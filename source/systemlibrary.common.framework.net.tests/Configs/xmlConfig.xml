@@ -1,0 +1,7 @@
+<XmlConfig>
+	<firstName>John Kusack</firstName>
+	<LastName>Doe</LastName>
+	<flagCamelCase>true</flagCamelCase>
+	<FlagPascalCase>True</FlagPascalCase>
+	<phone>1234</phone>
+</XmlConfig>

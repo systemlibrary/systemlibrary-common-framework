@@ -1,0 +1,9 @@
+{
+  "newString": "Local",
+  "newFlag": false,
+  "newInt": 5,
+  "newDateTime": "2024-12-24 13:44:05",
+  "child": {
+    "color": "white"
+  }
+}

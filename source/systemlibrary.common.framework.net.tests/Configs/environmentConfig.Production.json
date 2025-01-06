@@ -1,0 +1,9 @@
+{
+  "newString": "Production",
+  "newFlag": false,
+  "newInt": 6,
+  "newDateTime": "2024-12-24 13:44:15",
+  "child": {
+    "color": "orange"
+  }
+}

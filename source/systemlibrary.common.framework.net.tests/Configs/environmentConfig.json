@@ -1,0 +1,10 @@
+{
+  "newPropertyValue": "Hello world",
+  "newString": "John",
+  "newFlag": true,
+  "newInt": 1234,
+  "newDateTime": "2024-12-24 13:44:55",
+  "child": {
+    "color": "black"
+  }
+}

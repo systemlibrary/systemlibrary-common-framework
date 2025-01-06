@@ -1,0 +1,35 @@
+<Project>
+	<PropertyGroup>
+		<Version>8.0.0.1</Version>
+		<Product>$(MSBuildProjectName) $(Version)</Product>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<Deterministic>true</Deterministic>
+		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+		<RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
+		<DebugType>pdbonly</DebugType>
+		<NoWarn>CS1591;CS1570;CS1573;1701;1702;IDE1006;CS8618;</NoWarn>
+		<PackageOutputPath>..\$(MSBuildProjectName)</PackageOutputPath>
+		<Company>System Library</Company>
+		<Authors>System Library</Authors>
+		<Optimize>true</Optimize>
+		<WarningLevel>4</WarningLevel>
+		<NoWin32Manifest>true</NoWin32Manifest>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<IncludeSymbols>False</IncludeSymbols>
+		<EnableNETAnalyzers>False</EnableNETAnalyzers>
+		<AnalysisLevel>none</AnalysisLevel>
+	</PropertyGroup>
+</Project>
