@@ -14,7 +14,7 @@ internal static class KeyRingProtectorInstance
             {
                 var dataProtectionProvider = ServiceProviderInstance.Current.GetDataProtectionProvider();
 
-                _KeyRingProtector = dataProtectionProvider?.CreateProtector(AppInstance.AppName);
+                _KeyRingProtector = dataProtectionProvider.CreateProtector(AppInstance.AppName);
             }
 
             return _KeyRingProtector;

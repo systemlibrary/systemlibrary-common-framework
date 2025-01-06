@@ -7,7 +7,7 @@ namespace SystemLibrary.Common.Framework;
 
 partial class CryptationKey
 {
-    internal static string TryGetKeyFromDataRingKeyFile()
+    internal static string TryGetKeyFromKeyFile()
     {
         if (_KeyFileFullName.Is()) return Path.GetFileName(_KeyFileFullName);
 
@@ -15,8 +15,7 @@ partial class CryptationKey
 
         var keyDirectory = (keyManagementOptions?.Value?.XmlRepository as FileSystemXmlRepository)?.Directory?.FullName;
 
-        if (keyDirectory.IsNot())
-            keyDirectory = EnvironmentConfig.Current.ContentRootPath;
+        if (keyDirectory.IsNot()) keyDirectory = EnvironmentConfig.Current.ContentRootPath;
 
         if (keyDirectory.IsNot()) return null;
 
@@ -36,17 +35,17 @@ partial class CryptationKey
 
                 _KeyFileFullName = GetKeyFileFullName(parent.FullName);
 
-                if (_KeyFileFullName.IsNot())
+                if (_KeyFileFullName.IsNot()) 
                     parent = parent.Parent;
             }
 
             if (_KeyFileFullName.Is())
-                Debug.Log("Found key ring file in " + parent.FullName);
+                Debug.Log("Found key file in " + parent.FullName);
         }
         else
         {
             if (_KeyFileFullName.Is())
-                Debug.Log("Found key ring file in " + keyDirectory);
+                Debug.Log("Found key file in " + keyDirectory);
         }
 
         if (_KeyFileFullName.IsNot()) return null;
@@ -64,14 +63,15 @@ partial class CryptationKey
         if (fileNames.Length > 1)
         {
             fileNames = fileNames
-               .OrderBy(file =>
-               {
-                   var creationTime = File.GetCreationTime(file);
-                   return creationTime == DateTime.MinValue
-                       ? File.GetLastWriteTime(file)
-                       : creationTime;
-               })
-            .ToArray();
+                .OrderBy(file => file.Length)
+                .ThenBy(file =>
+                {
+                    var creationTime = File.GetCreationTime(file);
+                    return creationTime == DateTime.MinValue
+                        ? File.GetLastWriteTime(file)
+                        : creationTime;
+                })
+                .ToArray();
         }
 
         foreach (var fullFileName in fileNames)
@@ -85,17 +85,9 @@ partial class CryptationKey
 
     static string ValidateFileContent(string fullFileName)
     {
-        if (fullFileName.Length < 44) return null;
+        if (fullFileName.Length <= 12) return null;
 
         if (!fullFileName.Contains("key-")) return null;
-
-        var content = File.ReadAllText(fullFileName);
-
-        if (content.IsNot()) return null;
-
-        if (!content.Contains("key")) return null;
-
-        if (!content.Contains("encrypt")) return null;
 
         return fullFileName;
     }

@@ -31,32 +31,30 @@ internal static partial class CryptationKey
 
     static string GetKey()
     {
-        var key = TryGetKeyFromDataRingKeyFile();
+        var key = TryGetKeyFromKeyFile();
 
-        if (key.IsNot())
+        if(key.Is())
         {
-            key = TryGetKeyFromAppNameOrAsmName();
-
-            if (key != null)
-                Debug.Log("Encryption Key is based on 'app/asm name': " + key.MaxLength(5));
+            Debug.Log("Encryption Key from 'key file': " + key.MaxLength(3) + "...");
         }
         else
         {
-            Debug.Log("Encryption Key from 'key ring file': " + key.MaxLength(4));
-        }
-        
-        if (key.IsNot())
-        {
-            key = "ABCDEFGHIJKLMNOPQRST123456789011";
+            key = TryGetKeyFromAppName();
 
-            Debug.Log("Encryption Key is default (ABC...) as 'AddDataProtection' service is not registered and no key ring file found in any parent folder of Content Root");
+            if(key.Is())
+            {
+                Debug.Log("Encryption Key is based on 'app name': " + key.MaxLength(3) + "...");
+            }
+            else
+            {
+                key = "ABCDEFGHIJKLMNOPQRST123456789011";
 
-            KeyStart = key.MaxLength(maxLength: 4);
+                Debug.Log("Encryption Key is default 'ABC...' as 'Key File' is not found in any parent folder, nor is 'ApplicationName' set during AddDataProtection()");
+            }
         }
-        else
-        {
-            KeyStart = key.MaxLength(maxLength: 2);
-        }
+
+        KeyStart = key.MaxLength(3);
+
         return key.ToSha256Hash().MaxLength(47).Replace("-", "");
     }
 

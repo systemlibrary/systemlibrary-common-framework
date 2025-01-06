@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.DataProtection;
+﻿using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -10,7 +8,6 @@ internal static class AppInstance
 {
     static string _AppName;
 
-    // NOTE: An auto built-in app name, do not confuse it with "SetApplicationName()" method during "AddDataProtection" services
     internal static string AppName
     {
         get
@@ -34,25 +31,12 @@ internal static class AppInstance
                     }
                     else
                     {
-                        _AppName = "app" +
-                             Wash(Assembly.GetEntryAssembly()?.GetName()?.Name, 16) +
-                             Wash(Assembly.GetExecutingAssembly()?.GetName()?.Name, 8);
+                        _AppName = "app";
                     }
                 }
             }
             return _AppName;
         }
-    }
-
-    static string Wash(string name, int maxLength)
-    {
-        if (name == null) return "";
-
-        var washed = new string(name.Where(char.IsLetter).ToArray());
-
-        return washed?
-            .ToLower()?
-            .MaxLength(maxLength);
     }
 
     static string _AspNetCoreEnvironment;
