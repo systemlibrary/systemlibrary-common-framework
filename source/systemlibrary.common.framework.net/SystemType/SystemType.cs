@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text;
 
 using SystemLibrary.Common.Framework.Attributes;
 
@@ -13,6 +14,7 @@ namespace SystemLibrary.Common.Framework;
 public static class SystemType
 {
     public static Type StringType = typeof(string);
+    public static Type StringBuilderType = typeof(StringBuilder);
     public static Type Int16Type = typeof(short);
     public static Type IntType = typeof(int);
     public static Type Int64Type = typeof(long);
@@ -50,4 +52,7 @@ public static class SystemType
     public static Type ICollectionType = typeof(ICollection);
     public static Type ICollectionGenericType = typeof(ICollection<>);
     public static Type KeyValueType = typeof(KeyValuePair<,>);
+    public static Type DelegateType = typeof(Delegate);
+    public static Type NullableType = typeof(Nullable<>);
+    public static Type TupleType = typeof(Tuple);
 }

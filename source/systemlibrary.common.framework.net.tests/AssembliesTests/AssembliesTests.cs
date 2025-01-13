@@ -25,7 +25,7 @@ public class AssembliesTests : BaseTest
     [TestMethod]
     public void GetEmbeddedResource_Returns_String()
     {
-        var text = Assemblies.GetEmbeddedResource("/_Files/employee.json");
+        var text = Assemblies.GetEmbeddedResource("/_Assets/employee.json");
 
         Assert.IsTrue(text.Contains("johndoe"));
     }

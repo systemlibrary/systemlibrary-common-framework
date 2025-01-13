@@ -65,6 +65,7 @@ static internal class JsonSerializerOptionsInstance
         options.Converters.Add(DateTimeOffsetJsonConverter);
         options.Converters.Add(LongJsonConverter);
         options.Converters.Add(TypeConverter);
+        options.Converters.Add(new DelegateJsonConverter());
     }
 
     static JsonConfig _JsonConfigInstance;

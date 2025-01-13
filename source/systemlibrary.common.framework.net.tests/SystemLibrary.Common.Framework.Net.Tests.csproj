@@ -27,12 +27,6 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="_Assets\*" />
-		<EmbeddedResource Include="_Files\*" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="_Files\employees.json" />
-	  <None Remove="_Files\json-with-new-line.json" />
 	</ItemGroup>
 
 	<ItemGroup>

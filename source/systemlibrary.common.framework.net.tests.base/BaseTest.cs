@@ -36,6 +36,7 @@ public abstract class BaseTest
             .ConfigureServices(services =>
             {
                 services.AddControllers();
+                services.AddDataProtection();
 
                 services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();

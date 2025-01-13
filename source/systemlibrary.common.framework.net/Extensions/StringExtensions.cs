@@ -104,17 +104,35 @@ public static partial class StringExtensions
     {
         if (text == null) return text;
 
+        var l = text.Length;
+
+        if (l == 0) return text;
+
         if (newValue == null) return text;
 
         if (oldValues == null) return text;
 
-        if (oldValues.Length > 1)
-        {
-            StringBuilder sb = new StringBuilder(text);
-            foreach (var oldValue in oldValues)
-                sb.Replace(oldValue, newValue);
+        var nl = newValue.Length;
 
-            return sb.ToString();
+        var ol = oldValues.Length;
+        if (ol > 1)
+        {
+            if (ol > 3 || l > 128 || nl > 64)
+            {
+                var sb = new StringBuilder(text);
+
+                foreach (var oldValue in oldValues)
+                    sb.Replace(oldValue, newValue);
+
+                return sb.ToString();
+            }
+            else
+            {
+                foreach (var oldValue in oldValues)
+                    text = text.Replace(oldValue, newValue);
+
+                return text;
+            }
         }
 
         return text.Replace(oldValues[0], newValue);
@@ -1099,7 +1117,7 @@ public static partial class StringExtensions
         }
 
         var length = text.Length;
-      
+
         var sb = new StringBuilder(length);
 
         sb.Append(char.ToUpper(text[0]));

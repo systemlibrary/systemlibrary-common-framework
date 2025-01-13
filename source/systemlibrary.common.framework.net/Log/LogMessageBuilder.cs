@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -280,34 +279,11 @@ partial class Log
                 message.Append(name + ": " + obj + "\n");
         }
 
-        static MethodInfo DumpBuildMethod;
-
         static void AppendClass(StringBuilder message, object obj)
         {
-            if (DumpBuildMethod == null)
-            {
-                var type = Type.GetType("Dump, SystemLibrary.Common.Framework.Net");
-
-                if (type == null)
-                    throw new Exception("SystemLibrary.Common.Framework.Dump is not loaded or type is renamed in version you are using");
-
-                DumpBuildMethod = type.GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
-                   .Where(x => x.Name == "Build")
-                   .FirstOrDefault();
-
-                if (DumpBuildMethod == null)
-                    throw new Exception("Method 'Build' is renamed or do not exist");
-            }
-
             var objAsString = new StringBuilder();
 
-            try
-            {
-                DumpBuildMethod.Invoke(null, new object[] { objAsString, obj, 0, 3 });
-            }
-            catch
-            {
-            }
+            Dump.Build(objAsString, obj, 0, 3);
 
             AppendMessageFormat("object", objAsString.ToString(), message);
         }

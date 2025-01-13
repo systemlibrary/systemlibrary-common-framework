@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 
@@ -70,11 +71,14 @@ public static class Dump
 
             Visited.Clear();
 
-            StringBuilder logString = new StringBuilder();
-
-            logString.Append(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "\t");
+            var logString = new StringBuilder();
 
             Build(logString, o, 0, 3);
+
+            if (logString.IsNot())
+                logString.Append(o.GetType().Name + " skipped");
+
+            logString.Insert(0, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "\t");
 
             WriteToFileWithDateTime(logString);
         }
@@ -82,7 +86,7 @@ public static class Dump
         {
             try
             {
-                File.AppendAllText(Folder + "DumpWrite" + DateTime.Now.Millisecond + ".log", ex.Message + "\n");
+                File.AppendAllText(Folder + "DumpWrite" + DateTime.Now.Millisecond + ".log", ex.ToString() + "\n");
             }
             catch
             {
@@ -156,16 +160,16 @@ public static class Dump
         var collectionIncrementTabs = 0;
 
         if (e is IDictionary d)
-            logString.Append(" dictionary count: " + d.Count + "\n");
-
-        else if (e is IList l)
-            logString.Append("IList<" + genericType.Name + "> count: " + l.Count + "\n");
+            logString.Append(" dictionary count (" + d.Count + ")\n");
 
         else if (e is Array a)
-            logString.Append(" array length: " + a.Length + "\n");
+            logString.Append(genericType.Name + " length (" + a.Length + ")\n");
+
+        else if (e is IList l)
+            logString.Append("IList<" + genericType.Name + "> (" + l.Count + ")\n");
 
         else if (e is ICollection ic)
-            logString.Append(" collection count: " + ic.Count + "\n");
+            logString.Append(" collection count (" + ic.Count + ")\n");
         else if (e.GetType().Name[0] == '<' && e.GetType().Name.Contains("__"))
             logString.Append(" enumerable function count" + "\n");
         else
@@ -178,12 +182,59 @@ public static class Dump
 
         logString.Append(tabs);
 
+        if (e is Array)
+        {
+            if (type == typeof(int[]) ||
+                type == typeof(byte[]) ||
+                type == typeof(bool[]) ||
+                type == typeof(Int64[]))
+            {
+                foreach (var item in e)
+                {
+                    logString.Append(item + " ");
+                }
+                return;
+            }
+            if (type == typeof(int[,]))
+            {
+                var aa = e as int[,];
+
+                for (int i = 0; i < aa.GetLength(0); i++)
+                {
+                    for (int j = 0; j < aa.GetLength(1); j++)
+                    {
+                        logString.Append(aa[i, j] + " ");
+                    }
+
+                    if (i + 1 < aa.GetLength(0))
+                        logString.Append("\n" + tabs);
+                }
+                return;
+            }
+            if (type == typeof(long[,]))
+            {
+                var aa = e as long[,];
+
+                for (int i = 0; i < aa.GetLength(0); i++)
+                {
+                    for (int j = 0; j < aa.GetLength(1); j++)
+                    {
+                        logString.Append(aa[i, j] + " ");
+                    }
+
+                    if (i + 1 < aa.GetLength(0))
+                        logString.Append("\n" + tabs);
+                }
+                return;
+            }
+        }
+
         foreach (var item in e)
         {
             Build(logString, item, level, 3);
 
             var t = item.GetType();
-            if (IsNativeType(t) && t != SystemType.StringType)
+            if (t.IsNativeType() && t != SystemType.StringType)
                 logString.Append(" ");
             else
                 logString.Append("\n" + tabs);
@@ -203,7 +254,7 @@ public static class Dump
         if (type.Name == "RuntimeAssembly" ||
             type.Name == "Constructor")
         {
-            logString.Append(type.Name + (IsClassType(type) ? " (class, skipped)" : ""));
+            logString.Append(type.Name + (type.IsClassType() ? " (class, skipped)" : ""));
             return;
         }
 
@@ -222,18 +273,40 @@ public static class Dump
         if (type.IsInterface)
             logString.Append(typeName + " (interface)");
         else
-            logString.Append(typeName + (IsClassType(type) ? " (class)" : ""));
+        {
+            if (type.Name == "SafeWaitHandle")
+            {
+                logString.Append(typeName + " skipped");
+                return;
+            }
+            if (type.Name.Contains("Task`"))
+            {
+                logString.Append(typeName + " ");
+                var t = value as Task;
+                logString.Append("Ex: " + t.Exception?.Message + ", Completed: " + t.IsCompleted + ", IsFaulted: " + t.IsFaulted + ", IsCompletedSuccessfully: " + t.IsCompletedSuccessfully + ", Cancelled: " + t.IsCanceled);
+                return;
+            }
+            else if (typeName.Contains("Action`"))
+                return;
+            else
+            {
+                logString.Append(typeName + (type.IsClassType() ? " (class)" : ""));
+            }
+        }
 
         var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty);
 
         if (properties != null && properties.Length > 0)
         {
             logString.Append("\n");
+            var propL = properties.Length;
+            var propI = 0;
             foreach (var property in properties)
             {
+                propI++;
                 if (!property.CanRead)
                 {
-                    logString.Append("\t");
+                    logString.Append(GetTabs(level) + "\t");
                     logString.Append(property.Name + ": cant read, continuing...\n");
                     continue;
                 }
@@ -241,19 +314,21 @@ public static class Dump
                 if (property.PropertyType == SystemType.CharType) continue;
                 if (property.PropertyType.Name == "RuntimeType") continue;
 
-                logString.Append("\t");
+                logString.Append(GetTabs(level) + "\t");
 
                 try
                 {
                     var propertyValue = property.GetValue(value);
 
-                    AppendVariable(logString, property.PropertyType, property.Name, propertyValue, level);
+                    AppendVariable(logString, property.PropertyType, property.Name, propertyValue, level + 1);
                 }
                 catch
                 {
                     logString.Append(property.Name + ": could not retrieve value, continuing...\n");
                 }
-                logString.Append("\n");
+
+                if (propI < propL)
+                    logString.Append("\n");
             }
         }
 
@@ -264,8 +339,12 @@ public static class Dump
             if (properties == null || properties.Length == 0)
                 logString.Append("\n");
 
+            var fieldsL = fields.Length;
+            var fieldsI = 0;
             foreach (var field in fields)
             {
+                fieldsI++;
+
                 if (field?.FieldType == null) continue;
 
                 if (field.IsPrivate) continue;
@@ -282,7 +361,8 @@ public static class Dump
                     logString.Append(field.Name + ": could not retrieve value, continuing...");
                 }
 
-                logString.Append("\n");
+                if (fieldsI < fieldsL)
+                    logString.Append("\n");
             }
         }
     }
@@ -291,7 +371,7 @@ public static class Dump
     {
         logString.Append(GetTabs(level) + name + ": ");
 
-        if (IsClassType(variableType) && !IsListType(variableValue))
+        if (variableType.IsClassType() && !IsListType(variableValue))
         {
             Build(logString, variableValue, level + 1, 3);
         }
@@ -301,7 +381,7 @@ public static class Dump
         }
     }
 
-    static void Build(StringBuilder logString, object value, int level, int maxDepth = 3)
+    internal static void Build(StringBuilder logString, object value, int level, int maxDepth = 3)
     {
         if (level >= maxDepth)
             return;
@@ -328,7 +408,7 @@ public static class Dump
                 return;
             }
 
-            if (!type.IsInterface && IsClassType(type))
+            if (type.IsClassType())
             {
                 if (type.BaseType != typeof(ValueType))
                 {
@@ -346,9 +426,12 @@ public static class Dump
                         Visited.Add(hash);
                     }
                 }
+
                 WriteClass(logString, value, type, level);
+
                 return;
             }
+
             Append(logString, type, value, level);
         }
     }
@@ -403,13 +486,16 @@ public static class Dump
             return c + "";
 
         else if (value is Enum en)
-            return en.ToText() + " (enum value: " + en.ToValue() + ")";
+            return en.ToText() + " (enum value: " + en.ToValue() + ")\n";
 
         else if (value is long i64)
             return i64.ToString();
 
         else if (value is short i16)
             return i16.ToString();
+
+        else if (value is decimal)
+            return value.ToString();
 
         else if (value is bool?)
             return (value as bool?).Value + "";
@@ -426,29 +512,40 @@ public static class Dump
         else if (value is long?)
             return (value as long?).Value + "";
 
+        else if (value is decimal?)
+            return (value as decimal?).Value + "";
+
         else if (value is Memory<string> memString)
-            return memString.Span.ToString();
+            return "Memory<string> " + memString.Span.ToString();
 
         else if (value is Memory<bool> memBool)
-            return memBool.Span.ToString();
+            return "Memory<bool> " + memBool.Span.ToString();
 
         else if (value is Memory<int> memInt)
-            return memInt.Span.ToString();
+            return "Memory<int> " + memInt.Span.ToString();
 
         else if (value is Memory<DateTime> memDateTime)
-            return memDateTime.Span.ToString();
+            return "Memory<DateTime> " + memDateTime.Span.ToString();
 
         else if (value is ReadOnlyMemory<string> romString)
-            return romString.Span.ToString();
+            return "ReadOnlyMemory<string> " + romString.Span.ToString();
 
         else if (value is ReadOnlyMemory<int> romInt)
-            return romInt.Span.ToString();
-
-        else if (value is ReadOnlyMemory<string> romBool)
-            return romBool.Span.ToString();
+        {
+            var tmp = "ReadOnlyMemory<int> ";
+            foreach (var number in romInt.Span)
+            {
+                tmp += number + ", ";
+            }
+            return tmp;
+            //return romInt.Span.ToString();
+        }
 
         else if (value is ReadOnlyMemory<DateTime> romDateTime)
             return romDateTime.Span.ToString();
+
+        else if (value is CultureInfo cult)
+            return "CultureInfo name: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
 
         return null;
     }
@@ -469,45 +566,9 @@ public static class Dump
         return tabs;
     }
 
-    static bool IsNativeType(Type type)
-    {
-        return type == SystemType.StringType
-            || type == SystemType.CharType
-            || type == SystemType.IntType
-            || type == SystemType.BoolType
-            || type == SystemType.DateTimeType
-            || type == SystemType.TimeSpanType
-            || type == SystemType.DateTimeOffsetType
-            || type == SystemType.DoubleType
-            || type == typeof(short)
-            || type == typeof(long)
-            || type == typeof(decimal)
-            || IsNullableType(type);
-    }
-
     static bool IsListType(object o)
     {
         return o is IEnumerable && o is not string;
-    }
-
-    static bool IsClassType(Type classType)
-    {
-        return classType.IsClass &&
-        !classType.IsEnum &&
-        !classType.IsArray &&
-        !IsNativeType(classType) &&
-        classType != typeof(StringBuilder) &&
-        !IsNullableType(classType);
-    }
-
-    static bool IsNullableType(Type type)
-    {
-        return type == SystemType.DateTimeTypeNullable ||
-            type == SystemType.IntTypeNullable ||
-            type == SystemType.DateTimeOffsetTypeNullable ||
-            type == SystemType.TimeSpanType ||
-            type == SystemType.BoolTypeNullable ||
-            type == SystemType.DoubleTypeNullable;
     }
 
     static void WriteToFileWithDateTime(StringBuilder logString)
@@ -556,7 +617,7 @@ public static class Dump
         {
             try
             {
-                if(readWriteLock.IsWriterLockHeld)
+                if (readWriteLock.IsWriterLockHeld)
                     readWriteLock.ReleaseWriterLock();
             }
             catch

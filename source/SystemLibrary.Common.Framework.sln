@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemLibrary.Common.Framew
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{84F4435D-E662-4D3F-AEE2-9D37A384DC44}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemLibrary.Common.Framework.App", "systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj", "{5791A353-8C2A-451F-BAA2-F9242A604B81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemLibrary.Common.Framework.App.Tests", "systemlibrary.common.framework.app.tests\SystemLibrary.Common.Framework.App.Tests.csproj", "{74C77B2C-A102-4A4A-95B8-540213E88C74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -28,6 +32,10 @@ Global
 		{397C8136-A91C-48CB-9E81-B3691BD43785}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3704A5FD-9DAE-427A-9CC0-FE0545B25FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3704A5FD-9DAE-427A-9CC0-FE0545B25FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5791A353-8C2A-451F-BAA2-F9242A604B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5791A353-8C2A-451F-BAA2-F9242A604B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74C77B2C-A102-4A4A-95B8-540213E88C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74C77B2C-A102-4A4A-95B8-540213E88C74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,12 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Dynamic;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Text;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -6,10 +14,87 @@ using SystemLibrary.Common.Framework.Net.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
+public record Person(string Name, int Age);
+
 [TestClass]
 public class DumpTests : BaseTest
 {
+
     const string DumpPath = "C:\\Logs\\systemlibrary-common-framework-tests.log";
+    [TestMethod]
+    public void Tests()
+    {
+        Action<int> myAction = (x) => Console.WriteLine(x);
+        var myTuple = (42, "Hello", (3.14, DateTime.Now), (true, Guid.NewGuid()));
+        Span<byte> byteSpan = new Span<byte>(new byte[10]);
+        Span<int> intSpan = new Span<int>(new int[10]);
+        ReadOnlyMemory<int> readOnlyMemory = new ReadOnlyMemory<int>(new int[10]);
+        int[,] multiDimArray = new int[3, 3];
+        var person = new Person("John", 30);
+        var myValueTuple = ("Test", 42, 3.14);
+        dynamic obj = new ExpandoObject();
+        obj.Name = "John";
+        obj.Age = 30;
+        var myList = new List<Dictionary<string, (int, string)>>()
+        {
+            new Dictionary<string, (int, string)> { { "key1", (1, "one") } }
+        };
+        int? nullableInt = 42;
+        DateTime? nullableDate = DateTime.Now;
+        ReadOnlyCollection<int> readOnlyList = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3 });
+        Point point = new Point { X = 10, Y = 20 };
+        Lazy<int> lazyInt = new Lazy<int>(() => 42);
+        KeyValuePair<string, int> pair = new KeyValuePair<string, int>("One", 1);
+        BitArray bitArray = new BitArray(new bool[] { true, false, true });
+        ArraySegment<int> segment = new ArraySegment<int>(new int[] { 1, 2, 3, 4 }, 1, 2);
+        StackFrame frame = new StackFrame(1);
+        Task<int> task = Task.FromResult(42);
+        var ex = new Exception("Test", new ArgumentException("Inner exception"));
+        Memory<byte> memory = new Memory<byte>(new byte[10]);
+        var taskCompletionSource = new TaskCompletionSource<string>();
+        GCHandle handle = GCHandle.Alloc(new object());
+        SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+        CultureInfo culture = new CultureInfo("en-US");
+        var immutableList = ImmutableList<int>.Empty.Add(1).Add(2);
+        WeakReference<object> weakRef = new WeakReference<object>(obj);
+        var testObjects = new object[]
+        {
+            weakRef,
+            myAction,
+            myTuple,
+            intSpan.ToArray(),
+            byteSpan.ToArray(),
+            readOnlyMemory,
+            multiDimArray,
+            person,
+            myValueTuple,
+            obj,
+            myList,
+            nullableInt,
+            readOnlyList,
+            point,
+            lazyInt,
+            pair,
+            bitArray,
+            segment,
+            frame,
+            task,
+            ex,
+            memory,
+            taskCompletionSource,
+            handle,
+            semaphore,
+            culture,
+            immutableList
+        };
+
+        foreach (var o in testObjects)
+        {
+       //     Dump.Write(o);
+        }
+
+        Dump.Write(Employee.CreateList());
+    }
 
     [TestMethod]
     public void Write_Exceptions_Prints_Inner_Exceptions_Too()

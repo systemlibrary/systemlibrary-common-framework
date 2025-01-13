@@ -7,13 +7,18 @@ namespace SystemLibrary.Common.Framework.Extensions;
 
 internal static class IServiceCollectionExtensions
 {
+    internal static IServiceCollection AddCommonServices<TLogWriter>(this IServiceCollection serviceCollection) where TLogWriter : class, ILogWriter
+    {
+        serviceCollection.AddScoped<ILogWriter, TLogWriter>();
+
+        return serviceCollection.AddCommonServices();
+    }
+
     internal static IServiceCollection AddCommonServices(this IServiceCollection serviceCollection)
     {
-        // Inserting a default instance, should override the default System.Text.Json serialization that occurs whenever someone uses serialization/deserialization outside .Json() extensions
-        serviceCollection.TryAddSingleton(JsonSerializerOptionsInstance.Current);
-
         serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         serviceCollection.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+        serviceCollection.AddDataProtection();
 
         return serviceCollection;
     }

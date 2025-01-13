@@ -5,8 +5,8 @@ namespace SystemLibrary.Common.Framework;
 
 partial class StringExtensionsTests 
 {
-    static string GetEmployeeData() => Assemblies.GetEmbeddedResource("_files/employee.json");
-    static string GetResponseData() => Assemblies.GetEmbeddedResource("_files/response.json");
+    static string GetEmployeeData() => Assemblies.GetEmbeddedResource("_Assets/employee.json");
+    static string GetResponseData() => Assemblies.GetEmbeddedResource("_Assets/response.json");
 
     [TestMethod]
     public void JsonPartial_With_SearchPath_As_Property_Name_Returns_Response()

@@ -22,16 +22,16 @@ public partial class StringExtensionsTests : BaseTest
         var data = "{ \"firstName\": \"Hello\", \"age\": 10 }";
         Assert.IsTrue(data.IsJson(), "1");
 
-        data = Assemblies.GetEmbeddedResource("_Files/employee.json");
+        data = Assemblies.GetEmbeddedResource("_Assets/employee.json");
         Assert.IsTrue(data.IsJson(), "2");
 
-        data = Assemblies.GetEmbeddedResource("_Files/employees.json");
+        data = Assemblies.GetEmbeddedResource("_Assets/employees.json");
         Assert.IsTrue(data.IsJson(), "3");
 
-        data = Assemblies.GetEmbeddedResource("_Files/response.json");
+        data = Assemblies.GetEmbeddedResource("_Assets/response.json");
         Assert.IsTrue(data.IsJson(), "4");
 
-        data = Assemblies.GetEmbeddedResource("_Files/json-with-new-line.json");
+        data = Assemblies.GetEmbeddedResource("_Assets/json-with-new-line.json");
         Assert.IsTrue(data.IsJson(), "5");
     }
 

@@ -134,7 +134,7 @@ public class StreamExtensionsTests : BaseTest
     [TestMethod]
     public void JsonAsync_Generates_Hash()
     {
-        var data = Assemblies.GetEmbeddedResource("_Files/employee.json");
+        var data = Assemblies.GetEmbeddedResource("_Assets/employee.json");
 
         using (MemoryStream memory = new MemoryStream())
         {

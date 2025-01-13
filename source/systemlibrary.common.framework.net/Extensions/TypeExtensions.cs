@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace SystemLibrary.Common.Framework.Extensions;
 
@@ -11,7 +12,6 @@ public static class TypeExtensions
 {
     /// <summary>
     /// Check if 'thisType' inherits or implements 'type
-    /// 
     /// <para>False if both types are the same</para>
     /// </summary>
     /// <example>
@@ -315,8 +315,26 @@ public static class TypeExtensions
         if (type == null) return false;
 
         return type.IsClass &&
-            !type.IsInterface &&
-            !type.IsGenericType &&
-            type != SystemType.StringType;
+           !type.IsInterface &&
+           !type.IsEnum &&
+           !type.IsArray &&
+           !type.IsNativeType() &&
+           !type.IsDictionary() &&
+           type != SystemType.TupleType && 
+           !type.Inherits(typeof(ITuple));
+    }
+
+    internal static bool IsNativeType(this Type type)
+    {
+        return type.IsPrimitive ||  // int, long ...
+           type.IsValueType ||  // DateTime, DateTimeOffset, ...
+           type == SystemType.StringType ||
+           type == SystemType.StringBuilderType ||
+           type.IsNullableType();
+    }
+
+    public static bool IsNullableType(this Type type)
+    {
+        return type.IsGenericType && type.GetGenericTypeDefinition() == SystemType.NullableType;
     }
 }

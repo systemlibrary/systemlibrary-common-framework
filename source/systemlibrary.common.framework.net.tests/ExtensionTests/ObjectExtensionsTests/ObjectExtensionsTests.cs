@@ -191,7 +191,7 @@ public class ObjectExtensionsTests : BaseTest
     [TestMethod]
     public void Json_Serialize_To_Employee()
     {
-        var data = Assemblies.GetEmbeddedResource("_Files/employee.json");
+        var data = Assemblies.GetEmbeddedResource("_Assets/employee.json");
 
         var employee = data.Json<Employee>();
 

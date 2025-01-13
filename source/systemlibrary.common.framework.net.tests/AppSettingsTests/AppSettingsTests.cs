@@ -52,9 +52,19 @@ public class AppSettingsTests : BaseTest
         var UPPERCASE = config.UPPERCASE;
         var lowercase = config.lowercase;
 
+        var boolCase = config.boolCase;
+        var intCase = config.intCase;
+        var unsetCase = config.unsetCase;
+        var unsetCase2 = config.unsetCase2;
+
         Assert.IsTrue(PascalCase == "PascalCase");
         Assert.IsTrue(camelCase == "camelCase");
         Assert.IsTrue(UPPERCASE == "UPPERCASE");
         Assert.IsTrue(lowercase == "lowercase");
+
+        Assert.IsTrue(boolCase);
+        Assert.IsTrue(intCase > 0);
+        Assert.IsTrue(config.unsetCase.IsNot());    // No set property
+        Assert.IsTrue(config.unsetCase2.IsNot());   // A field
     }
 }

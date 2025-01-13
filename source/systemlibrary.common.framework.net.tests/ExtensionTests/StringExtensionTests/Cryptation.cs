@@ -19,7 +19,9 @@ partial class StringExtensionsTests : BaseTest
             .SetApplicationName("CustomAppNameUsedAsKey")
             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
 
-        var emptyProvider = serviceCollection.BuildServiceProvider();
+        var tmpServiceProvider = serviceCollection.BuildServiceProvider();
+        
+
 
         var fileName = "key-13F7D4C1-E781-4824-8270-0BE22A226220.xml";
         var fileContent = "key encryption";
@@ -30,16 +32,21 @@ partial class StringExtensionsTests : BaseTest
             File.Delete(dir + "\\" + fileName);
             Thread.Sleep(10);
         }
+
         File.AppendAllText(dir + "\\" + fileName, fileContent);
-
-        CryptationKey._Key = null;
-
-        ServiceProviderInstance.Instance = emptyProvider;
 
         var data = "Hello world";
 
+        CryptationKey._Key = null;
+
+        var oldServiceProvider = ServiceProviderInstance.Instance;
+
+        ServiceProviderInstance.Instance = tmpServiceProvider;
+
         var enc = data.Encrypt();
         var dec = enc.Decrypt();
+
+        ServiceProviderInstance.Instance = oldServiceProvider;
 
         if (File.Exists(dir + "\\" + fileName))
             File.Delete(dir + "\\" + fileName);
@@ -48,6 +55,7 @@ partial class StringExtensionsTests : BaseTest
 
         Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
         Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
+
     }
 
     [TestMethod]
@@ -98,7 +106,7 @@ partial class StringExtensionsTests : BaseTest
     [TestMethod]
     public void Cryptation_With_Diff_Key_IV_Multiple_Invocations_Success()
     {
-        var data = Assemblies.GetEmbeddedResource("_Files/employee.json") + "#¤%&,._<>?!|"; ;
+        var data = Assemblies.GetEmbeddedResource("_Assets/employee.json") + "#¤%&,._<>?!|"; ;
         var key = "aaaaa.CCCDDeeeFF-GGGG.HHHiiiii";
         var iv = "11223344556677";
 
