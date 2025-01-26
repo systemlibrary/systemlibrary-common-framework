@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.Extensions;
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 

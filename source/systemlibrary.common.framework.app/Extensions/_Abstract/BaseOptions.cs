@@ -18,7 +18,12 @@ public abstract class BaseOptions
     /// <summary>
     /// Optional: Additional endpoints configuration that is registered in front of RazorPages, Controllers and ApiControllers
     /// </summary>
-    public Action<IEndpointRouteBuilder> PrecededEndpoints = null;
+    public Action<IEndpointRouteBuilder> BeforeDefaultEndpoints = null;
+
+    /// <summary>
+    /// Optional: Additional endpoints configuration that is registered in after RazorPages, Controllers and ApiControllers
+    /// </summary>
+    public Action<IEndpointRouteBuilder> AfterDefaultEndpoints = null;
 
     /// <summary>
     /// Set to true to add services and middleware for cookie policies

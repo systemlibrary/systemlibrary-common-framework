@@ -11,9 +11,6 @@ static partial class IServiceCollectionExtensions
         return mvc =>
         {
             mvc.OutputFormatters.Add(new DefaultSupportedMediaTypes());
-
-            if (options.AdditionalSupportedMediaTypes != null)
-                mvc.OutputFormatters.Add(options.AdditionalSupportedMediaTypes);
         };
     }
 }

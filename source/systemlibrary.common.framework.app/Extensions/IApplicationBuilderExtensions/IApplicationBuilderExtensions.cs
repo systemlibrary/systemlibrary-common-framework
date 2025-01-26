@@ -44,9 +44,9 @@ public static partial class IApplicationBuilderExtensions
     /// }
     /// </code>
     /// </example>
-    public static IApplicationBuilder UseFrameworkApp(this IApplicationBuilder app, IWebHostEnvironment env, FrameworkAppOptions options = null)
+    public static IApplicationBuilder UseFrameworkMiddlewares(this IApplicationBuilder app, IWebHostEnvironment env, FrameworkAppOptions options = null)
     {
-        app.ApplicationServices.UseFrameworkServiceProvider();
+        app.ApplicationServices.UseServiceProvider();
 
         options ??= new FrameworkAppOptions();
 
@@ -108,50 +108,32 @@ public static partial class IApplicationBuilderExtensions
             }
         }
 
-        if (options.UseRouting)
-            app.UseRouting();
-
         if (options.UseCookiePolicy)
             app.UseCookiePolicy();
 
-        if (options.UseOutputCache && !options.UseOutputCacheAfterAuthentication)
-            app.UseOutputCache();
+        if (options.UseRouting)
+            app.UseRouting();
 
         if (!options.UseOutputCacheAfterAuthentication)
         {
-            if (options.UseBrotliResponseCompression || options.UseGzipResponseCompression)
-            {
-                app.UseWhen((context) => Compress.IsEligibleForCompression(context, options), appCompression =>
-                {
-                    appCompression.UseResponseCompression();
-                });
-            }
+            if (options.UseOutputCache)
+                app.UseOutputCache();
         }
 
         if (options.UseAuthentication)
             app.UseAuthentication();
-
-        if (options.UseOutputCache && options.UseOutputCacheAfterAuthentication)
-            app.UseOutputCache();
-
+            
         if (options.UseOutputCacheAfterAuthentication)
         {
-            if (options.UseBrotliResponseCompression || options.UseGzipResponseCompression)
-            {
-                app.UseWhen((context) => Compress.IsEligibleForCompression(context, options), appCompression =>
-                {
-                    appCompression.UseResponseCompression();
-                });
-            }
+            if (options.UseOutputCache)
+                app.UseOutputCache();
         }
 
         if (options.UseAuthorization)
             app.UseAuthorization();
 
-        if (options.PrecededEndpoints != null)
-        {
-            app.UseEndpoints(endpoints => options.PrecededEndpoints(endpoints));
-        }
+        if (options.BeforeDefaultEndpoints != null)
+            app.UseEndpoints(endpoints => options.BeforeDefaultEndpoints(endpoints));
 
         if (options.UseControllers)
         {
@@ -163,6 +145,17 @@ public static partial class IApplicationBuilderExtensions
 
         if (options.UseRazorPages)
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
+
+        if (options.AfterDefaultEndpoints != null)
+            app.UseEndpoints(endpoints => options.AfterDefaultEndpoints(endpoints));
+
+        if (options.UseBrotliResponseCompression || options.UseGzipResponseCompression)
+        {
+            app.UseWhen((context) => Compress.IsEligibleForCompression(context, options), appCompression =>
+            {
+                appCompression.UseResponseCompression();
+            });
+        }
 
         var enablePrometheusMetrics = AppSettings.Current?.SystemLibraryCommonFramework?.Metrics?.EnablePrometheus;
         if (enablePrometheusMetrics == true)

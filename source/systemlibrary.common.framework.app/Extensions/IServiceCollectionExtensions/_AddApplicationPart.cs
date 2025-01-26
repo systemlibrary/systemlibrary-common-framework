@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,7 +6,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder AddApplicationPart(IMvcBuilder builder, FrameworkServicesOptions options, Assembly executing, Assembly entry)
+    static IMvcBuilder AddApplicationPart(IMvcBuilder builder, Assembly executing, Assembly entry, Assembly calling)
     {
         if (builder != null)
         {
@@ -16,9 +15,10 @@ partial class IServiceCollectionExtensions
 
             if (entry != null && executing?.FullName != entry.FullName)
                 builder = builder.AddApplicationPart(entry);
+
+            if (calling != null && executing?.FullName != calling.FullName && entry?.FullName != calling.FullName)
+                builder = builder.AddApplicationPart(calling);
         }
-        else if (options.AdditionalSupportedMediaTypes != null)
-            throw new Exception("UseMvc, UseRazorPages and UseControllers are all false, yet you've set AdditionalSupportedMediaTypes or added ApplicationParts (assemblies). Set one of the flags to true to continue.");
 
         return builder;
     }

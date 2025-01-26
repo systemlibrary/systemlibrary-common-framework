@@ -10,6 +10,7 @@ internal static class ServiceProviderInstance
     static IServiceProvider Local;
 
     internal static IServiceProvider Instance;
+
     static object LocalLock = new object();
 
     internal static IServiceProvider Current
@@ -31,6 +32,7 @@ internal static class ServiceProviderInstance
                         serviceCollection
                             .AddCommonServices()
                             .AddDataProtection()
+                            .SetApplicationName("app")
                             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
 
                         Local = serviceCollection.BuildServiceProvider();

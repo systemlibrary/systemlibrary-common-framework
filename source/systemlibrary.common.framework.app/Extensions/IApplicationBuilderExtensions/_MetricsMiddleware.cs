@@ -2,7 +2,7 @@
 
 using SystemLibrary.Common.Framework;
 
-public static class MetricsAuthorizationMiddleware
+internal static class MetricsAuthorizationMiddleware
 {
     public static bool AuthorizeMetricsRequest(HttpContext context)
     {

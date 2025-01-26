@@ -4,16 +4,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SystemLibrary.Common.Framework.App.Extensions;
 
-public static class IServiceProviderExtensions
+internal static class IServiceProviderExtensions
 {
-    /// <summary>
-    /// Pass a reference of the Service Provider which will be used to loook up services from
-    /// </summary>
-    public static IServiceProvider UseFrameworkServiceProvider(this IServiceProvider serviceProvider)
+    internal static IServiceProvider UseServiceProvider(this IServiceProvider serviceProvider)
     {
         HttpContextInstance.HttpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
 
         ActionContextInstance.ActionContextAccessor = serviceProvider.GetRequiredService<IActionContextAccessor>();
+
+        ServiceProviderInstance.Instance = serviceProvider;
 
         return serviceProvider;
     }

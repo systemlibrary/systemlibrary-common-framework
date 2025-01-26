@@ -147,7 +147,10 @@ public abstract partial class Config<T> where T : class
         var configuration = ConfigLoader<T>.Load();
         try
         {
-            _Config = configuration.Get<T>();
+            _Config = configuration.Get<T>(opt =>
+            {
+                opt.ErrorOnUnknownConfiguration = false;
+            });
         }
         catch
         {
@@ -158,7 +161,7 @@ public abstract partial class Config<T> where T : class
         }
 
         if (_Config == null && typeof(T) == typeof(EnvironmentConfig))
-            throw new Exception("EnvironmentConfig could not be created - make sure the 'environmentConfig.json' is not empty, it must minimum contain one property, for instance 'name' set to some value like 'prod'");
+            throw new Exception("EnvironmentConfig could not be created - make sure the 'environmentConfig.json' is not empty, it must minimum contain one property, for instance: { 'name': 'prod' }");
 
         try
         {

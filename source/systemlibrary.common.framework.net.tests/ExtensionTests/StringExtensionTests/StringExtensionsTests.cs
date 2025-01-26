@@ -3,7 +3,7 @@ using System.Text.Json;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -13,7 +13,7 @@ public partial class StringExtensionsTests : BaseTest
     [TestInitialize]
     public void TestInitialize()
     {
-        CryptationKey._Key = null;
+        CryptationKey.Instance = null;
     }
 
     [TestMethod]

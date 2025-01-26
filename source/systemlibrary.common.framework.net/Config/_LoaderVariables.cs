@@ -60,23 +60,6 @@ internal static class ConfigVariables
             .Build();
     }
 
-    static string[] GetConfigurationFilesInFolder(string directoryPath, bool searchRecursively)
-    {
-        if (!Directory.Exists(directoryPath)) return new string[0];
-
-        string[] files;
-        if (!searchRecursively)
-            files = Directory.GetFiles(directoryPath, "*.*", SearchOption.TopDirectoryOnly);
-        else
-            files = Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories);
-
-        if (files == null || files.Length == 0) return new string[0];
-
-        return files
-            .Where(x => x.EndsWithAny(StringComparison.OrdinalIgnoreCase, ".json", ".xml", ".config"))
-            .ToArray();
-    }
-
     static bool FilterAppSettingFiles(string fileLowered)
     {
         if (fileLowered.IsNot()) return false;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -22,7 +22,7 @@ public class EnvironmentConfigTests : BaseTest
 
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "";
 
-        Assert.IsTrue(config.Name.Is(), "EnvironmentName is not existing, mstest.runsettings not added");
+        Assert.IsTrue(config.Name.Is(), "EnvironmentName is not existing, mstest.runsettings has most likely not been added, select it in main menu: Test > Configure Run Settings > Select File ");
         Assert.IsTrue(config.Name == environment, "Environmnent name is wrong: " + config.Name + ", expected: " + environment);
     }
 

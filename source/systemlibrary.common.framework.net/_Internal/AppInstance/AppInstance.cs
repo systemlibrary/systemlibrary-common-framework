@@ -14,26 +14,12 @@ internal static class AppInstance
         {
             if (_AppName == null)
             {
-                var dataProtectionOptions = ServiceProviderInstance.Current.GetService<IOptions<DataProtectionOptions>>();
+                _AppName = ServiceProviderInstance.Current.GetService<IOptions<DataProtectionOptions>>()
+                    ?.Value?.ApplicationDiscriminator
+                    ?? AppSettings.Current.DataProtection.AppName;
 
-                var dataProtectionAppName = dataProtectionOptions?.Value?.ApplicationDiscriminator;
-
-                if (dataProtectionAppName.Is())
-                {
-                    _AppName = dataProtectionAppName;
-                }
-                else
-                {
-                    var appNameFromAppSettings = AppSettings.Current.DataProtection.AppName;
-                    if (appNameFromAppSettings.Is())
-                    {
-                        _AppName = appNameFromAppSettings;
-                    }
-                    else
-                    {
-                        _AppName = "app";
-                    }
-                }
+                if (_AppName.IsNot())
+                    _AppName = "app";
             }
             return _AppName;
         }

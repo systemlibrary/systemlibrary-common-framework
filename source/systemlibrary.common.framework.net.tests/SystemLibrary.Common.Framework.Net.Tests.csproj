@@ -21,11 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\systemlibrary.common.framework.net.tests.base\SystemLibrary.Common.Framework.Tests.Base.csproj" />
-		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<EmbeddedResource Include="_Assets\*" />
 	</ItemGroup>
 
@@ -34,6 +29,11 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.7.0" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\systemlibrary.common.framework.net.tests.base\SystemLibrary.Common.Framework.Tests.Base.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

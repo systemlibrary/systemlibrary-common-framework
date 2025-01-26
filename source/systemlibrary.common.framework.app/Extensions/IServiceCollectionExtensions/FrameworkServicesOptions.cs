@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace SystemLibrary.Common.Framework.App.Extensions;
@@ -109,18 +108,13 @@ public class FrameworkServicesOptions : BaseOptions
     public string[] AreaViewLocations;
 
     /// <summary>
-    /// Create your own class that inherits 'StringOutputFormatter' which sets all 'SupportedMediaTypes' in its constructor
-    /// <para>A default 'string output formatter' will always be added to your application, so responses/files like CSS, JS, JPG, PNG, JSON, etc are allowed</para>
-    /// </summary>
-    public StringOutputFormatter AdditionalSupportedMediaTypes = null;
-
-    /// <summary>
-    /// Auto-generate and enable data protection with a data protection file that will be used for encrypting and decrypting data within your application
-    /// <para>- string extension methods Encrypt and Decrypt will use the file internally as a key</para>
+    /// Generate and enable data protection with a 31 days rotating key files
+    /// <para>Parent folder of 'ContentRoot' will be used as the destination for the key files</para>
+    /// <para>Key files older than 60 days will be deleted automatically, meaning older data encrypted is not possible to decrypt, for instance old login cookies, which forces people to relogin every 60 days at minimum</para>
     /// - string extension methods EncryptUsingKeyRing and DecryptUsingKeyRing will use the generated files internally
     /// <para>- cookies read over http will be encrypted and decrypted with the key file, if you host your app over several instances, they must all share the same key of course</para>
     /// </summary>
-    public bool UseAutomaticDataProtectionPolicy = false;
+    public bool UseDataProtectionPolicy = false;
 
     /// <summary>
     /// Add an internal logger that forwards errors to the ILogWriter of your own choice
@@ -136,11 +130,14 @@ public class FrameworkServicesOptions : BaseOptions
     /// <summary>
     /// Allow synchronous IO, an IIS setting
     /// </summary>
-    public bool IISAllowSynchronousIO = true;
+    public bool AllowSynchronousIO = true;
 
     /// <summary>
     /// Registers special Type Converters to the System.ComponentModel.TypeDescriptor
     /// <para>For instance: it registers the .ToEnum() method as the primary method to convert a String to an Enum, so EnumValue and EnumText works</para>
     /// </summary>
-    public bool UseExtendedEnumConverter = true;
+    /// <remarks>
+    /// Note: This is used when converting data in a response to a Model within a GET or POST method for instance, do not mix it with JSON Serialization, thats something else
+    /// </remarks>
+    public bool UseExtendedEnumModelConverter = true;
 }

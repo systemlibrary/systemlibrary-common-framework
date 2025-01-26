@@ -16,8 +16,7 @@ public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
     {
         get
         {
-            if (_EnvironmentName == null)
-                return default;
+            if (_EnvironmentName == null) return default;
 
             return _EnvironmentName.Value;
         }

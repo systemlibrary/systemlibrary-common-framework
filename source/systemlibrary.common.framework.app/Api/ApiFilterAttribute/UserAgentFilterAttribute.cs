@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
+using SystemLibrary.Common.Framework.App.Extensions;
+
 namespace SystemLibrary.Common.Framework.App;
 
 /// <summary>
@@ -54,7 +56,7 @@ public class UserAgentFilterAttribute : BaseApiFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        var value = context?.HttpContext?.Request?.Headers["User-Agent"].ToString();
+        var value = context?.HttpContext?.Request.UserAgent();
 
         var hasAccess = value == null || !IsBlacklisted(value);
 

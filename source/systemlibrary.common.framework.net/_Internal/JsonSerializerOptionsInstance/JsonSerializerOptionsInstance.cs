@@ -12,6 +12,7 @@ static internal class JsonSerializerOptionsInstance
     static DateTimeOffsetJsonConverter DateTimeOffsetJsonConverter = new DateTimeOffsetJsonConverter("yyyy-MM-dd");
     static TypeConverter TypeConverter = new TypeConverter();
     static LongJsonConverter LongJsonConverter = new LongJsonConverter();
+    static DelegateJsonConverter DelegateJsonConverter = new DelegateJsonConverter();
 
     internal static JsonSerializerOptions Current(JsonSerializerOptions options, params JsonConverter[] converters)
     {
@@ -65,7 +66,7 @@ static internal class JsonSerializerOptionsInstance
         options.Converters.Add(DateTimeOffsetJsonConverter);
         options.Converters.Add(LongJsonConverter);
         options.Converters.Add(TypeConverter);
-        options.Converters.Add(new DelegateJsonConverter());
+        options.Converters.Add(DelegateJsonConverter);
     }
 
     static JsonConfig _JsonConfigInstance;

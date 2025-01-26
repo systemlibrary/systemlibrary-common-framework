@@ -1,20 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
 [TestClass]
 public class FrameworkConfigTests : BaseTest
 {
-    [TestMethod]
-    public void DumpConfig_Is_Set()
-    {
-        var config = FrameworkConfig.Current.Dump;
-
-        Assert.IsTrue(config.FileName == "systemlibrary-common-framework-tests.log");
-    }
-
     [TestMethod]
     public void JsonConfig_Is_Set()
     {

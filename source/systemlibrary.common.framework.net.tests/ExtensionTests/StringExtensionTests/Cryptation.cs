@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.Extensions;
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -20,8 +20,6 @@ partial class StringExtensionsTests : BaseTest
             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
 
         var tmpServiceProvider = serviceCollection.BuildServiceProvider();
-        
-
 
         var fileName = "key-13F7D4C1-E781-4824-8270-0BE22A226220.xml";
         var fileContent = "key encryption";
@@ -37,7 +35,7 @@ partial class StringExtensionsTests : BaseTest
 
         var data = "Hello world";
 
-        CryptationKey._Key = null;
+        CryptationKey.Instance = null;
 
         var oldServiceProvider = ServiceProviderInstance.Instance;
 
@@ -70,7 +68,7 @@ partial class StringExtensionsTests : BaseTest
 
         var emptyProvider = serviceCollection.BuildServiceProvider();
 
-        CryptationKey._Key = null;
+        CryptationKey.Instance = null;
 
         ServiceProviderInstance.Instance = emptyProvider;
 
@@ -285,7 +283,7 @@ partial class StringExtensionsTests : BaseTest
 
         var emptyProvider = serviceCollection.AddCommonServices().BuildServiceProvider();
 
-        CryptationKey._Key = null;
+        CryptationKey.Instance = null;
 
         ServiceProviderInstance.Instance = emptyProvider;
 
@@ -335,7 +333,7 @@ partial class StringExtensionsTests : BaseTest
         }
         catch (Exception ex)
         {
-            Dump.Write(ex.Message + " Encrypted data was: " + "Hello world".Encrypt());
+            Log.Dump(ex.Message + " Encrypted data was: " + "Hello world".Encrypt());
 
             Decrypt_In_Async_Startup_Success_Counter_Increment();
         }

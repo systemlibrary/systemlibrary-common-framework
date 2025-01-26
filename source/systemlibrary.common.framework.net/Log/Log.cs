@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Runtime.CompilerServices;
+
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32.SafeHandles;
 
 using SystemLibrary.Common.Framework;
 
@@ -33,6 +37,11 @@ using SystemLibrary.Common.Framework;
 /// </example>
 public static partial class Log
 {
+    static HashSet<string> BlacklistMemberNames = new();
+    static HashSet<string> BlacklistClassTypes = new();
+
+    static string FullFilePath;
+
     static ILogWriter _LogWriter;
     static ILogWriter LogWriter
     {
@@ -41,6 +50,33 @@ public static partial class Log
             _LogWriter ??= ServiceProviderInstance.Current.GetService<ILogWriter>();
 
             return _LogWriter;
+        }
+    }
+
+    static Log()
+    {
+        BlacklistClassTypes.Add(typeof(Exception).Name);
+        BlacklistClassTypes.Add(typeof(NullReferenceException).Name);
+        BlacklistClassTypes.Add(typeof(RuntimeTypeHandle).Name);
+        BlacklistClassTypes.Add(typeof(ModelBindingMessageProvider).Name);
+        BlacklistClassTypes.Add(typeof(SafeWaitHandle).Name);
+        BlacklistClassTypes.Add(typeof(RuntimeWrappedException).Name);
+        BlacklistClassTypes.Add(typeof(char).Name);
+        BlacklistClassTypes.Add("RuntimeType");
+        BlacklistClassTypes.Add("RuntimeMethodInfo");
+        BlacklistClassTypes.Add("RuntimeAssembly");
+        BlacklistClassTypes.Add("Constructor");
+
+        FullFilePath = FrameworkConfig.Current.Log.GetFullFilePath();
+
+        System.IO.File.AppendAllText(@"C:\logs\text.txt", "\n" + FullFilePath);
+
+        if (FullFilePath.Is())
+        {
+            var folder = new FileInfo(FullFilePath).DirectoryName + "\\";
+
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
         }
     }
 
@@ -206,21 +242,20 @@ public static partial class Log
         {
             if (LogIsOff) return;
 
-            if ((int)level < MinLogLevel)
-                return;
+            if ((int)level < MinLogLevel) return;
         }
 
         // TODO: Optimize by 'fire and forget' the whole log message builder and dumping/logging
-        var message = LogMessageBuilder.Get(obj, level);
+        var message = LogMessageBuilder.Get(obj);
 
         if (LogWriter == null)
         {
             if (!WarningDumped)
             {
                 WarningDumped = true;
-                Dump.Write("Warning: SystemLibrary.Common.Framework.App.ILogWriter is not yet registered as a service, will Dump.Write message");
+                Log.Dump("SystemLibrary.Common.Framework.App.ILogWriter is not yet registered as a service, will Dump.Write message");
             }
-            Dump.Write(message);
+            Log.Dump(message);
             return;
         }
 

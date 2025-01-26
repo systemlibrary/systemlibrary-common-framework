@@ -52,11 +52,57 @@ public static class HttpRequestExtensions
     /// </example>
     public static Uri Referer(this HttpRequest request)
     {
-        if (request == null) throw new ArgumentNullException(nameof(request));
-
-        RequestHeaders header = request.GetTypedHeaders();
+        RequestHeaders header = request?.GetTypedHeaders();
 
         return header?.Referer;
+    }
+
+    /// <summary>
+    /// Returns the Accept as string or null if not found
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var accept = request.Accept();
+    /// // accept is now the accept header value from the request, or null if not existing
+    /// </code>
+    /// </example>
+    public static string Accept(this HttpRequest request)
+    {
+        if (request?.Headers.TryGetValue("Accept", out var value) == true)
+            return value.ToString();
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the User-Agent as string or null if not found
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var userAgent = request.UserAgent();
+    /// // userAgent is now the 'User-Agent' header value from the request, or null if not existing
+    /// </code>
+    /// </example>
+    public static string UserAgent(this HttpRequest request)
+    {
+        if (request?.Headers.TryGetValue("User-Agent", out var value) == true)
+            return value.ToString();
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the Content-Type as string or null if not found
+    /// </summary>
+    /// <example>
+    /// <code>
+    /// var contentType = request.ContentType();
+    /// // contentType is now the 'Content-Type' header value from the request, or null if not existing
+    /// </code>
+    /// </example>
+    public static string ContentType(this HttpRequest request)
+    {
+        if (request?.Headers.TryGetValue("Content-Type", out var value) == true)
+            return value.ToString();
+        return null;
     }
 }
 

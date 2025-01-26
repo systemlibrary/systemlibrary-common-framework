@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.App.Extensions;
 
+namespace SystemLibrary.Common.Framework.Tests;
 
 public abstract class BaseTest
 {
-    WebHostBuilder WebHostBuilder;
+    protected Assembly AssemblyPart;
     TestServer Server;
 
     HttpClient _Client;
@@ -21,43 +20,50 @@ public abstract class BaseTest
         {
             if (_Client == null)
             {
-                Server = new TestServer(WebHostBuilder);
+                var builder = new WebHostBuilder()
+                   .ConfigureServices(services =>
+                   {
+                       ServiceOptions.ApplicationParts = [
+                           AssemblyPart
+                       ];
+
+                       services = services.AddFrameworkServices<LogWriter>(ServiceOptions);
+                   })
+                   .Configure(app =>
+                   {
+                       app.UseFrameworkMiddlewares(null);
+                   });
+
+                Server = new TestServer(builder);
+
                 _Client = Server.CreateClient();
             }
-
             return _Client;
         }
     }
 
+    protected FrameworkServicesOptions ServiceOptions;
+
     [TestInitialize]
     public void Setup()
     {
-        var builder = new WebHostBuilder()
-            .ConfigureServices(services =>
-            {
-                services.AddControllers();
-                services.AddDataProtection();
-
-                services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-                services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            })
-            .Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
-            });
+        ServiceOptions = new FrameworkServicesOptions();
+        ServiceOptions.UseHttpsRedirection = false;
     }
 
-    protected void True(bool flag, string message)
+    public string GetResponse(string pathAndQuery)
     {
-        Assert.IsTrue(flag, message);
-    }
+        var response = Client.GetAsync(pathAndQuery)
+           .ConfigureAwait(false)
+           .GetAwaiter()
+           .GetResult();
 
-    protected void False(bool flag, string message)
-    {
-        Assert.IsFalse(flag, message);
+        if(!response.IsSuccessStatusCode)
+            Log.Dump("Not successful: " + pathAndQuery + " " +  response.StatusCode);
+
+        return response.Content.ReadAsStringAsync()
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
     }
 }

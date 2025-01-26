@@ -1,6 +1,4 @@
-﻿using SystemLibrary.Common.Framework.Attributes;
-
-partial class Log
+﻿partial class Log
 {
     public enum LogLevel
     {
@@ -12,8 +10,9 @@ partial class Log
 
         Warning,
 
-        [EnumValue("Critical")]
         Error,
+
+        Critical,
 
         None = 999
     }

@@ -32,8 +32,11 @@ internal class DefaultSupportedMediaTypes : StringOutputFormatter
     {
         var requestPath = context?.HttpContext?.Request?.Path.ToString();
 
-        if (requestPath != null && requestPath.Length > 4)
+        if (requestPath != null && requestPath.Length > 5 && !requestPath.EndsWith('/'))
         {
+            if (requestPath.Contains("?"))
+                requestPath = requestPath.Split('?')[0];
+
             if (BlockedExtensions.Any(ext => requestPath.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
             {
                 return false;

@@ -1,0 +1,19 @@
+﻿{
+    "[GET] /api/tvContentApi/getById/{id}/{name}": "int id, string name -> string",
+    "[POST] /api/tvContentApi/getByProductId/{id}?firstName&lastName": "int id, string firstName, string? lastName -> {id, name, lastName, price}",
+    "[GET, POST] /api/tvContentApi/getAll": "no args -> {id, name, lastName, price} []",
+    "[GET] /api/tvContentApi/getAllByProductId": "no args -> {id} []",
+    "[GET, POST] /api/tvContentApi/createProduct": "string name, decimal price -> {id, name, price}",
+    "[GET] /api/tvContentApi/getByCategory/{categoryId}?pageNumber&pageSize": "int categoryId, int pageNumber, int? pageSize -> {id, name, category} []",
+        
+    "[POST] /api/userApi/createUser": "string firstName, string lastName, string email -> {userId, firstName, lastName, email}",
+    "[GET] /api/userApi/getUser/{userId}": "int userId -> {userId, firstName, lastName, email}",
+    "[PUT] /api/userApi/updateUser/{userId}": "int userId, string? firstName, string? lastName, string? email -> {userId, firstName, lastName, email}",
+    "[DELETE] /api/userApi/deleteUser/{userId}": "int userId -> {success: true/false}",
+        
+    "[POST] /api/tvContentApi/addToCart?productId&quantity": "int productId, int quantity -> {success: true/false}",
+    "[GET] /api/tvContentApi/checkAvailability/{productId}": "int productId -> {available: true/false}",
+        
+    "[POST] /api/tvContentApi/placeOrder": "int userId, {productId, quantity}[] -> {orderId, status, totalAmount}",
+    "[GET] /api/tvContentApi/orderStatus/{orderId}": "int orderId -> {orderId, status, estimatedDelivery}"
+}

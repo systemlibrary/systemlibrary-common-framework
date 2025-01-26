@@ -7,11 +7,11 @@ namespace SystemLibrary.Common.Framework;
 
 internal class EnumStringConverter<TEnum> : JsonConverter<TEnum> where TEnum : IComparable, IFormattable, IConvertible
 {
-    Type Type;
+    Type EnumType;
 
     public EnumStringConverter()
     {
-        Type = typeof(TEnum);
+        EnumType = typeof(TEnum);
     }
 
     public override TEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -19,7 +19,7 @@ internal class EnumStringConverter<TEnum> : JsonConverter<TEnum> where TEnum : I
         if (reader.TokenType == JsonTokenType.Number)
         {
             if (reader.TryGetInt32(out int i32))
-                return (TEnum)i32.ToString().ToEnum(Type);
+                return (TEnum)i32.ToString().ToEnum(EnumType);
 
             if (reader.TryGetInt64(out long i64))
                 return (TEnum)(object)i64;
@@ -30,9 +30,9 @@ internal class EnumStringConverter<TEnum> : JsonConverter<TEnum> where TEnum : I
 
         if (reader.TokenType == JsonTokenType.String)
         {
-            return (TEnum)reader.GetString().ToEnum(Type);
+            return (TEnum)reader.GetString().ToEnum(EnumType);
         }
-        throw new JsonException("Could not convert token-type " + reader.TokenType + " to Enum " + Type.Name);
+        throw new JsonException("Could not convert token-type " + reader.TokenType + " to Enum " + EnumType.Name);
     }
 
     public override void Write(Utf8JsonWriter writer, TEnum value, JsonSerializerOptions options)

@@ -65,8 +65,9 @@ public interface ILogWriter
 
     /// <summary>
     /// Implement the writing of warning messages
-    /// 
+    /// <para>
     /// Note: Write() will always be invoked, even if you disable logging in appSettings
+    /// </para>
     /// </summary>
     void Write(string message);
 }

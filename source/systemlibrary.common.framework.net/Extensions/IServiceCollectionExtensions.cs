@@ -18,7 +18,11 @@ internal static class IServiceCollectionExtensions
     {
         serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         serviceCollection.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-        serviceCollection.AddDataProtection();
+
+        // Temporarily building service provider 'at the start' which contains our LogWriter and these Context Accessors only
+        var tempProvider = serviceCollection.BuildServiceProvider();
+
+        ServiceProviderInstance.Instance = tempProvider;
 
         return serviceCollection;
     }

@@ -3,9 +3,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.Extensions;
-using SystemLibrary.Common.Framework.Net.Tests;
-
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 

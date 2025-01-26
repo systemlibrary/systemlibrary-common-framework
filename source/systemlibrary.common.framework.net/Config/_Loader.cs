@@ -11,7 +11,7 @@ partial class Config<T>
             var type = typeof(T);
 
             var configNameLowered = type.Name.ToLower();
-
+            
             var files = new List<string>();
 
             // Find the "master" config file for the current T
@@ -50,7 +50,6 @@ partial class Config<T>
 
                 //TODO: Why should XML add env paths and not json? or any at all? string username will then always be overridden with 'computer user name' for instance
                 var isXml = files.Where(x => x.EndsWith(".xml", StringComparison.Ordinal)).Count();
-
                 if (isXml > 0)
                 {
                     return builder
@@ -64,7 +63,6 @@ partial class Config<T>
                         .Build();
                 }
             }
-
             return ConfigVariables.AppSettings;
         }
     }

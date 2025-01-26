@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Net.Tests;
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -17,7 +17,7 @@ public partial class StringExtensionsDPApiTests : BaseTest
     {
         var data = "Hello world";
 
-        CryptationKey._Key = null;
+        CryptationKey.Instance = null;
 
         var enc = data.EncryptUsingKeyRing();
 

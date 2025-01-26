@@ -50,12 +50,12 @@ public class FrameworkAppOptions : BaseOptions
 
     /// <summary>
     /// Set the cache-control max age header to a duration for all static requests
-    /// <para>Default: two weeks</para>
+    /// <para>Default: 20 days</para>
     /// </summary>
     /// <remarks>
     /// Requires UseStaticFiles set to True, and the header 'max-age' cannot be added already in the response
     /// </remarks>
-    public int StaticFilesMaxAgeSeconds = 1209600;
+    public int StaticFilesMaxAgeSeconds = 1728000;
 
     /// <summary>
     /// Allow serving of unknown, unsupported, media/mime types.

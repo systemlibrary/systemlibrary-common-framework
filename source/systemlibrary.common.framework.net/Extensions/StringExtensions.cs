@@ -734,7 +734,7 @@ public static partial class StringExtensions
     /// </code>
     /// </example>
     /// <returns>Returns T or null if the leaf property do not exist</returns>
-    public static T JsonPartial<T>(this string json, string findPropertySearchPath = null, System.Text.Json.JsonSerializerOptions options = null)
+    public static T JsonPartial<T>(this string json, string findPropertySearchPath = null, JsonSerializerOptions options = null)
     {
         return PartialJsonSearcher.Search<T>(json, findPropertySearchPath, options);
     }
@@ -762,7 +762,7 @@ public static partial class StringExtensions
     /// </code>
     /// </example>
     /// <returns>Returns T or null if json is null or empty</returns>
-    public static T Json<T>(this string json, System.Text.Json.JsonSerializerOptions options = null, bool transformUnicodeCodepoints = false) where T : class
+    public static T Json<T>(this string json, JsonSerializerOptions options = null, bool transformUnicodeCodepoints = false) where T : class
     {
         if (json.IsNot()) return default;
 
@@ -1735,5 +1735,17 @@ public static partial class StringExtensions
         if (path[queryIndex - 1] == '/') return false;
 
         return queryIndex - 7 <= extensionIndex || HasAssetPath();
+    }
+
+    internal static string ToOsFriendlyPath(this string path)
+    {
+        if (path.IsNot()) return path;
+
+        if(path.IndexOf('\\') > -1)
+        {
+            path = path.Replace("\\", "/");
+        }
+
+        return path.TrimEnd('/');
     }
 }

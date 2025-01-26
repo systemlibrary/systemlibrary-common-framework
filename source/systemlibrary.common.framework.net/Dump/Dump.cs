@@ -1,629 +1,614 @@
-﻿using System.Collections;
-using System.Globalization;
-using System.Reflection;
-using System.Text;
-
-using SystemLibrary.Common.Framework;
-using SystemLibrary.Common.Framework.Extensions;
-
-/// <summary>
-/// Dump any object to a local file for easy debugging and logging purposes
-/// <para>Dump.Write calls should only occur during development as it is slow and not thread safe</para>
-/// <para>Has a write lock of 100ms, so thread-safe to some extent, one might see multiple dump files in a real async world</para>
-/// </summary>
-/// <remarks>
-/// "Equivalent" to javascripts 'console.log'
-/// </remarks>
-public static class Dump
-{
-    static string LogFullPath;
-    static string Folder;
-    static bool Initialized;
-    static List<int> Visited = new List<int>();
-
-    /// <summary>
-    /// Deletes the current log file if exists
-    /// </summary>
-    public static void Clear()
-    {
-        if (LogFullPath == null)
-        {
-            Initialize();
-        }
-
-        try
-        {
-            File.Delete(LogFullPath);
-        }
-        catch
-        {
-        }
-    }
-
-    /// <summary>
-    /// Dump any object to the dump file
-    /// </summary>
-    /// <remarks>
-    /// "Equivalent" to javascripts 'console.log'
-    /// </remarks>
-    /// <example>
-    /// <code class="language-xml hljs">
-    /// class Car {
-    ///     public string Name {get;set;}
-    /// }
-    /// var list = new List&lt;Car&gt;();
-    /// 
-    /// list.Add(new Car { Name = "Vehicle 1" });
-    /// list.Add(new Car { Name = "Vehicle 2" });
-    /// 
-    /// Dump.Write(list);
-    /// // Outputs:
-    /// // List of Car (1)
-    /// //  - Name = Vehicle 1
-    /// //  - Name = Vehicle 2
-    /// </code>
-    /// </example>
-    public static void Write(object o)
-    {
-        try
-        {
-            Initialize();
-
-            Visited.Clear();
-
-            var logString = new StringBuilder();
-
-            Build(logString, o, 0, 3);
-
-            if (logString.IsNot())
-                logString.Append(o.GetType().Name + " skipped");
-
-            logString.Insert(0, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "\t");
-
-            WriteToFileWithDateTime(logString);
-        }
-        catch (Exception ex)
-        {
-            try
-            {
-                File.AppendAllText(Folder + "DumpWrite" + DateTime.Now.Millisecond + ".log", ex.ToString() + "\n");
-            }
-            catch
-            {
-                //Swallow infinite loop, in case of:
-                //File already opened exception (multi threaded scenario)
-                //Write access exception
-                //Full disk exception
-            }
-        }
-    }
-
-    internal static object Lock = new object();
-
-    static void Initialize()
-    {
-        if (Initialized) return;
-
-        lock (Lock)
-        {
-            if (Initialized) return;
-
-            if (!Directory.Exists(Folder))
-            {
-                try
-                {
-                    Directory.CreateDirectory(Folder);
-                }
-                catch
-                {
-                }
-            }
-
-            LogFullPath = FrameworkConfig.Current.Dump.GetFullLogPath();
-            Folder = new FileInfo(LogFullPath).DirectoryName + "\\";
-
-            Initialized = true;
-        }
-    }
-
-    static string WriteBoolProperty(string n, bool b)
-    {
-        if (b)
-            return ", " + n;
-        return "";
-    }
-
-    static string WriteType(Type t)
-    {
-        return t.FullName + " "
-            + WriteBoolProperty("IsClass", t.IsClass)
-            + WriteBoolProperty("IsInterface", t.IsInterface)
-            + WriteBoolProperty("IsEnum", t.IsEnum)
-            + WriteBoolProperty("IsValueType", t.IsValueType)
-            + WriteBoolProperty("IsAbstract", t.IsAbstract)
-            + WriteBoolProperty("IsPrimitive", t.IsPrimitive)
-            + WriteBoolProperty("IsArray", t.IsArray)
-            + WriteBoolProperty("IsSerializable", t.IsSerializable)
-            + WriteBoolProperty("IsAutoClass", t.IsAutoClass)
-            + WriteBoolProperty("IsPointer", t.IsPointer)
-            + WriteBoolProperty("IsGenericType", t.IsGenericType)
-            + WriteBoolProperty("IsGenericParameter", t.IsGenericParameter);
-    }
-
-    static void WriteList(StringBuilder logString, Type type, int level, IEnumerable e)
-    {
-        var arguments = type.GetGenericArguments();
-        var genericType = type;
-        if (arguments != null && arguments.Length > 0)
-            genericType = arguments[0];
-
-        var collectionIncrementTabs = 0;
-
-        if (e is IDictionary d)
-            logString.Append(" dictionary count (" + d.Count + ")\n");
-
-        else if (e is Array a)
-            logString.Append(genericType.Name + " length (" + a.Length + ")\n");
-
-        else if (e is IList l)
-            logString.Append("IList<" + genericType.Name + "> (" + l.Count + ")\n");
-
-        else if (e is ICollection ic)
-            logString.Append(" collection count (" + ic.Count + ")\n");
-        else if (e.GetType().Name[0] == '<' && e.GetType().Name.Contains("__"))
-            logString.Append(" enumerable function count" + "\n");
-        else
-            logString.Append(" unknown count" + "\n");
-
-        if (e is IDictionary || e is IList || e is Array || e is ICollection)
-            collectionIncrementTabs = 2;
-
-        var tabs = GetTabs(level + collectionIncrementTabs);
-
-        logString.Append(tabs);
-
-        if (e is Array)
-        {
-            if (type == typeof(int[]) ||
-                type == typeof(byte[]) ||
-                type == typeof(bool[]) ||
-                type == typeof(Int64[]))
-            {
-                foreach (var item in e)
-                {
-                    logString.Append(item + " ");
-                }
-                return;
-            }
-            if (type == typeof(int[,]))
-            {
-                var aa = e as int[,];
-
-                for (int i = 0; i < aa.GetLength(0); i++)
-                {
-                    for (int j = 0; j < aa.GetLength(1); j++)
-                    {
-                        logString.Append(aa[i, j] + " ");
-                    }
-
-                    if (i + 1 < aa.GetLength(0))
-                        logString.Append("\n" + tabs);
-                }
-                return;
-            }
-            if (type == typeof(long[,]))
-            {
-                var aa = e as long[,];
-
-                for (int i = 0; i < aa.GetLength(0); i++)
-                {
-                    for (int j = 0; j < aa.GetLength(1); j++)
-                    {
-                        logString.Append(aa[i, j] + " ");
-                    }
-
-                    if (i + 1 < aa.GetLength(0))
-                        logString.Append("\n" + tabs);
-                }
-                return;
-            }
-        }
-
-        foreach (var item in e)
-        {
-            Build(logString, item, level, 3);
-
-            var t = item.GetType();
-            if (t.IsNativeType() && t != SystemType.StringType)
-                logString.Append(" ");
-            else
-                logString.Append("\n" + tabs);
-        }
-    }
-
-    static void WriteClass(StringBuilder logString, object value, Type type, int level)
-    {
-        if (type == SystemType.ExceptionType ||
-            type.Name == "NullReferenceException" ||
-            type.Name == "RuntimeType" ||
-            type.Name == "RuntimeMethodInfo" ||
-            type.Name == "ModelBindingMessageProvider" ||
-            type.Name == "")
-            return;
-
-        if (type.Name == "RuntimeAssembly" ||
-            type.Name == "Constructor")
-        {
-            logString.Append(type.Name + (type.IsClassType() ? " (class, skipped)" : ""));
-            return;
-        }
-
-        var arguments = type.GetGenericArguments();
-
-        var genericType = (Type)null;
-
-        if (arguments != null && arguments.Length > 0)
-            genericType = arguments[0];
-
-        var typeName = type.Name;
-
-        if (genericType != null)
-            typeName = typeName + "<" + genericType?.Name + ">";
-
-        if (type.IsInterface)
-            logString.Append(typeName + " (interface)");
-        else
-        {
-            if (type.Name == "SafeWaitHandle")
-            {
-                logString.Append(typeName + " skipped");
-                return;
-            }
-            if (type.Name.Contains("Task`"))
-            {
-                logString.Append(typeName + " ");
-                var t = value as Task;
-                logString.Append("Ex: " + t.Exception?.Message + ", Completed: " + t.IsCompleted + ", IsFaulted: " + t.IsFaulted + ", IsCompletedSuccessfully: " + t.IsCompletedSuccessfully + ", Cancelled: " + t.IsCanceled);
-                return;
-            }
-            else if (typeName.Contains("Action`"))
-                return;
-            else
-            {
-                logString.Append(typeName + (type.IsClassType() ? " (class)" : ""));
-            }
-        }
-
-        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty);
-
-        if (properties != null && properties.Length > 0)
-        {
-            logString.Append("\n");
-            var propL = properties.Length;
-            var propI = 0;
-            foreach (var property in properties)
-            {
-                propI++;
-                if (!property.CanRead)
-                {
-                    logString.Append(GetTabs(level) + "\t");
-                    logString.Append(property.Name + ": cant read, continuing...\n");
-                    continue;
-                }
-                if (property?.PropertyType == null) continue;
-                if (property.PropertyType == SystemType.CharType) continue;
-                if (property.PropertyType.Name == "RuntimeType") continue;
-
-                logString.Append(GetTabs(level) + "\t");
-
-                try
-                {
-                    var propertyValue = property.GetValue(value);
-
-                    AppendVariable(logString, property.PropertyType, property.Name, propertyValue, level + 1);
-                }
-                catch
-                {
-                    logString.Append(property.Name + ": could not retrieve value, continuing...\n");
-                }
-
-                if (propI < propL)
-                    logString.Append("\n");
-            }
-        }
-
-        var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.GetProperty);
-
-        if (fields != null && fields.Length > 0)
-        {
-            if (properties == null || properties.Length == 0)
-                logString.Append("\n");
-
-            var fieldsL = fields.Length;
-            var fieldsI = 0;
-            foreach (var field in fields)
-            {
-                fieldsI++;
-
-                if (field?.FieldType == null) continue;
-
-                if (field.IsPrivate) continue;
-
-                logString.Append("\t");
-                try
-                {
-                    var fieldValue = field.GetValue(value);
-
-                    AppendVariable(logString, field.FieldType, field.Name, fieldValue, level);
-                }
-                catch
-                {
-                    logString.Append(field.Name + ": could not retrieve value, continuing...");
-                }
-
-                if (fieldsI < fieldsL)
-                    logString.Append("\n");
-            }
-        }
-    }
-
-    static void AppendVariable(StringBuilder logString, Type variableType, string name, object variableValue, int level)
-    {
-        logString.Append(GetTabs(level) + name + ": ");
-
-        if (variableType.IsClassType() && !IsListType(variableValue))
-        {
-            Build(logString, variableValue, level + 1, 3);
-        }
-        else
-        {
-            Build(logString, variableValue, level, 3);
-        }
-    }
-
-    internal static void Build(StringBuilder logString, object value, int level, int maxDepth = 3)
-    {
-        if (level >= maxDepth)
-            return;
-
-        if (logString.Length > 30000) return;
-
-        var v = GetVariableValue(value);
-
-        if (v != null)
-        {
-            logString.Append(v);
-        }
-        else if (value is Type t)
-        {
-            logString.Append(WriteType(t));
-        }
-        else
-        {
-            var type = value.GetType();
-
-            if (IsListType(value))
-            {
-                WriteList(logString, type, level, value as IEnumerable);
-                return;
-            }
-
-            if (type.IsClassType())
-            {
-                if (type.BaseType != typeof(ValueType))
-                {
-                    var hash = value.GetHashCode();
-
-                    if (hash > 1)
-                    {
-                        // Self-referenced objects are added to a 'already written queue' so it is ignored, every other time
-                        if (Visited.Contains(hash))
-                        {
-                            logString.Append("Object already logged, continuing...\n");
-                            Visited.Remove(hash);
-                            return;
-                        }
-                        Visited.Add(hash);
-                    }
-                }
-
-                WriteClass(logString, value, type, level);
-
-                return;
-            }
-
-            Append(logString, type, value, level);
-        }
-    }
-
-    static string GetVariableValue(object value)
-    {
-        if (value == null)
-            return "(null)";
-
-        else if (value is Exception e)
-        {
-            if (e is AggregateException agg)
-            {
-                return agg.Flatten().ToString();
-            }
-            return e.ToString();
-        }
-        else if (value is string str)
-            if (str.Length > 50)
-                return str + " (Length: " + str.Length + ")";
-            else
-                return str;
-
-        else if (value is StringBuilder sb)
-            if (sb.Length > 50)
-                return sb + " (Length: " + sb.Length + ")";
-            else
-                return sb.ToString();
-
-        else if (value is int i)
-            return i.ToString();
-
-        else if (value is DateTime dt)
-            return dt.ToString();
-
-        else if (value is DateTimeOffset dto)
-            return dto.ToString();
-
-        else if (value is TimeSpan ts)
-            return ts.ToString();
-
-        else if (value is bool b)
-            return b.ToString();
-
-        else if (value is double d)
-            return d.ToString();
-
-        else if (value is float f)
-            return f.ToString();
-
-        else if (value is char c)
-            return c + "";
-
-        else if (value is Enum en)
-            return en.ToText() + " (enum value: " + en.ToValue() + ")\n";
-
-        else if (value is long i64)
-            return i64.ToString();
-
-        else if (value is short i16)
-            return i16.ToString();
-
-        else if (value is decimal)
-            return value.ToString();
-
-        else if (value is bool?)
-            return (value as bool?).Value + "";
-
-        else if (value is int?)
-            return (value as int?).Value + "";
-
-        else if (value is double?)
-            return (value as double?).Value + "";
-
-        else if (value is short?)
-            return (value as short?).Value + "";
-
-        else if (value is long?)
-            return (value as long?).Value + "";
-
-        else if (value is decimal?)
-            return (value as decimal?).Value + "";
-
-        else if (value is Memory<string> memString)
-            return "Memory<string> " + memString.Span.ToString();
-
-        else if (value is Memory<bool> memBool)
-            return "Memory<bool> " + memBool.Span.ToString();
-
-        else if (value is Memory<int> memInt)
-            return "Memory<int> " + memInt.Span.ToString();
-
-        else if (value is Memory<DateTime> memDateTime)
-            return "Memory<DateTime> " + memDateTime.Span.ToString();
-
-        else if (value is ReadOnlyMemory<string> romString)
-            return "ReadOnlyMemory<string> " + romString.Span.ToString();
-
-        else if (value is ReadOnlyMemory<int> romInt)
-        {
-            var tmp = "ReadOnlyMemory<int> ";
-            foreach (var number in romInt.Span)
-            {
-                tmp += number + ", ";
-            }
-            return tmp;
-            //return romInt.Span.ToString();
-        }
-
-        else if (value is ReadOnlyMemory<DateTime> romDateTime)
-            return romDateTime.Span.ToString();
-
-        else if (value is CultureInfo cult)
-            return "CultureInfo name: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
-
-        return null;
-    }
-
-    static void Append(StringBuilder sb, Type type, object value, int level)
-    {
-        sb.Append(GetTabs(level) + type?.Name + ": " + value);
-    }
-
-    static string GetTabs(int level)
-    {
-        if (level == 0) return "";
-        var tabs = "";
-
-        for (int i = 1; i < level; i++)
-            tabs += "\t";
-
-        return tabs;
-    }
-
-    static bool IsListType(object o)
-    {
-        return o is IEnumerable && o is not string;
-    }
-
-    static void WriteToFileWithDateTime(StringBuilder logString)
-    {
-        logString.Append("\n");
-
-        SafeWrite(logString.ToString());
-    }
-
-    static ReaderWriterLock readWriteLock = new ReaderWriterLock();
-
-    static void SafeWrite(string message)
-    {
-        if (Assemblies.IsKestrelMainHost)
-        {
-            var previousColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(message);
-            Console.ForegroundColor = previousColor;
-            return;
-        }
-
-        try
-        {
-            try
-            {
-                readWriteLock.AcquireWriterLock(175);
-            }
-            catch
-            {
-            }
-
-            File.AppendAllText(LogFullPath, message, Encoding.UTF8);
-        }
-        catch (Exception ex)
-        {
-            try
-            {
-                File.AppendAllText(Folder + @"DumpWrite" + DateTime.Now.Millisecond + ".log", "Error writing to dump file: " + ex.Message + "\nDumped message was:" + message + "\n");
-            }
-            catch
-            {
-            }
-        }
-        finally
-        {
-            try
-            {
-                if (readWriteLock.IsWriterLockHeld)
-                    readWriteLock.ReleaseWriterLock();
-            }
-            catch
-            {
-            }
-        }
-    }
-
-}
+﻿//using System.Collections;
+//using System.Diagnostics;
+//using System.Globalization;
+//using System.Reflection;
+//using System.Text;
+
+//using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+//using Microsoft.Win32.SafeHandles;
+
+//using SystemLibrary.Common.Framework;
+//using SystemLibrary.Common.Framework.Extensions;
+
+//public static class Dump
+//{
+//    static HashSet<string> BlacklistMemberNames = new();
+//    static HashSet<string> BlacklistClassTypes = new();
+
+//    static string LogFullPath;
+//    static string Folder;
+
+//    static Dump()
+//    {
+//        BlacklistClassTypes.Add(typeof(Exception).Name);
+//        BlacklistClassTypes.Add(typeof(NullReferenceException).Name);
+//        BlacklistClassTypes.Add(typeof(RuntimeTypeHandle).Name);
+//        BlacklistClassTypes.Add(typeof(ModelBindingMessageProvider).Name);
+//        BlacklistClassTypes.Add(typeof(SafeWaitHandle).Name);
+//        BlacklistClassTypes.Add(typeof(char).Name);
+//        BlacklistClassTypes.Add("RuntimeType");
+//        BlacklistClassTypes.Add("RuntimeMethodInfo");
+//        BlacklistClassTypes.Add("RuntimeAssembly");
+//        BlacklistClassTypes.Add("Constructor");
+
+//        try
+//        {
+//            LogFullPath = FrameworkConfig.Current.Dump.GetFullLogPath();
+//            Folder = new FileInfo(LogFullPath).DirectoryName + "\\";
+//        }
+//        catch
+//        {
+//            Folder = "C:\\logs\\";
+//            LogFullPath = Folder + "dump.log";
+//        }
+
+//        if (!Directory.Exists(Folder))
+//            Directory.CreateDirectory(Folder);
+//    }
+
+//    public static void Write(object obj)
+//    {
+//        var message = Build(obj);
+
+//        AppendSkippedObject(message, obj);
+
+//        PrefixDateTime(message);
+
+//        message.Append("\n");
+
+//        SafeWrite(message.ToString());
+//    }
+
+//    public static StringBuilder Build(object obj)
+//    {
+//        var message = new StringBuilder(128);
+
+//        var visited = new List<int>();
+
+//        Append(message, obj, 0, 5, visited);
+
+//        visited.Clear();
+
+//        visited = null;
+
+//        return message;
+//    }
+
+//    public static void Clear()
+//    {
+//        try
+//        {
+//            File.Delete(LogFullPath);
+//        }
+//        catch
+//        {
+//        }
+//    }
+
+//    static void Append(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
+//    {
+//        if (AppendVariable(message, obj, level)) return;
+
+//        if (AppendType(message, obj, level)) return;
+
+//        if (level > maxLevel)
+//        {
+//            Add(message, "Max depth reached, skipping deeper, continue...", level);
+//            return;
+//        }
+
+//        if (AppendEnumerable(message, obj, level, maxLevel, visited)) return;
+
+//        if (AppendClass(message, obj, level, maxLevel, visited)) return;
+
+//        Add(message, obj.ToString(), level);
+//    }
+
+//    static bool AppendVariable(StringBuilder message, object obj, int level)
+//    {
+//        var value = GetVariableValue(obj);
+
+//        if (value != null)
+//        {
+//            Add(message, value, level);
+
+//            return true;
+//        }
+//        return false;
+//    }
+
+//    static bool AppendType(StringBuilder message, object obj, int level)
+//    {
+//        string PrintBool(string n, bool b)
+//        {
+//            if (b)
+//                return n + ", ";
+//            return "";
+//        }
+
+//        if (obj is Type t)
+//        {
+//            var name = t.FullName;
+//            var index = name.IndexOf(',');
+//            if (index > 0)
+//            {
+//                var tmp = name.Substring(0, index);
+//                var countBrackets = 0;
+//                foreach (var a in name)
+//                    if (a == '[')
+//                        countBrackets++;
+
+//                foreach (var a in tmp)
+//                    if (a == ']')
+//                        countBrackets--;
+
+//                while (countBrackets > 0)
+//                {
+//                    tmp += "]";
+//                    countBrackets--;
+//                }
+//                name = tmp;
+//            }
+
+//            name = name.Replace("System.Collections.Generic.", "")
+//                .Replace("System.Collections.", "")
+//                .Replace("System.", "");
+
+//            var value = name + ": "
+//                + (PrintBool("IsClass", t.IsClass)
+//                + PrintBool("IsValueType", t.IsValueType)
+//                + PrintBool("IsInterface", t.IsInterface)
+//                + PrintBool("IsEnum", t.IsEnum)
+//                + PrintBool("IsGenericType", t.IsGenericType)
+//                + PrintBool("IsPrimitive", t.IsPrimitive)
+//                + PrintBool("IsArray", t.IsArray)
+//                + PrintBool("IsAbstract", t.IsAbstract)
+//                + PrintBool("IsAutoClass", t.IsAutoClass)
+//                + PrintBool("IsPointer", t.IsPointer)
+//                + PrintBool("IsGenericParameter", t.IsGenericParameter)).TrimEnd(", ");
+
+//            Add(message, value, level);
+
+//            return true;
+//        }
+//        return false;
+//    }
+
+//    static bool AppendEnumerable(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
+//    {
+//        var isList = obj is IEnumerable && obj is not string;
+
+//        if (!isList) return false;
+
+//        if (obj is IEnumerable enumerable)
+//        {
+//            var originalType = obj.GetType();
+//            var type = (Type)null;
+//            var type2 = (Type)null;
+//            var args = (Type[])null;
+
+//            if (originalType.IsArray)
+//            {
+//                type = originalType.GetElementType();
+//            }
+//            else
+//            {
+//                args = originalType.GetGenericArguments();
+//                if (args?.Length > 0) type = args[0];
+//                if (args?.Length > 1) type2 = args[1];
+//            }
+//            if (type == null) type = originalType;
+
+//            int i = 0;
+
+//            if (enumerable is IDictionary d) i = d.Count;
+
+//            else if (enumerable is Array a) i = a.Length;
+
+//            else if (enumerable is IList l) i = l.Count;
+
+//            else if (enumerable is ICollection c) i = c.Count;
+
+//            else foreach (var item in enumerable) i++;
+
+//            if (args == null || args.Length == 0)
+//                Add(message, type.Name + " (" + i + ")", level);
+//            else if (args.Length == 1)
+//                Add(message, "<" + type.Name + "> (" + i + ")", level);
+//            else
+//                Add(message, "<" + type.Name + "," + type2.Name + "> (" + i + ")", level);
+
+//            var printAsOneLine = IsListTypePrintableAsOneLine(type);
+
+//            var printAsMatrix = !printAsOneLine && type == typeof(int[,]) || type == typeof(long[,]) || type == typeof(string[,]);
+
+//            if (printAsOneLine)
+//            {
+//                var tmp = new StringBuilder(": ");
+
+//                if (type.IsEnum)
+//                {
+//                    foreach (var item in enumerable)
+//                        tmp.Append(PrintEnum(item) + ", ");
+//                }
+//                else
+//                {
+//                    foreach (var item in enumerable)
+//                        tmp.Append(item + ", ");
+//                }
+
+//                Add(message, tmp.ToString().TrimEnd(", "), level);
+//            }
+//            else if (printAsMatrix)
+//            {
+//                var arr = enumerable as Array;
+
+//                message.Append("\n" + new string('\t', level + 1));
+
+//                for (int j = 0; j < arr.GetLength(0); j++)
+//                {
+//                    for (int k = 0; k < arr.GetLength(1); k++)
+//                    {
+//                        message.Append(arr.GetValue(j, k) + " ");
+//                    }
+
+//                    if (j + 1 < arr.GetLength(0))
+//                        message.Append("\n" + new string('\t', level + 1));
+//                }
+//            }
+//            else
+//            {
+//                Add(message, "\n", level);
+//                int curr = 1;
+//                foreach (var item in enumerable)
+//                {
+//                    Append(message, item, level + 1, maxLevel, visited);
+//                    if (curr < i)
+//                    {
+//                        curr++;
+//                        Add(message, "\n", level + 1);
+//                    }
+//                }
+//            }
+//        }
+
+//        return true;
+//    }
+
+//    static bool AppendClass(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
+//    {
+//        var type = obj.GetType();
+
+//        if (!type.IsClassType()) return false;
+
+//        var hash = obj.GetHashCode();
+
+//        if (IsVisited(type, hash, visited))
+//        {
+//            Add(message, obj.GetType().Name + " class " + obj.GetHashCode() + " already printed, continue...", level);
+//            return true;
+//        }
+
+//        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty)
+//            .Where(p => p.CanRead && !BlacklistMemberNames.Contains(p.Name) && !BlacklistClassTypes.Contains(p.PropertyType.Name))
+//            .ToList();
+
+//        var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+//            .Where(f => !BlacklistMemberNames.Contains(f.Name) && !BlacklistClassTypes.Contains(f.FieldType?.Name))
+//            .ToList();
+
+//        var args = type.GetGenericArguments();
+//        var genericType = (Type)null;
+
+//        if (args?.Length > 0)
+//            genericType = args[0];
+
+//        var typeName = type.Name;
+
+//        if (genericType != null)
+//            typeName = typeName + "<" + genericType?.Name + ">";
+
+//        Add(message, typeName + " (hash: " + hash + ")", level);
+
+//        Add(message, "\n", 0);
+
+//        level += 1;
+
+//        if (!fields.Any() && !properties.Any())
+//        {
+//            Add(message, "{ no fields or props? } " + fields?.Count + " " + properties?.Count, level);
+//            return true;
+//        }
+
+//        if (properties.Any())
+//        {
+//            for (int i = 0; i < properties.Count; i++)
+//            {
+//                var property = properties[i];
+
+//                if (property?.PropertyType == null) continue;
+
+//                if (!property.CanRead) continue;
+
+//                Add(message, property.Name + ": ", level);
+
+//                try
+//                {
+//                    var value = property.GetValue(obj);
+//                    var sb = new StringBuilder(128);
+//                    Append(sb, value, level, maxLevel, visited);
+
+//                    int index = level;
+//                    if (index > 0)
+//                        sb.Remove(0, index);
+
+//                    Add(message, sb.ToString(), 0);
+//                }
+//                catch
+//                {
+//                    Add(message, "(error reading, continue...)", level);
+//                }
+//                if (i < properties.Count - 1)
+//                    Add(message, "\n", 0);
+
+
+//            }
+//        }
+
+//        if (fields.Any())
+//        {
+//            if (properties.Any())
+//                Add(message, "\n", 0);
+
+//            for (int i = 0; i < fields.Count; i++)
+//            {
+//                var field = fields[i];
+
+//                if (field?.FieldType == null) continue;
+
+//                if (field.IsPrivate) continue;
+
+//                Add(message, field.Name + ": ", level);
+
+//                try
+//                {
+//                    var value = field.GetValue(obj);
+
+//                    var sb = new StringBuilder(128);
+//                    Append(sb, value, level, maxLevel, visited);
+
+//                    int index = level;
+//                    if (index > 0)
+//                        sb.Remove(0, index);
+
+//                    Add(message, sb.ToString(), 0);
+//                }
+//                catch
+//                {
+//                    Add(message, "(error reading, continue...)", level);
+//                }
+//                if (i < fields.Count - 1)
+//                    Add(message, "\n", 0);
+//            }
+//        }
+//        return true;
+//    }
+
+//    static void AppendSkippedObject(StringBuilder message, object obj)
+//    {
+//        if (message.Length == 0)
+//            message.Append(obj.GetType().Name + " skipped");
+//    }
+
+//    static void Add(StringBuilder message, string value, int level)
+//    {
+//        message.Append(new string('\t', level));
+
+//        message.Append(value);
+//    }
+
+//    static bool IsVisited(Type type, int hash, List<int> visit)
+//    {
+//        if (type.BaseType == typeof(ValueType)) return false;
+
+
+//        if (hash == 0) return false;
+
+//        if (visit.Contains(hash)) return true;
+
+//        visit.Add(hash);
+
+//        return false;
+//    }
+
+//    static void PrefixDateTime(StringBuilder message)
+//    {
+//        message.Insert(0, DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "\t");
+//    }
+
+//    static bool IsListTypePrintableAsOneLine(Type listTypeArg)
+//    {
+//        return listTypeArg.IsEnum ||
+//               listTypeArg == typeof(short) ||
+//               listTypeArg == typeof(int) ||
+//               listTypeArg == typeof(long) ||
+//               listTypeArg == typeof(byte) ||
+//               listTypeArg == typeof(decimal) ||
+//               listTypeArg == typeof(double) ||
+//               listTypeArg == typeof(float) ||
+//               listTypeArg == typeof(bool);
+//    }
+
+//    static string GetVariableValue(object obj)
+//    {
+//        if (obj == null) return "(null)";
+
+//        if (obj is Exception e)
+//        {
+//            if (e is AggregateException agg)
+//            {
+//                return agg.Flatten().ToString().Replace("\n", "\n\t");
+//            }
+//            return e.ToString().Replace("\n", "\n\t");
+//        }
+
+//        if (obj is string str)
+//        {
+//            if (str == "") return "(empty)";
+
+//            var strLength = str.Length;
+//            if (strLength > 8192)
+//            {
+//                var lastWords = new StringBuilder();
+//                int spaceCount = 0;
+
+//                for (int i = strLength - 1; i >= 0 && spaceCount < 3; i--)
+//                {
+//                    if (str[i] == ' ') spaceCount++;
+
+//                    lastWords.Insert(0, str[i]);
+
+//                    if (lastWords.Length > 192) break;
+//                }
+
+//                var l = 8000 + 4 + lastWords.Length;
+
+//                return $"{str.Substring(0, 8000)}...{lastWords} (length: {l}/{strLength})";
+//            }
+//            return strLength > 32 ? $"{str} (length: {strLength})" : str;
+//        }
+
+//        if (obj is StringBuilder sb) return sb.ToString();
+
+//        if (obj is DateTime dt) return dt.ToString("yyyy-MM-dd HH:mm:ss.fffzzz");
+
+//        if (obj is DateTimeOffset dto) return dto.ToString("yyyy-MM-dd HH:mm:ss.fffzzz");
+
+//        if (obj is ValueType &&
+//           !(obj is IEnumerable) &&
+//           !(obj is ReadOnlyMemory<int>) &&
+//           !(obj is ReadOnlyMemory<string>))
+//        {
+//            return obj.ToString();
+//        }
+
+//        if (obj is Enum enu) return PrintEnum(enu);
+
+//        if (obj is CultureInfo cult)
+//            return "CultureInfo: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
+
+//        if (obj is bool?)
+//            return (obj as bool?).Value + "";
+
+//        if (obj is int?)
+//            return (obj as int?).Value + "";
+
+//        if (obj is double?)
+//            return (obj as double?).Value + "";
+
+//        if (obj is short?)
+//            return (obj as short?).Value + "";
+
+//        if (obj is long?)
+//            return (obj as long?).Value + "";
+
+//        if (obj is decimal?)
+//            return (obj as decimal?).Value + "";
+
+//        if (obj is Memory<string> memString)
+//            return "Memory<string> " + memString.Span.ToString();
+
+//        if (obj is Memory<bool> memBool)
+//            return "Memory<bool> " + memBool.Span.ToString();
+
+//        if (obj is Memory<int> memInt)
+//            return "Memory<int> " + memInt.Span.ToString();
+
+//        if (obj is Memory<DateTime> memDateTime)
+//            return "Memory<DateTime> " + memDateTime.Span.ToString();
+
+//        if (obj is ReadOnlyMemory<string> romString)
+//            return "ReadOnlyMemory<string> " + romString.Span.ToString();
+
+//        if (obj is ReadOnlyMemory<int> romInt)
+//        {
+//            var tmp = "ReadOnlyMemory<int> ";
+//            foreach (var number in romInt.Span)
+//            {
+//                tmp += number + ", ";
+//            }
+//            return tmp;
+//        }
+
+//        if (obj is ReadOnlyMemory<DateTime> romDateTime) return romDateTime.Span.ToString();
+
+//        if (obj is StackFrame stackFrame)
+//            return "StackFrame " + (stackFrame.GetFileName() + " " + stackFrame.GetMethod()?.Name + " in type " + stackFrame.GetMethod()?.DeclaringType?.Name).Trim();
+
+//        var type = obj.GetType();
+
+//        if (type.Name.Contains("Task`"))
+//        {
+//            var task = obj as Task;
+//            return type.Name + " Message: " + task.Exception?.Message + ", IsCompleted: " + task.IsCompleted + ", IsFaulted: " + task.IsFaulted + ", IsCompletedSuccessfully: " + task.IsCompletedSuccessfully + ", Cancelled: " + task.IsCanceled;
+//        }
+
+//        if (type.Name.Contains("Action`")) return "";
+
+
+//        return null;
+//    }
+
+//    static string PrintEnum(object item)
+//    {
+//        return (item as Enum).ToText() + " (" + (item as Enum).ToValue() + ")";
+//    }
+
+//    static ReaderWriterLock WriteLock = new ReaderWriterLock();
+
+//    static void SafeWrite(string message)
+//    {
+//        if (Assemblies.IsKestrelMainHost)
+//        {
+//            var previousColor = Console.ForegroundColor;
+//            Console.ForegroundColor = ConsoleColor.Gray;
+//            Console.WriteLine(message);
+//            Console.ForegroundColor = previousColor;
+//            return;
+//        }
+
+//        try
+//        {
+//            try
+//            {
+//                WriteLock.AcquireWriterLock(175);
+//            }
+//            catch
+//            {
+//            }
+
+//            File.AppendAllText(LogFullPath, message, Encoding.UTF8);
+//        }
+//        catch (Exception ex)
+//        {
+//            try
+//            {
+//                File.AppendAllText(Folder + @"dump." + DateTime.Now.Millisecond + ".log", "Error writing to dump file: " + ex.Message + "\nMessage was: " + message + "\n");
+//            }
+//            catch
+//            {
+//            }
+//        }
+//        finally
+//        {
+//            try
+//            {
+//                if (WriteLock.IsWriterLockHeld)
+//                    WriteLock.ReleaseWriterLock();
+//            }
+//            catch
+//            {
+//            }
+//        }
+//    }
+//}

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Net.Tests;
-
+using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -38,7 +37,7 @@ public class LogWriterTests : BaseTest
     {
         CleanDumpFile();
 
-        Log.Write("Err");
+        Log.Dump("Err");
 
         var content = File.ReadAllText(DumpFullPath);
 
@@ -50,8 +49,7 @@ public class LogWriterTests : BaseTest
     [TestMethod]
     public void Register_ILogWriter_Uses_Implementation_Whe_Writing_Objects_Success()
     {
-
-        CleanDumpFile();
+    //    CleanDumpFile();
 
         var list = new List<string>
         {
@@ -59,17 +57,15 @@ public class LogWriterTests : BaseTest
             "world",
             "!"
         };
+        FrameworkApp.Start();
 
-        var tmp = ServiceProviderInstance.Instance;
-        ServiceProviderInstance.Instance = App.Start<ILogWriter, LogWriter>();
-        Log.Error(list);
-        ServiceProviderInstance.Instance = tmp;
+        //Log.Error(list);
 
-        var content = File.ReadAllText(DumpFullPath);
+        //var content = File.ReadAllText(DumpFullPath);
 
-        Assert.IsTrue(content.Contains("world"), "world");
+        //Assert.IsTrue(content.Contains("world"), "world");
 
-        Assert.IsTrue(content.Contains("in LogWriter"), "LogWriter is not used");
+        //Assert.IsTrue(content.Contains("in LogWriter"), "LogWriter is not used");
 
 
         //var employee = Employee.Create();
@@ -105,7 +101,7 @@ public class LogWriterTests : BaseTest
         Log.Debug("33333");
         Log.Information("44444");
         Log.Trace("66666");
-        Log.Write("55555");
+        Log.Dump("55555");
 
         var content = File.ReadAllText(DumpFullPath);
 

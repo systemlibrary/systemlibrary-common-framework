@@ -21,6 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
 		<ProjectReference Include="..\systemlibrary.common.framework.net.tests.base\SystemLibrary.Common.Framework.Tests.Base.csproj" />
 		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
 	</ItemGroup>
@@ -30,9 +31,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="appSettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.7.0" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Configs\AppSettings\" />
+	  <Folder Include="Configs\" />
 	</ItemGroup>
 </Project>

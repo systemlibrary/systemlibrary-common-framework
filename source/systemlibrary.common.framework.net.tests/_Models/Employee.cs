@@ -7,6 +7,7 @@ public class Employee
     public string FirstName { get; set; }
     [JsonIgnore]
     public string MiddleName { get; set; }
+    public Employee Nested { get; set; }
     string LastName { get; set; }
     public string Email { get; set; }
     public string PhoneNumber;
@@ -24,11 +25,26 @@ public class Employee
 
     public static Employee Create(string name = "John")
     {
+        Employee employee = new Employee();
+        employee.FirstName = name + " nested";
+        employee.Nested = new Employee();
+        employee.Nested.FirstName = name + " nested2";
+        employee.Nested.Nested = new Employee();
+        employee.Nested.Nested.FirstName = name + " nested3";
+        employee.Nested.Nested.Nested = new Employee();
+        employee.Nested.Nested.Nested.FirstName = name + " nested4";
+
+        employee.Nested.Nested.Nested.Nested = new Employee();
+        employee.Nested.Nested.Nested.Nested.FirstName = name + " nested5";
+        employee.Nested.Nested.Nested.Nested.Nested = new Employee();
+        employee.Nested.Nested.Nested.Nested.Nested.FirstName = name + " nested6";
+
         return new Employee
         {
             FirstName = name,
             MiddleName = "A.",
             LastName = "Doe",
+            Nested = employee,
             MarriedDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").ToDateTime(),
             Email = name.ToLower() + ".doe@example.com",
             PhoneNumber = "123-456-" + Randomness.Int(1000, 9999),
