@@ -27,10 +27,12 @@ public class StringBuilderExtensionsTests : BaseTest
         sb = new StringBuilder("");
         result = sb.TrimEnd("abc");
         Assert.IsTrue(result == expected, "abc 3 errored");
+        Assert.IsTrue(sb.ToString() == "", "abc 3 not equal empty");
 
         sb = new StringBuilder("ab");
         result = sb.TrimEnd("abc");
         Assert.IsTrue(result == expected, "abc 4 errored");
+        Assert.IsTrue(sb.ToString() == "ab", "abc 4 not equal ab");
 
         sb = new StringBuilder("abc");
         result = sb.TrimEnd("abc");
@@ -42,7 +44,7 @@ public class StringBuilderExtensionsTests : BaseTest
         result = sb.TrimEnd("Hello World !234567890-.-,_:_");
         expected = true;
         Assert.IsTrue(result == expected, "Hello world errored");
-        Assert.IsTrue(sb.ToString() == "", "Hell oworld was not removed");
+        Assert.IsTrue(sb.ToString() == "", "Hello world was not removed");
 
         sb = new StringBuilder("ABC");
         result = sb.TrimEnd("abC");
@@ -80,6 +82,12 @@ public class StringBuilderExtensionsTests : BaseTest
         expected = true;
         Assert.IsTrue(result == expected, "Hello world 2 multiple errored");
         Assert.IsTrue(sb.ToString() == "hello world this is the end this is the end", "Hello world 2 multiple was not removed");
+
+
+        sb = new StringBuilder("Hello world \t\n\n\n");
+        result = sb.TrimEnd("\n");
+        Assert.IsTrue(result, "Hello world tab and new lines did not trim new line");
+        Assert.IsTrue(sb.ToString() == "Hello world \t\n\n");
     }
 
     [TestMethod]

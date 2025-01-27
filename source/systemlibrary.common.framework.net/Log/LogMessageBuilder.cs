@@ -23,15 +23,28 @@ partial class Log
             Format = LogConfig.Format;
         }
 
-        internal static string Get(object[] objects)
+        internal static string Get(object[] objects, LogLevel level)
         {
-            var message = Build(objects);
+            var message = new StringBuilder(256);
+            message.Append(level.ToString());
+            foreach (var obj in objects)
+            {
+                message.Append(Build(obj));
+
+                if(Format == LogFormat.Text)
+                    message.Append("\n");
+            }
+
+            if (level != LogLevel.Critical &&
+                level != LogLevel.Error &&
+                level != LogLevel.Warning)
+                return message.ToString();
 
             var httpContext = ServiceProviderInstance.Current.GetService<IHttpContextAccessor>()?.HttpContext;
 
             var url = GetUrl(httpContext?.Request);
             var httpMethod = GetHttpMethod(httpContext?.Request);
-            var authenticatedState = GetAuthenticatedState(httpContext);
+            var isAuthenticated = GetAuthenticatedState(httpContext);
             var stackTrace = GetStackTrace();
             var IP = GetIP(httpContext);
             var browserName = GetBrowserName(httpContext?.Request);
@@ -44,7 +57,7 @@ partial class Log
                     url = httpMethod.Is() ? "(" + httpMethod + ") " + url : url,
                     message = message.ToString(),
                     stackTrace,
-                    isAuthenticated = authenticatedState,
+                    isAuthenticated,
                     IP,
                     browserName,
                     correlationId
@@ -60,6 +73,24 @@ partial class Log
             }
             else
             {
+                if (url != null)
+                    message.Insert(0, "url: " + (httpMethod.Is() ? "(" + httpMethod + ") " + url + "\n" : url + "\n"));
+
+                if (stackTrace != null)
+                    message.Append("stackTrace: " + stackTrace + "\n");
+
+                if (isAuthenticated != null)
+                    message.Append("isAuthenticated: " + isAuthenticated + "\n");
+
+                if (IP != null)
+                    message.Append("IP: " + IP + "\n");
+
+                if (browserName != null)
+                    message.Append("browser: " + browserName + "\n");
+
+                if (correlationId != null)
+                    message.Append("correlationId: " + correlationId + "\n");
+
                 return message.ToString();
             }
         }
@@ -101,7 +132,7 @@ partial class Log
                         if (i < Math.Min(traces.Length, 9) - 1)
                             stackTraceBuilder.Append("\t" + traces[i].TrimStart() + "\n");
                     }
-                    return stackTraceBuilder.ToString();
+                    return stackTraceBuilder.ToString().TrimStart('\t').TrimEnd("\n");
                 }
                 return "";
             }

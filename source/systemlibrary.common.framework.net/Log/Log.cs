@@ -52,6 +52,61 @@ public static partial class Log
             return _LogWriter;
         }
     }
+    static bool WarningDumped = false;
+
+    static bool? _LogIsOff;
+    static bool LogIsOff
+    {
+        get
+        {
+            if (_LogIsOff == null)
+            {
+                // Turned off for this package config
+                var temp = FrameworkConfig.Current.Log.Level;
+
+                if (temp == null)
+                {
+                    // Turned off on a global level, so one can turn off globally, but explicit enable for this package
+                    if (AppSettings.Current.Logging.LogLevel.Default?.ToLower() == "none")
+                        temp = LogLevel.None;
+                }
+
+                _LogIsOff = temp == LogLevel.None;
+
+            }
+            return _LogIsOff.Value;
+        }
+    }
+
+    static int? _MinLogLevel;
+    static int MinLogLevel
+    {
+        get
+        {
+            if (_MinLogLevel == null)
+            {
+                // Read log level specific to this package
+                var temp = AppSettings.Current?.SystemLibraryCommonFramework?.Log?.Level;
+
+                if (temp == null)
+                {
+                    // Package log was not specified, check the global default "Logging" if exists
+                    var def = AppSettings.Current?.Logging?.LogLevel?.Default;
+                    if (def.Is())
+                    {
+                        temp = def.ToEnum<LogLevel>();
+                    }
+                    else
+                    {
+                        // Setting default
+                        temp = LogLevel.Information;
+                    }
+                }
+                _MinLogLevel = (int)temp;
+            }
+            return _MinLogLevel.Value;
+        }
+    }
 
     static Log()
     {
@@ -68,8 +123,6 @@ public static partial class Log
         BlacklistClassTypes.Add("Constructor");
 
         FullFilePath = FrameworkConfig.Current.Log.GetFullFilePath();
-
-        System.IO.File.AppendAllText(@"C:\logs\text.txt", "\n" + FullFilePath);
 
         if (FullFilePath.Is())
         {
@@ -180,62 +233,6 @@ public static partial class Log
         Write(obj, (LogLevel)99999);
     }
 
-    static bool WarningDumped = false;
-
-    static bool? _LogIsOff;
-    static bool LogIsOff
-    {
-        get
-        {
-            if (_LogIsOff == null)
-            {
-                // Turned off for this package config
-                var temp = FrameworkConfig.Current.Log.Level;
-
-                if (temp == null)
-                {
-                    // Turned off on a global level, so one can turn off globally, but explicit enable for this package
-                    if (AppSettings.Current.Logging.LogLevel.Default?.ToLower() == "none")
-                        temp = LogLevel.None;
-                }
-
-                _LogIsOff = temp == LogLevel.None;
-
-            }
-            return _LogIsOff.Value;
-        }
-    }
-
-    static int? _MinLogLevel;
-    static int MinLogLevel
-    {
-        get
-        {
-            if (_MinLogLevel == null)
-            {
-                // Read log level specific to this package
-                var temp = AppSettings.Current?.SystemLibraryCommonFramework?.Log?.Level;
-
-                if (temp == null)
-                {
-                    // Package log was not specified, check the global default "Logging" if exists
-                    var def = AppSettings.Current?.Logging?.LogLevel?.Default;
-                    if (def.Is())
-                    {
-                        temp = def.ToEnum<LogLevel>();
-                    }
-                    else
-                    {
-                        // Setting default
-                        temp = LogLevel.Information;
-                    }
-                }
-                _MinLogLevel = (int)temp;
-            }
-            return _MinLogLevel.Value;
-        }
-    }
-
     static void Write(object[] obj, LogLevel level)
     {
         if ((int)level != 99999)
@@ -246,7 +243,7 @@ public static partial class Log
         }
 
         // TODO: Optimize by 'fire and forget' the whole log message builder and dumping/logging
-        var message = LogMessageBuilder.Get(obj);
+        var message = LogMessageBuilder.Get(obj, level);
 
         if (LogWriter == null)
         {

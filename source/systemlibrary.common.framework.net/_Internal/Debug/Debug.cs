@@ -18,9 +18,10 @@ internal static class Debug
     {
         if (Debugging)
         {
-            global::Log.Debug("Common Framework Debug=true: " + msg);
+            global::Log.Debug("[systemLibraryCommonFramework.Debug=true] " + msg);
         }
     }
+
     internal static void Write(string obj)
     {
         try

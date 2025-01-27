@@ -7,13 +7,13 @@ internal class LogConfig
     public Log.LogLevel Level { get; set; }
     public Log.LogFormat Format { get; set; }
 
-    public bool AddUrl { get; set; } = true;
-    public bool AddHttpMethod { get; set; } = false;
-    public bool AddAuthenticatedState { get; set; } = true;
-    public bool AddStacktrace { get; set; } = true;
-    public bool AddIP { get; set; } = false;
-    public bool AddBrowserName { get; set; } = false;
-    public bool AddCorrelationId { get; set; } = true;
+    public bool AddUrl { get; set; } = false;
+    public bool AddHttpMethod { get; set; } = true;
+    public bool AddAuthenticatedState { get; set; } = false;
+    public bool AddStacktrace { get; set; } = false;
+    public bool AddIP { get; set; } = true;
+    public bool AddBrowserName { get; set; } = true;
+    public bool AddCorrelationId { get; set; } = false;
 
     string _FullFilePath;
     public string GetFullFilePath()
@@ -21,8 +21,6 @@ internal class LogConfig
         if (_FullFilePath == null)
         {
             var tmp = FullFilePath;
-
-            System.IO.File.AppendAllText(@"C:\logs\text.txt", "\nCurrent?" + tmp);
 
             if (tmp.IsNot())
             {

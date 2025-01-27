@@ -9,6 +9,20 @@ public class LogWriterTests : BaseTest
 {
     const string DumpFullPath = @"C:\Logs\systemlibrary-common-framework-tests.log";
 
+    static string ReadFile()
+    {
+        Thread.Sleep(100);
+        try
+        {
+            return File.ReadAllText(DumpFullPath);
+        }
+        catch
+        {
+            Thread.Sleep(33);
+            return File.ReadAllText(DumpFullPath);
+        }
+    }
+
     static void CleanDumpFile()
     {
         if (File.Exists(DumpFullPath))
@@ -37,9 +51,14 @@ public class LogWriterTests : BaseTest
     {
         CleanDumpFile();
 
-        Log.Dump("Err");
+        int i = 1500000;
+        while (i > 0)
+        {
+            i--;
+            Log.Dump("Err");
+        }
 
-        var content = File.ReadAllText(DumpFullPath);
+        var content = ReadFile();
 
         Assert.IsTrue(content.Contains("Err"), "Does not contain 'Err': " + content);
         Assert.IsTrue(!content.Contains("Error"));
@@ -49,7 +68,7 @@ public class LogWriterTests : BaseTest
     [TestMethod]
     public void Register_ILogWriter_Uses_Implementation_Whe_Writing_Objects_Success()
     {
-    //    CleanDumpFile();
+        //    CleanDumpFile();
 
         var list = new List<string>
         {
@@ -59,7 +78,7 @@ public class LogWriterTests : BaseTest
         };
         FrameworkApp.Start();
 
-        //Log.Error(list);
+        Log.Error(list);
 
         //var content = File.ReadAllText(DumpFullPath);
 
