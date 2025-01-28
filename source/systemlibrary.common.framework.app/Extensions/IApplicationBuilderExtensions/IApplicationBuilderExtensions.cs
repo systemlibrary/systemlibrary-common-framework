@@ -64,7 +64,7 @@ public static partial class IApplicationBuilderExtensions
 
         if (options.UseStaticFiles)
         {
-            var contentRootPath = env?.WebRootPath ?? EnvironmentConfig.Current.ContentRootPath;
+            var contentRootPath = env?.WebRootPath ?? EnvironmentConfig.ContentRootPath;
 
             if (options.StaticFilesRequestPaths.Is())
             {

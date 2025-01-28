@@ -2,18 +2,7 @@
 
 partial class Assemblies
 {
-    static IEnumerable<Type> _Types = null;
-    static IEnumerable<Type> Types
-    {
-        get
-        {
-            if (_Types == null)
-            {
-                _Types = WhiteListedAssemblies.SelectMany(asm => asm.GetTypes()).ToArray();
-            }
-            return _Types;
-        }
-    }
+    static readonly IEnumerable<Type> Types;
 
     static IEnumerable<Type> FindTypesInheriting(Type classType, Type classWithAttribute = null)
     {

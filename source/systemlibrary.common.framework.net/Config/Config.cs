@@ -140,14 +140,12 @@ namespace SystemLibrary.Common.Framework;
 /// <typeparam name="T">T is the class inheriting Config&lt;&gt;, also referenced as 'self'. Note that T cannot be a nested class</typeparam>
 public abstract partial class Config<T> where T : class
 {
-    static T _Config = default;
-
     static Config()
     {
         var configuration = ConfigLoader<T>.Load();
         try
         {
-            _Config = configuration.Get<T>(opt =>
+            Current = configuration.Get<T>(opt =>
             {
                 opt.ErrorOnUnknownConfiguration = false;
             });
@@ -156,16 +154,16 @@ public abstract partial class Config<T> where T : class
         {
             // NOTE: static properties inside the Config class errors unless already instantiated
             // could check for static members myself, but try-catch for now
-            _Config = Activator.CreateInstance<T>();
-            _Config = configuration.Get<T>();
+            Current = Activator.CreateInstance<T>();
+            Current = configuration.Get<T>();
         }
 
-        if (_Config == null && typeof(T) == typeof(EnvironmentConfig))
+        if (Current == null && typeof(T) == typeof(EnvironmentConfig))
             throw new Exception("EnvironmentConfig could not be created - make sure the 'environmentConfig.json' is not empty, it must minimum contain one property, for instance: { 'name': 'prod' }");
 
         try
         {
-            DecryptPublicGetSetProperties(_Config, typeof(T));
+            DecryptPublicGetSetProperties(Current, typeof(T));
         }
         catch (Exception ex)
         {
@@ -176,7 +174,7 @@ public abstract partial class Config<T> where T : class
     /// <summary>
     /// Get the current configuration as a singleton object, always instantiated
     /// </summary>
-    public static T Current => _Config;
+    public static readonly T Current;
 
     static void DecryptPublicGetSetProperties(object instance, Type type)
     {

@@ -2,33 +2,38 @@
 
 internal class LogWriter : ILogWriter
 {
+    public void Critical(string message)
+    {
+        Log.Dump(message);
+    }
+
     public void Error(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 
     public void Warning(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 
     public void Debug(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 
     public void Information(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 
     public void Trace(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 
     public void Write(string message)
     {
-        File.AppendAllText(@"C:\logs\log.log", message);
+        Log.Dump(message);
     }
 }

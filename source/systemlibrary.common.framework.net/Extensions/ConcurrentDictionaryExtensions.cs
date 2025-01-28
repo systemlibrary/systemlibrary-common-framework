@@ -13,7 +13,7 @@ public static class ConcurrentDictionaryExtensions
     /// <remarks>
     /// The static concurrent dictionary lives as long as application runs
     /// <para>You are responsible for when to instantiate the dictionary</para>
-    /// Item limit per dictionary is set to 100.000 items, if reached the dictionary is cleaned and starts caching over again
+    /// Item limit per dictionary is set to 50.000 items, if reached the dictionary is cleaned and starts caching over again
     /// </remarks>
     /// <returns>Returns T either from Cache or from the Method</returns>
     public static T Cache<T>(this ConcurrentDictionary<int, T> dictionary, int key, Func<T> getItem)
@@ -25,7 +25,7 @@ public static class ConcurrentDictionaryExtensions
 
         if (!dictionary.TryGetValue(key, out var result))
         {
-            if (dictionary.Count > 100000)
+            if (dictionary.Count > 50000)
             {
                 dictionary.Clear();
             }
@@ -43,7 +43,7 @@ public static class ConcurrentDictionaryExtensions
     /// <remarks>
     /// The static concurrent dictionary lives as long as application runs
     /// <para>You are responsible for when to instantiate the dictionary</para>
-    /// <para>Item limit per dictionary is set to 100.000 items, if reached the dictionary is cleaned and starts caching over again</para>
+    /// <para>Item limit per dictionary is set to 50.000 items, if reached the dictionary is cleaned and starts caching over again</para>
     /// </remarks>
     /// <returns>Returns T either from Cache or from the Method</returns>
     public static T Cache<T>(this ConcurrentDictionary<int, T> dictionary, Type type, Func<T> getItem)
@@ -57,7 +57,7 @@ public static class ConcurrentDictionaryExtensions
 
         if (!dictionary.TryGetValue(hashCode, out var result))
         {
-            if (dictionary.Count > 100000)
+            if (dictionary.Count > 50000)
             {
                 dictionary.Clear();
             }
@@ -75,7 +75,7 @@ public static class ConcurrentDictionaryExtensions
     /// <remarks>
     /// The static concurrent dictionary lives as long as application runs
     /// <para>You are responsible for when to instantiate the dictionary</para>
-    /// Item limit per dictionary is set to 100.000 items, if reached the dictionary is cleaned and starts caching over again
+    /// Item limit per dictionary is set to 50.000 items, if reached the dictionary is cleaned and starts caching over again
     /// </remarks>
     /// <returns>Returns T either from Cache or from the Method</returns>
     public static T Cache<T>(this ConcurrentDictionary<string, T> dictionary, string key, Func<T> getItem)
@@ -88,7 +88,7 @@ public static class ConcurrentDictionaryExtensions
 
         if (!dictionary.TryGetValue(key, out var result))
         {
-            if (dictionary.Count > 100000)
+            if (dictionary.Count > 50000)
             {
                 dictionary.Clear();
             }

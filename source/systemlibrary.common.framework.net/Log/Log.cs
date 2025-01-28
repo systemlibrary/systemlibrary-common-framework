@@ -37,46 +37,16 @@ using SystemLibrary.Common.Framework;
 /// </example>
 public static partial class Log
 {
-    static HashSet<string> BlacklistMemberNames = new();
-    static HashSet<string> BlacklistClassTypes = new();
+    static readonly HashSet<string> BlacklistMemberNames = new();
+    static readonly HashSet<string> BlacklistClassTypes = new();
 
     static string FullFilePath;
 
-    static ILogWriter _LogWriter;
-    static ILogWriter LogWriter
-    {
-        get
-        {
-            _LogWriter ??= ServiceProviderInstance.Current.GetService<ILogWriter>();
+    static readonly ILogWriter LogWriter = ServiceProviderInstance.Current.GetService<ILogWriter>();
 
-            return _LogWriter;
-        }
-    }
     static bool WarningDumped = false;
 
-    static bool? _LogIsOff;
-    static bool LogIsOff
-    {
-        get
-        {
-            if (_LogIsOff == null)
-            {
-                // Turned off for this package config
-                var temp = FrameworkConfig.Current.Log.Level;
-
-                if (temp == null)
-                {
-                    // Turned off on a global level, so one can turn off globally, but explicit enable for this package
-                    if (AppSettings.Current.Logging.LogLevel.Default?.ToLower() == "none")
-                        temp = LogLevel.None;
-                }
-
-                _LogIsOff = temp == LogLevel.None;
-
-            }
-            return _LogIsOff.Value;
-        }
-    }
+    static readonly bool LogIsOff = (LogLevel)MinLogLevel == LogLevel.None;
 
     static int? _MinLogLevel;
     static int MinLogLevel
@@ -85,22 +55,23 @@ public static partial class Log
         {
             if (_MinLogLevel == null)
             {
-                // Read log level specific to this package
-                var temp = AppSettings.Current?.SystemLibraryCommonFramework?.Log?.Level;
+                var temp = FrameworkConfig.Current?.Log?.Level;
 
-                if (temp == null)
+                // Not specified for the package 'systemLibraryCommonFramework', let's check the global logging level
+                if (temp == null || temp == LogLevel.Unset)
                 {
-                    // Package log was not specified, check the global default "Logging" if exists
-                    var def = AppSettings.Current?.Logging?.LogLevel?.Default;
-                    if (def.Is())
+                    // If 'none' is the default logging level, no logs should occur at all, except Log.Write always bypassed, same does Log.Dump (but this writes to physical drive)
+                    var defaultLogLevel = AppSettings.Current.Logging?.LogLevel?.Default?.ToLower();
+
+                    if (defaultLogLevel.Is())
                     {
-                        temp = def.ToEnum<LogLevel>();
+                        if (defaultLogLevel == "none")
+                            temp = LogLevel.None;
+                        else
+                            temp = defaultLogLevel.ToEnum<LogLevel>();
                     }
                     else
-                    {
-                        // Setting default
-                        temp = LogLevel.Information;
-                    }
+                        temp = LogLevel.Debug; // Debug, Error and Critical are logged by default
                 }
                 _MinLogLevel = (int)temp;
             }
@@ -250,7 +221,7 @@ public static partial class Log
             if (!WarningDumped)
             {
                 WarningDumped = true;
-                Log.Dump("SystemLibrary.Common.Framework.App.ILogWriter is not yet registered as a service, will Dump.Write message");
+                Log.Dump("SystemLibrary.Common.Framework.App.ILogWriter is not registered as a service, will Log.Dump message");
             }
             Log.Dump(message);
             return;
@@ -258,14 +229,17 @@ public static partial class Log
 
         switch (level)
         {
+            case LogLevel.Critical:
+                LogWriter.Critical(message); 
+                break;
             case LogLevel.Error:
                 LogWriter.Error(message);
                 break;
-            case LogLevel.Warning:
-                LogWriter.Warning(message);
-                break;
             case LogLevel.Debug:
                 LogWriter.Debug(message);
+                break;
+            case LogLevel.Warning:
+                LogWriter.Warning(message);
                 break;
             case LogLevel.Information:
                 LogWriter.Information(message);

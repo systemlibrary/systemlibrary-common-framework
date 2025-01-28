@@ -26,7 +26,8 @@ public class Employee
     public static Employee Create(string name = "John")
     {
         Employee employee = new Employee();
-        employee.FirstName = name + " nested";
+        employee.FirstName = name;
+
         employee.Nested = new Employee();
         employee.Nested.FirstName = name + " nested2";
         employee.Nested.Nested = new Employee();
@@ -48,7 +49,7 @@ public class Employee
             MarriedDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").ToDateTime(),
             Email = name.ToLower() + ".doe@example.com",
             PhoneNumber = "123-456-" + Randomness.Int(1000, 9999),
-            BirthDate = new DateTime(Randomness.Int(1990, 2020), 1, 1),
+            BirthDate = new DateTime(1999, 1, Randomness.Int(1, 28)),
             Age = Randomness.Int(10, 99),
             IsHired = true,
             IsFired = false,

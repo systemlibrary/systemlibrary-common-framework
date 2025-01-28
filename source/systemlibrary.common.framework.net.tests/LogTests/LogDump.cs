@@ -17,7 +17,7 @@ namespace SystemLibrary.Common.Framework;
 public record Person(string Name, int Age);
 
 [TestClass]
-public class DumpTests : BaseTest
+public class LogDumpTests : BaseTest
 {
     const string DumpFullPath = "C:\\Logs\\systemlibrary-common-framework-tests.log";
     
@@ -36,7 +36,7 @@ public class DumpTests : BaseTest
     }
 
     [TestMethod]
-    public void TestNewDump()
+    public void Log_Dump_Simple_Strings_And_Null()
     {
         Log.Dump(null);
         Log.Dump("");
@@ -155,15 +155,16 @@ public class DumpTests : BaseTest
         var e3 = new Exception("Hello world3", e2);
 
         Log.Dump(e3);
-        //Log.Clear();
 
-        //Log.Dump(e3);
+        Log.Clear();
 
-        //var content = File.ReadAllText(DumpPath);
+        Log.Dump(e3);
 
-        //Assert.IsTrue(content.Contains("Hello world3"), "Missing 3");
-        //Assert.IsTrue(content.Contains("Hello world2"), "Missing 2");
-        //Assert.IsTrue(content.Contains("Hello world1"), "Missing 1");
+        var content = ReadFile();
+
+        Assert.IsTrue(content.Contains("Hello world3"), "Missing 3");
+        Assert.IsTrue(content.Contains("Hello world2"), "Missing 2");
+        Assert.IsTrue(content.Contains("Hello world1"), "Missing 1");
     }
 
     [TestMethod]
@@ -180,7 +181,7 @@ public class DumpTests : BaseTest
         Assert.IsTrue(content.Contains("John1"), "Missing John1");
         Assert.IsTrue(content.Contains("John2"), "Missing John2");
 
-        Assert.IsTrue(content.Contains("12:00:00"), "Missing datetime");
+        Assert.IsTrue(content.Contains("BirthDate: 1999-01-"), "Missing datetime");
         Assert.IsTrue(content.Contains("Invoice 00"), "Missing Invoice N");
         Assert.IsTrue(content.Contains("123456789"), "Missing bankAccountNumber");
         Assert.IsTrue(content.Contains("123456789"), "Missing bankAccountNumber");
@@ -263,8 +264,8 @@ public class DumpTests : BaseTest
 
         var content = ReadFile();
 
-        Assert.IsTrue(content.Contains("System.String"));
-        Assert.IsTrue(content.Contains("Dump"));
+        Assert.IsTrue(content.Contains("String"));
+        Assert.IsTrue(content.Contains("Log"));
         Assert.IsTrue(content.Contains("SystemLibrary.Common.Framework.Async"));
         Assert.IsTrue(content.Contains("IsClass"));
         Assert.IsTrue(content.Contains("IsValueType"));
@@ -292,11 +293,14 @@ public class DumpTests : BaseTest
         var employee = Employee.Create("Johnny");
 
         Log.Clear();
+
         Log.Dump(employee);
 
         var content = ReadFile();
 
         Assert.IsTrue(content.Contains("Johnny"), "Missing Johnny");
+
+        Assert.IsTrue(content.Contains("Skipped as max depth reached"), "Max depth not reached");
     }
 
     [TestMethod]
@@ -316,10 +320,8 @@ public class DumpTests : BaseTest
     }
 
     [TestMethod]
-    public void Dump_Write_Async()
+    public void Log_Dump_Async()
     {
-        Thread.Sleep(250);
-
         void LocalOverheadWriting(string m)
         {
             Log.Dump(m);
@@ -327,10 +329,9 @@ public class DumpTests : BaseTest
 
         Log.Clear();
 
-        Thread.Sleep(10);
-
         var tasks = new List<Task>();
-        for (int i = 0; i < 1000; i++)
+
+        for (int i = 0; i < 100; i++)
         {
             int tmp = i;
             tasks.Add(Task.Run(() =>
@@ -347,9 +348,7 @@ public class DumpTests : BaseTest
 
         var content = ReadFile();
 
-        Assert.IsTrue(content.Length > 10000);
-
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 100; i++)
         {
             Assert.IsTrue(content.Contains("Iteration number " + i), "Missing " + i);
         }

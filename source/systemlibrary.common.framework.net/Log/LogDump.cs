@@ -11,6 +11,5 @@
         message.Append("\n");
 
         AddMessageToQueue(message.ToString());
-        //SafeWrite(message.ToString());
     }
 }

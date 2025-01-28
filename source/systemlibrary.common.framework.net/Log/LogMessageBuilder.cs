@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,29 +16,36 @@ partial class Log
         static bool IsLocal;
         static LogConfig LogConfig;
         static LogFormat Format;
+        static JsonStringEnumConverter JsonStringEnumConverter = new();
 
         static LogMessageBuilder()
         {
-            IsLocal = EnvironmentConfig.IsLocal == true;
-            LogConfig = AppSettings.Current?.SystemLibraryCommonFramework?.Log;
+            IsLocal = EnvironmentConfig.IsLocal;
+            LogConfig = AppSettings.Current.SystemLibraryCommonFramework.Log;
             Format = LogConfig.Format;
         }
 
         internal static string Get(object[] objects, LogLevel level)
         {
             var message = new StringBuilder(256);
-            message.Append(level.ToString());
+
+            if(level != LogLevel.Unset && (int)level < 9999)
+                message.Append(level.ToString().ToUpper() + ": ");
+
             foreach (var obj in objects)
             {
                 message.Append(Build(obj));
 
-                if(Format == LogFormat.Text)
-                    message.Append("\n");
+                message.Append("\n");
             }
 
             if (level != LogLevel.Critical &&
                 level != LogLevel.Error &&
+                level != LogLevel.Debug &&
                 level != LogLevel.Warning)
+                return message.ToString();
+
+            if (IsLocal)
                 return message.ToString();
 
             var httpContext = ServiceProviderInstance.Current.GetService<IHttpContextAccessor>()?.HttpContext;
@@ -54,8 +62,8 @@ partial class Log
             {
                 var anonymous = new
                 {
-                    url = httpMethod.Is() ? "(" + httpMethod + ") " + url : url,
                     message = message.ToString(),
+                    url = httpMethod.Is() ? "(" + httpMethod + ") " + url : url,
                     stackTrace,
                     isAuthenticated,
                     IP,
@@ -63,18 +71,25 @@ partial class Log
                     correlationId
                 };
 
-                return anonymous.Json(new JsonSerializerOptions()
+                var options = new JsonSerializerOptions()
                 {
-                    DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                     MaxDepth = 1,
                     IncludeFields = false,
-                    WriteIndented = true
-                });
+                    AllowTrailingCommas = true,
+                    IgnoreReadOnlyFields = true,
+                    IgnoreReadOnlyProperties = false,
+                    WriteIndented = true,
+                };
+
+                options.Converters.Add(JsonStringEnumConverter);
+
+                return anonymous.Json(options);
             }
             else
             {
                 if (url != null)
-                    message.Insert(0, "url: " + (httpMethod.Is() ? "(" + httpMethod + ") " + url + "\n" : url + "\n"));
+                    message.Append("url: " + (httpMethod.Is() ? "(" + httpMethod + ") " + url + "\n" : url + "\n"));
 
                 if (stackTrace != null)
                     message.Append("stackTrace: " + stackTrace + "\n");

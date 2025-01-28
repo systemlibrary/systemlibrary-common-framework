@@ -10,8 +10,9 @@ partial class Log
     static Timer Interval;
     static object TimerLock = new();
     static bool QueueTimerStarted = false;
-    static int QueueDiscardThreshold = 50;
-    static int IntervalTimeMs = 90;
+    static int QueueDiscardThreshold = 100;
+    static int IntervalTimeMs = 75;
+    const long MaxLogSizeBytes = 25 * 1024 * 1024;
 
     static void AddMessageToQueue(string message)
     {
@@ -38,12 +39,24 @@ partial class Log
         {
             if (QueueTimerStarted) return;
 
+            LogFileFullTruncate();
+
             if (Interval == null)
                 Interval = new Timer(SafeWriteQueue, null, IntervalTimeMs, Timeout.Infinite);
             else
                 Interval.Change(IntervalTimeMs, Timeout.Infinite);
 
             QueueTimerStarted = true;
+        }
+    }
+
+    static void LogFileFullTruncate()
+    {
+        FileInfo logFile = new(FullFilePath);
+
+        if (logFile.Exists && logFile.Length >= MaxLogSizeBytes)
+        {
+            Clear();
         }
     }
 
@@ -59,14 +72,14 @@ partial class Log
             {
                 batch.Append(logMessage);
                 messageCount++;
-                if (messageCount >= QueueDiscardThreshold)
+                if (messageCount > QueueDiscardThreshold)
                     break;
             }
 
             if (batch.Length > 0)
                 File.AppendAllText(FullFilePath, batch.ToString(), Encoding.UTF8);
 
-            if(messageCount >= QueueDiscardThreshold)
+            if(messageCount > QueueDiscardThreshold)
             {
                 Queue.Clear();
                 try
@@ -82,7 +95,7 @@ partial class Log
         }
         catch
         {
-            Thread.Sleep(IntervalTimeMs);
+            Thread.Sleep(IntervalTimeMs/2);
 
             try
             {
@@ -108,20 +121,5 @@ partial class Log
                 }
             }
         }
-    }
-
-    static void WriteToRandomGeneratedFile(Exception ex, string batch)
-    {
-        //var index = FullFilePath.IndexOf('.');
-
-        //var tmp = FullFilePath.Substring(0, index) + "-" + DateTime.Now.Second + "-" + DateTime.Now.Millisecond + ".log";
-
-        //try
-        //{
-        //    File.AppendAllText(tmp, "Error writing to dump file: " + ex.Message + "\nBatch:\n" + batch);
-        //}
-        //catch
-        //{
-        //}
     }
 }

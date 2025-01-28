@@ -250,38 +250,32 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
     /// <summary>
     /// Returns true if IsTest and IsProd is false
     /// </summary>
-    public static bool IsLocal => !IsProd && !IsTest;
+    public static readonly bool IsLocal = !IsProd && !IsTest;
 
     /// <summary>
-    /// Returns true if environment 'name' is 'prod' or 'production', case insensitive
+    /// Returns true if environment is set to prod or production, else false
     /// </summary>
-    public static bool IsProd => Current.EnvironmentName == EnvironmentName.Prod || Current.EnvironmentName == EnvironmentName.Production;
+    public static readonly bool IsProd = Current.EnvironmentName == EnvironmentName.Prod || Current.EnvironmentName == EnvironmentName.Production;
 
     /// <summary>
     /// Returns true if environment 'name' is 'Test', 'Stage', 'Staging', 'QA' or 'AT', case insensitive
     /// </summary>
-    public static bool IsTest => Current.EnvironmentName == EnvironmentName.Test ||
+    public static readonly bool IsTest = Current.EnvironmentName == EnvironmentName.AT ||
+        Current.EnvironmentName == EnvironmentName.Integration ||
+        Current.EnvironmentName == EnvironmentName.PreProd ||
+        Current.EnvironmentName == EnvironmentName.PreProduction ||
+        Current.EnvironmentName == EnvironmentName.QA ||
+        Current.EnvironmentName == EnvironmentName.Sandbox ||
         Current.EnvironmentName == EnvironmentName.Stage ||
         Current.EnvironmentName == EnvironmentName.Staging ||
-        Current.EnvironmentName == EnvironmentName.QA ||
-        Current.EnvironmentName == EnvironmentName.AT;
-
-    string _ContentRootPathNotUsed;
+        Current.EnvironmentName == EnvironmentName.Test ||
+        Current.EnvironmentName == EnvironmentName.UAT ||
+        Current.EnvironmentName == EnvironmentName.UnitTest;
 
     /// <summary>
     /// Returns the application's root folder full path
     /// <para>Does not end with slash</para>
     /// <para>If folder is bin or inside, it will traverse up and return the parent of the folder named 'bin'. Except: if the ASM ends in Test(s) for test projects</para>
     /// </summary>
-    public string ContentRootPath
-    {
-        get
-        {
-            return AppInstance.ContentRootPath;
-        }
-        set
-        {
-            _ContentRootPathNotUsed = value;
-        }
-    }
+    public static readonly string ContentRootPath = AppInstance.ContentRootPath;
 }

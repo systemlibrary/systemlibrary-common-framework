@@ -18,7 +18,7 @@ public static partial class Assemblies
             {
                 whiteListedAssemblies.Add(asm);
             }
-            else if(!IsKestrelMainHostChecked)
+            else if (!IsKestrelMainHostChecked)
             {
                 if (asm.FullName.Contains("Kestrel"))
                 {
@@ -45,10 +45,13 @@ public static partial class Assemblies
                 }
             }
         }
+
         WhiteListedAssemblies = whiteListedAssemblies;
+
+        Types = WhiteListedAssemblies.SelectMany(asm => asm.GetTypes()).ToArray();
     }
 
-    internal static bool IsKestrelMainHostChecked;
+    internal static readonly bool IsKestrelMainHostChecked;
 
-    internal static bool IsKestrelMainHost;
+    internal static readonly bool IsKestrelMainHost;
 }

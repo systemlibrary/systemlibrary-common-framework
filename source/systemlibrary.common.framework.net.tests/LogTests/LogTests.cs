@@ -11,7 +11,7 @@ public class LogWriterTests : BaseTest
 
     static string ReadFile()
     {
-        Thread.Sleep(100);
+        Thread.Sleep(95);
         try
         {
             return File.ReadAllText(DumpFullPath);
@@ -39,7 +39,9 @@ public class LogWriterTests : BaseTest
         CleanDumpFile();
 
         Log.Write("Error param 1", "Error param 2", "Error param 3", true, false, 12345);
-        var content = File.ReadAllText(DumpFullPath);
+
+        var content = ReadFile();
+
         Assert.IsTrue(content.Contains(12345.ToString()), "missing int");
         Assert.IsTrue(content.Contains(true.ToString()), "missing true");
         Assert.IsTrue(content.Contains(false.ToString()), "missing false");
@@ -66,10 +68,8 @@ public class LogWriterTests : BaseTest
     }
 
     [TestMethod]
-    public void Register_ILogWriter_Uses_Implementation_Whe_Writing_Objects_Success()
+    public void ILogWriter_Uses_Implementation_When_Writing_Objects_Success()
     {
-        //    CleanDumpFile();
-
         var list = new List<string>
         {
             "hello",
@@ -78,24 +78,25 @@ public class LogWriterTests : BaseTest
         };
         FrameworkApp.Start();
 
+        CleanDumpFile();
+
         Log.Error(list);
 
-        //var content = File.ReadAllText(DumpFullPath);
+        var content = ReadFile();
 
-        //Assert.IsTrue(content.Contains("world"), "world");
+        Assert.IsTrue(content.Contains("world"), "world");
 
-        //Assert.IsTrue(content.Contains("in LogWriter"), "LogWriter is not used");
+        Assert.IsTrue(!content.Contains("ILogWriter is not registered"), "ILogWriter is not registered");
 
+        var employee = Employee.Create();
 
-        //var employee = Employee.Create();
+        Log.Error(employee);
 
-        //Log.Error(employee);
+        content = ReadFile();
 
-        //content = File.ReadAllText(DumpFullPath);
-
-        //Assert.IsTrue(content.Contains("John"), "Missing John");
-        //Assert.IsTrue(content.Contains(".doe@example.com"), "Missing email");
-        //Assert.IsTrue(content.Contains("Invoice 002"), "Missing second invoice");
+        Assert.IsTrue(content.Contains("John"), "Missing John");
+        Assert.IsTrue(content.Contains(".doe@example.com"), "Missing email");
+        Assert.IsTrue(content.Contains("Invoice 002"), "Missing second invoice");
     }
 
     [TestMethod]
@@ -105,7 +106,7 @@ public class LogWriterTests : BaseTest
 
         Log.Warning(new Exception("Hello world"));
 
-        var content = File.ReadAllText(DumpFullPath);
+        var content = ReadFile();
 
         Assert.IsTrue(content.Contains("Hello world"), "Missing hello world");
     }
@@ -122,13 +123,13 @@ public class LogWriterTests : BaseTest
         Log.Trace("66666");
         Log.Dump("55555");
 
-        var content = File.ReadAllText(DumpFullPath);
+        var content = ReadFile();
 
-        Assert.IsTrue(content.Contains("Error: "), "Error: level missing as prefix");
-        Assert.IsTrue(content.Contains("Warning: "), "Warn: level missing as prefix");
-        Assert.IsTrue(content.Contains("Debug: "), "Debug: level missing as prefix");
-        Assert.IsTrue(content.Contains("Information: "), "Information: level missing as prefix");
-        Assert.IsTrue(!content.Contains("Trace: "), "Trace is outputted yet not trace level is set");
+        Assert.IsTrue(content.Contains("ERROR: "), "Error: level missing as prefix");
+        Assert.IsTrue(content.Contains("DEBUG: "), "Debug: level missing as prefix");
+        Assert.IsTrue(content.Contains("WARNING: "), "Warn: level missing as prefix");
+        Assert.IsTrue(content.Contains("INFORMATION: "), "Information: level missing as prefix");
+        Assert.IsTrue(!content.Contains("TRACE: "), "Trace is outputted yet not trace level is set");
     }
 
     [TestMethod]
@@ -143,7 +144,7 @@ public class LogWriterTests : BaseTest
         Log.Error("hello5");
         Log.Error("hello6");
 
-        var content = File.ReadAllText(DumpFullPath);
+        var content = ReadFile();
 
         Assert.IsTrue(content.Contains("hello3"));
         Assert.IsTrue(content.Contains("hello5"));

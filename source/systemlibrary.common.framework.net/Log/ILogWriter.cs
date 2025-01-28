@@ -28,30 +28,38 @@
 /// 
 /// Usage
 /// <code>
-/// Log.Error("hello world");
-/// Log.Warning("hello world");
-/// Log.Debug("hello world");
-/// Log.Info("hello world");
+/// // The hierarchy is as follows:
 /// Log.Write("hello world");
+/// Log.Critical("hello world");
+/// Log.Error("hello world");
+/// Log.Debug("hello world");
+/// Log.Warning("hello world");
+/// Log.Info("hello world");
+/// Log.Trace("hello world");
 /// </code>
 /// All calls to method in 'Log' will create a message, append various data, and pass it to your log writer
 /// </example>
 public interface ILogWriter
 {
     /// <summary>
+    /// Implement the writing of critical messages
+    /// </summary>
+    void Critical(string message);
+
+    /// <summary>
     /// Implement the writing of error messages
     /// </summary>
     void Error(string message);
 
     /// <summary>
-    /// Implement the writing of warning messages
-    /// </summary>
-    void Warning(string message);
-
-    /// <summary>
     /// Implement the writing of debug messages
     /// </summary>
     void Debug(string message);
+
+    /// <summary>
+    /// Implement the writing of warning messages
+    /// </summary>
+    void Warning(string message);
 
     /// <summary>
     /// Implement the writing of information messages

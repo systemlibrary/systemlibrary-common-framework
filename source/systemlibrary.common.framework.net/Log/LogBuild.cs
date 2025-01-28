@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 
+using SystemLibrary.Common.Framework;
 using SystemLibrary.Common.Framework.Extensions;
 
 partial class Log
@@ -92,7 +93,7 @@ partial class Log
                 .Replace("System.Collections.", "")
                 .Replace("System.", "");
 
-            var value = name + ": "
+            var value = "Type " + name + ": "
                 + (PrintBool("IsClass", t.IsClass)
                 + PrintBool("IsValueType", t.IsValueType)
                 + PrintBool("IsInterface", t.IsInterface)
@@ -138,24 +139,9 @@ partial class Log
             }
             if (type == null) type = originalType;
 
-            int i = 0;
+            int count = GetEnumerableCount(enumerable);
 
-            if (enumerable is IDictionary d) i = d.Count;
-
-            else if (enumerable is Array a) i = a.Length;
-
-            else if (enumerable is IList l) i = l.Count;
-
-            else if (enumerable is ICollection c) i = c.Count;
-
-            else foreach (var item in enumerable) i++;
-
-            if (args == null || args.Length == 0)
-                Add(message, type.Name + " (" + i + ")", level);
-            else if (args.Length == 1)
-                Add(message, "<" + type.Name + "> (" + i + ")", level);
-            else
-                Add(message, "<" + type.Name + "," + type2.Name + "> (" + i + ")", level);
+            AppendEnumerableTypeName(message, enumerable, level, type, type2, args, count);
 
             var printAsOneLine = IsListTypePrintableAsOneLine(type);
 
@@ -202,7 +188,7 @@ partial class Log
                 foreach (var item in enumerable)
                 {
                     Append(message, item, level + 1, maxLevel, visited);
-                    if (curr < i)
+                    if (curr < count)
                     {
                         curr++;
                         Add(message, "\n", level + 1);
@@ -212,6 +198,54 @@ partial class Log
         }
 
         return true;
+    }
+
+    static void AppendEnumerableTypeName(StringBuilder message, IEnumerable enumerable, int level, Type type, Type type2, Type[] args, int count)
+    {
+        if (args == null || args.Length == 0)
+            Add(message, PrintTypeName(type) + "[] (" + count + ")", level);
+
+        else
+        {
+            if (enumerable is IDictionary)
+            {
+                Add(message, "IDictionary<" + PrintTypeName(type) + ", " + PrintTypeName(type2) + "> (" + count + ")", level);
+            }
+            else if (enumerable is Array)
+            {
+                Add(message, PrintTypeName(type) + "[] (" + count + ")", level);
+            }
+            else if (enumerable is IList)
+            {
+                Add(message, "List<" + PrintTypeName(type) + "> (" + count + ")", level);
+            }
+            else if (enumerable is ICollection)
+            {
+                if (args.Length == 1)
+                {
+                    Add(message, "ICollection<" + PrintTypeName(type) + "> (" + count + ")", level);
+                }
+                else
+                {
+                    Add(message, "ICollection<" + PrintTypeName(type) + ", " + PrintTypeName(type2) + "> (" + count + ")", level);
+                }
+            }
+            else
+                Add(message, PrintTypeName(type) + " (" + count + ")", level);
+        }
+    }
+
+    static string PrintTypeName(Type type)
+    {
+        if (type == null) return "";
+        if (type == SystemType.IntType) return "int";
+        if (type == SystemType.StringType) return "string";
+        if (type == SystemType.CharType) return "char";
+        if (type == SystemType.Int64Type) return "long";
+        if (type == SystemType.Int16Type) return "short";
+        if (type == SystemType.BoolType) return "bool";
+        if (type == SystemType.DoubleType) return "double";
+        return type.Name;
     }
 
     static bool AppendClass(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
@@ -350,7 +384,6 @@ partial class Log
     {
         if (type.BaseType == typeof(ValueType)) return false;
 
-
         if (hash == 0) return false;
 
         if (visit.Contains(hash)) return true;
@@ -376,6 +409,23 @@ partial class Log
                listTypeArg == typeof(double) ||
                listTypeArg == typeof(float) ||
                listTypeArg == typeof(bool);
+    }
+
+    static int GetEnumerableCount(IEnumerable enumerable)
+    {
+        int c = 0;
+
+        if (enumerable is IDictionary d) c = d.Count;
+
+        else if (enumerable is Array a) c = a.Length;
+
+        else if (enumerable is IList l) c = l.Count;
+
+        else if (enumerable is ICollection ic) c = ic.Count;
+
+        else foreach (var item in enumerable) c++;
+
+        return c;
     }
 
     static string GetVariableValue(object obj)
@@ -423,6 +473,8 @@ partial class Log
 
         if (obj is DateTimeOffset dto) return dto.ToString("yyyy-MM-dd HH:mm:ss.fffzzz");
 
+        if (obj is Enum enu) return PrintEnum(enu);
+
         if (obj is ValueType &&
            !(obj is IEnumerable) &&
            !(obj is ReadOnlyMemory<int>) &&
@@ -430,8 +482,6 @@ partial class Log
         {
             return obj.ToString();
         }
-
-        if (obj is Enum enu) return PrintEnum(enu);
 
         if (obj is CultureInfo cult)
             return "CultureInfo: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
@@ -494,14 +544,7 @@ partial class Log
 
         if (type.Name.Contains("Action`")) return "";
 
-        // If the callee calls on Build() with an array, then we do loop it, even they often use "params object[] ..."
-        //if(type.IsArray)
-        //{
-        //    var arr = (Array)obj;
-        //    if(arr.Length == 1)
-        //        return GetVariableValue(arr.GetValue(0));
-        //}
-
+        
         return null;
     }
 
