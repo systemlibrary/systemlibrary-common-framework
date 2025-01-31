@@ -28,14 +28,13 @@ namespace SystemLibrary.Common.Framework.App;
 /// </remarks>
 public class ApiTokenFilterAttribute : BaseApiFilterAttribute
 {
-    const string DefaultHeaderName = "api-token";
     new string Match;
     string HeaderName;
 
     /// <summary>
     /// match: either a regex, an exact string, or strings delimited by |
     /// </summary>
-    public ApiTokenFilterAttribute(string match, string headerName = null)
+    public ApiTokenFilterAttribute(string match, string headerName = "api-token")
     {
         this.Match = match;
         this.HeaderName = headerName;
@@ -43,13 +42,13 @@ public class ApiTokenFilterAttribute : BaseApiFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        var value = context?.HttpContext?.Request?.Headers[this.HeaderName ?? DefaultHeaderName].ToString();
+        var value = context?.HttpContext?.Request?.Headers[this.HeaderName].ToString();
 
         var hasAccess = RequestHasValidHeaderValue(Match, value);
 
         if (hasAccess)
             base.OnActionExecuting(context);
         else
-            base.OnAccessDenied(context, (this.HeaderName ?? DefaultHeaderName) + " is incorrect");
+            base.OnAccessDenied(context, this.HeaderName + " is incorrect");
     }
 }

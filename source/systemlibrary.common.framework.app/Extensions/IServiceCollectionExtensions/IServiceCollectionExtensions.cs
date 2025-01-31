@@ -155,6 +155,7 @@ public static partial class IServiceCollectionExtensions
         {
             builder = serviceCollection.UseAddControllers(options);
         }
+
         builder = builder.UseDefaultJsonConverters();
 
         if (options.AddApplicationAsPart)

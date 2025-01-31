@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-using SystemLibrary.Common.Framework.App;
-namespace SystemLibrary.Common.Framework.App;
+﻿namespace SystemLibrary.Common.Framework.App;
 
 public class GeoLocation
 {

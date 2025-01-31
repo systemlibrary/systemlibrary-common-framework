@@ -37,8 +37,8 @@ static internal class JsonSerializerOptionsInstance
             {
                 var tmp = CreateNewDefaultOptions;
 
-                if(options.ReferenceHandler == null)
-                options.ReferenceHandler = tmp.ReferenceHandler;
+                if (options.ReferenceHandler == null)
+                    options.ReferenceHandler = tmp.ReferenceHandler;
 
                 if (options.MaxDepth <= 0)
                     options.MaxDepth = tmp.MaxDepth;
@@ -46,7 +46,7 @@ static internal class JsonSerializerOptionsInstance
                 if (options.PropertyNamingPolicy == null)
                     options.PropertyNamingPolicy = tmp.PropertyNamingPolicy;
 
-                if(options.Encoder == null)
+                if (options.Encoder == null)
                     options.Encoder = tmp.Encoder;
             }
         }
@@ -95,8 +95,9 @@ static internal class JsonSerializerOptionsInstance
                 PropertyNameCaseInsensitive = JsonConfigInstance.PropertyNameCaseInsensitive,
                 WriteIndented = JsonConfigInstance.WriteIndented,
                 PropertyNamingPolicy = null,
-                IncludeFields = true,
-                ReadCommentHandling = JsonConfigInstance.ReadCommentHandling,
+                IncludeFields = JsonConfigInstance.IncludeFields,
+                IgnoreReadOnlyFields = JsonConfigInstance.IgnoreReadOnlyFields,
+                ReadCommentHandling = JsonConfigInstance.JsonCommentHandling,
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
                 ReferenceHandler = ReferenceHandler.IgnoreCycles,
             };

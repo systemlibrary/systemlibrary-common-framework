@@ -13,9 +13,16 @@ public class AppSettingsTests
         var defaultLogLevel = config.Logging.LogLevel.Default;
 
         Assert.IsTrue(defaultLogLevel == "None", "Value is " + defaultLogLevel);
+    }
+
+    [TestMethod]
+    public void AppSetings_Contains_All_Configurations_Non_Null()
+    {
+        var config = AppSettings.Current;
 
         Assert.IsTrue(config.DataProtection != null);
         Assert.IsTrue(config.SystemLibraryCommonFramework != null);
+        Assert.IsTrue(config.SystemLibraryCommonFramework.Log != null);
         Assert.IsTrue(config.SystemLibraryCommonFramework.Json != null);
         Assert.IsTrue(config.SystemLibraryCommonFramework.Log != null);
         Assert.IsTrue(config.SystemLibraryCommonFramework.Cache != null);
@@ -29,6 +36,7 @@ public class AppSettingsTests
         try
         {
             var config = AppSettings.Current.SystemLibraryCommonFramework.Json;
+
             Assert.IsTrue(false, "Should throw");
         }
         catch

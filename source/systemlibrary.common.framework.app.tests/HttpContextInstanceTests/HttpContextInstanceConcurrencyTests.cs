@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.App.Extensions;
 using SystemLibrary.Common.Framework.Tests;
+
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]

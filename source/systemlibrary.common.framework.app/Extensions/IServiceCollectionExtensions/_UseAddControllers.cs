@@ -24,6 +24,8 @@ partial class IServiceCollectionExtensions
             options.JsonSerializerOptions.ReferenceHandler = defaultJsonSerializerOptions.ReferenceHandler;
             options.JsonSerializerOptions.NumberHandling = defaultJsonSerializerOptions.NumberHandling;
             options.JsonSerializerOptions.UnknownTypeHandling = defaultJsonSerializerOptions.UnknownTypeHandling;
+            options.JsonSerializerOptions.IgnoreReadOnlyFields = defaultJsonSerializerOptions.IgnoreReadOnlyFields;
+            options.JsonSerializerOptions.IncludeFields = defaultJsonSerializerOptions.IncludeFields;
 
             foreach (var converter in defaultJsonSerializerOptions.Converters)
             {

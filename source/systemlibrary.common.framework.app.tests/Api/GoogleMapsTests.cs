@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,9 +8,9 @@ using SystemLibrary.Common.Framework.Tests;
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]
-public class ApiTestUserOrigin : BaseTest
+public class GoogleMapsTests : BaseTest
 {
-    public ApiTestUserOrigin()
+    public GoogleMapsTests()
     {
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
@@ -32,11 +31,26 @@ public class ApiTestUserOrigin : BaseTest
     }
 
     [TestMethod]
-    public void GetPin_Returns_403_Not_Authorized()
+    public void GetPin()
     {
-        var responseText = GetResponse("/userAgent/getPin/");
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/getPin");
 
-        Assert.IsTrue(responseText.Contains("403"), "No 403 " + responseText);
+        request.Headers.TryAddWithoutValidation("User-Agent", "He.l.lo-User-Agent;(SomeOS)");
+
+        request.Headers.TryAddWithoutValidation("api-token", "helloworld");
+
+        var response = Client.SendAsync(request)
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
+
+        Log.Dump(response.StatusCode);
+        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+
+        var text = response.Content.ReadAsStringAsync()
+          .ConfigureAwait(false)
+          .GetAwaiter()
+          .GetResult();
     }
 
     [TestMethod]
@@ -60,12 +74,4 @@ public class ApiTestUserOrigin : BaseTest
 
         Assert.IsTrue(!text.Contains("403"), text);
     }
-}
-
-[UserAgentFilter(match: "He.l.lo-User-Agent;(SomeOS)")]
-public class UserAgentApiController : BaseApiController
-{
-    [HttpGet]
-    [Route("/userAgent/getPin/")]
-    public ActionResult GetPin() => Ok();
 }

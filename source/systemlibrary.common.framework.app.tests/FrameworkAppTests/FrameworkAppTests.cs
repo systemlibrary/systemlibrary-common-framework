@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SystemLibrary.Common.Framework.Tests;
+using SystemLibrary.Common.Framework.Tests;
+
+namespace SystemLibrary.Common.Framework.App;
 
 public class FrameworkAppTests
 {
@@ -9,5 +11,4 @@ public class FrameworkAppTests
     {
         FrameworkApp.Start();
     }
-
 }

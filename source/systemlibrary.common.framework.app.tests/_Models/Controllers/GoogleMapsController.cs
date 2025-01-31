@@ -6,6 +6,7 @@ namespace SystemLibrary.Common.Framework.App;
 //[OriginFilter(match: "^[ab0-4]{4,}$")]
 [UserAgentFilter("Edg|Chrome")]
 [ApiTokenFilter("helloworld")]
+[Route("api/googleMaps")]
 public partial class GoogleMapsController : BaseApiController
 {
     [HttpGet]

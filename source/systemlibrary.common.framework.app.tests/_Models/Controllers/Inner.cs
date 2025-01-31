@@ -1,5 +1,4 @@
-﻿using SystemLibrary.Common.Framework.App;
-namespace SystemLibrary.Common.Framework.App;
+﻿namespace SystemLibrary.Common.Framework.App;
 
 public class Inner
 {

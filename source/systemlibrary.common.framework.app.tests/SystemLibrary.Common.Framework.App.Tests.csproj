@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
-		<RootNamespace>SystemLibrary.Common.Framework.Tests</RootNamespace>
+		<RootNamespace>SystemLibrary.Common.Framework.App</RootNamespace>
 		<Configurations>Release</Configurations>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
