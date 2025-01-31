@@ -4,36 +4,19 @@ namespace SystemLibrary.Common.Framework;
 
 internal static partial class CryptationKey
 {
-    internal static byte[] Instance;
-
-    static object Lock = new object();
-
     internal static string FrameworkKeyDirectory;
+
+    internal static readonly string _KeyFileFullName;
 
     internal static string KeyStart;
 
-    internal static byte[] Current
-    {
-        get
-        {
-            if (Instance == null)
-            {
-                lock (Lock)
-                {
-                    if (Instance != null) return Instance;
-
-                    Instance = Encoding.UTF8.GetBytes(GetKey());
-                }
-            }
-            return Instance;
-        }
-    }
+    internal static readonly byte[] Current = Encoding.UTF8.GetBytes(GetKey());
 
     static string GetKey()
     {
         var key = TryGetKeyFileName();
 
-        if(key.Is())
+        if (key.Is())
         {
             Debug.Log("Encryption key from key file: " + key.MaxLength(3) + "...");
         }
@@ -49,7 +32,7 @@ internal static partial class CryptationKey
             {
                 key = "ABCDEFGHIJKLMNOPQRST123456789011";
 
-                if(FrameworkKeyDirectory.Is())
+                if (FrameworkKeyDirectory.Is())
                     Debug.Log("Encryption key is default 'ABC...' as 'Framework Key File' is not found in FrameworkKeyDirectory, nor was 'ApplicationName' set in appSettings/AddDataProtection");
                 else
                     Debug.Log("Encryption key is default 'ABC...' as 'FrameworkKeyDirectory' is not set in FrameworkBuilder.Create(), nor is 'ApplicationName' set in appSettings/AddDataProtection");

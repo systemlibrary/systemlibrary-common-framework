@@ -11,5 +11,5 @@ internal class LoggingConfig
 
 internal class LoggingLogLevel
 {
-    public string Default { get; set; } = "Information";
+    public string Default { get; set; } = "Warning";
 }

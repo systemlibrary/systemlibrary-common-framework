@@ -20,7 +20,7 @@ public class ConfigTests : BaseTest
     {
         var conf = XmlConfig.Current;
 
-        Assert.IsTrue(conf.FirstName == "John Kusack");
+        Assert.IsTrue(conf.FirstName == "John Kusack", "firstName missing " + conf.FirstName + ". Sure the XML is copied to output path on build, as the .exe is the starting point for the /Configs folders");
         Assert.IsTrue(conf.lastname == "Doe");
         Assert.IsTrue(conf.FlagPascalCase);
         Assert.IsTrue(conf.FlagCamelCase);

@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 
 using SystemLibrary.Common.Framework;
-using SystemLibrary.Common.Framework.Extensions;
 
 partial class Log
 {
@@ -84,7 +83,7 @@ partial class Log
 
                 options.Converters.Add(JsonStringEnumConverter);
 
-                return anonymous.Json(options);
+                return JsonSerializer.Serialize(anonymous, options);
             }
             else
             {

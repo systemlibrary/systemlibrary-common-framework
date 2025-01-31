@@ -6,6 +6,7 @@
 		<RootNamespace>SystemLibrary.Common.Framework.Tests</RootNamespace>
 		<Configurations>Release</Configurations>
 		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,12 +19,9 @@
 		<Content Include="Configs\**\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
-		<ProjectReference Include="..\systemlibrary.common.framework.net.tests.base\SystemLibrary.Common.Framework.Tests.Base.csproj" />
-		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
+		<Content Include="Configurations\**\*.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -31,18 +29,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="appSettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.7.0" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+		<PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="*" ExcludeAssets="all" />
+		<PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="*" ExcludeAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Configs\AppSettings\" />
-	  <Folder Include="Configs\" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" />
 	</ItemGroup>
+
 </Project>

@@ -9,16 +9,19 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
+		<EnableSourceLink>false</EnableSourceLink>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<Deterministic>true</Deterministic>
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<DOTNET_CLI_TELEMETRY_OPTOUT>true</DOTNET_CLI_TELEMETRY_OPTOUT>
 	</PropertyGroup>
 	
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
-		<RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
+		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
 		<DebugType>pdbonly</DebugType>
 		<NoWarn>CS1591;CS1570;CS1573;1701;1702;IDE1006;CS8618;</NoWarn>
 		<PackageOutputPath>..\$(MSBuildProjectName)</PackageOutputPath>

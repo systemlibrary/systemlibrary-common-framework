@@ -22,10 +22,7 @@ public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
         }
     }
 
-    internal string GetName() => Name;
-
     string _Name;
-
     /// <summary>
     /// Returns environment name based on 'ASPNETCORE_ENVIRONMENT' variable passed to the startup of your application
     /// <para>This variable 'name' is used for config transformations for all C# config classes that inherits Config &lt;&gt;</para>

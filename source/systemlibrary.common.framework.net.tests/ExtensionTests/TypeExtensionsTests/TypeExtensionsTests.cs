@@ -202,10 +202,6 @@ public class TypeExtensionsTests
         name = type.GetTypeName();
         Assert.IsTrue("Int32" == name, name);
 
-        type = typeof(DateTimeJsonConverter);
-        name = type.GetTypeName();
-        Assert.IsTrue("DateTimeJsonConverter" == name, name);
-
         type = typeof(List<>);
         name = type.GetTypeName();
         Assert.IsTrue("<>" == name, name);

@@ -46,52 +46,87 @@ public static partial class Log
 
     static bool WarningDumped = false;
 
-    static readonly bool LogIsOff = (LogLevel)MinLogLevel == LogLevel.None;
+    static bool LogIsOff
+    {
+        get
+        {
+            return (LogLevel)MinLogLevel == LogLevel.None;
+        }
+    }
 
-    static int? _MinLogLevel;
+    static object MinLogLevelLock = new object();
+
+    static bool MinLogLevelIsSet = false;
+    static int _MinLogLevel;
+
     static int MinLogLevel
     {
         get
         {
-            if (_MinLogLevel == null)
+            if (!MinLogLevelIsSet)
             {
-                var temp = FrameworkConfig.Current?.Log?.Level;
-
-                // Not specified for the package 'systemLibraryCommonFramework', let's check the global logging level
-                if (temp == null || temp == LogLevel.Unset)
+                lock (MinLogLevelLock)
                 {
-                    // If 'none' is the default logging level, no logs should occur at all, except Log.Write always bypassed, same does Log.Dump (but this writes to physical drive)
-                    var defaultLogLevel = AppSettings.Current.Logging?.LogLevel?.Default?.ToLower();
+                    if (MinLogLevelIsSet) return _MinLogLevel;
 
-                    if (defaultLogLevel.Is())
+                    var temp = FrameworkConfig.Current.Log.Level;
+
+                    // Not specified for the package 'systemLibraryCommonFramework', let's check the global logging level
+                    if (temp == null || temp == LogLevel.Unset)
                     {
-                        if (defaultLogLevel == "none")
-                            temp = LogLevel.None;
+                        // If 'none' is the default logging level, no logs should occur at all, except Log.Write always bypassed, same does Log.Dump (but this writes to physical drive)
+                        var defaultLogLevel = AppSettings.Current.Logging.LogLevel.Default?.ToLower();
+                        if (defaultLogLevel.Is())
+                        {
+                            if (defaultLogLevel == "none")
+                                temp = LogLevel.None;
+                            else
+                                temp = defaultLogLevel.ToEnum<LogLevel>();
+                        }
                         else
-                            temp = defaultLogLevel.ToEnum<LogLevel>();
+                            temp = LogLevel.Debug; // Debug, Error and Critical are logged by default
                     }
-                    else
-                        temp = LogLevel.Debug; // Debug, Error and Critical are logged by default
+                    _MinLogLevel = (int)0;
+
+                    MinLogLevelIsSet = true;
                 }
-                _MinLogLevel = (int)temp;
             }
-            return _MinLogLevel.Value;
+            return _MinLogLevel;
         }
     }
 
     static Log()
     {
-        BlacklistClassTypes.Add(typeof(Exception).Name);
-        BlacklistClassTypes.Add(typeof(NullReferenceException).Name);
         BlacklistClassTypes.Add(typeof(RuntimeTypeHandle).Name);
         BlacklistClassTypes.Add(typeof(ModelBindingMessageProvider).Name);
         BlacklistClassTypes.Add(typeof(SafeWaitHandle).Name);
         BlacklistClassTypes.Add(typeof(RuntimeWrappedException).Name);
-        BlacklistClassTypes.Add(typeof(char).Name);
-        BlacklistClassTypes.Add("RuntimeType");
-        BlacklistClassTypes.Add("RuntimeMethodInfo");
+
         BlacklistClassTypes.Add("RuntimeAssembly");
-        BlacklistClassTypes.Add("Constructor");
+        BlacklistClassTypes.Add("RuntimeModule");
+        BlacklistClassTypes.Add("RuntimeMethodHandle");
+        BlacklistClassTypes.Add("ControllerContext");
+
+
+        BlacklistMemberNames.Add("Constructor");
+        BlacklistMemberNames.Add("ReturnTypeCustomAttributes");
+        BlacklistMemberNames.Add("ReturnParameter");
+        BlacklistMemberNames.Add("MethodImplementationFlags");
+        BlacklistMemberNames.Add("CallingConvention");
+
+        //BlacklistMemberNames.Add("ConstructorArguments");
+
+        //BlacklistClassTypes.Add(typeof(RuntimeTypeHandle).Name);
+        //BlacklistClassTypes.Add(typeof(ModelBindingMessageProvider).Name);
+        //BlacklistClassTypes.Add(typeof(SafeWaitHandle).Name);
+        //BlacklistClassTypes.Add(typeof(RuntimeWrappedException).Name);
+        //BlacklistClassTypes.Add(typeof(char).Name);
+        //BlacklistClassTypes.Add("RuntimeMethodHandle");
+        //BlacklistClassTypes.Add("RuntimeCustomAttributeData");
+        //BlacklistClassTypes.Add("RuntimeModule");
+        //BlacklistMemberNames.Add("RuntimeConstructorInfo");
+        //BlacklistMemberNames.Add("ReturnTypeCustomAttributes");
+        //BlacklistMemberNames.Add("Constructor");
 
         FullFilePath = FrameworkConfig.Current.Log.GetFullFilePath();
 
@@ -105,6 +140,22 @@ public static partial class Log
     }
 
     /// <summary>
+    /// Write an critical message
+    /// </summary>
+    /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
+    /// <example>
+    /// Usage:
+    /// <code>
+    /// Log.Critical("hello world");
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
+    /// </code>
+    /// </example>
+    public static void Critical(params object[] obj)
+    {
+        Write(obj, LogLevel.Critical);
+    }
+
+    /// <summary>
     /// Write an error message
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
@@ -112,7 +163,7 @@ public static partial class Log
     /// Usage:
     /// <code>
     /// Log.Error("hello world");
-    /// //This creates a log message with prefix 'Error', timestamp, stacktrace and your input text "hello world" and sends it to your LogWriter
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
     /// </code>
     /// </example>
     public static void Error(params object[] obj)
@@ -121,14 +172,14 @@ public static partial class Log
     }
 
     /// <summary>
-    /// Write a warning message
+    /// Write an warning message
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
     /// <example>
     /// Usage:
     /// <code>
     /// Log.Warning("hello world");
-    /// //This creates a log message with prefix 'Warning', timestamp and your input text "hello world" and sends it to your LogWriter
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
     /// </code>
     /// </example>
     public static void Warning(params object[] obj)
@@ -137,14 +188,14 @@ public static partial class Log
     }
 
     /// <summary>
-    /// Write a debug message
+    /// Write an debug message
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
     /// <example>
     /// Usage:
     /// <code>
     /// Log.Debug("hello world");
-    /// //This creates a log message with prefix 'Debug', timestamp and your input text "hello world" and sends it to your LogWriter
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
     /// </code>
     /// </example>
     public static void Debug(params object[] obj)
@@ -160,7 +211,7 @@ public static partial class Log
     /// Usage:
     /// <code>
     /// Log.Information("hello world");
-    /// //This creates a log message with prefix 'Info', timestamp and your input text "hello world" and sends it to your LogWriter
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
     /// </code>
     /// </example>
     public static void Information(params object[] obj)
@@ -169,14 +220,14 @@ public static partial class Log
     }
 
     /// <summary>
-    /// Write a trace message
+    /// Write an trace message
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
     /// <example>
     /// Usage:
     /// <code>
     /// Log.Trace("hello world");
-    /// //This creates a log message with prefix 'Trace', timestamp and your input text "hello world" and sends it to your LogWriter
+    /// //This creates a log message prefixed with Timestamp then Level then your input and sends it to Log.Dump or your ILogWriter
     /// </code>
     /// </example>
     public static void Trace(params object[] obj)
@@ -185,7 +236,7 @@ public static partial class Log
     }
 
     /// <summary>
-    /// Always writing the message to your LogWriter
+    /// Always write the message to your LogWriter, you decide wether or not to send it further
     /// <para>This ignores the log level set in appSettings, so it always writes</para>
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
@@ -230,7 +281,7 @@ public static partial class Log
         switch (level)
         {
             case LogLevel.Critical:
-                LogWriter.Critical(message); 
+                LogWriter.Critical(message);
                 break;
             case LogLevel.Error:
                 LogWriter.Error(message);

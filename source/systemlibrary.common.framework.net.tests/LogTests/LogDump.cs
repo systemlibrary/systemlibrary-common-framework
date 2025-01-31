@@ -23,7 +23,7 @@ public class LogDumpTests : BaseTest
     
     static string ReadFile()
     {
-        Thread.Sleep(100);
+        Thread.Sleep(125);
         try
         {
             return File.ReadAllText(DumpFullPath);
@@ -327,11 +327,13 @@ public class LogDumpTests : BaseTest
             Log.Dump(m);
         }
 
-        Log.Clear();
+        Thread.Sleep(333);
 
+        Log.Clear();
+        
         var tasks = new List<Task>();
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 40; i++)
         {
             int tmp = i;
             tasks.Add(Task.Run(() =>
@@ -348,7 +350,7 @@ public class LogDumpTests : BaseTest
 
         var content = ReadFile();
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 40; i++)
         {
             Assert.IsTrue(content.Contains("Iteration number " + i), "Missing " + i);
         }

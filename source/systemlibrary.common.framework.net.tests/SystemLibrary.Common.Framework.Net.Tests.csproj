@@ -5,7 +5,7 @@
 		<IsTestProject>true</IsTestProject>
 		<RootNamespace>SystemLibrary.Common.Framework.Tests</RootNamespace>
 		<Configurations>Release</Configurations>
-		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,6 +16,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="Configs\**\*.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Configurations\**\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
@@ -29,18 +32,16 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.7.0" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+		<PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="*" ExcludeAssets="all" />
+		<PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="*" ExcludeAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\systemlibrary.common.framework.net.tests.base\SystemLibrary.Common.Framework.Tests.Base.csproj" />
-	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Update="Configs\environmentConfig.Local.json">
-	    <DependentUpon>environmentConfig.json</DependentUpon>
-	  </Content>
-	  <Content Update="Configs\environmentConfig.Production.json">
+	  <Content Update="Configs\environmentConfig.*.json">
 	    <DependentUpon>environmentConfig.json</DependentUpon>
 	  </Content>
 	</ItemGroup>

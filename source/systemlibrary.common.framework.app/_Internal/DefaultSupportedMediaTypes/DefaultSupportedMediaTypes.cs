@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
-
 namespace SystemLibrary.Common.Framework.App;
 
 internal class DefaultSupportedMediaTypes : StringOutputFormatter

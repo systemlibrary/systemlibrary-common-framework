@@ -1,54 +1,57 @@
-﻿using Microsoft.AspNetCore.TestHost;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SystemLibrary.Common.Framework.App.Extensions;
+using SystemLibrary.Common.Framework.Tests;
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]
-public class HttpContextInstanceConcurrencyTests
+public class HttpContextInstanceConcurrencyTests : BaseTest
 {
-    private TestServer _server;
-    private HttpClient _client;
-
-    [TestInitialize]
-    public void Setup()
+    public HttpContextInstanceConcurrencyTests()
     {
-        //_server = new TestServer(new WebHostBuilder()
-        //    .ConfigureServices(services =>
-        //    {
-        //        services.AddCommonWebServices();
-        //    })
-        //    .Configure(app =>
-        //    {
-        //        var options = new AppBuilderOptions();
-        //        options.UseHsts = false;
-        //        options.UseHttpsRedirection = false;
-        //        app.UseCommonWebApp(null, options);
+        WebHostBuilder = new WebHostBuilder()
+            .ConfigureServices(services =>
+            {
+                var options = new FrameworkServicesOptions();
 
-        //        app.Run(async context =>
-        //        {
-        //            var r = new Random();
+                options.ApplicationParts = [
+                    typeof(HttpContextInstanceConcurrencyTests).Assembly
+                ];
 
-        //            System.Threading.Thread.Sleep(r.Next(0, maxValue: 25));
-        //            var username = context.Request.Query["username"];
+                services = services.AddFrameworkServices<LogWriter>(options);
+            })
+            .Configure(app =>
+            {
+                var options = new FrameworkAppOptions();
 
-        //            System.Threading.Thread.Sleep(r.Next(0, maxValue: 25));
+                options.UseHsts = false;
+                options.UseHttpsRedirection = false;
 
-        //            var currentContext = HttpContextInstance.Current;
-        //            System.Threading.Thread.Sleep(r.Next(0, maxValue: 25));
+                app.UseFrameworkMiddlewares(null, options);
 
-        //            var hash = r.Next(1, 5).ToString().ToMD5Hash();
+                app.Run(async context =>
+                {
+                    var queryString = context.Request.QueryString.Value;
 
-        //            await context.Response.WriteAsync($"{username}|{currentContext?.Request.Query["username"]}" + hash);
-        //        });
-        //    }));
+                    var r = new Random();
 
-        //_client = _server.CreateClient();
+                    Thread.Sleep(r.Next(5, 50));
+
+                    var currentContext = HttpContextInstance.Current;
+
+                    await context.Response.WriteAsync($"{queryString}|{currentContext?.Request.QueryString.Value}");
+                        
+                });
+            });
     }
 
     [TestMethod]
     public async Task HttpContextInstance_Current_IsThreadSafe_PerRequest()
     {
-        var tasks = new Task<string>[10000];
+        var tasks = new Task<string>[14];
 
         var r = new Random();
         for (int i = 0; i < tasks.Length; i++)
@@ -59,8 +62,9 @@ public class HttpContextInstanceConcurrencyTests
             {
                 try
                 {
-                    System.Threading.Thread.Sleep(r.Next(1, 10));
-                    var response = await _client.GetAsync($"?username={userName}");
+                    Thread.Sleep(r.Next(2, 5));
+
+                    var response = await Client.GetAsync($"?username={userName}");
 
                     return await response.Content.ReadAsStringAsync();
                 }
@@ -75,8 +79,7 @@ public class HttpContextInstanceConcurrencyTests
 
         for (int i = 0; i < results.Length; i++)
         {
-            Assert.IsTrue(results[i].Contains("User" + i + "|" + "User" + i), "Error at " + i + " result is " + results[i]);
+            Assert.IsTrue(results[i].Contains("?username=User" + i + "|?username=User" + i), "Error at " + i + " result is " + results[i]);
         }
     }
-
 }

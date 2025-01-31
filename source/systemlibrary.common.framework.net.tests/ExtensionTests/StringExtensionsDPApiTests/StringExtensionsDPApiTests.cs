@@ -7,17 +7,10 @@ namespace SystemLibrary.Common.Framework;
 [TestClass]
 public partial class StringExtensionsDPApiTests : BaseTest
 {
-    [TestInitialize]
-    public void TestInitialize()
-    {
-    }
-
     [TestMethod]
     public void Encrypt_And_Decrypt_Using_DataProtection_API_Success()
     {
         var data = "Hello world";
-
-        CryptationKey.Instance = null;
 
         var enc = data.EncryptUsingKeyRing();
 

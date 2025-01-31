@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-
-using SystemLibrary.Common.Framework.Extensions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -28,9 +29,7 @@ internal static class ServiceProviderInstance
                         // Auto-generating a built-in service provider for data protection and context access
                         // in 'unit test' scenarios and in 'console applications' if one does not register services oneself
                         var serviceCollection = new ServiceCollection();
-
                         serviceCollection
-                            .AddCommonServices()
                             .AddDataProtection()
                             .SetApplicationName("app")
                             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));

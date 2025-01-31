@@ -143,6 +143,8 @@ partial class Log
 
             AppendEnumerableTypeName(message, enumerable, level, type, type2, args, count);
 
+            if (count == 0) return true;
+
             var printAsOneLine = IsListTypePrintableAsOneLine(type);
 
             var printAsMatrix = !printAsOneLine && type == typeof(int[,]) || type == typeof(long[,]) || type == typeof(string[,]);
@@ -185,13 +187,27 @@ partial class Log
             {
                 Add(message, "\n", level);
                 int curr = 1;
+
                 foreach (var item in enumerable)
                 {
-                    Append(message, item, level + 1, maxLevel, visited);
+                    if (item == null) continue;
+
+                    var tmp = new StringBuilder();
+
+                    Append(tmp, item, level + 1, maxLevel, visited);
+
+                    if (tmp.Length == 0)
+                        Add(tmp, item.ToString(), level + 1);
+
                     if (curr < count)
                     {
                         curr++;
+                        Add(message, tmp.ToString(), 0);
                         Add(message, "\n", level + 1);
+                    }
+                    else
+                    {
+                        Add(message, tmp.ToString(), 0);
                     }
                 }
             }
@@ -254,11 +270,13 @@ partial class Log
 
         if (!type.IsClassType()) return false;
 
-        var hash = obj.GetHashCode();
+        if (BlacklistClassTypes.Contains(type.Name)) return true;
 
-        if (IsVisited(type, hash, visited))
+        var reference = obj.GetHashCode();
+
+        if (IsVisited(type, reference, visited))
         {
-            Add(message, obj.GetType().Name + " class " + obj.GetHashCode() + " already printed, continue...", level);
+            Add(message, obj.GetType().Name + " ref: " + obj.GetHashCode() + " already printed, continue...", level);
             return true;
         }
 
@@ -267,7 +285,7 @@ partial class Log
             .ToList();
 
         var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-            .Where(f => !BlacklistMemberNames.Contains(f.Name) && !BlacklistClassTypes.Contains(f.FieldType?.Name))
+            .Where(f => !BlacklistMemberNames.Contains(f.Name) && !BlacklistClassTypes.Contains(f.FieldType.Name))
             .ToList();
 
         var args = type.GetGenericArguments();
@@ -281,7 +299,7 @@ partial class Log
         if (genericType != null)
             typeName = typeName + "<" + genericType?.Name + ">";
 
-        Add(message, typeName + " (hash: " + hash + ")", level);
+        Add(message, typeName + " (ref: " + reference + ")", level);
 
         Add(message, "\n", 0);
 
@@ -289,7 +307,7 @@ partial class Log
 
         if (!fields.Any() && !properties.Any())
         {
-            Add(message, "{ no fields or props? } " + fields?.Count + " " + properties?.Count, level);
+            Add(message, "{ fieldCount: " + fields?.Count + ", propertyCount: " + properties?.Count + " } ", level);
             return true;
         }
 
@@ -308,23 +326,22 @@ partial class Log
                 try
                 {
                     var value = property.GetValue(obj);
-                    var sb = new StringBuilder(128);
-                    Append(sb, value, level, maxLevel, visited);
 
+                    var sb = new StringBuilder(128);
+
+                    Append(sb, value, level, maxLevel, visited);
                     int index = level;
-                    if (index > 0)
+                    if (index > 0 && sb.Length > index)
                         sb.Remove(0, index);
 
                     Add(message, sb.ToString(), 0);
                 }
                 catch
                 {
-                    Add(message, "(error reading, continue...)", level);
+                    Add(message, "(error reading prop, continue...)", level);
                 }
                 if (i < properties.Count - 1)
                     Add(message, "\n", 0);
-
-
             }
         }
 
@@ -358,7 +375,7 @@ partial class Log
                 }
                 catch
                 {
-                    Add(message, "(error reading, continue...)", level);
+                    Add(message, "(error reading field, continue...)", level);
                 }
                 if (i < fields.Count - 1)
                     Add(message, "\n", 0);
@@ -543,6 +560,8 @@ partial class Log
         }
 
         if (type.Name.Contains("Action`")) return "";
+
+        if (type.Name == "DBNull") return "null";
 
         
         return null;

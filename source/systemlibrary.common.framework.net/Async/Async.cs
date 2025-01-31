@@ -14,6 +14,7 @@ public static class Async
 {
     /// <summary>
     /// Execute methods in an async manner, appending each single result to a list, and it halts execution till all functions passed as params has completed 
+    /// <para>A hardcoded limit of 30 seconds for all methods to complete, else some results are left out and an error is logged, but the data we got so far, is returned</para>
     /// </summary>
     /// <example>
     /// <code class="language-csharp hljs">
@@ -43,11 +44,50 @@ public static class Async
     /// </example>
     public static List<T> Run<T>(params Func<T>[] functions)
     {
+        return Run(30000, functions);
+    }
+
+    /// <summary>
+    /// Execute methods in an async manner, appending each single result to a list, and it halts execution till all functions passed as params has completed 
+    /// <para>Pass in a specific timeout limit in milliseconds, before the results will be returned 'as is'</para>
+    /// </summary>
+    /// <example>
+    /// <code class="language-csharp hljs">
+    /// class Car {
+    ///     public string Name { get; set; }
+    /// }
+    /// 
+    /// class CarApi {
+    ///     //Simple dummy method that pretends to return a list of cars based on the name from some API
+    ///     List&lt;Car&gt; GetByName(string name) {
+    ///         //Client exists in nuget package: SystemLibrary.Common.Framework.App
+    ///         return Client.Get&lt;List&lt;Car&gt;&gt;("https://systemlibrary.com/cars/q=?" + name);   
+    ///     }
+    /// }
+    /// 
+    /// var carApi = new CarApi();
+    /// var cars = Async.Run&lt;Car&gt;(7500,
+    ///     () => carApi.GetByName("blue"),
+    ///     () => carApi.GetByName("red"),
+    ///     () => carApi.GetByName("orange")
+    /// ); 
+    /// 
+    /// // Variable 'cars' is filled after all three api requests has completed.
+    /// // Assume we got 1 blue, 0 red and 1 orange
+    /// // 'cars' now contain a total of 2 objects of type 'Car'
+    /// </code>
+    /// </example>
+    public static List<T> Run<T>(int timeoutMilliseconds, params Func<T>[] functions)
+    {
         var results = new ConcurrentBag<T>();
+
+        using var taskCancellation = new CancellationTokenSource();
+        using var timeoutCancellation = new CancellationTokenSource();
 
         var tasks = functions
             .Where(f => f != null)
-            .Select(f => Task.Run(() => {
+            .Select(f => Task.Run(() =>
+            {
                 try
                 {
                     var result = f();
@@ -58,9 +98,23 @@ public static class Async
                 {
                     // Swallow
                 }
-            }));
+            }, taskCancellation.Token));
 
-        Task.WhenAll(tasks).GetAwaiter().GetResult();
+        var timeoutTask = Task.Delay(30000, timeoutCancellation.Token);
+
+        var task = Task.WhenAll(tasks);
+
+        task.ConfigureAwait(false);
+
+        if (Task.WhenAny(task, timeoutTask).Result == timeoutTask)
+        {
+            Log.Error("Async.Run timed out after 30s without tasks finishing in time " + results.Count + "/" + tasks.Count());
+            taskCancellation.Cancel();
+        }
+        else
+        {
+            timeoutCancellation.Cancel();
+        }
 
         return results.ToList();
     }
@@ -100,7 +154,8 @@ public static class Async
 
         var tasks = functions
             .Where(f => f != null)
-            .Select(f => Task.Run(() => {
+            .Select(f => Task.Run(() =>
+            {
                 try
                 {
                     var result = f();

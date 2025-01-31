@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
+using SystemLibrary.Common.Framework.Extensions;
+
 namespace SystemLibrary.Common.Framework;
 
 internal static class AppInstance
@@ -17,9 +19,6 @@ internal static class AppInstance
                 _AppName = ServiceProviderInstance.Current.GetService<IOptions<DataProtectionOptions>>()
                     ?.Value?.ApplicationDiscriminator
                     ?? AppSettings.Current.DataProtection.AppName;
-
-                if (_AppName.IsNot())
-                    _AppName = "app";
             }
             return _AppName;
         }

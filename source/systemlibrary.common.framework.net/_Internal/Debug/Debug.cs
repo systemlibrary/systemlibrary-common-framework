@@ -22,22 +22,8 @@ internal static class Debug
         }
     }
 
-    internal static void Write(string obj)
+    internal static void Write(object o)
     {
-        try
-        {
-            File.AppendAllText(@"C:\Logs\debug.log", "Debug Write: " + obj + "\n");
-        }
-        catch
-        {
-            Thread.Sleep(33);
-            try
-            {
-                File.AppendAllText(@"C:\Logs\debug.log", "Debug Write: " + obj + "\n");
-            }
-            catch
-            {
-            }
-        }
+        System.IO.File.AppendAllText(@"C:\logs\write.log", o + "\n");
     }
 }

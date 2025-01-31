@@ -35,7 +35,10 @@ public class ConfigTransformationTests : BaseTest
         }
         else
         {
-            Assert.IsTrue(config.Name == "Untransformed", "Unknown configuration mode, should not transform any file - as no such transformation file exists, name: " + config.Name);
+            if (environmentName.IsNot())
+                Assert.IsTrue(false, "Please register a runtimesettings file in VS with the environment name set through var ASPNETCORE_ENVIRONMENTNAME");
+            else
+                Assert.IsTrue(config.Name == "Untransformed", "Unknown configuration mode in env " + environmentName + ", should not transform any file - as no such transformation file exists, name: " + config.Name);
         }
     }
 }

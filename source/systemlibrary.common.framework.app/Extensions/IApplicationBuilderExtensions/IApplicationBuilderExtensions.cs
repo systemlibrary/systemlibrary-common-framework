@@ -46,7 +46,7 @@ public static partial class IApplicationBuilderExtensions
     /// </example>
     public static IApplicationBuilder UseFrameworkMiddlewares(this IApplicationBuilder app, IWebHostEnvironment env, FrameworkAppOptions options = null)
     {
-        app.ApplicationServices.UseServiceProvider();
+        ServiceProviderInstance.Instance = app.ApplicationServices;
 
         options ??= new FrameworkAppOptions();
 

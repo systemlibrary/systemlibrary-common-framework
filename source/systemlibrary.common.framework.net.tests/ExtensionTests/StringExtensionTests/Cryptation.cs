@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.Extensions;
 using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
@@ -14,7 +13,7 @@ partial class StringExtensionsTests : BaseTest
     {
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddCommonServices()
+        serviceCollection
             .AddDataProtection()
             .SetApplicationName("CustomAppNameUsedAsKey")
             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
@@ -35,16 +34,14 @@ partial class StringExtensionsTests : BaseTest
 
         var data = "Hello world";
 
-        CryptationKey.Instance = null;
-
-        var oldServiceProvider = ServiceProviderInstance.Instance;
+        //var oldServiceProvider = ServiceProviderInstance.Instance;
 
         ServiceProviderInstance.Instance = tmpServiceProvider;
 
         var enc = data.Encrypt();
         var dec = enc.Decrypt();
 
-        ServiceProviderInstance.Instance = oldServiceProvider;
+        // ServiceProviderInstance.Instance = oldServiceProvider;
 
         if (File.Exists(dir + "\\" + fileName))
             File.Delete(dir + "\\" + fileName);
@@ -61,14 +58,12 @@ partial class StringExtensionsTests : BaseTest
     {
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddCommonServices()
+        serviceCollection
             .AddDataProtection()
             .SetApplicationName("CustomAppNameUsedAsKey")
             .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
 
         var emptyProvider = serviceCollection.BuildServiceProvider();
-
-        CryptationKey.Instance = null;
 
         ServiceProviderInstance.Instance = emptyProvider;
 
@@ -104,7 +99,7 @@ partial class StringExtensionsTests : BaseTest
     [TestMethod]
     public void Cryptation_With_Diff_Key_IV_Multiple_Invocations_Success()
     {
-        var data = Assemblies.GetEmbeddedResource("_Assets/employee.json") + "#¤%&,._<>?!|"; ;
+        var data = Assemblies.GetEmbeddedResource("_Assets/embeddedResource.json") + "#¤%&,._<>?!|"; ;
         var key = "aaaaa.CCCDDeeeFF-GGGG.HHHiiiii";
         var iv = "11223344556677";
 
@@ -281,9 +276,7 @@ partial class StringExtensionsTests : BaseTest
     {
         var serviceCollection = new ServiceCollection();
 
-        var emptyProvider = serviceCollection.AddCommonServices().BuildServiceProvider();
-
-        CryptationKey.Instance = null;
+        var emptyProvider = serviceCollection.BuildServiceProvider();
 
         ServiceProviderInstance.Instance = emptyProvider;
 

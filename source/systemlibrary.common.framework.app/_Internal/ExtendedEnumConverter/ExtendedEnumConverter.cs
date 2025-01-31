@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-
 namespace SystemLibrary.Common.Framework.App;
 
 internal class ExtendedEnumConverter : EnumConverter

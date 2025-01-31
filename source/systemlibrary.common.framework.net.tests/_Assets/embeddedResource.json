@@ -1,0 +1,44 @@
+﻿{
+  "firstName": "John",
+  "middleName": "Kusack",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "phoneNumber": "123-456-7890",
+  "birthDate": "1985-06-15T00:00:00Z",
+  "lastSeen": "2024-12-24 15:14:13",
+  "age": 39,
+  "isHired": true,
+  "isFired": false,
+  "parent": {
+    "birthDate": "1985-06-15T00:00:00Z",
+    "lastSeen": "2024-12-24 15:14:13",
+    "age": 69,
+    "isHired": false,
+    "isFired": true
+  },
+  "invoices": [
+    {
+      "id": 0,
+      "title": "Invoice 0",
+      "isPaid": true,
+      "price": 100,
+      "bankAccountNumber": 1234567890,
+      "linkedInvoice": null
+    },
+    {
+      "id": 1,
+      "title": "Invoice 1",
+      "isPaid": false,
+      "price": 110,
+      "bankAccountNumber": 1234567891,
+      "linkedInvoice": {
+        "id": 0,
+        "title": "Invoice 0",
+        "isPaid": true,
+        "price": 100,
+        "bankAccountNumber": 1234567890,
+        "linkedInvoice": null
+      }
+    }
+  ]
+}

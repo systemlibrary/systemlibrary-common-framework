@@ -8,7 +8,7 @@ namespace SystemLibrary.Common.Framework;
 public class AsyncTests : BaseTest
 {
     [TestMethod]
-    public void Run_Success()
+    public void Run_Return_String_Async_Added_To_List_Returns_All()
     {
         var result = Async.Run(
             () => OnAsyncRun("Hello world"),
@@ -37,16 +37,14 @@ public class AsyncTests : BaseTest
         File.Delete(file);
     }
 
-
     [TestMethod]
-    public void SearchConfigurationFiles_In_Folders_Async_Success()
+    public void Run_Searches_For_Files_Async_Returns_All_Files_Successfully()
     {
-        var path1 = "C:\\syslib\\framework\\source\\systemlibrary.common.framework.net.tests";
-        var path2 = "C:\\syslib\\framework\\source\\systemlibrary.common.framework.net.tests\\config\\";
-        var path3 = "C:\\syslib\\framework\\source\\systemlibrary.common.framework.net.tests\\configs\\";
-        var path4 = "C:\\syslib\\framework\\source\\systemlibrary.common.framework.net.tests\\configuration\\";
-        var path5 = "C:\\syslib\\framework\\source\\systemlibrary.common.framework.net.tests\\configurations\\";
-
+        var path1 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests";
+        var path2 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\config\\";
+        var path3 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configs\\";
+        var path4 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\configuration\\";
+        var path5 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configurations\\";
         var files = Async.Run(
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path1, false),
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path2, true),
@@ -54,6 +52,17 @@ public class AsyncTests : BaseTest
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path4, true),
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path5, true)
         );
+
+        Assert.IsTrue(files.Count == 5, "One or more directory searches failed: " + files.Count );
+
+        var any = false;
+        foreach(var configs in files)
+        {
+            if (configs.Length == 6)
+                any = true;
+        }
+
+        Assert.IsTrue(any, "One or more directory searches should return 6 config files, but didnt, so some config files missing");
     }
 
     [TestMethod]

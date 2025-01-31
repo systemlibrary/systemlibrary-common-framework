@@ -2,7 +2,6 @@
 
 using SystemLibrary.Common.Framework.Extensions;
 
-
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]

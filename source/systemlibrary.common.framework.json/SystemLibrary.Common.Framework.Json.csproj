@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NeT.Sdk">
+	<PropertyGroup>
+		<Configurations>Release</Configurations>
+		<RootNamespace>SystemLibrary.Common.Framework</RootNamespace>
+	</PropertyGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
+	</ItemGroup>
+</Project>

@@ -83,9 +83,9 @@ public static partial class IServiceCollectionExtensions
     {
         if (serviceCollection == null) serviceCollection = new ServiceCollection();
 
-        options ??= new FrameworkServicesOptions();
-
         serviceCollection.AddCommonServices<TLogWriter>();
+
+        options ??= new FrameworkServicesOptions();
 
         if (options.UseExtendedEnumModelConverter)
         {

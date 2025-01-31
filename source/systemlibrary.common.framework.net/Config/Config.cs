@@ -145,6 +145,9 @@ public abstract partial class Config<T> where T : class
         var configuration = ConfigLoader<T>.Load();
         try
         {
+            // Activate the instance to create it's static properties and fields
+            // Note: but I cannot do this anymore, as that sets the static properties to its default configurations...
+            //_Current = Activator.CreateInstance<T>();
             Current = configuration.Get<T>(opt =>
             {
                 opt.ErrorOnUnknownConfiguration = false;
@@ -152,29 +155,37 @@ public abstract partial class Config<T> where T : class
         }
         catch
         {
-            // NOTE: static properties inside the Config class errors unless already instantiated
-            // could check for static members myself, but try-catch for now
-            Current = Activator.CreateInstance<T>();
-            Current = configuration.Get<T>();
+            try
+            {
+                Current = Activator.CreateInstance<T>();
+                Current = null;
+                Current = configuration.Get<T>(opt =>
+                {
+                    opt.ErrorOnUnknownConfiguration = false;
+                });
+            }
+            catch
+            {
+            }
         }
 
-        if (Current == null && typeof(T) == typeof(EnvironmentConfig))
-            throw new Exception("EnvironmentConfig could not be created - make sure the 'environmentConfig.json' is not empty, it must minimum contain one property, for instance: { 'name': 'prod' }");
+        if (Current == null)
+            throw new Exception(typeof(T).Name + " could not be created - make sure a '" + typeof(T).Name + ".json' file exists in for instance Configs or Configurations folder, and it's not empty. It must minimum contain one property, for instance: { 'name': 'prod' }");
 
         try
         {
             DecryptPublicGetSetProperties(Current, typeof(T));
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.Log("Decrypt configuration failed: " + ex.Message);
         }
     }
 
     /// <summary>
     /// Get the current configuration as a singleton object, always instantiated
     /// </summary>
-    public static readonly T Current;
+    public static T Current;
+    
 
     static void DecryptPublicGetSetProperties(object instance, Type type)
     {

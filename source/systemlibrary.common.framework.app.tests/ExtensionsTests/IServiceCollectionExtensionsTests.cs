@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]

@@ -25,7 +25,7 @@ public class AssembliesTests : BaseTest
     [TestMethod]
     public void GetEmbeddedResource_Returns_String()
     {
-        var text = Assemblies.GetEmbeddedResource("/_Assets/employee.json");
+        var text = Assemblies.GetEmbeddedResource("/_Assets/embeddedResource.json");
 
         Assert.IsTrue(text.Contains("johndoe"));
     }
@@ -33,7 +33,7 @@ public class AssembliesTests : BaseTest
     [TestMethod]
     public void GetEmbeddedResource_File_Name_Only_Matches_First_Entry_String()
     {
-        var text = Assemblies.GetEmbeddedResource("employee.json");
+        var text = Assemblies.GetEmbeddedResource("embeddedResource.json");
 
         Assert.IsTrue(text.Contains("johndoe"));
     }

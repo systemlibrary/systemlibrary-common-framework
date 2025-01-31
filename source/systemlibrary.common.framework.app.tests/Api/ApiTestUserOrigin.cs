@@ -1,16 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SystemLibrary.Common.Framework.App;
+using SystemLibrary.Common.Framework.App.Extensions;
+using SystemLibrary.Common.Framework.Tests;
 
-namespace SystemLibrary.Common.Framework.Tests;
+namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]
 public class ApiTestUserOrigin : BaseTest
 {
     public ApiTestUserOrigin()
     {
-        this.AssemblyPart = typeof(ApiTestUserOrigin).Assembly;
+        WebHostBuilder = new WebHostBuilder()
+            .ConfigureServices(services =>
+            {
+                var options = new FrameworkServicesOptions();
+
+                services = services.AddFrameworkServices<LogWriter>(options);
+            })
+            .Configure(app =>
+            {
+                var options = new FrameworkAppOptions();
+
+                options.UseHsts = false;
+                options.UseHttpsRedirection = false;
+
+                app.UseFrameworkMiddlewares(null, options);
+            });
     }
 
     [TestMethod]
@@ -25,6 +43,7 @@ public class ApiTestUserOrigin : BaseTest
     public void GetPin_Returns_200_User_Agent_Is_Valid()
     {
         var request = new HttpRequestMessage(HttpMethod.Get, "/userAgent/getPin/");
+
         request.Headers.TryAddWithoutValidation("User-Agent", "He.l.lo-User-Agent;(SomeOS)");
 
         var response = Client.SendAsync(request)

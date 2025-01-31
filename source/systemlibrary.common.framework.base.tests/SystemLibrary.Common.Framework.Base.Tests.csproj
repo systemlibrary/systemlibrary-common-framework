@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NeT.Sdk">
+
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<RootNamespace>SystemLibrary.Common.Framework.Tests</RootNamespace>
+		<Configurations>Release</Configurations>
+		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
+		<PackageReference Include="Microsoft.NeT.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.7.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.7.0" />
+		<PackageReference Include="Microsoft.Testing.extensions.Telemetry" Version="*" excludeAssets="all" />
+		<PackageReference Include="Microsoft.Testing.extensions.VSTestBridge" Version="*" excludeAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+	</ItemGroup>
+
+</Project>

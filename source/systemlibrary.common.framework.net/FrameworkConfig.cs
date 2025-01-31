@@ -22,8 +22,9 @@ internal class FrameworkConfig
     internal static FrameworkConfig Current
     {
         get
-        {   
+        {
             return AppSettings.Current.SystemLibraryCommonFramework;
         }
     }
 }
+
