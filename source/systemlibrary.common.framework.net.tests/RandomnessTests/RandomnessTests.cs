@@ -8,6 +8,21 @@ namespace SystemLibrary.Common.Framework;
 public class RandomnessTests : BaseTest
 {
     [TestMethod]
+    public void Double_Returns_Random_Double_Within_Range_And_Next_10_Still_Differs_From_Initial()
+    {
+        // NOTE: test might crash as there is a 1 in a billion chance that test2 is equal to test1
+        var test1 = Randomness.Double(1.01, 3.99);
+
+        Assert.IsTrue(test1 > 1 && test1 < 4);
+
+        for (int i = 0; i < 10; i++)
+        {
+            var test2 = Randomness.Double(1.01, 3.99);
+            Assert.IsTrue(test1 != test2);
+        }
+    }
+
+    [TestMethod]
     public void Int_Returns_Random_Integer_Based_On_Input_Rules()
     {
         var test1 = Randomness.Int();
@@ -15,7 +30,7 @@ public class RandomnessTests : BaseTest
         var test3 = Randomness.Int(2);
         var test4 = Randomness.Int(2);
         var test5 = Randomness.Int(2);
-        var test6 = Randomness.Int(50,50);
+        var test6 = Randomness.Int(50, 50);
 
         Assert.IsTrue(test1 - test2 > 1 || test1 - test2 < -1, "Both numbers were equal " + test1 + ", unlucky?");
 

@@ -8,6 +8,16 @@ namespace SystemLibrary.Common.Framework;
 public class EnvironmentConfigTests : BaseTest
 {
     [TestMethod]
+    public void EnvironmentConfig_Has_EnvName_Set_Success()
+    {
+        var config = Configs.EnvironmentConfig.Current;
+
+        Assert.IsTrue(config.EnvironmentName == EnvironmentName.Local, "Wrong envName " + config.EnvironmentName);
+
+        Assert.IsTrue(config.Name.Is(), "Wrong Name " + config.Name);
+    }
+
+    [TestMethod]
     public void EnvironmentConfig_Extending_Property_Has_Value()
     {
         var config = Configs.EnvironmentConfig.Current;

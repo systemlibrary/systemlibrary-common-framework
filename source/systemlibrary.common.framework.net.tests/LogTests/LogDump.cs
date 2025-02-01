@@ -23,14 +23,14 @@ public class LogDumpTests : BaseTest
     
     static string ReadFile()
     {
-        Thread.Sleep(125);
+        Thread.Sleep(66);
         try
         {
             return File.ReadAllText(DumpFullPath);
         }
         catch
         {
-            Thread.Sleep(33);
+            Thread.Sleep(25);
             return File.ReadAllText(DumpFullPath);
         }
     }

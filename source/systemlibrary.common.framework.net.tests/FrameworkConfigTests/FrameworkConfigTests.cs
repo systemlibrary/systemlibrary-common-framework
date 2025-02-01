@@ -8,12 +8,15 @@ namespace SystemLibrary.Common.Framework;
 public class FrameworkConfigTests : BaseTest
 {
     [TestMethod]
-    public void JsonConfig_Is_Set()
+    public void Is_Read_With_Case_Insensitive_Match()
     {
         var config = FrameworkConfig.Current.Json;
 
         Assert.IsTrue(config.MaxDepth == 99);
         Assert.IsTrue(!config.AllowTrailingCommas);
+        Assert.IsTrue(config.JsonCommentHandling == System.Text.Json.JsonCommentHandling.Skip);
+        Assert.IsTrue(config.IncludeFields);
+        Assert.IsTrue(config.JsonIgnoreCondition == System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault);
     }
 
     [TestMethod]

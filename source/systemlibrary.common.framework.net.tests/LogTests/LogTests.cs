@@ -11,14 +11,14 @@ public class LogWriterTests : BaseTest
 
     static string ReadFile()
     {
-        Thread.Sleep(95);
+        Thread.Sleep(50);
         try
         {
             return File.ReadAllText(DumpFullPath);
         }
         catch
         {
-            Thread.Sleep(33);
+            Thread.Sleep(25);
             return File.ReadAllText(DumpFullPath);
         }
     }
@@ -129,7 +129,7 @@ public class LogWriterTests : BaseTest
         Assert.IsTrue(content.Contains("ERROR: "), "Error: level missing as prefix");
         Assert.IsTrue(content.Contains("DEBUG: "), "Debug: level missing as prefix");
         Assert.IsTrue(content.Contains("WARNING: "), "Warn: level missing as prefix");
-        Assert.IsTrue(!content.Contains("INFORMATION: "), "Information is outputted yet it should be set to Warning (warn debug err and crit are logged)");
+        Assert.IsTrue(content.Contains("INFORMATION: "), "Information is missing as prefix");
         Assert.IsTrue(!content.Contains("TRACE: "), "Trace is outputted yet it should be set to Warning (warn debug err and crit are logged)");
     }
 
