@@ -16,7 +16,7 @@ public class HttpContextInstanceConcurrencyTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServicesOptions();
+                var options = new FrameworkServiceOptions();
 
                 options.ApplicationParts = [
                     typeof(HttpContextInstanceConcurrencyTests).Assembly

@@ -1,35 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using SystemLibrary.Common.Framework.App.Extensions;
-using SystemLibrary.Common.Framework.Tests;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]
-public class GoogleMapsTests : BaseTest
+public class GoogleMapsTests : AppBaseTest
 {
-    public GoogleMapsTests()
-    {
-        WebHostBuilder = new WebHostBuilder()
-            .ConfigureServices(services =>
-            {
-                var options = new FrameworkServicesOptions();
-
-                services = services.AddFrameworkServices<LogWriter>(options);
-            })
-            .Configure(app =>
-            {
-                var options = new FrameworkAppOptions();
-
-                options.UseHsts = false;
-                options.UseHttpsRedirection = false;
-
-                app.UseFrameworkMiddlewares(null, options);
-            });
-    }
-
     [TestMethod]
     public void GetPin_Fails_Invalid_User_Agent_403_Forbidden()
     {
@@ -39,10 +14,7 @@ public class GoogleMapsTests : BaseTest
 
         request.Headers.TryAddWithoutValidation("api-token", "helloworld");
 
-        var response = Client.SendAsync(request)
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
+        var response = GetResponse(request);
 
         Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.Forbidden, "Not forbidden: " + response.StatusCode);
     }
@@ -56,10 +28,7 @@ public class GoogleMapsTests : BaseTest
 
         request.Headers.TryAddWithoutValidation("api-token", "hello2world");
 
-        var response = Client.SendAsync(request)
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
+        var response = GetResponse(request);
 
         Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.Forbidden, "Not forbidden: " + response.StatusCode);
     }
@@ -74,17 +43,11 @@ public class GoogleMapsTests : BaseTest
 
         request.Headers.TryAddWithoutValidation("api-token", "helloworld");
 
-        var response = Client.SendAsync(request)
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
+        var response = GetResponse(request);
 
         Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK, "Not OK "  + response.StatusCode);
 
-        var text = response.Content.ReadAsStringAsync()
-          .ConfigureAwait(false)
-          .GetAwaiter()
-          .GetResult();
+        var text = GetResponseText(response);
 
         Assert.IsTrue(text == "", "Text was something: " + text);
     }
@@ -95,19 +58,34 @@ public class GoogleMapsTests : BaseTest
         var request = new HttpRequestMessage(HttpMethod.Get, "/userAgent/getPin/");
 
         request.Headers.TryAddWithoutValidation("User-Agent", "He.l.lo-User-Agent;(SomeOS)");
-
-        var response = Client.SendAsync(request)
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
+        
+        var response = GetResponse(request);
 
         Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
 
-        var text = response.Content.ReadAsStringAsync()
-          .ConfigureAwait(false)
-          .GetAwaiter()
-          .GetResult();
+        var text = GetResponseText(response);
 
         Assert.IsTrue(!text.Contains("403"), text);
+    }
+
+    [TestMethod]
+    public void GetPin_Enum_Converted_To_Params_Successfully()
+    {
+        //public ActionResult GetPin(ProductColor color1, ProductColor color2 = ProductColor.Red, ProductColor color3 = (ProductColor)4) => Ok();
+        //public ActionResult GetPin(GeoLocation geoLocation) => Ok();
+
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/GetPin/?color1=red&color2=blue&color3=yellow&color4=green");
+
+        request.Headers.TryAddWithoutValidation("User-Agent", "Edg");
+
+        request.Headers.TryAddWithoutValidation("api-token", "helloworld");
+
+        var response = GetResponse(request);
+
+        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK, "Not OK " + response.StatusCode);
+
+        var text = GetResponseText(response);
+
+        Assert.IsTrue(text == "", "Text was something: " + text);
     }
 }

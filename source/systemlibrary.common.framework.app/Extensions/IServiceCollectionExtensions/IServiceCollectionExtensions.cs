@@ -79,13 +79,13 @@ public static partial class IServiceCollectionExtensions
     /// }
     /// </code>
     /// </example>
-    public static IServiceCollection AddFrameworkServices<TLogWriter>(this IServiceCollection serviceCollection, FrameworkServicesOptions options = null) where TLogWriter : class, ILogWriter
+    public static IServiceCollection AddFrameworkServices<TLogWriter>(this IServiceCollection serviceCollection, FrameworkServiceOptions options = null) where TLogWriter : class, ILogWriter
     {
         if (serviceCollection == null) serviceCollection = new ServiceCollection();
 
         serviceCollection.AddCommonServices<TLogWriter>();
 
-        options ??= new FrameworkServicesOptions();
+        options ??= new FrameworkServiceOptions();
 
         if (options.UseExtendedEnumModelConverter)
         {

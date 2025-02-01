@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -20,7 +19,7 @@ public partial class GoogleMapsController : BaseApiController
     public ActionResult GetPin(double d) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(LogLevel color1, LogLevel color2 = LogLevel.Warning, LogLevel color3 = (LogLevel)4) => Ok();
+    public ActionResult GetPin(ProductColor color1, ProductColor color2 = ProductColor.Red, ProductColor color3 = (ProductColor)4) => Ok();
 
     [HttpGet]
     public ActionResult GetPin(decimal dd) => Ok();

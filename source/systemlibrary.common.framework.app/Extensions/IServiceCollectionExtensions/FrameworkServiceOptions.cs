@@ -41,7 +41,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 /// }
 /// </code>
 /// </example>
-public class FrameworkServicesOptions : BaseOptions
+public class FrameworkServiceOptions : BaseOptions
 {
     /// <summary>
     /// Set to true to add MVC services

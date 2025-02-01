@@ -10,8 +10,8 @@ partial class Log
     static Timer Interval;
     static object TimerLock = new();
     static bool QueueTimerStarted = false;
-    static int QueueDiscardThreshold = 100;
-    static int IntervalTimeMs = 25;
+    static int QueueDiscardThreshold = 80;
+    static int IntervalTimeMs = 20;
     const long MaxLogSizeBytes = 25 * 1024 * 1024;
 
     static void AddMessageToQueue(string message)

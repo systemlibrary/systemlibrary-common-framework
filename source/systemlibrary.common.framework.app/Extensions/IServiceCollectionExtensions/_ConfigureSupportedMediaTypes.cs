@@ -6,7 +6,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 static partial class IServiceCollectionExtensions
 {
-    static Action<MvcOptions> ConfigureSupportedMediaTypes(FrameworkServicesOptions options)
+    static Action<MvcOptions> ConfigureSupportedMediaTypes(FrameworkServiceOptions options)
     {
         return mvc =>
         {

@@ -4,7 +4,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder UseAddMvc(this IServiceCollection services, FrameworkServicesOptions options)
+    static IMvcBuilder UseAddMvc(this IServiceCollection services, FrameworkServiceOptions options)
     {
         var builder = services.AddMvc();
 

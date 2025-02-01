@@ -4,7 +4,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder UseAddControllers(this IServiceCollection services, FrameworkServicesOptions options)
+    static IMvcBuilder UseAddControllers(this IServiceCollection services, FrameworkServiceOptions options)
     {
         return services.AddControllers(ConfigureSupportedMediaTypes(options));
     }

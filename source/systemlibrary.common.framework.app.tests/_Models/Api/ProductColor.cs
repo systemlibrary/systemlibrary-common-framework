@@ -9,4 +9,5 @@ public enum ProductColor
     Blue,
     [EnumValue("g")]
     Green, 
+    Yellow
 }

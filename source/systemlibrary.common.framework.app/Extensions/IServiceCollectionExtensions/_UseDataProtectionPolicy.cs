@@ -7,7 +7,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    public static IServiceCollection UseDataProtectionPolicy(this IServiceCollection services, FrameworkServicesOptions options)
+    public static IServiceCollection UseDataProtectionPolicy(this IServiceCollection services, FrameworkServiceOptions options)
     {
         if (!options.UseDataProtectionPolicy) return services;
 

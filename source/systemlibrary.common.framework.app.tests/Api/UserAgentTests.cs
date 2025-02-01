@@ -15,7 +15,7 @@ public class UserAgentTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServicesOptions();
+                var options = new FrameworkServiceOptions();
 
                 services = services.AddFrameworkServices<LogWriter>(options);
             })
@@ -33,7 +33,7 @@ public class UserAgentTests : BaseTest
     [TestMethod]
     public void GetPin_Returns_403_Not_Authorized()
     {
-        var responseText = GetResponse("/userAgent/getPin/");
+        var responseText = GetResponseText("/userAgent/getPin/");
 
         Assert.IsTrue(responseText.Contains("403"), "No 403 " + responseText);
     }

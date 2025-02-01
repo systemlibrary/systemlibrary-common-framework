@@ -260,7 +260,15 @@ public static partial class Log
     {
         if ((int)level != 99999)
         {
-            if (LogIsOff) return;
+            if (LogIsOff)
+            {
+                if(!WarningDumped)
+                {
+                    WarningDumped = true;
+                    Log.Dump("[SystemLibrary.Common.Framework] Logging is unset for the framework and the default logging is set to 'none', will not log anything from here on.");
+                }
+                return;
+            }
 
             if ((int)level < MinLogLevel) return;
         }
