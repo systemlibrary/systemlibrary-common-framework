@@ -1,7 +1,0 @@
-﻿<RunSettings>
-	<RunConfiguration>
-		<EnvironmentVariables>
-			<ASPNETCORE_ENVIRONMENT>LOCAL</ASPNETCORE_ENVIRONMENT>
-		</EnvironmentVariables>
-	</RunConfiguration>
-</RunSettings>

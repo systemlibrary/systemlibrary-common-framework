@@ -3,5 +3,7 @@
 		<EnvironmentVariables>
 			<ASPNETCORE_ENVIRONMENT>LOCAL</ASPNETCORE_ENVIRONMENT>
 		</EnvironmentVariables>
+		<ResultsDirectory>.\TestResults</ResultsDirectory>
+		<GenerateInconclusiveResults>false</GenerateInconclusiveResults>
 	</RunConfiguration>
 </RunSettings>

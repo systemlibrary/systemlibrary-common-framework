@@ -96,7 +96,7 @@ internal static class Cryptation
                         {
                             var value = streamReader.ReadToEnd();
 
-                            if (DecryptedShelf.Count < 100)
+                            if (DecryptedShelf.Count < 200)
                                 DecryptedShelf.TryAdd(shelfKey, value);
 
                             return value;

@@ -1,10 +1,10 @@
 ﻿namespace SystemLibrary.Common.Framework.Attributes;
 
 /// <summary>
-/// Mark a property as the Decrypted value of an Encrypted Configuration Property
-/// <para>The property marked must be Public, Instance, Get and Set.</para>
-/// <para>This attribute goes hand in hand with Config class, when a Config class is created it looks for which properties has this attribute and decrypts accordingly</para>
-/// To decrypt, properties must be encrypted through Encrypt() extension in this library that takes no Key/IV, but the "default" you've specified by configuration/convention. Read more in StringExtensions.Encrypt method how to encrypt.
+/// Mark a property as the place holder for the decrypted value of an encrypted config property
+/// <para>A place holder property must be an instance, public with get; and set;</para>
+/// <para>Attribute is used internally by the Config class within the framework. Whenever the Config class is instantiated, it finds the DecryptAttribute and decrypts accordingly</para>
+/// <para>An encrypted config property must be encrypted with the parameterless .Encrypt() method within this framework. The key/iv is either a default or one you've specified. Read more at the StringExtensions.Encrypt() method's documentation</para>
 /// </summary>
 /// <remarks>
 /// The PropertyName must be a property within the same class that this attribute was used, and class must inherit Config to work automatically
@@ -24,7 +24,6 @@
 /// {
 ///    public string Token {get;set;} //Encrypted value...
 ///    
-///     public string TokenDecrypted {get;set;} // Naming convention decrypting
 ///     public string TokenDecrypt {get;set;} // Naming convention decrypting
 ///     
 ///     [ConfigDecrypt(propertyName="Token")]
@@ -38,7 +37,7 @@ public class ConfigDecryptAttribute : Attribute
     public string PropertyName;
 
     /// <summary>
-    /// Set the property name that will be decrypted
+    /// Set the property name that will be decrypted and the decrypted value is stored within this property
     /// </summary>
     /// <param name="propertyName"></param>
     public ConfigDecryptAttribute(string propertyName = null)

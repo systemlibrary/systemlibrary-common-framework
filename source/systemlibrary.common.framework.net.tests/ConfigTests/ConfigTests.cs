@@ -28,6 +28,24 @@ public class ConfigTests : BaseTest
     }
 
     [TestMethod]
+    public void Run_With_Timeout_Times_Out()
+    {
+        string Call(int i)
+        {
+            Thread.Sleep(333);
+            var key = i.ToString();
+            var value = Configs.AppSettings.Current.Child.Color;
+            return key + "=" + value;
+        }
+        var results = Async.Run(100,
+            () => Call(1),
+            () => Call(2)
+        );
+
+        Assert.IsTrue(results.Count == 0, "Results returned items, it should return 0 as all times out");
+    }
+
+    [TestMethod]
     public void Run_Multiple_Async_Calls_Success()
     {
         string Call(int i)

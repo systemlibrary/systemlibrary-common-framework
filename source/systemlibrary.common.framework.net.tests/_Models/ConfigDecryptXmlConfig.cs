@@ -10,7 +10,6 @@ public class ConfigDecryptXmlConfig : Config<ConfigDecryptXmlConfig>
     public string Password2 { get; set; }
 
     public string PasswordDecrypt { get; set; }
-    public string PasswordDecrypted { get; set; }
 
     [ConfigDecrypt(nameof(Password))]
     public string PasswordDecByAttrib { get; set; }

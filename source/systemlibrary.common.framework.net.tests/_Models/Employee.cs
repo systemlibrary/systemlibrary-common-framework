@@ -1,8 +1,14 @@
 ﻿using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace SystemLibrary.Common.Framework;
 
-public class Employee
+public class BaseEmployee
+{
+}
+
+[XmlSerializerAssembly]
+public class Employee : BaseEmployee
 {
     public string FirstName { get; set; }
     [JsonIgnore]

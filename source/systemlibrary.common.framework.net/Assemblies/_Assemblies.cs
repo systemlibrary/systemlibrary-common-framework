@@ -14,7 +14,7 @@ public static partial class Assemblies
 
         foreach (var asm in assembliesLoaded)
         {
-            if (!asm.FullName.StartsWithAny(BlacklistedAssemblyNames))
+            if (!asm.FullName.StartsWithAny(BlacklistedAssemblyNames) || asm.GetName()?.Name?.EndsWith(".Tests") == true)
             {
                 whiteListedAssemblies.Add(asm);
             }

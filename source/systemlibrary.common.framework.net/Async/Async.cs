@@ -100,7 +100,7 @@ public static class Async
                 }
             }, taskCancellation.Token));
 
-        var timeoutTask = Task.Delay(30000, timeoutCancellation.Token);
+        var timeoutTask = Task.Delay(timeoutMilliseconds, timeoutCancellation.Token);
 
         var task = Task.WhenAll(tasks);
 

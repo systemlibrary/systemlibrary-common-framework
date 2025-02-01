@@ -23,7 +23,7 @@ namespace SystemLibrary.Common.Framework;
 /// <para>Read the example of 'EnvironmentConfig.Name' property, it gives details on where/how to set environment per application type</para>
 /// Encrypted properties such as "ApiToken {get;set;}" can be decrypted auto by creating a "ApiTokenDecrypt {get;set;}"
 /// <para>must be string, public, and marked with get;set;</para>
-/// <para>convention by specifying suffix "Decrypt" or "Decrypted" or use attribute [Decrypt] on a property</para>
+/// <para>convention by specifying suffix "Decrypt" or use attribute [Decrypt] on a property</para>
 /// <para>Environment variables like 'UserName' is only added to 'appSettings' reads not your custom configuration files</para>
 /// WARNING: The generic T cannot be a nested class
 /// </remarks>
@@ -56,7 +56,7 @@ namespace SystemLibrary.Common.Framework;
 ///    public int[] ValidPhoneNumbers { get; set; }
 ///    
 ///    public class Password { get; set; } // Contains encrypted value
-///    public class PasswordDecrypted { get; set; } // Contains decrypted Password at runtime
+///    public class PasswordDecrypt { get; set; } // Contains decrypted Password at runtime
 /// }
 /// 
 /// public class ApiOptions 
@@ -198,7 +198,7 @@ public abstract partial class Config<T> where T : class
 
             if (!property.CanWrite || !property.CanRead) continue;
 
-            var isEligibleForDecryption = property.Name.EndsWith("Decrypted", StringComparison.Ordinal) || property.Name.EndsWith("Decrypt", StringComparison.Ordinal);
+            var isEligibleForDecryption = property.Name.EndsWith("Decrypt", StringComparison.Ordinal);
 
             var attribute = property.GetCustomAttribute<ConfigDecryptAttribute>();
 
@@ -213,7 +213,7 @@ public abstract partial class Config<T> where T : class
             }
 
             var encryptedPropertyName = attribute?.PropertyName ??
-                property.Name.ReplaceAllWith("", "Decrypted", "Decrypt");
+                property.Name.ReplaceAllWith("", "Decrypt");
 
             var encryptedProperty = FindEncryptedProperty(properties, encryptedPropertyName);
 

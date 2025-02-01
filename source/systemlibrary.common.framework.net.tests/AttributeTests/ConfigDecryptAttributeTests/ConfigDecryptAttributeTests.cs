@@ -15,7 +15,6 @@ public class ConfigDecryptAttributeTests : BaseTest
         Assert.IsTrue(config.Password != "Hello world");
         Assert.IsTrue(config.Password2 != "Hello world");
 
-        Assert.IsTrue(config.PasswordDecrypted == "Hello world");
         Assert.IsTrue(config.PasswordDecrypt == "Hello world");
         Assert.IsTrue(config.PasswordDecByAttrib == "Hello world");
         Assert.IsTrue(config.Password2DecByAttrib == "Hello world");
@@ -29,7 +28,6 @@ public class ConfigDecryptAttributeTests : BaseTest
         Assert.IsTrue(config.Password != "Hello world");
         Assert.IsTrue(config.Password2 != "Hello world");
 
-        Assert.IsTrue(config.PasswordDecrypted == "Hello world");
         Assert.IsTrue(config.PasswordDecrypt == "Hello world");
         Assert.IsTrue(config.PasswordDecByAttrib == "Hello world");
         Assert.IsTrue(config.Password2DecByAttrib == "Hello world");

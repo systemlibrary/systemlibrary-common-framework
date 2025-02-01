@@ -7,8 +7,10 @@ partial class Assemblies
     static IEnumerable<Type> FindTypesInheriting(Type classType, Type classWithAttribute = null)
     {
         return Types
-            .Where(type => classType.IsAssignableFrom(type) &&
-                    (classWithAttribute == null || type.IsDefined(classWithAttribute, false))
+            .Where(type => 
+                classType.IsAssignableFrom(type) &&
+                type != classType &&
+                (classWithAttribute == null || type.IsDefined(classWithAttribute, false))
         );
     }
 }
