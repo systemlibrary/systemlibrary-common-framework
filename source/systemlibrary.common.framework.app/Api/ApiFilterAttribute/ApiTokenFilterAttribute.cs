@@ -42,13 +42,21 @@ public class ApiTokenFilterAttribute : BaseApiFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        var value = context?.HttpContext?.Request?.Headers[this.HeaderName].ToString();
+        try
+        {
+            var value = context?.HttpContext?.Request?.Headers[this.HeaderName].ToString();
 
-        var hasAccess = RequestHasValidHeaderValue(Match, value);
+            var hasAccess = RequestHasValidHeaderValue(Match, value);
 
-        if (hasAccess)
-            base.OnActionExecuting(context);
-        else
-            base.OnAccessDenied(context, this.HeaderName + " is incorrect");
+            if (hasAccess)
+                base.OnActionExecuting(context);
+            else
+                base.OnAccessDenied(context, this.HeaderName + " is incorrect");
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex);
+            base.OnAccessDenied(context, "api-token errored");
+        }
     }
 }

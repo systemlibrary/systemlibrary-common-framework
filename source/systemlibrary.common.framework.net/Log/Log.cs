@@ -75,7 +75,8 @@ public static partial class Log
                     if (temp == null || temp == LogLevel.Unset)
                     {
                         // If 'none' is the default logging level, no logs should occur at all, except Log.Write always bypassed, same does Log.Dump (but this writes to physical drive)
-                        var defaultLogLevel = AppSettings.Current.Logging.LogLevel.Default?.ToLower();
+                        var defaultLogLevel = AppSettings.Current.Logging.LogLevel.Default.ToLower();
+
                         if (defaultLogLevel.Is())
                         {
                             if (defaultLogLevel == "none")
@@ -86,7 +87,7 @@ public static partial class Log
                         else
                             temp = LogLevel.Debug; // Debug, Error and Critical are logged by default
                     }
-                    _MinLogLevel = (int)0;
+                    _MinLogLevel = (int)temp;
 
                     MinLogLevelIsSet = true;
                 }

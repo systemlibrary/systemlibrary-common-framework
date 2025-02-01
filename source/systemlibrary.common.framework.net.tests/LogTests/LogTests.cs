@@ -121,15 +121,16 @@ public class LogWriterTests : BaseTest
         Log.Debug("33333");
         Log.Information("44444");
         Log.Trace("66666");
+        Log.Critical("9999");
         Log.Dump("55555");
 
         var content = ReadFile();
-
+        Assert.IsTrue(content.Contains("CRITICAL: "), "Critical level missing as prefix");
         Assert.IsTrue(content.Contains("ERROR: "), "Error: level missing as prefix");
         Assert.IsTrue(content.Contains("DEBUG: "), "Debug: level missing as prefix");
         Assert.IsTrue(content.Contains("WARNING: "), "Warn: level missing as prefix");
-        Assert.IsTrue(content.Contains("INFORMATION: "), "Information: level missing as prefix");
-        Assert.IsTrue(!content.Contains("TRACE: "), "Trace is outputted yet not trace level is set");
+        Assert.IsTrue(!content.Contains("INFORMATION: "), "Information is outputted yet it should be set to Warning (warn debug err and crit are logged)");
+        Assert.IsTrue(!content.Contains("TRACE: "), "Trace is outputted yet it should be set to Warning (warn debug err and crit are logged)");
     }
 
     [TestMethod]

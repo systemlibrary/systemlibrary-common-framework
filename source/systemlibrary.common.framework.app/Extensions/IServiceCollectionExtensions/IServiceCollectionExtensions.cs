@@ -142,8 +142,10 @@ public static partial class IServiceCollectionExtensions
 
         if (options.UseMvc)
         {
-            builder = serviceCollection.AddMvc();
-
+            builder = serviceCollection.AddMvc(options =>
+            {
+            });
+            
             if (options.UseRazorPages)
                 builder = serviceCollection.UseAddRazorPages(options, builder);
         }
@@ -199,7 +201,7 @@ public static partial class IServiceCollectionExtensions
 
         if (options.AllowSynchronousIO)
             serviceCollection.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
-
+        
         return serviceCollection;
     }
 }

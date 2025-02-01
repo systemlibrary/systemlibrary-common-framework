@@ -170,7 +170,7 @@ public abstract partial class Config<T> where T : class
         }
 
         if (Current == null)
-            throw new Exception(typeof(T).Name + " could not be created - make sure a '" + typeof(T).Name + ".json' file exists in for instance Configs or Configurations folder, and it's not empty. It must minimum contain one property, for instance: { 'name': 'prod' }");
+            throw new Exception(typeof(T).Name + " could not be created. A '" + typeof(T).Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appSettings.json named '" + typeof(T).Name + "' is also supported.");
 
         try
         {
@@ -186,7 +186,6 @@ public abstract partial class Config<T> where T : class
     /// </summary>
     public static T Current;
     
-
     static void DecryptPublicGetSetProperties(object instance, Type type)
     {
         var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty)?.Where(prop => prop.PropertyType == SystemType.StringType);

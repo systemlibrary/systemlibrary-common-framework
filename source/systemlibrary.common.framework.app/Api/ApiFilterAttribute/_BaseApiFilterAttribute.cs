@@ -69,13 +69,13 @@ public class BaseApiFilterAttribute : ActionFilterAttribute
 
     protected void OnAccessDenied(ActionExecutingContext context, string message)
     {
-        context.Result = new StatusCodeResult(StatusCodes.Status403Forbidden);
-
         var result = new ContentResult();
 
         result.Content = @"{ ""success"": false, ""status"": 403, ""type"": """ + this.GetType().Name + "\", \"error\": \"" + message + "\" }";
 
         result.ContentType = "application/json";
+
+        result.StatusCode = 403;
 
         context.Result = result;
     }

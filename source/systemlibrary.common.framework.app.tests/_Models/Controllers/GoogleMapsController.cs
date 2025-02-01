@@ -6,11 +6,11 @@ namespace SystemLibrary.Common.Framework.App;
 //[OriginFilter(match: "^[ab0-4]{4,}$")]
 [UserAgentFilter("Edg|Chrome")]
 [ApiTokenFilter("helloworld")]
-[Route("api/googleMaps")]
+[Route("api/googleMaps/{action}")]
 public partial class GoogleMapsController : BaseApiController
 {
     [HttpGet]
-    public ActionResult GetPin() => Ok();
+    public ActionResult GetPinOK() => Ok();
 
     [HttpGet]
     [Route("/root/googleMaps/getPinning/{f}")]
@@ -26,25 +26,25 @@ public partial class GoogleMapsController : BaseApiController
     public ActionResult GetPin(decimal dd) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(string countryCode = "Hello World") => Ok();
+    public ActionResult GetPin(string countryCode) => Ok();
 
     [HttpGet]
     public ActionResult GetPin(int x, int y = -1, bool b = false, bool b2 = true) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(GeoLocation geoLocation = null) => Ok();
+    public ActionResult GetPin(GeoLocation geoLocation) => Ok();
 
     [HttpGet]
     public ActionResult GetPin(IList<string> list) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(Dictionary<string, int> dict = null) => Ok();
+    public ActionResult GetPin(Dictionary<string, int> dict ) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(IEnumerable<int> enumerable = null) => Ok();
+    public ActionResult GetPin(IEnumerable<int> enumerable) => Ok();
 
     [HttpGet]
-    public ActionResult GetPin(List<bool> boolList = null) => Ok();
+    public ActionResult GetPin(List<bool> boolList) => Ok();
 
     [HttpGet]
     public ActionResult GetPin(Tuple<bool, int, string, DateTime> tuple) => Ok();

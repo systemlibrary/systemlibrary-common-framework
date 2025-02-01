@@ -31,11 +31,11 @@ public class GoogleMapsTests : BaseTest
     }
 
     [TestMethod]
-    public void GetPin()
+    public void GetPin_Fails_Invalid_User_Agent_403_Forbidden()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/getPin");
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/GetPinOK/");
 
-        request.Headers.TryAddWithoutValidation("User-Agent", "He.l.lo-User-Agent;(SomeOS)");
+        request.Headers.TryAddWithoutValidation("User-Agent", "E2dg");
 
         request.Headers.TryAddWithoutValidation("api-token", "helloworld");
 
@@ -44,13 +44,49 @@ public class GoogleMapsTests : BaseTest
             .GetAwaiter()
             .GetResult();
 
-        Log.Dump(response.StatusCode);
-        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
+        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.Forbidden, "Not forbidden: " + response.StatusCode);
+    }
+
+    [TestMethod]
+    public void GetPin_Fails_Invalid_Api_Token_403_Forbidden()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/GetPinOK/");
+
+        request.Headers.TryAddWithoutValidation("User-Agent", "Edg");
+
+        request.Headers.TryAddWithoutValidation("api-token", "hello2world");
+
+        var response = Client.SendAsync(request)
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
+
+        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.Forbidden, "Not forbidden: " + response.StatusCode);
+    }
+
+
+    [TestMethod]
+    public void GetPin_Success_200_OK()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/googleMaps/GetPinOK/");
+
+        request.Headers.TryAddWithoutValidation("User-Agent", "Edg");
+
+        request.Headers.TryAddWithoutValidation("api-token", "helloworld");
+
+        var response = Client.SendAsync(request)
+            .ConfigureAwait(false)
+            .GetAwaiter()
+            .GetResult();
+
+        Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK, "Not OK "  + response.StatusCode);
 
         var text = response.Content.ReadAsStringAsync()
           .ConfigureAwait(false)
           .GetAwaiter()
           .GetResult();
+
+        Assert.IsTrue(text == "", "Text was something: " + text);
     }
 
     [TestMethod]

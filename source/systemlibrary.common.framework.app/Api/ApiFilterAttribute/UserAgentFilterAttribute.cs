@@ -56,22 +56,28 @@ public class UserAgentFilterAttribute : BaseApiFilterAttribute
 
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        var value = context?.HttpContext?.Request.UserAgent();
-
-        var hasAccess = value == null || !IsBlacklisted(value);
-
-        if (hasAccess)
-            hasAccess = RequestHasValidHeaderValue(Match, value);
-
-        // Debug.Log("FilterAttribute value: " + value + " = " + hasAccess);
-
-        if (hasAccess)
+        try
         {
-            base.OnActionExecuting(context);
+            var value = context?.HttpContext?.Request.UserAgent();
+
+            var hasAccess = value == null || !IsBlacklisted(value);
+
+            if (hasAccess)
+                hasAccess = RequestHasValidHeaderValue(Match, value);
+
+            if (hasAccess)
+            {
+                base.OnActionExecuting(context);
+            }
+            else
+            {
+                base.OnAccessDenied(context, "User agent is incorrect");
+            }
         }
-        else
+        catch(Exception ex)
         {
-            base.OnAccessDenied(context, "User agent is incorrect");
+            Log.Error(ex);
+            base.OnAccessDenied(context, "User agent errored");
         }
     }
 
