@@ -3,7 +3,7 @@
 namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Static functions running on loaded Assemblies in your application
+/// Static functions on whitelisted loaded assemblies
 /// </summary>
 /// <remarks>
 /// Built on top of System.Reflection.Assembly
@@ -116,17 +116,17 @@ public static partial class Assemblies
     static IEnumerable<Asm> WhiteListedAssemblies;
 
     /// <summary>
-    /// Find all types inheriting/implements T from all white listed loaded assemblies
+    /// Find all types that inherit from or implement T in all whitelisted loaded assemblies.
     /// </summary>
     /// <remarks>
-    /// Skips searching in known assemblies, names starting with Microsoft, System, EntityFramework, AWS, Serilog, MSTest, nunit, Newtonsoft, Xamarin, Dapper, Autofac, Automapper, Salesforce and more...
+    /// Skip searching in known assemblies with names starting with Microsoft, System, EntityFramework, AWS, Serilog, MSTest, NUnit, Newtonsoft, Xamarin, Dapper, Autofac, AutoMapper, Salesforce, and others.
     /// </remarks>
     /// <example>
     /// <code class="language-csharp hljs">
     /// public class Car : IVehicle {
     /// }
     /// var vehicles = Assemblies.FindAllTypesInheriting&lt;IVehicle&gt;
-    /// // returns 'Car' and all other types that inherits/implements IVehicle
+    /// // Returns Car and all other types that inherit from or implement IVehicle.
     /// </code>
     /// </example>
     /// <returns>IEnumerable of System.Type</returns>
@@ -136,10 +136,10 @@ public static partial class Assemblies
     }
 
     /// <summary>
-    /// Find all types inheriting/implements T with a attribute from all white listed loaded assemblies
+    /// Find all types that inherit from or implement T and have an attribute, in all whitelisted loaded assemblies.
     /// </summary>
     /// <remarks>
-    /// Skips searching in known assemblies, names starting with Microsoft, System, EntityFramework, AWS, Serilog, MSTest, nunit, Newtonsoft, Xamarin, Dapper, Autofac, Automapper, Salesforce and more...
+    /// Skip searching in known assemblies with names starting with Microsoft, System, EntityFramework, AWS, Serilog, MSTest, NUnit, Newtonsoft, Xamarin, Dapper, Autofac, AutoMapper, Salesforce, and others.
     /// </remarks>
     /// <example>
     /// <code class="language-csharp hljs">
@@ -151,7 +151,7 @@ public static partial class Assemblies
     /// }
     /// 
     /// var vehicles = Assemblies.FindAllTypesInheriting&lt;IVehicle,NameAttribute&gt;
-    /// // returns 'Car' and all other types that inherits/implements IVehicle which also contains the attribute
+    /// // Returns Car and all other types that inherit from or implement IVehicle, which also have the attribute.
     /// </code>
     /// </example>
     /// <typeparam name="TClassType">Class</typeparam>
@@ -165,10 +165,10 @@ public static partial class Assemblies
     }
 
     /// <summary>
-    /// Read the content of an embedded resource as a string
+    /// Read the content of an embedded resource as a string.
     /// </summary>
     /// <remarks>
-    /// Searches only in one assembly, defaulting to 'CallingAssembly'
+    /// Searches only in a single assembly, defaulting to 'CallingAssembly'.
     /// </remarks>
     /// <example>
     /// <code class="language-csharp hljs">
@@ -185,12 +185,12 @@ public static partial class Assemblies
     }
 
     /// <summary>
-    /// Read the content of an embedded resource as a byte[]
+    /// Read the content of an embedded resource as a byte[].
     /// </summary>
     /// <example>
     /// <code class="language-csharp hljs">
     /// var bytes = Assemblies.GetEmbeddedResourceAsBytes("Folder/SubFolder/SubFolder2/image.png");
-    /// // bytes contains now the whole image.jpg as an byte array, assuming image.jpg was marked with the build action 'Embedded Resource'
+    /// // The bytes array now contains the entire image.jpg file as a byte array, assuming image.jpg was marked with the build action 'Embedded Resource'.
     /// </code>
     /// </example>
     public static byte[] GetEmbeddedResourceAsBytes(string relativeName, Asm assembly = null)

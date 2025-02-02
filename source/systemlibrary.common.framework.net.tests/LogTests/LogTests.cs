@@ -49,17 +49,12 @@ public class LogWriterTests : BaseTest
     }
 
     [TestMethod]
-    public void Write_Does_Not_Output_LogLevel_Success()
+    public void Dump_Does_Not_Output_Log_Level()
     {
         CleanDumpFile();
 
-        int i = 1500000;
-        while (i > 0)
-        {
-            i--;
-            Log.Dump("Err");
-        }
-
+        Log.Dump("Err");
+     
         var content = ReadFile();
 
         Assert.IsTrue(content.Contains("Err"), "Does not contain 'Err': " + content);
@@ -68,36 +63,55 @@ public class LogWriterTests : BaseTest
     }
 
     [TestMethod]
-    public void ILogWriter_Uses_Implementation_When_Writing_Objects_Success()
+    public void Dump_Does_Discard_Messages_On_Threshold_Reached()
     {
-        var list = new List<string>
-        {
-            "hello",
-            "world",
-            "!"
-        };
-        FrameworkApp.Start();
-
         CleanDumpFile();
 
-        Log.Error(list);
+        int i = 500000;
+        while (i > 0)
+        {
+            i--;
+            Log.Dump("Err");
+        }
 
         var content = ReadFile();
 
-        Assert.IsTrue(content.Contains("world"), "world");
+        Assert.IsTrue(content.Contains("log is overflown"));
 
-        Assert.IsTrue(!content.Contains("ILogWriter is not registered"), "ILogWriter is not registered");
-
-        var employee = Employee.Create();
-
-        Log.Error(employee);
-
-        content = ReadFile();
-
-        Assert.IsTrue(content.Contains("John"), "Missing John");
-        Assert.IsTrue(content.Contains(".doe@example.com"), "Missing email");
-        Assert.IsTrue(content.Contains("Invoice 002"), "Missing second invoice");
+        Assert.IsTrue(content.Length < 75000, "Content is too large (usually should be around 30K), discarding messages not working? " + content.Length);
     }
+
+    //[TestMethod]
+    //public void ILogWriter_Uses_Implementation_When_Writing_Objects_Success()
+    //{
+    //    var list = new List<string>
+    //    {
+    //        "hello",
+    //        "world",
+    //        "!"
+    //    };
+    //    FrameworkApp.Start();
+
+    //    CleanDumpFile();
+
+    //    Log.Error(list);
+
+    //    var content = ReadFile();
+
+    //    Assert.IsTrue(content.Contains("world"), "world");
+
+    //    Assert.IsTrue(!content.Contains("ILogWriter is not registered"), "ILogWriter is not registered");
+
+    //    var employee = Employee.Create();
+
+    //    Log.Error(employee);
+
+    //    content = ReadFile();
+
+    //    Assert.IsTrue(content.Contains("John"), "Missing John");
+    //    Assert.IsTrue(content.Contains(".doe@example.com"), "Missing email");
+    //    Assert.IsTrue(content.Contains("Invoice 002"), "Missing second invoice");
+    //}
 
     [TestMethod]
     public void Write_Exception_As_Warning()

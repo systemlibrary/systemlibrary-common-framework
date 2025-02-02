@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-using SystemLibrary.Common.Framework.Extensions;
-
 namespace SystemLibrary.Common.Framework;
 
 internal static class AppInstance

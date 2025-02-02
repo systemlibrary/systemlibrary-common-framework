@@ -1,7 +1,7 @@
 ﻿namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// EnvironmentConfig with option to bass a Configuration class on your own and a Enum that defines all environment names
+/// EnvironmentConfig with an option to pass your own Configuration class, along with an enum that defines all environment names.
 /// </summary>
 public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
     where T : class
@@ -24,12 +24,12 @@ public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
 
     string _Name;
     /// <summary>
-    /// Returns environment name based on 'ASPNETCORE_ENVIRONMENT' variable passed to the startup of your application
-    /// <para>This variable 'name' is used for config transformations for all C# config classes that inherits Config &lt;&gt;</para>
+    /// Returns the environment name based on the ASPNETCORE_ENVIRONMENT variable passed during the startup of your application.
+    /// <para>This variable name is used for configuration transformations for all C# config classes that inherit from Config&lt;&gt;.</para>
     /// </summary>
     /// <remarks>
-    /// <para>Changing environment name requires shell restart (iisreset for instance)</para>
-    /// Transformation for this class, EnvironmentConfig, is ran then based on ASPNETCORE_ENVIRONMENT passed. And a 'environmentConfig.someEnvName.json' file can also include a Name, which differs, which mean this Name in the transformed file is whats being returned
+    /// <para>Changing the environment name requires a shell restart (e.g., iisreset).</para>
+    /// Transformation for the EnvironmentConfig class is run based on the ASPNETCORE_ENVIRONMENT passed. Additionally, a environmentConfig.someEnvName.json file may include a Name that differs from the environment name, in which case this Name in the transformed file will be returned instead.
     /// </remarks>
     /// <example>
     /// Test Explorer
@@ -245,17 +245,17 @@ public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
 public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, EnvironmentName>
 {
     /// <summary>
-    /// Returns true if IsTest and IsProd is false
+    /// Returns true if both IsTest and IsProd are false.
     /// </summary>
     public static readonly bool IsLocal = !IsProd && !IsTest;
 
     /// <summary>
-    /// Returns true if environment is set to prod or production, else false
+    /// Returns true if the environment is set to 'prod' or 'production', otherwise false.
     /// </summary>
     public static readonly bool IsProd = Current.EnvironmentName == EnvironmentName.Prod || Current.EnvironmentName == EnvironmentName.Production;
 
     /// <summary>
-    /// Returns true if environment 'name' is 'Test', 'Stage', 'Staging', 'QA' or 'AT', case insensitive
+    /// Returns true if both IsLocal and IsProd are false
     /// </summary>
     public static readonly bool IsTest = Current.EnvironmentName == EnvironmentName.AT ||
         Current.EnvironmentName == EnvironmentName.Integration ||
@@ -270,9 +270,9 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
         Current.EnvironmentName == EnvironmentName.UnitTest;
 
     /// <summary>
-    /// Returns the application's root folder full path
-    /// <para>Does not end with slash</para>
-    /// <para>If folder is bin or inside, it will traverse up and return the parent of the folder named 'bin'. Except: if the ASM ends in Test(s) for test projects</para>
+    /// Returns the application's root folder full path.
+    /// <para>Does not end with a slash.</para>
+    /// <para>If the folder is 'bin' or inside it, the method will traverse up and return the parent folder of the 'bin' folder. This is excepted for assemblies ending in 'Test(s)' for test projects.</para>
     /// </summary>
     public static readonly string ContentRootPath = AppInstance.ContentRootPath;
 }

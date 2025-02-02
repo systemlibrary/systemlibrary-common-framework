@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 
 namespace SystemLibrary.Common.Framework.Tests;
@@ -58,7 +56,7 @@ public abstract class BaseTest
                 .GetAwaiter()
                 .GetResult();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Log.Dump(ex);
             return default;

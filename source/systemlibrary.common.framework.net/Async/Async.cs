@@ -5,16 +5,13 @@ using SystemLibrary.Common.Framework.Extensions;
 namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Run methods in a non-blocking manner
+/// Run methods asynchronously without blocking.
 /// </summary>
-/// <remarks>
-/// Might be removed at some point if little or no usage is found
-/// </remarks>
 public static class Async
 {
     /// <summary>
-    /// Execute methods in an async manner, appending each single result to a list, and it halts execution till all functions passed as params has completed 
-    /// <para>A hardcoded limit of 30 seconds for all methods to complete, else some results are left out and an error is logged, but the data we got so far, is returned</para>
+    /// Execute methods asynchronously, appending each result to a list, and halt execution until all functions passed as parameters have completed.
+    /// <para>A hardcoded 30-second limit for all methods to complete; if exceeded, some results may be omitted, an error is logged, but the data collected so far is returned.</para>
     /// </summary>
     /// <example>
     /// <code class="language-csharp hljs">

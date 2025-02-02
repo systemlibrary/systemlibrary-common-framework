@@ -70,11 +70,12 @@ partial class Log
                     correlationId
                 };
 
+                // Note: cannot be a singleton, it crashes occasionally in high concurrency apps
                 var options = new JsonSerializerOptions()
                 {
                     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                     MaxDepth = 1,
-                    IncludeFields = false,
+                    IncludeFields = true,
                     AllowTrailingCommas = true,
                     IgnoreReadOnlyFields = true,
                     IgnoreReadOnlyProperties = false,

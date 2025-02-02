@@ -41,19 +41,15 @@ public class AsyncTests : BaseTest
     public void Run_Searches_For_Files_Async_Returns_All_Files_Successfully()
     {
         var path1 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests";
-        var path2 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\config\\";
-        var path3 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configs\\";
-        var path4 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\configuration\\";
-        var path5 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configurations\\";
+        var path2 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configs\\";
+        var path3 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configurations\\";
         var files = Async.Run(
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path1, false),
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path2, true),
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(path3, true),
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(path4, true),
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(path5, true)
+            () => ConfigFileSearcher.GetConfigurationFilesInFolder(path3, true)
         );
 
-        Assert.IsTrue(files.Count == 5, "One or more directory searches failed: " + files.Count );
+        Assert.IsTrue(files.Count == 3, "Wrong config count: " + files.Count );
 
         var any = false;
         foreach(var configs in files)
@@ -62,7 +58,7 @@ public class AsyncTests : BaseTest
                 any = true;
         }
 
-        Assert.IsTrue(any, "One or more directory searches should return 6 config files, but didnt, so some config files missing");
+        Assert.IsTrue(any, "One config dir used to have 6 config files. Have you copied all config files to correct folders? Are there 6 json files in either of the config folders?");
     }
 
     [TestMethod]

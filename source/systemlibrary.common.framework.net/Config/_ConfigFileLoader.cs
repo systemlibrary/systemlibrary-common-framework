@@ -13,6 +13,8 @@ internal static class ConfigFileLoader
 
     static ConfigFileLoader()
     {
+        ConfigEnumConvertRegister.Register();
+
         var contentRootDirectory = AppInstance.ContentRootPath;
 
         if (!contentRootDirectory.EndsWith("/", StringComparison.Ordinal) && !contentRootDirectory.EndsWith("\\", StringComparison.Ordinal))
@@ -119,34 +121,6 @@ internal static class ConfigFileLoader
                         builder.AddJsonFile(f, true, true);
                 }
             }
-        }
-    }
-}
-
-internal static class ConfigFileSearcher
-{
-    internal static string[] GetConfigurationFilesInFolder(string directoryPath, bool searchRecursively)
-    {
-        try
-        {
-            if (!Directory.Exists(directoryPath)) return [];
-
-            string[] files;
-
-            if (!searchRecursively)
-                files = Directory.GetFiles(directoryPath, "*.*", SearchOption.TopDirectoryOnly);
-            else
-                files = Directory.GetFiles(directoryPath, "*.*", SearchOption.AllDirectories);
-
-            if (files == null || files.Length == 0) return [];
-
-            return files
-                .Where(x => x.EndsWithAny(StringComparison.OrdinalIgnoreCase, ".json", ".xml", ".config"))
-                .ToArray();
-        }
-        catch
-        {
-            return [];
         }
     }
 }

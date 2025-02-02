@@ -1,15 +1,15 @@
 ﻿namespace SystemLibrary.Common.Framework.Attributes;
 
 /// <summary>
-/// Mark a property as the place holder for the decrypted value of an encrypted config property
-/// <para>A place holder property must be an instance, public with get; and set;</para>
-/// <para>Attribute is used internally by the Config class within the framework. Whenever the Config class is instantiated, it finds the DecryptAttribute and decrypts accordingly</para>
-/// <para>An encrypted config property must be encrypted with the parameterless .Encrypt() method within this framework. The key/iv is either a default or one you've specified. Read more at the StringExtensions.Encrypt() method's documentation</para>
+/// Marks a property as the placeholder for the decrypted value of an encrypted config property.
+/// <para>The placeholder property must be an instance, public with both get and set accessors.</para>
+/// <para>This attribute is used internally by the Config class within the framework. When the Config class is instantiated, it locates the DecryptAttribute and performs decryption accordingly.</para>
+/// <para>An encrypted config property must be encrypted using the parameterless .Encrypt() method within this framework. The key/IV is either the default or one that you've specified. See the documentation for the StringExtensions.Encrypt() method for more details.</para>
 /// </summary>
 /// <remarks>
-/// The PropertyName must be a property within the same class that this attribute was used, and class must inherit Config to work automatically
-/// <para>This class attribute exists to read Config Properties that are public get;set;, but feel free to use ConfigDecrypt attribute yourself as it is not subject for breaking changes in near future</para>
-/// The decryption occurs only once for the app life time, at the creation of the Configuration class
+/// The PropertyName must refer to a property within the same class that this attribute is applied to, and the class must inherit from Config for automatic decryption to work.
+/// <para>This class attribute exists to read Config Properties that are public get;set;, but feel free to use ConfigDecrypt attribute yourself as it is not subject for breaking changes in near future.</para>
+/// Decryption occurs once during the application's lifetime, specifically during the creation of the Configuration class.
 /// </remarks>
 /// <example>
 /// apiConfig.json:
@@ -37,7 +37,7 @@ public class ConfigDecryptAttribute : Attribute
     public string PropertyName;
 
     /// <summary>
-    /// Set the property name that will be decrypted and the decrypted value is stored within this property
+    /// Sets the property name to be decrypted, with the decrypted value stored within this property.
     /// </summary>
     /// <param name="propertyName"></param>
     public ConfigDecryptAttribute(string propertyName = null)

@@ -11,6 +11,10 @@ public class AppSettings : Config<AppSettings>
     public string unsetCase { get; }
     public string unsetCase2;
     string unsetCase3;
+    public BackgroundColor BackgroundColor1 { get;set;}
+    public BackgroundColor BackgroundColor2 { get; set; }
+    public BackgroundColor BackgroundColor3;
+    public BackgroundColor BackgroundColor4 { get; set; }
 
     public string USERNAME { get; set; }
     public string Username { get; set; }

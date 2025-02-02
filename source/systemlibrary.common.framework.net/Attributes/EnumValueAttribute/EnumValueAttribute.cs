@@ -1,7 +1,7 @@
 ﻿namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Decorate Enum Key with a value
+/// Decorate the enum key with a value.
 /// </summary>
 /// <remarks>
 /// The string extension Json() will try matching a value in a json-string to the EnumValue specified first, and fall back to normal behavior if no match
@@ -38,7 +38,7 @@
 /// 
 /// var value = Color.Black.GetEnumValue();
 /// // 'value' is now an object with value "#000", so it is castable to string
-/// // Note: GetEnumValue() returns null if the enum key does not have the attribute declared, or if the actual "value" of the EnumValueAttribute is null
+/// // Note: GetEnumValue() returns null if the enum key does not have the attribute declared, or if the actual value of the EnumValueAttribute is null.
 /// </code>
 /// </example>
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]

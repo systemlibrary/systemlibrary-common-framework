@@ -1,7 +1,7 @@
 ﻿namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Decorate Enum Key with text
+/// Decorate the enum key with text.
 /// </summary>
 /// <example>
 /// <code class="language-csharp hljs">
@@ -20,13 +20,13 @@
 /// 
 /// // 'value' is now "Black Colored Text"
 /// // 'value2' is now "White", 
-/// // Note: .ToText() falls back to ToString() of the enum key
+/// // Note: .ToText() falls back to the ToString() representation of the enum key.
 /// 
 /// var value = Color.White.GetEnumText();
-/// // 'value' is now null, as White does not contain EnumTextAttribute
+/// // 'value' is now null, as 'White' does not contain the EnumTextAttribute.
 /// 
 /// var value = Color.Black.GetEnumText();
-/// // 'value' is now a string with value 'Black Colored Text' as 'Black' has the EnumTextAttribute
+/// // 'value' is now a string with the value 'Black Colored Text', as 'Black' has the EnumTextAttribute.
 /// 
 /// </code>
 /// </example>
@@ -35,7 +35,7 @@ public class EnumTextAttribute : Attribute
 {
     public string Text;
 
-    /// <param name="text">Set additional text metadata for the Enum key</param>
+    /// <param name="text">Sets additional text metadata for the enum key.</param>
     public EnumTextAttribute(string text = null)
     {
         Text = text;

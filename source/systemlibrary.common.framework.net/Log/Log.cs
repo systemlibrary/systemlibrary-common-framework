@@ -7,15 +7,15 @@ using Microsoft.Win32.SafeHandles;
 using SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Log class, responsible for taking any object and create a decent message, based on current request data, and send the whole message as a string to your LogWriter
-/// <para>You implement LogWriter : ILogWriter, which controls where you store the message</para>
-/// You register LogWriter as a service in your application
+/// Log class, takes any object, creating a meaningful message based on the current request data, and sending the message to your LogWriter.
+/// <para>You implement LogWriter : ILogWriter, which controls where the message is stored.</para>
+/// Register LogWriter as a service in your application.
 /// </summary>
 /// <remarks>
-/// Log.Error() creates a log message which again calls your LogWriter with the message
-/// <para>- You can then add additional data to the message before storing, up to you</para>
-/// Log exists in the global namespace
-/// <para>If ILogWriter is not registered, this will use Dump.Write. Dump.Write shall never be used in production</para>
+/// Log.Error() creates a log message, which in turn calls your LogWriter with the message.
+/// <para>- You can then add additional data to the message before storing it, as needed.</para>
+/// Log exists in the global namespace.
+/// <para>If ILogWriter is not registered, this will use Log.Dump. Note: Log.Dump should not be used in production for performance and disc reasons.</para>
 /// </remarks>
 /// <example>
 /// Configure log options in appSettings.json
@@ -237,8 +237,7 @@ public static partial class Log
     }
 
     /// <summary>
-    /// Always write the message to your LogWriter, you decide wether or not to send it further
-    /// <para>This ignores the log level set in appSettings, so it always writes</para>
+    /// Always writes the message to your LogWriter, regardless of the minimum log level or whether logging is set to 'None'. You decide if the message should be sent further.
     /// </summary>
     /// <param name="obj">Object can be of any type, a string, list, dictionary, etc...</param>
     /// <example>

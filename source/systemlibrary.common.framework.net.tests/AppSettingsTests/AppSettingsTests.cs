@@ -66,5 +66,11 @@ public class AppSettingsTests : BaseTest
         Assert.IsTrue(intCase > 0);
         Assert.IsTrue(config.unsetCase.IsNot());    // No set property
         Assert.IsTrue(config.unsetCase2.IsNot());   // A field
+
+        Assert.IsTrue(config.BackgroundColor1 == BackgroundColor.Green, "Background 1 is not green");
+        Assert.IsTrue(config.BackgroundColor2 == BackgroundColor.Green, "Background 2 is not green");
+        Assert.IsTrue(config.BackgroundColor3 == BackgroundColor.Green, "Background 3 is not green " + config.BackgroundColor3);
+        Assert.IsTrue(config.BackgroundColor4 == BackgroundColor.Green, "Background 4 is not green");
+
     }
 }

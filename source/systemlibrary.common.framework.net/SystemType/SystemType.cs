@@ -4,11 +4,8 @@ using System.Text;
 namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Static class containing common "typeof" calls for performance reasons
+/// A static class containing common typeof calls to optimize performance, as typeof can be slow. Use these predefined types whenever possible.
 /// </summary>
-/// <remarks>
-/// typeof is 'slow' so whenever you remember, you should use any of these types
-/// </remarks>
 public static class SystemType
 {
     public static Type StringType = typeof(string);

@@ -3,7 +3,7 @@
 namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Shortcut for generating random variables through System.Random
+/// Shortcut for generating random values using System.Random
 /// </summary>
 public static class Randomness
 {

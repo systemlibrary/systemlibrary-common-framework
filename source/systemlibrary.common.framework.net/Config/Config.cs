@@ -7,25 +7,25 @@ using SystemLibrary.Common.Framework.Attributes;
 namespace SystemLibrary.Common.Framework;
 
 /// <summary>
-/// Class to load and read configuration files (xml, json or config) as a Class with transformations if exist and with decrypting encrypted properties
-/// <para>Configurations can be placed in either:</para>
+/// Class for loading and reading configuration files (XML, JSON, or config) as a class, applying transformations when present, and decrypting encrypted properties.
+/// <para>Configurations can be placed in the following locations:</para>
 /// ~/*.json, ~/*.xml, ~/Configs/**.[json|xml], or ~/Configurations/**.[json|xml]
-/// <para>Or appended to your existing 'appSettings.json' file</para>
-/// Transformations are ran based on the 'ASPNETCORE_ENVIRONMENT' variable passed to your application
+/// <para>Or appended to your existing appSettings.json file.</para>
+/// Transformations are applied based on the ASPNETCORE_ENVIRONMENT variable passed to your application.
 /// <para>Recommended places to set ASPNETCORE_ENVIRONMENT:</para>
 /// - launchSettings.json when using IIS Express
-/// <para>- web.config if you use IIS</para>
-/// - mstest.runsettings if you run transformations in unit tests
-/// <para>- commandline with --configuration if running as 'exe'</para>
+/// <para>- web.config if using IIS</para>
+/// - mstest.runsettings if running unit tests
+/// <para>- command-line with --configuration if running as an executable.</para>
 /// </summary>
 /// <remarks>
-/// The Current instance on the Config object is a Singleton and only loaded once
-/// <para>Read the example of 'EnvironmentConfig.Name' property, it gives details on where/how to set environment per application type</para>
-/// Encrypted properties such as "ApiToken {get;set;}" can be decrypted auto by creating a "ApiTokenDecrypt {get;set;}"
-/// <para>must be string, public, and marked with get;set;</para>
-/// <para>convention by specifying suffix "Decrypt" or use attribute [Decrypt] on a property</para>
-/// <para>Environment variables like 'UserName' is only added to 'appSettings' reads not your custom configuration files</para>
-/// WARNING: The generic T cannot be a nested class
+/// The current instance of the Config object is a singleton and is loaded only once.
+/// <para>For an example, see the EnvironmentConfig.Name property, which provides details on where/how to set the environment per application type.</para>
+/// Encrypted properties such as ApiToken {get; set;} can be decrypted automatically by creating a corresponding ApiTokenDecrypt {get; set;} property.
+/// <para>The property must be public, of type string, and marked with get; set;.</para>
+/// <para>This follows the convention of specifying the suffix "Decrypt" or using the [ConfigDecrypt] attribute on a property.</para>
+/// <para>Environment variables like UserName are only added when reading from appSettings, not from your custom configuration files.</para>
+/// WARNING: The generic type T cannot be a nested class
 /// </remarks>
 /// <example>
 /// - Create new file '~/TestConfig.json'
@@ -164,25 +164,37 @@ public abstract partial class Config<T> where T : class
                     opt.ErrorOnUnknownConfiguration = false;
                 });
             }
-            catch
+            catch(Exception ex) 
             {
+                Debug.Log(ex.ToString());
             }
         }
 
+        var type = typeof(T);
+
         if (Current == null)
-            throw new Exception(typeof(T).Name + " could not be created. A '" + typeof(T).Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appSettings.json named '" + typeof(T).Name + "' is also supported.");
+            throw new Exception(type.Name + " could not be created. A '" + type.Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appSettings.json named '" + type.Name + "' is also supported.");
 
         try
         {
-            DecryptPublicGetSetProperties(Current, typeof(T));
+            DecryptPublicGetSetProperties(Current, type);
         }
         catch
         {
         }
+
+        try
+        {
+            SetPublicEnumFields(configuration, Current, type);
+        }
+        catch
+        {
+
+        }
     }
 
     /// <summary>
-    /// Get the current configuration as a singleton object, always instantiated
+    /// Gets the current configuration as a singleton object, always instantiated, thread-safe, and should not throw exceptions.
     /// </summary>
     public static T Current;
     
@@ -244,6 +256,28 @@ public abstract partial class Config<T> where T : class
         }
     }
 
+    static void SetPublicEnumFields(IConfiguration configuration, object instance, Type type)
+    {
+        if (instance == null) return;
+        if (configuration == null) return;
+
+        var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField | BindingFlags.SetField);
+
+        if (fields == null) return;
+
+        foreach (var field in fields)
+        {
+            var fieldType = field.FieldType;
+            if (fieldType.IsEnum)
+            {
+                var value = configuration[field.Name];
+                if (value != null)
+                {
+                    field.SetValue(Current, value.ToEnum(fieldType));
+                }
+            }
+        }
+    }
     static PropertyInfo FindEncryptedProperty(IEnumerable<PropertyInfo> properties, string encryptedPropertyName)
     {
         return properties.FirstOrDefault(x => x.Name == encryptedPropertyName);

@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Globalization;
-namespace SystemLibrary.Common.Framework.App;
+namespace SystemLibrary.Common.Framework;
 
-internal class ExtendedEnumConverter : EnumConverter
+internal class ConfigEnumConverter : EnumConverter
 {
-    public ExtendedEnumConverter(Type type) : base(type) { }
+    public ConfigEnumConverter(Type type) : base(type) { }
 
     public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
     {
