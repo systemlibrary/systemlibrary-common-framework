@@ -1,7 +1,9 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SystemLibrary.Common.Framework.Extensions;
 using SystemLibrary.Common.Framework.Tests;
 
 namespace SystemLibrary.Common.Framework;
@@ -52,5 +54,21 @@ public partial class StringExtensionsTests : BaseTest
 
         Assert.IsTrue(user.FirstName == "Hello World");
         Assert.IsTrue(user.Age == 0);
+    }
+
+    [TestMethod]
+    public void Json_Blacklisted_Types_Does_Not_Throw()
+    {
+        var model = new BlacklistedJsonPropertyTypes();
+
+        model.Exception = new Exception("Hello world");
+        model.RuntimeWrappedException = new RuntimeWrappedException(new Exception("Hello world"));
+
+        model.IDictionaryTypeString = new Dictionary<int, string>();
+        model.IDictionaryTypeString.Add(typeof(SystemType).GetHashCode(), "Hello world");
+
+        var json = model.Json();
+
+        Assert.IsTrue(json.Contains("\"RuntimeWrappedException\": null,"));
     }
 }

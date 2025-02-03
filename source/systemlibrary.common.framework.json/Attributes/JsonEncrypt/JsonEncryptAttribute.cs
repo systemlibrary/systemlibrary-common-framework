@@ -3,7 +3,7 @@
 namespace SystemLibrary.Common.Framework.Attributes;
 
 /// <summary>
-/// Encrypt and decrypt a property or field on serialization and deserialization
+/// Encrypt and decrypt a String, Long or Int property or field on serialization and deserialization
 /// <para>Useful when you want to hide productId's or similar in Frontend part of your application. Avoids having int's or ID's in the frontend, for attackers wanting to brute force endpoints taking INTs</para>
 /// </summary>
 /// <remarks>
@@ -38,6 +38,26 @@ public class JsonEncryptAttribute : JsonConverterAttribute
 
     public override JsonConverter CreateConverter(Type typeToConvert)
     {
-        return new JsonEncryptConverter(this);
+        if (typeToConvert != SystemType.Int64Type &&
+            typeToConvert != SystemType.StringType &&
+            typeToConvert != SystemType.IntType &&
+            typeToConvert != SystemType.Int16Type &&
+            typeToConvert != SystemType.UInt64Type &&
+            typeToConvert != SystemType.UIntType)
+            throw new Exception("JsonEncrypt attribute is only allowed on string, (u)int, (u)long, short");
+
+        if (FrameworkConfig.Current.Json.JsonSecureAttributesEnabled)
+            return new JsonEncryptConverter(this);
+
+        else
+        {
+            if (typeToConvert == SystemType.IntType)
+                return new IntJsonConverter();
+
+            if (typeToConvert == SystemType.Int64Type)
+                return new LongJsonConverter();
+
+            return new StringJsonConverter();
+        }
     }
 }

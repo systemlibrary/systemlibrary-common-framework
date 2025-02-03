@@ -3,7 +3,7 @@
 namespace SystemLibrary.Common.Framework.Attributes;
 
 /// <summary>
-/// Compress and decompress a property or field on serialization and deserialization
+/// Compress and decompress a String, Long or Int property or field on serialization and deserialization
 /// <para>Useful when you want to minify long texts before sending to Client or upon receiving</para>
 /// </summary>
 /// <remarks>
@@ -32,6 +32,26 @@ public class JsonCompressAttribute : JsonConverterAttribute
 
     public override JsonConverter CreateConverter(Type typeToConvert)
     {
-        return new JsonCompressConverter(this);
+        if (typeToConvert != SystemType.Int64Type &&
+            typeToConvert != SystemType.StringType &&
+            typeToConvert != SystemType.IntType &&
+            typeToConvert != SystemType.Int16Type &&
+            typeToConvert != SystemType.UInt64Type &&
+            typeToConvert != SystemType.UIntType)
+            throw new Exception("JsonCompress attribute is only allowed on string, (u)int, (u)long, short");
+
+        if (FrameworkConfig.Current.Json.JsonSecureAttributesEnabled)
+            return new JsonCompressConverter(this);
+
+        else
+        {
+            if (typeToConvert == SystemType.IntType)
+                return new IntJsonConverter();
+
+            if (typeToConvert == SystemType.Int64Type)
+                return new LongJsonConverter();
+
+            return new StringJsonConverter();
+        }
     }
 }

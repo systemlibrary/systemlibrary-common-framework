@@ -13,4 +13,5 @@ internal class JsonConfig
     public bool WriteIndented { get; set; } = false;
     public bool IgnoreReadOnlyFields { get; set; } = true;
     public bool IncludeFields { get;set; } = true;
+    public bool JsonSecureAttributesEnabled { get; set; } = true;
 }

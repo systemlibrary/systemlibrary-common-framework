@@ -14,6 +14,7 @@ static internal class JsonSerializerOptionsInstance
     static LongJsonConverter LongJsonConverter = new LongJsonConverter();
     static DelegateJsonConverter DelegateJsonConverter = new DelegateJsonConverter();
     static StringJsonConverter StringJsonConverter = new StringJsonConverter();
+    static BlacklistConverterFactory BlacklistConverterFactory = new BlacklistConverterFactory();
 
     internal static JsonSerializerOptions Current(JsonSerializerOptions options, params JsonConverter[] converters)
     {
@@ -67,6 +68,8 @@ static internal class JsonSerializerOptionsInstance
         options.Converters.Add(LongJsonConverter);
         options.Converters.Add(TypeConverter);
         options.Converters.Add(DelegateJsonConverter);
+        options.Converters.Add(BlacklistConverterFactory);
+
     }
 
     static JsonConfig JsonConfigInstance = FrameworkConfig.Current.Json;

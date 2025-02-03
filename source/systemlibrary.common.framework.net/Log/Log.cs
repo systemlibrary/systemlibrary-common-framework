@@ -2,7 +2,6 @@
 
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32.SafeHandles;
 
 using SystemLibrary.Common.Framework;
 
@@ -100,7 +99,6 @@ public static partial class Log
     {
         BlacklistClassTypes.Add(typeof(RuntimeTypeHandle).Name);
         BlacklistClassTypes.Add(typeof(ModelBindingMessageProvider).Name);
-        BlacklistClassTypes.Add(typeof(SafeWaitHandle).Name);
         BlacklistClassTypes.Add(typeof(RuntimeWrappedException).Name);
 
         BlacklistClassTypes.Add("RuntimeAssembly");

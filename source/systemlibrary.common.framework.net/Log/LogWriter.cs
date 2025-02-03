@@ -12,7 +12,7 @@ partial class Log
     static bool QueueTimerStarted = false;
     // TODO: Discard even writing & building the message if queue is too large
     static int QueueDiscardThreshold = 60;
-    static int IntervalTimeMs = 25;
+    static int IntervalTimeMs = 12;
     const long MaxLogSizeBytes = 25 * 1024 * 1024;
 
     static void AddMessageToQueue(string message)

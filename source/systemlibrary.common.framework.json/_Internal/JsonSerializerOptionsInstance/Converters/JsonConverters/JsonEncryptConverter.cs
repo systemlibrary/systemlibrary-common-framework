@@ -29,9 +29,9 @@ internal class JsonEncryptConverter : BaseJsonConverter
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
-        var data = value?.ToString();
+        if (value == null) return;
 
-        if (data.IsNot()) return;
+        var data = value.ToString();
 
         var encrypted = data.Encrypt(Attribute.Key, Attribute.IV, Attribute.AddedIV);
 

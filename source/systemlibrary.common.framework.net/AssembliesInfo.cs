@@ -4,5 +4,6 @@
 [assembly: InternalsVisibleTo("SystemLibrary.Common.Framework.App")]
 [assembly: InternalsVisibleTo("SystemLibrary.Common.Framework.App.Tests")]
 [assembly: InternalsVisibleTo("SystemLibrary.Common.Framework.Json")]
+[assembly: InternalsVisibleTo("SystemLibrary.Common.Framework.Json.Tests")]
 [assembly: InternalsVisibleTo("SystemLibrary.Common.Framework.Client")]
 

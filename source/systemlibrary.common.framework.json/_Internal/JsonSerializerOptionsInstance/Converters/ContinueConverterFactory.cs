@@ -20,3 +20,10 @@ internal class ContinueConverterFactory : JsonConverter<Enum>
         throw new NotImplementedException();
     }
 }
+
+internal class ContinueConverterNext : JsonConverterFactory
+{
+    public override bool CanConvert(Type typeToConvert) => false;
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        => throw new NotSupportedException(); // This should never be called
+}
