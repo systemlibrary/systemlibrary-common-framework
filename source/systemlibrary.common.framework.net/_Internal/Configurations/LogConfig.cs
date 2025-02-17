@@ -27,44 +27,29 @@ internal class LogConfig
                 tmp = "%HomeDrive%/Logs/Dump.log";
             }
 
-            var firstIndex = tmp.IndexOf('%');
-
-            if (firstIndex > -1)
+            try
             {
-                var lastIndex = tmp.LastIndexOf('%');
+                tmp = Environment.ExpandEnvironmentVariables(tmp);
+            }
+            catch
+            {
+                // Swallow errors to avoid breaking in uncertain environments
+            }
 
-                if (firstIndex == lastIndex) throw new Exception("Log folder cannot contain only one %, specify for instance: %HomeDrive%");
-
-                var varName = tmp.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
-
-                var value = "";
-
+            if (tmp.Contains("%"))
+            {
                 try
                 {
-                    value = Environment.GetEnvironmentVariable(varName);
+                    tmp = tmp.Replace("%HomeDrive%", Environment.GetLogicalDrives()[0], StringComparison.OrdinalIgnoreCase);
                 }
                 catch
                 {
+                    tmp = tmp.Replace("%HomeDrive%", "/", StringComparison.OrdinalIgnoreCase);
                 }
-
-                if (value.IsNot())
-                {
-                    try
-                    {
-                        value = Environment.GetEnvironmentVariable(varName, EnvironmentVariableTarget.Machine);
-                    }
-                    catch
-                    {
-                    }
-                }
-
-                if (value.IsNot() && varName.ToLower() == "homedrive")
-                {
-                    value = Environment.GetLogicalDrives()?[0];
-                }
-
-                tmp = tmp.Replace("%" + varName + "%", value);
             }
+
+            tmp = tmp.Replace("\\", "/");
+            tmp = tmp.Replace("//", "/");
 
             _FullFilePath = tmp;
         }

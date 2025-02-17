@@ -12,7 +12,7 @@ public class LogConfigTests : BaseTest
     [TestMethod]
     public void LogConfig_Read_Properly_With_Default_Values_Overwritten()
     {
-        var config = FrameworkConfig.Current.Log;
+        var config = FrameworkConfigInstance.Current.Log;
 
         Assert.IsTrue(config.FullFilePath.Contains(DumpFullPath), config.FullFilePath);
 

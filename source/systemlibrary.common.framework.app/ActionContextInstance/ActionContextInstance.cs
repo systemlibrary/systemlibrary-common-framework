@@ -21,5 +21,14 @@ public static class ActionContextInstance
     /// </code>
     /// </example>
     /// <return>Returns current Action Context or null if there is none</return>
-    public static Microsoft.AspNetCore.Mvc.ActionContext Current => ActionContextAccessor?.ActionContext;
+    public static Microsoft.AspNetCore.Mvc.ActionContext Current
+    {
+        get
+        {
+            var ctx1 = ActionContextAccessor?.ActionContext;
+            var ctx2 = ActionContextAccessor?.ActionContext;
+
+            return ctx1 == ctx2 ? ctx1 : null;
+        }
+    }
 }

@@ -25,19 +25,22 @@ internal class InternalLog : ILogger
         if (logLevel == LogLevel.Critical)
             global::Log.Error(exception);
 
-        if (logLevel == LogLevel.Error)
+        else if (logLevel == LogLevel.Error)
             global::Log.Error(exception);
 
-        if (logLevel == LogLevel.Warning)
+        else if (logLevel == LogLevel.Warning)
             global::Log.Warning(exception);
 
-        if (logLevel == LogLevel.Information)
+        else if (logLevel == LogLevel.Information)
             global::Log.Information(exception);
 
-        if (logLevel == LogLevel.Debug)
+        else if (logLevel == LogLevel.Debug)
             global::Log.Debug(exception);
 
-        if (logLevel == LogLevel.Trace)
+        else if (logLevel == LogLevel.Trace)
             global::Log.Trace(exception);
+
+        else
+            global::Log.Write(exception);
     }
 }

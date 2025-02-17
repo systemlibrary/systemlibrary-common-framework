@@ -10,7 +10,7 @@ public class AsyncTests : BaseTest
     [TestMethod]
     public void Run_Return_String_Async_Added_To_List_Returns_All()
     {
-        var result = Async.Run(
+        var result = Async.Tasks(
             () => OnAsyncRun("Hello world"),
             () => OnAsyncRun("Hello world"),
             () => OnAsyncRun("Hello world"),
@@ -19,7 +19,7 @@ public class AsyncTests : BaseTest
 
         var sum = result.Sum();
 
-        Assert.IsTrue(sum == 4, "Async.Run did not execute all " + sum);
+        Assert.IsTrue(sum == 4, "Async.Run did not execute all 4, sum is: " + sum);
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public class AsyncTests : BaseTest
         var path1 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests";
         var path2 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configs\\";
         var path3 = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\Configurations\\";
-        var files = Async.Run(
+        var files = Async.Tasks(
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path1, false),
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path2, true),
             () => ConfigFileSearcher.GetConfigurationFilesInFolder(path3, true)
@@ -83,6 +83,76 @@ public class AsyncTests : BaseTest
         Thread.Sleep(1750);
 
         Assert.IsTrue(ExceptionCounter > 9, "Exception counter was: " + ExceptionCounter);
+    }
+
+    [TestMethod]
+    public void Paralel_Reads_Configuration_Value_Success()
+    {
+        string Call(int i)
+        {
+            Thread.Sleep(10);
+            var key = i.ToString();
+            var value = Configs.AppSettings.Current.Child.Color;
+            return key + "=" + value;
+        }
+        var results = Async.Parallel(
+            () => Call(1),
+            () => Call(2),
+            () => Call(3),
+            () => Call(4)
+        );
+
+        Assert.IsTrue(results.Count == 4, "Wrong count: " + results.Count);
+        Assert.IsTrue(results[1].Contains("=red"), "Wrong: " + results[1] );
+    }
+
+    [TestMethod]
+    public void Tasks_With_Timeout_Times_Out()
+    {
+        string Call(int i)
+        {
+            Thread.Sleep(500);
+            var key = i.ToString();
+            var value = Configs.AppSettings.Current.Child.Color;
+            return key + "=" + value;
+        }
+        var results = Async.Tasks(400,
+            () => Call(1),
+            () => Call(2),
+            () => Call(3),
+            () => Call(4)
+        );
+
+        Assert.IsTrue(results.Count == 0, "Results returned items, it should return 0 as all times out " + results.Count);
+    }
+
+    [TestMethod]
+    public void Tasks_Multiple_Async_Calls_Success()
+    {
+        string Call(int i)
+        {
+            var key = i.ToString();
+            var value = Configs.AppSettings.Current.Child.Color;
+            return key + "=" + value;
+        }
+
+        var results = Async.Tasks(
+            () => Call(1),
+            () => Call(2),
+            () => Call(3),
+            () => Call(4),
+            () => Call(5),
+            () => Call(6),
+            () => Call(7),
+            () => Call(8));
+
+        foreach (var result in results)
+        {
+            var parts = result.Split('=');
+            var red = parts[1];
+
+            Assert.IsTrue(red == "red", "Missing red in " + parts[0]);
+        }
     }
 
     static void Call()

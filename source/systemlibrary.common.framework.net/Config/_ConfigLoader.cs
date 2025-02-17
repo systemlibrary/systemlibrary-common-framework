@@ -14,7 +14,7 @@ partial class Config<T>
 
             var files = new List<string>();
             // Find the "master" config file for the current config T
-            
+
             foreach (var fileLowered in ConfigFileLoader.ConfigurationFilesLowered)
             {
                 if (fileLowered.IsNot()) continue;
@@ -25,7 +25,11 @@ partial class Config<T>
 
                 if (values != null && values.Length > 1 && values[^2].Contains(configNameLowered))
                 {
-                    files.Add(fileLowered);
+                    if (values[^2].Contains("\\" + configNameLowered) ||
+                        values[^2].Contains("/" + configNameLowered))
+                    {
+                        files.Add(fileLowered);
+                    }
                 }
             }
             

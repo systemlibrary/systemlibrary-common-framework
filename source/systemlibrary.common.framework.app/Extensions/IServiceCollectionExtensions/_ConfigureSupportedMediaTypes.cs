@@ -10,7 +10,7 @@ static partial class IServiceCollectionExtensions
     {
         return mvc =>
         {
-            mvc.OutputFormatters.Add(new DefaultSupportedMediaTypes());
+            
         };
     }
 }

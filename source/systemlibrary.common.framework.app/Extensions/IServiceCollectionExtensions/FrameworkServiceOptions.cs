@@ -26,12 +26,8 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 /// public void ConfigureServices(IServiceCollection services)
 /// {
 ///     var options = new FrameworkServicesOptions();
-///     
-///     options.UseControllers = false;
-///     //Note: two ways to add view locations, either through an Expander class
-///     options.ViewLocationExpander = new CustomViewLocations();
-///     
-///     //Or directly adding a string array
+///     options.UseMvc = false;
+///     // options.ViewLocationExpander = new CustomViewLocations();
 ///     options.ViewLocations = new string[] {
 ///         "~/Folder/{0}/Index.cshtml",
 ///         "~/Folder/{1}/{0}.cshtml"
@@ -43,16 +39,6 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 /// </example>
 public class FrameworkServiceOptions : BaseOptions
 {
-    /// <summary>
-    /// Set to true to add MVC services
-    /// </summary>
-    public bool UseMvc = true;
-
-    /// <summary>
-    /// Add application assembly as a 'part' so controllers within your application assembly are tried matching against requests
-    /// </summary>
-    public bool AddApplicationAsPart = true;
-
     /// <summary>
     /// Add multiple assemblies as a 'part' so controllers within the assemblies are tried matched against requests
     /// </summary>

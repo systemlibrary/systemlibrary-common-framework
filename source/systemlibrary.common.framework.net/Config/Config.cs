@@ -140,6 +140,8 @@ namespace SystemLibrary.Common.Framework;
 /// <typeparam name="T">T is the class inheriting Config&lt;&gt;, also referenced as 'self'. Note that T cannot be a nested class</typeparam>
 public abstract partial class Config<T> where T : class
 {
+    static List<string[]> ConfigurationFiles = ConfigAsyncDirectorySearcher.Search();
+
     static Config()
     {
         var configuration = ConfigLoader<T>.Load();
@@ -164,9 +166,9 @@ public abstract partial class Config<T> where T : class
                     opt.ErrorOnUnknownConfiguration = false;
                 });
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                Debug.Log(ex.ToString());
+                Debug.Write(ex);
             }
         }
 
@@ -189,7 +191,6 @@ public abstract partial class Config<T> where T : class
         }
         catch
         {
-
         }
     }
 
@@ -197,7 +198,7 @@ public abstract partial class Config<T> where T : class
     /// Gets the current configuration as a singleton object, always instantiated, thread-safe, and should not throw exceptions.
     /// </summary>
     public static T Current;
-    
+
     static void DecryptPublicGetSetProperties(object instance, Type type)
     {
         var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty)?.Where(prop => prop.PropertyType == SystemType.StringType);
@@ -281,5 +282,33 @@ public abstract partial class Config<T> where T : class
     static PropertyInfo FindEncryptedProperty(IEnumerable<PropertyInfo> properties, string encryptedPropertyName)
     {
         return properties.FirstOrDefault(x => x.Name == encryptedPropertyName);
+    }
+}
+
+internal static class ConfigAsyncDirectorySearcher
+{
+    static List<string[]> ConfigurationFiles;
+
+    internal static List<string[]> Search()
+    {
+        if (ConfigurationFiles == null)
+        {
+            var contentRootDirectory = AppInstance.ContentRootPath;
+
+            if (!contentRootDirectory.EndsWith("/", StringComparison.Ordinal) && !contentRootDirectory.EndsWith("\\", StringComparison.Ordinal))
+            {
+                if (contentRootDirectory.Contains("/", StringComparison.Ordinal))
+                    contentRootDirectory += "/";
+                else
+                    contentRootDirectory += "\\";
+            }
+
+            ConfigurationFiles = Async.Parallel(
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory, false),
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configs\\", true),
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configurations\\", true)
+            );
+        }
+        return ConfigurationFiles;
     }
 }

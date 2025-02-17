@@ -8,7 +8,7 @@ internal static class Debug
     {
         get
         {
-            _Debugging ??= FrameworkConfig.Current?.Debug == true;
+            _Debugging ??= FrameworkConfigInstance.Current?.Debug == true;
 
             return _Debugging.Value;
         }
@@ -26,18 +26,25 @@ internal static class Debug
     {
         try
         {
-            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", o + "\n");
+            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" +   o + "\n");
         }
         catch
         {
-            Thread.Sleep(10);
+            Thread.Sleep(8);
             try
             {
-                System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", o + "\n");
+                System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
             }
             catch
             {
-
+                try
+                {
+                    Thread.Sleep(8);
+                    System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
+                }
+                catch
+                {
+                }
             }
         }
     }

@@ -3,8 +3,8 @@ namespace SystemLibrary.Common.Framework.App;
 
 internal class DefaultSupportedMediaTypes : StringOutputFormatter
 {
-    static HashSet<string> BlockedExtensions = new()
-    {
+    static string[] BlockedExtensions =
+    [
         ".exe",
         ".dll",
         ".iso",
@@ -20,28 +20,43 @@ internal class DefaultSupportedMediaTypes : StringOutputFormatter
         ".ini",
         ".key",
         ".pem"
-    };
+    ];
+
+    static int BlockedExtensionsLength = BlockedExtensions.Length;
 
     internal DefaultSupportedMediaTypes()
     {
         SupportedMediaTypes.Add("*/*");
     }
-    
+
     public override bool CanWriteResult(OutputFormatterCanWriteContext context)
     {
         var requestPath = context?.HttpContext?.Request?.Path.ToString();
 
-        if (requestPath != null && requestPath.Length > 5 && !requestPath.EndsWith('/'))
-        {
-            if (requestPath.Contains("?"))
-                requestPath = requestPath.Split('?')[0];
+        if (requestPath == null) return true;
 
-            if (BlockedExtensions.Any(ext => requestPath.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
-            {
-                return false;
-            }
+        var l = requestPath.Length;
+
+        if (l <= 5) return true;
+
+        if (requestPath[l - 1] == '/') return true;
+
+        var extensionPosition = requestPath.LastIndexOf('.', l - 1, 7); 
+
+        if (extensionPosition == -1) return true;
+
+        // 11 hellowor.ld
+        // 8
+        // 11 - 8 == 3 
+        var extensionLength = l - extensionPosition;
+
+        if (extensionLength < 3) return true;
+
+        for (int i = 0; i < BlockedExtensionsLength; i++)
+        {
+            if (requestPath.EndsWith(BlockedExtensions[i], StringComparison.OrdinalIgnoreCase)) return false;
         }
-        
+
         return true;
     }
 }

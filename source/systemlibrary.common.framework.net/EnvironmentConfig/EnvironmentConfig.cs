@@ -236,7 +236,6 @@ public abstract class EnvironmentConfig<T, TEnvironmentNameEnum> : Config<T>
 
 /// <summary>
 /// Standard class for environmental configurations read from environmentConfig.json if exists
-/// 
 /// <para>If you've added more properties to environmentConfig.json than just the 'Name' you'd have to inherit 'EnvironmentConfig&lt;YourClass&gt;' and use that instead</para>
 /// </summary>
 /// <remarks>
@@ -272,7 +271,7 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
     /// <summary>
     /// Returns the application's root folder full path.
     /// <para>Does not end with a slash.</para>
-    /// <para>If the folder is 'bin' or inside it, the method will traverse up and return the parent folder of the 'bin' folder. This is excepted for assemblies ending in 'Test(s)' for test projects.</para>
+    /// <para>If the folder is 'bin' or inside it, the method will traverse up and return the parent folder of the 'bin' folder. Exceptions is if assembly ends in Tests for test projects, then 'up-traversal out of bin' is skipped</para>
     /// </summary>
     public static readonly string ContentRootPath = AppInstance.ContentRootPath;
 }

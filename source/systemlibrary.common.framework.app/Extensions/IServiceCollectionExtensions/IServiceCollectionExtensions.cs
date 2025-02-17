@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -112,7 +113,7 @@ public static partial class IServiceCollectionExtensions
         if (options.UseOutputCache)
             serviceCollection.AddOutputCache(opt1 =>
             {
-                opt1.SizeLimit = 2000L * 1024 * 1048;       //2GB
+                opt1.SizeLimit = 2500L * 1024 * 1024;       //2.5GB
                 opt1.MaximumBodySize = 8 * 1024 * 1024;     //8MB
                 opt1.UseCaseSensitivePaths = false;
             });
@@ -121,7 +122,7 @@ public static partial class IServiceCollectionExtensions
         {
             serviceCollection.AddResponseCaching(opt2 =>
             {
-                opt2.SizeLimit = 2000L * 1024 * 1048;       //2GB
+                opt2.SizeLimit = 2500L * 1024 * 1024;       //2.5GB
                 opt2.MaximumBodySize = 8 * 1024 * 1024;     //8MB
                 opt2.UseCaseSensitivePaths = false;
             });
@@ -144,14 +145,10 @@ public static partial class IServiceCollectionExtensions
         {
             builder = serviceCollection.AddMvc(options =>
             {
+                options.AllowEmptyInputInBodyModelBinding = false;
+                options.CacheProfiles.Add("Default", new CacheProfile { Duration = 200, Location = ResponseCacheLocation.Any, VaryByHeader = "Accept-Language" });
+                options.OutputFormatters.Add(new DefaultSupportedMediaTypes());
             });
-            
-            if (options.UseRazorPages)
-                builder = serviceCollection.UseAddRazorPages(options, builder);
-        }
-        else if (options.UseRazorPages)
-        {
-            builder = serviceCollection.UseAddRazorPages(options, builder);
         }
         else
         {
@@ -160,19 +157,19 @@ public static partial class IServiceCollectionExtensions
 
         builder = builder.UseDefaultJsonConverters();
 
-        if (options.AddApplicationAsPart)
-        {
-            var executingAssembliy = Assembly.GetExecutingAssembly();
-            var entryAssembly = Assembly.GetEntryAssembly();
-            var callingAssembly = Assembly.GetCallingAssembly();
+        var executingAssembliy = Assembly.GetExecutingAssembly();
+        var entryAssembly = Assembly.GetEntryAssembly();
+        var callingAssembly = Assembly.GetCallingAssembly();
 
-            builder = AddApplicationPart(builder, executingAssembliy, entryAssembly, callingAssembly);
-        }
+        builder = AddApplicationPart(builder, executingAssembliy, entryAssembly, callingAssembly);
 
         if (options.ApplicationParts != null)
         {
             foreach (var part in options.ApplicationParts)
-                if (part != null)
+                if (part != null &&
+                    part != executingAssembliy &&
+                    part != entryAssembly &&
+                    part != callingAssembly)
                     builder = builder.AddApplicationPart(part);
         }
 
@@ -201,7 +198,7 @@ public static partial class IServiceCollectionExtensions
 
         if (options.AllowSynchronousIO)
             serviceCollection.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
-        
+
         return serviceCollection;
     }
 }

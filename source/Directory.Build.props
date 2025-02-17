@@ -1,4 +1,7 @@
 <Project>
+	
+	
+  
 	<PropertyGroup>
 		<Version>8.0.0.1</Version>
 		<Product>$(MSBuildProjectName) $(Version)</Product>

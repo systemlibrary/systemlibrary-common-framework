@@ -46,7 +46,7 @@ public class JsonEncryptAttribute : JsonConverterAttribute
             typeToConvert != SystemType.UIntType)
             throw new Exception("JsonEncrypt attribute is only allowed on string, (u)int, (u)long, short");
 
-        if (FrameworkConfig.Current.Json.JsonSecureAttributesEnabled)
+        if (FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled)
             return new JsonEncryptConverter(this);
 
         else

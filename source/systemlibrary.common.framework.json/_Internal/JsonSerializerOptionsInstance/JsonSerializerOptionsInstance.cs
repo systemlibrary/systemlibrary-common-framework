@@ -72,7 +72,7 @@ static internal class JsonSerializerOptionsInstance
 
     }
 
-    static JsonConfig JsonConfigInstance = FrameworkConfig.Current.Json;
+    static JsonConfig JsonConfigInstance = FrameworkConfigInstance.Current.Json;
 
     static JavaScriptEncoder JavaScriptEncoder = JavaScriptEncoder.Create(
                             UnicodeRanges.BasicLatin,

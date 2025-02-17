@@ -46,7 +46,7 @@ public class FrameworkAppOptions : BaseOptions
     /// - compression is set to 'HttpsCompressionMode.Compress'
     /// <para>- does not append a trailing slash for static files</para>
     /// </summary>
-    public bool UseStaticFiles = true;
+    public bool UseStaticFilePolicy = true;
 
     /// <summary>
     /// Set the cache-control max age header to a duration for all static requests

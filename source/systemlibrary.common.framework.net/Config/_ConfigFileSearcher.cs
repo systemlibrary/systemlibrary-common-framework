@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-
-using Microsoft.Extensions.Configuration;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 internal static class ConfigFileSearcher
 {

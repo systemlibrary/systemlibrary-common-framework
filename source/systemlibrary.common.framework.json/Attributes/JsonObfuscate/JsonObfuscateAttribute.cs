@@ -42,7 +42,7 @@ public class JsonObfuscateAttribute : JsonConverterAttribute
             typeToConvert != SystemType.UIntType)
             throw new Exception("JsonObfuscate attribute is only allowed on string, (u)int, (u)long, short");
 
-        if (FrameworkConfig.Current.Json.JsonSecureAttributesEnabled)
+        if (FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled)
             return new JsonObfuscateConverter(this);
 
         else

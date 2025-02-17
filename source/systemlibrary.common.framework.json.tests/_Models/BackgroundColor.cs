@@ -1,6 +1,4 @@
-﻿using SystemLibrary.Common.Framework.Attributes;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 public enum BackgroundColor
 {

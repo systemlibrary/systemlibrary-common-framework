@@ -47,6 +47,16 @@ public abstract class BaseTest
             .GetResult();
     }
 
+    public async Task<string> GetResponseTextAsync(string pathAndQuery)
+    {
+        var response = await Client.GetAsync(pathAndQuery);
+
+        if (!response.IsSuccessStatusCode)
+            Log.Dump("Not successful: " + pathAndQuery + " " + response.StatusCode);
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
     protected HttpResponseMessage GetResponse(HttpRequestMessage request)
     {
         try

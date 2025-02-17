@@ -13,6 +13,57 @@ namespace SystemLibrary.Common.Framework.App;
 
 partial class BaseApiController
 {
+    [HttpGet]
+    public ActionResult Docs()
+    {
+        var endpoints = new Dictionary<string, string>();
+
+        var controllerType = GetType();
+
+        var methods = controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+        var apiPath = GetApiPath(controllerType);
+
+        foreach (var method in methods)
+        {
+            if (method.Name == nameof(Docs)) continue;
+
+            var httpMethods = GetHttpMethodFormatted(method).ToUpper();
+
+            var endpointPath = GetEndpointPath(apiPath, method, controllerType);
+
+            var endpointFullName = GetEndpointFullName(endpointPath, method);
+
+            var routeParams = GetRouteParams(method);
+
+            var endpointParams = GetEndpointParams(method, routeParams);
+
+            var parameterTypes = GetParameterTypes(method);
+
+            var response = GetResponseType(method);
+
+            var key = $"[{httpMethods}] /{endpointFullName}{endpointParams}";
+
+            var value = $"{parameterTypes} -> {response}";
+
+            key = CreateOverloadedKey(endpoints, key);
+
+            endpoints.Add(key, value);
+        }
+
+        var sortedEndpoints = endpoints
+            .OrderBy(e => GetHttpMethodOrder(e.Key))
+            .ThenBy(e => e.Key)
+            .ToDictionary(e => e.Key, e => e.Value);
+
+        return new ContentResult
+        {
+            Content = sortedEndpoints.Json(),
+            ContentType = "application/json",
+            StatusCode = 200
+        };
+    }
+
     static string CreateOverloadedKey(Dictionary<string, string> endpoints, string key)
     {
         int counter = 1;
@@ -417,54 +468,4 @@ partial class BaseApiController
         return param.HasDefaultValue ? param.DefaultValue : null;
     }
 
-    [HttpGet]
-    public ActionResult Docs()
-    {
-        var endpoints = new Dictionary<string, string>();
-
-        var controllerType = GetType();
-
-        var methods = controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-
-        var apiPath = GetApiPath(controllerType);
-
-        foreach (var method in methods)
-        {
-            if (method.Name == nameof(Docs)) continue;
-
-            var httpMethods = GetHttpMethodFormatted(method).ToUpper();
-
-            var endpointPath = GetEndpointPath(apiPath, method, controllerType);
-
-            var endpointFullName = GetEndpointFullName(endpointPath, method);
-
-            var routeParams = GetRouteParams(method);
-
-            var endpointParams = GetEndpointParams(method, routeParams);
-
-            var parameterTypes = GetParameterTypes(method);
-
-            var response = GetResponseType(method);
-
-            var key = $"[{httpMethods}] /{endpointFullName}{endpointParams}";
-
-            var value = $"{parameterTypes} -> {response}";
-
-            key = CreateOverloadedKey(endpoints, key);
-
-            endpoints.Add(key, value);
-        }
-
-        var sortedEndpoints = endpoints
-            .OrderBy(e => GetHttpMethodOrder(e.Key))
-            .ThenBy(e => e.Key)
-            .ToDictionary(e => e.Key, e => e.Value);
-
-        return new ContentResult
-        {
-            Content = sortedEndpoints.Json(),
-            ContentType = "application/json",
-            StatusCode = 200
-        };
-    }
 }

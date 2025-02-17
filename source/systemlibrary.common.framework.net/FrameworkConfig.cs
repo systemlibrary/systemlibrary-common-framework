@@ -18,13 +18,26 @@ internal class FrameworkConfig
         Client = new ClientConfig();
         Metrics = new MetricsConfig();
     }
+}
 
+internal static class FrameworkConfigInstance
+{
+    static FrameworkConfig _Current;
+    static object _CurrentLock = new object();
     internal static FrameworkConfig Current
     {
         get
         {
-            return AppSettings.Current.SystemLibraryCommonFramework;
+            if(_Current == null)
+            {
+                lock (_CurrentLock)
+                {
+                    if (_Current != null) return _Current;
+
+                    _Current = AppSettings.Current.SystemLibraryCommonFramework;
+                }
+            }
+            return _Current;
         }
     }
 }
-

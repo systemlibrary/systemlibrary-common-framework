@@ -62,7 +62,7 @@ public static partial class IApplicationBuilderExtensions
         if (options.UseHttpsRedirection)
             app.UseHttpsRedirection();
 
-        if (options.UseStaticFiles)
+        if (options.UseStaticFilePolicy)
         {
             var contentRootPath = env?.WebRootPath ?? EnvironmentConfig.ContentRootPath;
 
@@ -143,7 +143,7 @@ public static partial class IApplicationBuilderExtensions
             });
         }
 
-        if (options.UseRazorPages)
+        if (options.UseMvc)
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
 
         if (options.AfterDefaultEndpoints != null)
@@ -157,12 +157,12 @@ public static partial class IApplicationBuilderExtensions
             });
         }
 
-        var enablePrometheusMetrics = AppSettings.Current?.SystemLibraryCommonFramework?.Metrics?.EnablePrometheus;
+        var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.EnablePrometheus;
         if (enablePrometheusMetrics == true)
         {
             app.UseEndpoints(endpoints =>
             {
-                Debug.Log("[IApplicationBuilder] Adding /metrics and /metrics/ endpoints");
+                Debug.Log("[IApplicationBuilder] Adding /metrics endpoint");
 
                 Metrics.SuppressDefaultMetrics();
 
@@ -170,11 +170,11 @@ public static partial class IApplicationBuilderExtensions
                 {
                     if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context))
                     {
-                        Debug.Log("[MetricsAuthorizationMiddleware] not authorized");
+                        Debug.Log("[MetricsAuthorizationMiddleware] 401 Unauthorized");
                         return;
                     }
 
-                    Debug.Log("[MetricsAuthorizationMiddleware] reading metrics...");
+                    Debug.Log("[MetricsAuthorizationMiddleware] 200 Authorized");
 
                     try
                     {

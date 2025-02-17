@@ -40,7 +40,7 @@ public class JsonCompressAttribute : JsonConverterAttribute
             typeToConvert != SystemType.UIntType)
             throw new Exception("JsonCompress attribute is only allowed on string, (u)int, (u)long, short");
 
-        if (FrameworkConfig.Current.Json.JsonSecureAttributesEnabled)
+        if (FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled)
             return new JsonCompressConverter(this);
 
         else

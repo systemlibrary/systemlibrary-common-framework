@@ -5,19 +5,23 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 public abstract class BaseOptions
 {
     /// <summary>
-    /// Set to true to add services and middleware for razor pages
-    /// <para>NOTE: This also registers a default media type output formatter, so your application is allowed to serve default mime types, such as: html, css, js, jpg, png, tiff, woff, json, xml, and a few others</para>
-    /// </summary>
-    public bool UseRazorPages = true;
-
-    /// <summary>
     /// Set to true to add services and middleware for controllers and api controllers
     /// </summary>
     public bool UseControllers = true;
 
     /// <summary>
+    /// Set to true to add MVC services
+    /// <para>NOTE: This also registers the controllers even if you try to set UseControllers to false</para>
+    /// <para>NOTE: This registers a default media type output formatter, so all types are allowed served with exception of: .cs, .exe, .dll, .config, .iso, .dmg and a few more...</para>
+    /// </summary>
+    public bool UseMvc = true;
+
+    /// <summary>
     /// Optional: Additional endpoints configuration that is registered in front of RazorPages, Controllers and ApiControllers
     /// </summary>
+    /// <remarks>
+    /// These endpoints will be called after StaticFiles, Routing, CookiePolicy, OutputCache, Authentication and Authorization, but before MVC
+    /// </remarks>
     public Action<IEndpointRouteBuilder> BeforeDefaultEndpoints = null;
 
     /// <summary>

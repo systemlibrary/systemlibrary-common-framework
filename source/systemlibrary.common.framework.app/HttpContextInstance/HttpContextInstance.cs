@@ -21,5 +21,14 @@ public static class HttpContextInstance
     /// </code>
     /// </example>
     /// <return>Returns current Http Context or null if there is none</return>
-    public static HttpContext Current => HttpContextAccessor?.HttpContext;
+    public static HttpContext Current
+    {
+        get
+        {
+            var ctx1 = HttpContextAccessor?.HttpContext;
+            var ctx2 = HttpContextAccessor?.HttpContext;
+
+            return ctx1 == ctx2 ? ctx1 : null;
+        }
+    }
 }

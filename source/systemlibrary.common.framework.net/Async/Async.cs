@@ -28,7 +28,7 @@ public static class Async
     /// }
     /// 
     /// var carApi = new CarApi();
-    /// var cars = Async.Run&lt;Car&gt;(
+    /// var cars = Async.Tasks&lt;Car&gt;(
     ///     () => carApi.GetByName("blue"),
     ///     () => carApi.GetByName("red"),
     ///     () => carApi.GetByName("orange")
@@ -39,9 +39,9 @@ public static class Async
     /// // 'cars' now contain a total of 2 objects of type 'Car'
     /// </code>
     /// </example>
-    public static List<T> Run<T>(params Func<T>[] functions)
+    public static List<T> Tasks<T>(params Func<T>[] functions)
     {
-        return Run(30000, functions);
+        return Tasks(30000, functions);
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public static class Async
     /// }
     /// 
     /// var carApi = new CarApi();
-    /// var cars = Async.Run&lt;Car&gt;(7500,
+    /// var cars = Async.Tasks&lt;Car&gt;(7500,
     ///     () => carApi.GetByName("blue"),
     ///     () => carApi.GetByName("red"),
     ///     () => carApi.GetByName("orange")
@@ -74,7 +74,7 @@ public static class Async
     /// // 'cars' now contain a total of 2 objects of type 'Car'
     /// </code>
     /// </example>
-    public static List<T> Run<T>(int timeoutMilliseconds, params Func<T>[] functions)
+    public static List<T> Tasks<T>(int timeoutMilliseconds, params Func<T>[] functions)
     {
         var results = new ConcurrentBag<T>();
 
@@ -112,6 +112,45 @@ public static class Async
         {
             timeoutCancellation.Cancel();
         }
+
+        return results.ToList();
+    }
+
+    /// <summary>
+    /// Execute methods in paralell manner where each result is appended to a List
+    /// <para>Halts execution till all functions passed have ran till completion</para>
+    /// </summary>
+    /// <remarks>
+    /// Parallel swallows exceptions if the methods passed does throw
+    /// <para>Parallel requires the methods pass to always return a data</para>
+    /// <para>Null values returned from the methods will be filtered away</para>
+    /// <para>Parallel usage is against local file system, file searches and CPU bound calculations</para>
+    /// </remarks>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="functions"></param>
+    /// <returns></returns>
+    public static List<T> Parallel<T>(params Func<T>[] functions)
+    {
+        var results = new ConcurrentBag<T>();
+
+        ParallelOptions options = new()
+        {
+            MaxDegreeOfParallelism = 4
+        };
+
+        System.Threading.Tasks.Parallel.ForEach(functions.Where(f => f != null), options, (f) =>
+        {
+            try
+            {
+                var result = f();
+
+                if (result != null)
+                    results.Add(result);
+            }
+            catch
+            {
+            }
+        });
 
         return results.ToList();
     }

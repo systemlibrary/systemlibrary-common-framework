@@ -35,10 +35,19 @@ public class AppBaseTest : BaseTest
                         context.Response.Body = responseBodyStream;
 
                         await next();
+
+                        if (!context.Response.HasStarted)
+                        {
+                            context.Response.StatusCode = 200;
+                            await context.Response.WriteAsync("Url: " + context.Request.Url());
+                        }
+
                         if (context.Response.StatusCode >= 400)
                         {
                             responseBodyStream.Seek(0, SeekOrigin.Begin);
+
                             var responseText = await new StreamReader(responseBodyStream).ReadToEndAsync();
+
                             Log.Error(responseText);
                         }
                     }
@@ -47,13 +56,12 @@ public class AppBaseTest : BaseTest
                         Log.Error(ex);
 
                         context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("Internal Server Error");
+
+                        await context.Response.WriteAsync("Internal Server Error: " + ex.Message);
                     }
                 });
 
                 app.UseFrameworkMiddlewares(null, FrameworkAppOptions);
             });
     }
-
-   
 }

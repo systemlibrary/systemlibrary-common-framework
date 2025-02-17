@@ -15,23 +15,9 @@ internal static class ConfigFileLoader
     {
         ConfigEnumConvertRegister.Register();
 
-        var contentRootDirectory = AppInstance.ContentRootPath;
-
-        if (!contentRootDirectory.EndsWith("/", StringComparison.Ordinal) && !contentRootDirectory.EndsWith("\\", StringComparison.Ordinal))
-        {
-            if (contentRootDirectory.Contains("/", StringComparison.Ordinal))
-                contentRootDirectory += "/";
-            else
-                contentRootDirectory += "\\";
-        }
-
-        var allFoundConfigurationFiles = Async.Run(
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory, false),
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configs\\", true),
-            () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configurations\\", true)
-        );
-
         var appSettingsBuilder = new ConfigurationBuilder();
+
+        var allFoundConfigurationFiles = ConfigAsyncDirectorySearcher.Search();
 
         if (allFoundConfigurationFiles != null)
         {

@@ -68,7 +68,7 @@ public static partial class Log
                 {
                     if (MinLogLevelIsSet) return _MinLogLevel;
 
-                    var temp = FrameworkConfig.Current.Log.Level;
+                    var temp = FrameworkConfigInstance.Current.Log.Level;
 
                     // Not specified for the package 'systemLibraryCommonFramework', let's check the global logging level
                     if (temp == null || temp == LogLevel.Unset)
@@ -106,7 +106,6 @@ public static partial class Log
         BlacklistClassTypes.Add("RuntimeMethodHandle");
         BlacklistClassTypes.Add("ControllerContext");
 
-
         BlacklistMemberNames.Add("Constructor");
         BlacklistMemberNames.Add("ReturnTypeCustomAttributes");
         BlacklistMemberNames.Add("ReturnParameter");
@@ -127,7 +126,7 @@ public static partial class Log
         //BlacklistMemberNames.Add("ReturnTypeCustomAttributes");
         //BlacklistMemberNames.Add("Constructor");
 
-        FullFilePath = FrameworkConfig.Current.Log.GetFullFilePath();
+        FullFilePath = FrameworkConfigInstance.Current.Log.GetFullFilePath();
 
         if (FullFilePath.Is())
         {

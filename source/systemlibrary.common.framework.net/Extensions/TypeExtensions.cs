@@ -320,7 +320,7 @@ public static class TypeExtensions
            !type.IsArray &&
            !type.IsNativeType() &&
            !type.IsDictionary() &&
-           type != SystemType.TupleType && 
+           type != SystemType.TupleType &&
            !type.Inherits(typeof(ITuple));
     }
 
@@ -336,5 +336,19 @@ public static class TypeExtensions
     public static bool IsNullableType(this Type type)
     {
         return type.IsGenericType && type.GetGenericTypeDefinition() == SystemType.NullableType;
+    }
+
+    public static bool IsNumberType(this Type type)
+    {
+        // NOTE: Consider if nullable int etc is a "Number Type"
+        return
+            type == SystemType.IntType ||
+            type == SystemType.UIntType ||
+            type == SystemType.Int64Type ||
+            type == SystemType.UInt64Type ||
+            type == SystemType.Int16Type ||
+            type == typeof(byte) ||
+            type == typeof(ushort) ||
+            type == typeof(sbyte);
     }
 }
