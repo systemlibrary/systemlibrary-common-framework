@@ -39,12 +39,11 @@ public class HttpContextInstanceTests : BaseTest
 
                     var r = new Random();
 
-                    Thread.Sleep(r.Next(5, 50));
+                    Thread.Sleep(r.Next(1, 15));
 
                     var currentContext = HttpContextInstance.Current;
 
                     await context.Response.WriteAsync($"{queryString}|{currentContext?.Request.QueryString.Value}");
-
                 });
             });
     }
@@ -52,7 +51,7 @@ public class HttpContextInstanceTests : BaseTest
     [TestMethod]
     public async Task HttpContextInstance_Current_IsThreadSafe_PerRequest()
     {
-        var tasks = new Task<string>[100];
+        var tasks = new Task<string>[10000];
 
         var r = new Random();
         for (int i = 0; i < tasks.Length; i++)
@@ -63,7 +62,10 @@ public class HttpContextInstanceTests : BaseTest
             {
                 try
                 {
-                    Thread.Sleep(r.Next(2, 5));
+                    var sleep = Randomness.Int(0, 7);
+
+                    if (sleep > 0)
+                        Thread.Sleep(sleep);
 
                     var response = await Client.GetAsync($"?username={userName}");
 

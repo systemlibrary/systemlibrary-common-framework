@@ -37,14 +37,17 @@ public class ActionContextInstanceTests : BaseTest
                 {
                     var queryString = context.Request.QueryString.Value;
 
-                    var r = new Random();
+                    var sleep = Randomness.Int(0, 15);
 
-                    Thread.Sleep(r.Next(1, 5));
+                    if(sleep > 0)
+                        Thread.Sleep(sleep);
 
-                    var currentContext = HttpContextInstance.Current;
+                    var currentContext = ActionContextInstance.Current?.HttpContext;
+                    // NOTE: It's always null, but at least we invoke it several times...
+                    if (currentContext == null)
+                        currentContext = HttpContextInstance.Current;
 
-                    await context.Response.WriteAsync($"{queryString}=={currentContext?.Request.QueryString.Value}");
-
+                    await context.Response.WriteAsync($"{queryString}=={currentContext.Request.QueryString.Value}");
                 });
             });
     }
@@ -60,22 +63,23 @@ public class ActionContextInstanceTests : BaseTest
 
             tasks[i] = Task.Run(async () =>
             {
-                var sleep = Randomness.Int(0, 3);
+                var sleep = Randomness.Int(0, 7);
 
                 if (sleep > 0)
-                    System.Threading.Thread.Sleep(sleep);
+                    Thread.Sleep(sleep);
 
                 return await GetResponseTextAsync($"?username={userName}");
             });
         }
 
         var results = Task.WhenAll(tasks).GetAwaiter().GetResult();
-
+        var c = 0;
         for (int i = 0; i < results.Length; i++)
         {
             if (results[i] == null) continue;
-
+            c++;
             Assert.IsTrue(results[i].Contains("?username=User" + i + "==?username=User" + i), "Error at " + i + " result is " + results[i]);
         }
+        Assert.IsTrue(results.Length == c, "Too few " + c + " vs " + results.Length);
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace SystemLibrary.Common.Framework.App;
 
 /// <summary>
-/// HtmlHelperFactory builds a new instance of a HtmlBuilder outside of your View Context
+/// HtmlHelperFactory builds a new instance of IHtmlBuilder outside of your View Context
 /// </summary>
 public class HtmlHelperFactory
 {
@@ -24,7 +24,7 @@ public class HtmlHelperFactory
     static ITempDataProvider TempDataProvider;
 
     /// <summary>
-    /// Returns a generic HtmlHelper instance
+    /// Build a IHtmlHelper&lt;T&gt; where T is your ViewModel
     /// </summary>
     /// <example>
     /// Usage:
@@ -49,7 +49,7 @@ public class HtmlHelperFactory
     }
 
     /// <summary>
-    /// Returns a HtmlHelper instance
+    /// Build a default IHtmlHelper 
     /// </summary>
     /// <example>
     /// Usage:

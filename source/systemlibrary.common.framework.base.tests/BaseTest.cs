@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System.Diagnostics;
+
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 
 namespace SystemLibrary.Common.Framework.Tests;
 
-public abstract class BaseTest
+public abstract partial class BaseTest
 {
     static object ClientLock = new object();
 
@@ -29,55 +31,5 @@ public abstract class BaseTest
             }
             return _Client;
         }
-    }
-
-    public string GetResponseText(string pathAndQuery)
-    {
-        var response = Client.GetAsync(pathAndQuery)
-           .ConfigureAwait(false)
-           .GetAwaiter()
-           .GetResult();
-
-        if (!response.IsSuccessStatusCode)
-            Log.Dump("Not successful: " + pathAndQuery + " " + response.StatusCode);
-
-        return response.Content.ReadAsStringAsync()
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
-    }
-
-    public async Task<string> GetResponseTextAsync(string pathAndQuery)
-    {
-        var response = await Client.GetAsync(pathAndQuery);
-
-        if (!response.IsSuccessStatusCode)
-            Log.Dump("Not successful: " + pathAndQuery + " " + response.StatusCode);
-
-        return await response.Content.ReadAsStringAsync();
-    }
-
-    protected HttpResponseMessage GetResponse(HttpRequestMessage request)
-    {
-        try
-        {
-            return Client.SendAsync(request)
-                .ConfigureAwait(false)
-                .GetAwaiter()
-                .GetResult();
-        }
-        catch (Exception ex)
-        {
-            Log.Dump(ex);
-            return default;
-        }
-    }
-
-    protected string GetResponseText(HttpResponseMessage response)
-    {
-        return response.Content.ReadAsStringAsync()
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
     }
 }

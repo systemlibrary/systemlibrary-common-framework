@@ -44,11 +44,18 @@ public class ApiTokenFilterAttribute : BaseApiFilterAttribute
     {
         var value = context?.HttpContext?.Request?.Headers[this.HeaderName].ToString();
 
-        var hasAccess = RequestHasValidHeaderValue(Match, value);
+        try
+        {
+            var hasAccess = RequestHasValidHeaderValue(Match, value);
 
-        if (hasAccess)
-            base.OnActionExecuting(context);
-        else
-            base.OnAccessDenied(context, this.HeaderName + " is incorrect");
+            if (hasAccess)
+                base.OnActionExecuting(context);
+            else
+                base.OnAccessDenied(context, this.HeaderName + " is incorrect");
+        }
+        catch(Exception ex)
+        {
+            base.OnAccessDenied(context, this.HeaderName + " threw: " + ex.Message);
+        }
     }
 }
