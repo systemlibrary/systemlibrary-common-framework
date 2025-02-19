@@ -46,8 +46,9 @@ partial class BaseTest
 
         if (headers != null)
             foreach (var (key, value) in headers)
-                request.Headers.Add(key, value);
-
+                if(key.Is() && value != null)
+                    request.Headers.TryAddWithoutValidation(key, value);
+    
         return await Client.SendAsync(request)
             .ConfigureAwait(false);
     }

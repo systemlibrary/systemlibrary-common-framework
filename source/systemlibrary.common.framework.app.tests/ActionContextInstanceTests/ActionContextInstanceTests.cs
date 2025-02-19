@@ -81,5 +81,6 @@ public class ActionContextInstanceTests : BaseTest
             Assert.IsTrue(results[i].Contains("?username=User" + i + "==?username=User" + i), "Error at " + i + " result is " + results[i]);
         }
         Assert.IsTrue(results.Length == c, "Too few " + c + " vs " + results.Length);
+        Assert.IsTrue(c == tasks.Length, "Too few " + c);
     }
 }
