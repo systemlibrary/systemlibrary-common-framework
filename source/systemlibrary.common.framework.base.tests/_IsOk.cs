@@ -10,6 +10,7 @@ partial class BaseTest
         if (!IsValueInvalid(value)) return;
 
         var msg = GetAssertionMessage(value, message);
+
         throw new AssertFailedException(msg);
     }
 
@@ -18,18 +19,42 @@ partial class BaseTest
         if (IsValueInvalid(value)) return;
 
         var msg = GetAssertionMessage(value, message);
+
         throw new AssertFailedException(msg);
     }
 
     static bool IsValueInvalid(object value)
     {
+        if (value == null) return true;
+
+        if(value is HttpStatusCode statusCode)
+        {
+            return statusCode != HttpStatusCode.OK && 
+                statusCode != HttpStatusCode.Accepted;
+        }
+
+        if(value is string s)
+        {
+            if (s.IsNot()) return true;
+            var enumKeys = Enum.GetValues<HttpStatusCode>()
+                   .Cast<HttpStatusCode>()
+                   .Where(status => (int)status >= 400);
+
+            foreach (var enumKey in enumKeys)
+                if (s.Contains(enumKey.ToString(), StringComparison.OrdinalIgnoreCase))
+                    return true;
+
+            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid", "Error", "Exception"))
+                return true;
+
+            return false;
+        }
+
         return value == null ||
-               (value is int i && i <= 0) ||
-               (value is string s && s.IsNot()) ||
+               (value is int i && i <= 0) ||               
                (value is double d && d <= 0) ||
                (value is float f && f <= 0) ||
                (value is bool b && !b) ||
-               (value is HttpStatusCode hts && hts != HttpStatusCode.OK && hts != HttpStatusCode.Accepted) ||
                (value is DateTime dt && (dt == DateTime.MinValue || dt == DateTime.MaxValue)) ||
                (value is DateTimeOffset dto && (dto == DateTimeOffset.MinValue || dto == DateTimeOffset.MaxValue));
     }

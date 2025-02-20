@@ -18,30 +18,6 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 /// </summary>
 public static partial class IServiceCollectionExtensions
 {
-    // NOTE: Whats the need of having this ? IServices should just do that, register all the services we want, period, no serviceprovider is here yet...
-    // But we could register the ServiceCollection, a ref to the instance, so if something invokes something and currprovider is null we could "build it" based on "curr state" of that ref... we will see
-    ///// <summary>
-    ///// Configures ServiceCollection in one-line, registering the most common services and building the service provider and returns it
-    ///// <para>Registers:</para>
-    ///// - MVC services
-    ///// <para>- Razor Page services</para>
-    ///// - Routing services
-    ///// <para>- ForwardedProtocol and ForwardedIp (XForwardedFor) headers</para>
-    ///// - Compression for Gzip and Brotli services
-    ///// <para>- Authentication and authorization services</para>
-    ///// - Output cache services
-    ///// <para>- Registers the main assembly and all its controllers (if any), as in: your Web Application Project's assembly</para>
-    ///// Optionally, through the argument FrameworkServicesOptions: 
-    ///// <para>- and more...</para>
-    ///// </summary>
-    //public static IServiceProvider UseFrameworkServices<TLogWriter>(this IServiceCollection serviceCollection, FrameworkServicesOptions options = null) where TLogWriter : class, ILogWriter
-    //{
-    //    return serviceCollection
-    //        .AddFrameworkServices<TLogWriter>(options)
-    //        .BuildServiceProvider()
-    //        .UseFrameworkServiceProvider();
-    //}
-
     /// <summary>
     /// Configures ServiceCollection in one-line, so register all of your own or other service configurations after this one
     /// <para>Registers:</para>
@@ -76,7 +52,9 @@ public static partial class IServiceCollectionExtensions
     ///     
     ///     options.ViewLocationExpander = null; //or create one based on the Interface 'IViewLocationExpander'
     /// 
-    ///     services.AddFrameworkServices(options);
+    ///     options.UseDataProtectionPolicy = true; // Register and enabled the data protection policy in this framework
+    ///     
+    ///     services.AddFrameworkServices&lt;TLogWriter&gt;(options);
     /// }
     /// </code>
     /// </example>
@@ -139,42 +117,14 @@ public static partial class IServiceCollectionExtensions
 
         serviceCollection.AddAuthorization();
 
-        IMvcBuilder builder = null;
-
-        if (options.UseMvc)
-        {
-            builder = serviceCollection.AddMvc(options =>
-            {
-                options.AllowEmptyInputInBodyModelBinding = false;
-                options.CacheProfiles.Add("Default", new CacheProfile { Duration = 200, Location = ResponseCacheLocation.Any, VaryByHeader = "Accept-Language" });
-                options.OutputFormatters.Add(new DefaultSupportedMediaTypes());
-            });
-        }
-        else
-        {
-            builder = serviceCollection.UseAddControllers(options);
-        }
+        IMvcBuilder builder = serviceCollection.UseModelViewControllers(options);
 
         builder = builder.UseDefaultJsonConverters();
 
-        var executingAssembliy = Assembly.GetExecutingAssembly();
-        var entryAssembly = Assembly.GetEntryAssembly();
-        var callingAssembly = Assembly.GetCallingAssembly();
-
-        builder = AddApplicationPart(builder, executingAssembliy, entryAssembly, callingAssembly);
-
-        if (options.ApplicationParts != null)
-        {
-            foreach (var part in options.ApplicationParts)
-                if (part != null &&
-                    part != executingAssembliy &&
-                    part != entryAssembly &&
-                    part != callingAssembly)
-                    builder = builder.AddApplicationPart(part);
-        }
-
-        if (options.AddRazorRuntimeCompilationOnChange)
-            builder = AddRazorRuntimeCompilationOnChange(builder);
+        builder = AddApplicationParts(builder, options);
+        
+        if (options.AddRazorRuntimeCompilationOnSave)
+            builder = AddRazorRuntimeCompilationOnSave(builder);
 
         if (builder != null)
             serviceCollection = builder.Services;
@@ -185,19 +135,19 @@ public static partial class IServiceCollectionExtensions
             serviceCollection = serviceCollection.UseCookiePolicy();
 
         if (options.ForwardStandardLogging)
-            serviceCollection.AddLogging(builder =>
+            serviceCollection.AddLogging(bld =>
             {
-                builder.AddProvider(new InternalLogProvider());
+                bld.AddProvider(new InternalLogProvider());
             });
 
         // NOTE: Can this be Scoped instead?
         serviceCollection.TryAddTransient<HtmlHelperFactory, HtmlHelperFactory>();
 
         if (options.AllowSynchronousIO)
+        {
             serviceCollection.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });
-
-        if (options.AllowSynchronousIO)
             serviceCollection.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
+        }
 
         return serviceCollection;
     }

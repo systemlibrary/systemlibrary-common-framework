@@ -1,0 +1,8 @@
+﻿{
+  "[GET] /docs/getDocumentationId?i": "int -> response",
+  "[GET] /docs/getDocumentations": "no args -> response",
+  "[POST] /docs/postDocumentationId?id": "string -> response",
+  "[POST] /docs/postDocumentations": "no args -> response",
+  "[PUT] /docs/putDocumentationId?id&optional": "string, string -> response",
+  "[HEAD] /docs/headDocumentations": "no args -> response"
+}

@@ -463,7 +463,7 @@ partial class Log
             if (str == "") return "(empty)";
 
             var strLength = str.Length;
-            if (strLength > 8192)
+            if (strLength > 16384)
             {
                 var lastWords = new StringBuilder();
                 int spaceCount = 0;
@@ -477,9 +477,9 @@ partial class Log
                     if (lastWords.Length > 192) break;
                 }
 
-                var l = 8000 + 4 + lastWords.Length;
+                var l = 16192 + 4 + lastWords.Length;
 
-                return $"{str.Substring(0, 8000)}...{lastWords} (length: {l}/{strLength})";
+                return $"{str.Substring(0, 16192)}...{lastWords} (length: {l}/{strLength})";
             }
             return strLength > 32 ? $"{str} (length: {strLength})" : str;
         }

@@ -6,6 +6,27 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
+    static IMvcBuilder AddApplicationParts(IMvcBuilder builder, FrameworkServiceOptions options)
+    {
+        var executingAssembliy = Assembly.GetExecutingAssembly();
+        var entryAssembly = Assembly.GetEntryAssembly();
+        var callingAssembly = Assembly.GetCallingAssembly();
+
+        builder = AddApplicationPart(builder, executingAssembliy, entryAssembly, callingAssembly);
+
+        if (options.ApplicationParts != null)
+        {
+            foreach (var part in options.ApplicationParts)
+                if (part != null &&
+                    part != executingAssembliy &&
+                    part != entryAssembly &&
+                    part != callingAssembly)
+                    builder = builder.AddApplicationPart(part);
+        }
+
+        return builder;
+    }
+
     static IMvcBuilder AddApplicationPart(IMvcBuilder builder, Assembly executing, Assembly entry, Assembly calling)
     {
         if (builder != null)

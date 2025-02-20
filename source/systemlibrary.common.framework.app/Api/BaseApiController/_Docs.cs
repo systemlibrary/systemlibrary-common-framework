@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
@@ -19,7 +20,7 @@ partial class BaseApiController
         var endpoints = new Dictionary<string, string>();
 
         var controllerType = GetType();
-
+        
         var methods = controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
         var apiPath = GetApiPath(controllerType);
@@ -58,7 +59,11 @@ partial class BaseApiController
 
         return new ContentResult
         {
-            Content = sortedEndpoints.Json(),
+            Content = sortedEndpoints.Json(new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+                AllowTrailingCommas = true
+            }),
             ContentType = "application/json",
             StatusCode = 200
         };
@@ -114,7 +119,7 @@ partial class BaseApiController
         {
             var bracketIndex = routeTemplate.IndexOf('{');
 
-            if(bracketIndex > -1)
+            if (bracketIndex > -1)
                 return routeTemplate.Substring(0, bracketIndex).Trim('/');
         }
 
@@ -123,18 +128,12 @@ partial class BaseApiController
         if (path.EndsWith("Controller"))
             path = path.Replace("Controller", "");
 
-        var fullNamespace = controllerType.Namespace;
-        var rootNamespace = controllerType.Assembly?.GetName()?.Name;
+        var namespacePath = UseApiControllersRouting.GetNamespaceAsPath(controllerType);
 
-        if (fullNamespace?.StartsWith(rootNamespace) == true)
-        {
-            fullNamespace = fullNamespace.Substring(rootNamespace.Length).TrimStart('.');
-            var parts = fullNamespace.Split('.');
-            var camelCasedParts = parts.Select(part => ToCamelCase(part)).ToArray();
-            fullNamespace = string.Join("/", camelCasedParts);
-        }
+        if(namespacePath == "")
+            return $"{ToCamelCase(path)}";
 
-        return $"{fullNamespace ?? "api"}/{ToCamelCase(path)}";
+        return $"{namespacePath}/{ToCamelCase(path)}";
     }
 
     static string GetHttpMethodFormatted(MethodInfo method)
@@ -467,5 +466,4 @@ partial class BaseApiController
     {
         return param.HasDefaultValue ? param.DefaultValue : null;
     }
-
 }

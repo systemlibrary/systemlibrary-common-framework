@@ -1,7 +1,6 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.Unicode;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -74,16 +73,19 @@ static internal class JsonSerializerOptionsInstance
 
     static JsonConfig JsonConfigInstance = FrameworkConfigInstance.Current.Json;
 
-    static JavaScriptEncoder JavaScriptEncoder = JavaScriptEncoder.Create(
-                            UnicodeRanges.BasicLatin,
-                            UnicodeRanges.LatinExtendedA,
-                            UnicodeRanges.LatinExtendedB,
-                            UnicodeRanges.LatinExtendedAdditional,
-                            UnicodeRanges.LatinExtendedC,
-                            UnicodeRanges.Latin1Supplement,
-                            UnicodeRanges.CurrencySymbols,
-                            UnicodeRanges.Cyrillic,
-                            UnicodeRanges.GreekandCoptic);
+    // This is for JSON escaping inside HTML
+    //static JavaScriptEncoder JavaScriptEncoder = JavaScriptEncoder.Create(
+    //                        UnicodeRanges.BasicLatin,
+    //                        UnicodeRanges.LatinExtendedA,
+    //                        UnicodeRanges.LatinExtendedB,
+    //                        UnicodeRanges.LatinExtendedAdditional,
+    //                        UnicodeRanges.LatinExtendedC,
+    //                        UnicodeRanges.Latin1Supplement,
+    //                        UnicodeRanges.CurrencySymbols,
+    //                        UnicodeRanges.Cyrillic,
+    //                        UnicodeRanges.GreekandCoptic);
+
+    static JavaScriptEncoder JavaScriptEncoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
     static JsonSerializerOptions CreateNewDefaultOptions
     {

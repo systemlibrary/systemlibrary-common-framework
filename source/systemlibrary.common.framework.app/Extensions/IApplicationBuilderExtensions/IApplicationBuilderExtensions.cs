@@ -139,7 +139,7 @@ public static partial class IApplicationBuilderExtensions
         {
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
-                endpoints.MapControllerRoute("api/{controller}/{action}/{id?}", "api/{controller}/{action}/{id?}");
+                //endpoints.MapControllerRoute("api/{controller}/{action}/{id?}", "api/{controller}/{action}/{id?}");
             });
         }
 

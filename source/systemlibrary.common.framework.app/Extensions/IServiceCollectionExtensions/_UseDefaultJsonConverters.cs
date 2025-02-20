@@ -1,16 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using SystemLibrary.Common.Framework.Extensions;
+
 namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder UseAddControllers(this IServiceCollection services, FrameworkServiceOptions options)
-    {
-        return services.AddControllers(ConfigureSupportedMediaTypes(options));
-    }
-
     static IMvcBuilder UseDefaultJsonConverters(this IMvcBuilder builder)
     {
+        if (builder == null) return builder;
+
         var defaultJsonSerializerOptions = JsonSerializerOptionsInstance.Current(null);
 
         return builder.AddJsonOptions(options =>

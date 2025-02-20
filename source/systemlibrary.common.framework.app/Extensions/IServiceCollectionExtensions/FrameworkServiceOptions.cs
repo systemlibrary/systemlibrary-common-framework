@@ -51,7 +51,7 @@ public class FrameworkServiceOptions : BaseOptions
     /// <item>- Package 'System.Security.Cryptography.Pkcs' is required, not a direct dependency, but through SystemLibrary.Common.Framework. If you turn this on and it throws? Add the right version of System.Security.Cryptography.Pkcs</item>
     /// </list>
     /// </summary>
-    public bool AddRazorRuntimeCompilationOnChange = true;
+    public bool AddRazorRuntimeCompilationOnSave = true;
 
     /// <summary>
     /// Pass in an object that implements the interface if you want to extend View Locations
