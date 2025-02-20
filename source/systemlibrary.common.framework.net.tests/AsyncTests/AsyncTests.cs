@@ -111,7 +111,7 @@ public class AsyncTests : BaseTest
     {
         string Call(int i)
         {
-            Thread.Sleep(500);
+            Thread.Sleep(600);
             var key = i.ToString();
             var value = Configs.AppSettings.Current.Child.Color;
             return key + "=" + value;

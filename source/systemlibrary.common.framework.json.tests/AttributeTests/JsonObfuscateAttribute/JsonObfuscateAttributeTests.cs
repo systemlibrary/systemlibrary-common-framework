@@ -21,8 +21,8 @@ public class JsonObfuscateAttributeTests : BaseTest
         expected.id9 = 123456789123456;
 
         var data = Assemblies.GetEmbeddedResource("_Assets/jsonObfuscateAttribute.json");
-       
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = true;
+
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = true;
 
         var model = data.Json<JsonObfuscateAttributeModel>();
 
@@ -36,7 +36,7 @@ public class JsonObfuscateAttributeTests : BaseTest
 
         Assert.IsTrue(model.id9 == 123456789123456);
 
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = true;
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = true;
 
         var json = model.Json();
 
@@ -58,9 +58,9 @@ public class JsonObfuscateAttributeTests : BaseTest
 
         var data = Assemblies.GetEmbeddedResource("_Assets/jsonObfuscateAttributeIgnored.json");
 
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = false;
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = false;
         var model = data.Json<JsonObfuscateAttributeModelIgnored>();
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = true;
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = true;
 
         Assert.IsTrue(model.Id == expected.Id, "id");
         Assert.IsTrue(model.Id2 == expected.Id2, "id2 " + model.Id2 + " " + expected.Id2);
@@ -71,9 +71,9 @@ public class JsonObfuscateAttributeTests : BaseTest
         Assert.IsTrue(model.id9 == expected.id9, "id9 ");
         Assert.IsTrue(model.id9 == 123456789123456);
 
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = false;
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = false;
         var json = model.Json();
-        FrameworkConfig.Current.Json.JsonSecureAttributesEnabled = true;
+        FrameworkConfigInstance.Current.Json.JsonSecureAttributesEnabled = true;
 
         Assert.IsTrue(json.Contains("123456789123456"), "Invalid, the obfuscation ran when it should not due to a framework config");
         Assert.IsTrue(!json.Contains("LLLLLLLLLLLLLLLLLLLLLLLLLLLLL"), "Invalid, the obfuscation ran when it should not due to a framework config");

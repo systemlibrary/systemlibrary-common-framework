@@ -1,4 +1,6 @@
-﻿namespace SystemLibrary.Common.Framework;
+﻿using System.Text.Json.Serialization;
+
+namespace SystemLibrary.Common.Framework;
 
 public class Invoice
 {
@@ -9,5 +11,7 @@ public class Invoice
     public decimal Amount { get; set; }
     public long BankAccountNumber { get; set; }
     public Invoice LinkedInvoice { get; set; }
+
+    [JsonConverter(typeof(DateJsonConverter))]
     public DateTime DateIssued { get; set; }
 }
