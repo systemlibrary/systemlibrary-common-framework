@@ -9,10 +9,8 @@ namespace SystemLibrary.Common.Framework.Extensions;
 
 static partial class IServiceCollectionextensions
 {
-    internal static IServiceCollection AddCommonServices<TLogWriter>(this IServiceCollection serviceCollection) where TLogWriter : class, ILogWriter
+    internal static IServiceCollection AddCommonServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<ILogWriter, TLogWriter>();
-
         serviceCollection.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         serviceCollection.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();

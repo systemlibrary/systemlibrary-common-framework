@@ -14,19 +14,12 @@ public class BaseApiControllerTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServiceOptions();
-
-                options.ApplicationParts = [
-                    typeof(BaseApiControllerTests).Assembly
-                ];
-
-                services = services.AddFrameworkServices<LogWriter>(options);
+                services = services.AddFrameworkServices();
             })
             .Configure(app =>
             {
                 var options = new FrameworkAppOptions();
 
-                options.UseHsts = false;
                 options.UseHttpsRedirection = false;
 
                 app.UseFrameworkMiddlewares(null, options);
@@ -36,6 +29,7 @@ public class BaseApiControllerTests : BaseTest
     [TestMethod]
     public void Default_Api_Routing_For_BaseApiControllers_Without_Api_Token_Returns_NotOk()
     {
+        
         var text = GetResponseText("/ApiTests/DocsApiToken/docs");
 
         IsNotOk(text);

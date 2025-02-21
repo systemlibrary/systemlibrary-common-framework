@@ -2,7 +2,7 @@
 
 namespace SystemLibrary.Common.Framework.App.Extensions;
 
-public abstract class BaseOptions
+public abstract class FrameworkOptions
 {
     /// <summary>
     /// Set to true to add services and middleware for controllers and api controllers
@@ -25,7 +25,7 @@ public abstract class BaseOptions
     public Action<IEndpointRouteBuilder> BeforeDefaultEndpoints = null;
 
     /// <summary>
-    /// Optional: Additional endpoints configuration that is registered in after RazorPages, Controllers and ApiControllers
+    /// Optional: Additional endpoints configuration that is registered after RazorPages, Controllers and ApiControllers, but before Compression
     /// </summary>
     public Action<IEndpointRouteBuilder> AfterDefaultEndpoints = null;
 

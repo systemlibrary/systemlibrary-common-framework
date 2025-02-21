@@ -23,7 +23,7 @@ internal class InternalLog : ILogger
         }
 
         if (logLevel == LogLevel.Critical)
-            global::Log.Error(exception);
+            global::Log.Critical(exception);
 
         else if (logLevel == LogLevel.Error)
             global::Log.Error(exception);

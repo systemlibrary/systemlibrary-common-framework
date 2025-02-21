@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -62,7 +60,14 @@ public static partial class IServiceCollectionExtensions
     {
         if (serviceCollection == null) serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddCommonServices<TLogWriter>();
+        serviceCollection.AddScoped<ILogWriter, TLogWriter>();
+        
+        return serviceCollection.AddFrameworkServices(options);
+    }
+     
+    public static IServiceCollection AddFrameworkServices(this IServiceCollection serviceCollection, FrameworkServiceOptions options = null)
+    {
+        serviceCollection.AddCommonServices();
 
         options ??= new FrameworkServiceOptions();
 
@@ -74,6 +79,14 @@ public static partial class IServiceCollectionExtensions
             {
                 TypeDescriptor.AddAttributes(enumType, new TypeConverterAttribute(typeof(ExtendedEnumConverter)));
             }
+        }
+
+        if (options.ForwardILogger)
+        {
+            serviceCollection.AddLogging(bld =>
+            {
+                bld.AddProvider(new InternalLogProvider());
+            });
         }
 
         if (options.UseForwardedHeaders)
@@ -122,7 +135,7 @@ public static partial class IServiceCollectionExtensions
         builder = builder.UseDefaultJsonConverters();
 
         builder = AddApplicationParts(builder, options);
-        
+
         if (options.AddRazorRuntimeCompilationOnSave)
             builder = AddRazorRuntimeCompilationOnSave(builder);
 
@@ -134,11 +147,7 @@ public static partial class IServiceCollectionExtensions
         if (options.UseCookiePolicy)
             serviceCollection = serviceCollection.UseCookiePolicy();
 
-        if (options.ForwardStandardLogging)
-            serviceCollection.AddLogging(bld =>
-            {
-                bld.AddProvider(new InternalLogProvider());
-            });
+      
 
         // NOTE: Can this be Scoped instead?
         serviceCollection.TryAddTransient<HtmlHelperFactory, HtmlHelperFactory>();

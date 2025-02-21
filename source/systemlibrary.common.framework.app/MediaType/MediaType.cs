@@ -55,6 +55,13 @@ public enum MediaType
     [EnumValue("text/xml")]
     xml,
 
+    [EnumValue("application/graphql")]
+    graphql,
+
+    [EnumValue("json-patch+json")]
+    jsonPatch,
+    
+
     [EnumValue("")]
     None
 }

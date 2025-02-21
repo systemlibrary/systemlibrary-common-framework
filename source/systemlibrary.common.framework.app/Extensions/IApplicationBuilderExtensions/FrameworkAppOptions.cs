@@ -18,7 +18,7 @@
 /// }
 /// </code>
 /// </example>
-public class FrameworkAppOptions : BaseOptions
+public class FrameworkAppOptions : FrameworkOptions
 {
     /// <summary>
     /// Adds middleware for http to https redirect client side, aka hsts

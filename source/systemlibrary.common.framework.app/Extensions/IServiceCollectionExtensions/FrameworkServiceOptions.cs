@@ -37,7 +37,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 /// }
 /// </code>
 /// </example>
-public class FrameworkServiceOptions : BaseOptions
+public class FrameworkServiceOptions : FrameworkOptions
 {
     /// <summary>
     /// Add multiple assemblies as a 'part' so controllers within the assemblies are tried matched against requests
@@ -103,10 +103,10 @@ public class FrameworkServiceOptions : BaseOptions
     public bool UseDataProtectionPolicy = false;
 
     /// <summary>
-    /// Add an internal logger that forwards errors to the ILogWriter of your own choice
-    /// <para>Standard output is forwarded to your own ILogWriter</para>
+    /// Forwards all Microsoft.Extensions.Logging.ILogger log events to your custom ILogWriter.
+    /// <para>If enabled, an internal LogProvider is added to capture and route all logs.</para>
     /// </summary>
-    public bool ForwardStandardLogging = false;
+    public bool ForwardILogger = false;
 
     /// <summary>
     /// Set to true to add ResponseCaching services
