@@ -29,7 +29,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsFormat.json" />
+	  <EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_All_IsOk.txt" />
+	  <EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_Url_And_Empty_IsOk.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsHttpVerbFormat.json" />
+	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsAmbiguityFormat.json" />
+	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsControllerFormat.json" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,0 +1,9 @@
+﻿{
+  "[GET] /apiTests/docsHttpVerb/createProduct?name&price": "string, number -> response",
+  "[GET] /apiTests/docsHttpVerb/getByCategory?categoryId&pageNumber&hasValue&value": "int, int, number -> response",
+  "[GET] /apiTests/docsHttpVerb/getById?id": "int -> response",
+  "[GET] /apiTests/docsHttpVerb/getByIdAndName?id&name": "int, string -> response",
+  "[GET] /apiTests/docsHttpVerb/getByIdNameAndCountries?id&name&countries": "int, string, <> -> response",
+  "[GET, POST] /apiTests/docsHttpVerb/getAll": "no args -> response",
+  "[POST] /apiTests/docsHttpVerb/getByProductId?id&firstName&lastName": "int, string, string -> response"
+}

@@ -1,0 +1,6 @@
+﻿http://localhost/hello/world/path?q=1
+True
+referer3
+agent1
+app/content2; charset=utf-8
+accept4

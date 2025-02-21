@@ -1,56 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SystemLibrary.Common.Framework.App;
+namespace SystemLibrary.Common.Framework.App.ApiTests.Another.And.Deeply.NESTED;
 
-// CLASS DEFINED ALL METHODS AND HOW THEY ARE PRINTED
-public class DocsApiController : BaseApiController
+/// <summary>
+/// Applications that may allow ambiguity methods due to overwriting default MS behavior, and/or
+/// supports various ambiguity routes through Route attribute
+/// </summary>
+public class DocsAmbiguityController : BaseApiController
 {
-    [HttpGet("getBy/{id}")]
-    public ActionResult GetById(int id)
-    {
-        return null;
-    }
-
-    [HttpGet("getBy/{id}/{name}")]
-    public ActionResult GetByIdAndName(int id, string name)
-    {
-        return null;
-    }
-
-    [HttpGet("getBy/{id}/{name}")]
-    public ActionResult GetByIdNameAndCountries(int id, string name, [FromQuery] string[] countries)
-    {
-        return null;
-    }
-
-    [HttpPost("getByProductId/{id}")]
-    public ActionResult GetByProductId(int id, [FromQuery] string firstName, [FromQuery] string? lastName)
-    {
-        return null;
-    }
-
-    [HttpGet]
-    [HttpPost]
-    public ActionResult GetAll()
-    {
-        return null;
-    }
-
-    public ActionResult CreateProduct(string name, decimal price)
-    {
-        return null;
-    }
-
-    [HttpGet("getByCategory/{categoryId}")]
-    public ActionResult GetByCategory(int categoryId, [FromQuery] int pageNumber, [FromQuery] int? pageSize)
-    {
-        return null;
-    }
-
-    /// <summary>
-    /// For applications that allow Ambiguity methods, supporting overloaded methods in the Routing mechanism
-    /// We make sure those are printed OK too
-    /// </summary>
     [HttpGet]
     public ActionResult Ambiguity() => Ok();
 

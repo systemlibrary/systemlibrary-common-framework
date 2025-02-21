@@ -7,14 +7,20 @@ using SystemLibrary.Common.Framework.Tests;
 namespace SystemLibrary.Common.Framework.App;
 
 [TestClass]
-public class BaseApiControllerTests : BaseTest
+public class DocsApiTokenControllerTests : BaseTest
 {
-    public BaseApiControllerTests()
+    public DocsApiTokenControllerTests()
     {
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                services = services.AddFrameworkServices();
+                var options = new FrameworkServiceOptions();
+
+                options.ApplicationParts = [
+                    typeof(DocsApiTokenControllerTests).Assembly
+                ];
+
+                services = services.AddFrameworkServices(options);
             })
             .Configure(app =>
             {
@@ -27,16 +33,15 @@ public class BaseApiControllerTests : BaseTest
     }
 
     [TestMethod]
-    public void Default_Api_Routing_For_BaseApiControllers_Without_Api_Token_Returns_NotOk()
+    public void Missing_Api_Token_Header_And_Value_Returns_NotOk()
     {
-        
         var text = GetResponseText("/ApiTests/DocsApiToken/docs");
 
         IsNotOk(text);
     }
 
     [TestMethod]
-    public void Last_Namespace_Segment_Routing_Case_Insensitive_For_BaseApiControllers_Returns_Ok()
+    public void CaseInsensitive_Path_With_Api_Token_Header_And_Value_Returns_Ok()
     {
         var header = "api-token";
 
@@ -48,16 +53,14 @@ public class BaseApiControllerTests : BaseTest
     }
 
     [TestMethod]
-    public void DocsController_Returns_Formatted_Docs()
+    public void Wrong_Header_Name_Returns_NotOk()
     {
-        var text = GetResponseText("/docs/docs");
+        var header = "new-token";
 
-        var expectedLines = Assemblies.GetEmbeddedResource("DocsFormat.json").Split(Environment.NewLine);
+        var headerValue = "Docs";
 
-        foreach(var line in expectedLines)
-        {
-            IsOk(text.Contains(line), "Line missing or invalid: " + line);
-        }
-        IsOk(text);
+        var text = GetResponseText("/ApiTests/DoCSApITokEn/dOCs", (header, headerValue));
+
+        IsNotOk(text);
     }
 }

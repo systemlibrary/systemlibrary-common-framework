@@ -1,4 +1,9 @@
-﻿namespace SystemLibrary.Common.Framework.Tests;
+﻿using System.Net.Http;
+using System.Text;
+
+using Microsoft.AspNetCore.Http;
+
+namespace SystemLibrary.Common.Framework.Tests;
 
 partial class BaseTest
 {
@@ -45,9 +50,21 @@ partial class BaseTest
         var request = new HttpRequestMessage(HttpMethod.Get, path);
 
         if (headers != null)
+        {
+
             foreach (var (key, value) in headers)
-                if(key.Is() && value != null)
+            {
+                if (key.Is() && value != null)
+                {
+                    if(key == "Content-Type")
+                    {
+                        request.Content = new StringContent("", Encoding.UTF8, value);
+                    }
                     request.Headers.TryAddWithoutValidation(key, value);
+                }
+            }
+        }
+
     
         return await Client.SendAsync(request)
             .ConfigureAwait(false);

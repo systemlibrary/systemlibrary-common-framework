@@ -1,0 +1,21 @@
+﻿{
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity": "no args -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?boolList": "bool[] -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?color1=&color2=Red&color3=4": "enum, enum, enum -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?countryCode": "string -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?d": "number -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?dd": "number -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?dict": "<string,int> -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?enumerable": "int32 -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?idict": "<int,string> -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?list": "string -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?tuple": "boolean -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?x&y&id&price&productColor": "geoLocation -> response",
+  "[GET] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?x&y=-1&b&b2=true": "int, int, bool, bool -> response",
+  "[GET] /root/ambiguity/{f}?": "number -> response",
+  "[POST] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?arrayX&arrayY": "int[], int[], geoLocation: {x, y, {id, price, productColor}} -> response",
+  "[POST] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?intx&flag&inty": "int, bool, int, geoLocation: {x, y, {id, price, productColor}} -> geoLocation[]",
+  "[POST] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?intx&inty": "int, int, geoLocation: {x, y, {id, price, productColor}} -> response",
+  "[POST] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?x": "string, geoLoc1: {x, y, {id, price, productColor}}, geoLoc2: {x, y, {id, price, productColor}} -> response",
+  "[POST] /apiTests/another/and/deeply/nESTED/docsAmbiguity/ambiguity?x&y&id&price&productColor": "geoLocation, geoLocation: {x, y, {id, price, productColor}} -> response"
+}

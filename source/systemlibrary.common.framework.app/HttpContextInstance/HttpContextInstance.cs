@@ -26,9 +26,12 @@ public static class HttpContextInstance
         get
         {
             var ctx1 = HttpContextAccessor?.HttpContext;
+
+            if (ctx1 == null) return new DefaultHttpContext();
+
             var ctx2 = HttpContextAccessor?.HttpContext;
 
-            return ctx1 == ctx2 ? ctx1 : null;
+            return ctx1 == ctx2 ? ctx1 : new DefaultHttpContext();
         }
     }
 }
