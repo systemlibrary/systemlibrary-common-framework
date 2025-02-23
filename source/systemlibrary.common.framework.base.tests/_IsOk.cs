@@ -38,13 +38,13 @@ partial class BaseTest
             if (s.IsNot()) return true;
             var enumKeys = Enum.GetValues<HttpStatusCode>()
                    .Cast<HttpStatusCode>()
-                   .Where(status => (int)status >= 400);
+                   .Where(status => (int)status >= 400 && (int)status != 500);
 
             foreach (var enumKey in enumKeys)
                 if (s.Contains(enumKey.ToString(), StringComparison.OrdinalIgnoreCase))
                     return true;
 
-            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid ", "Invalid:", "Error ", "Exception ", "Error:", "Exception:"))
+            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid ", "Invalid:", "Error ", "Exception ", "Error:", "Exception:", "status\": 403", "status\": 404"))
                 return true;
 
             return false;

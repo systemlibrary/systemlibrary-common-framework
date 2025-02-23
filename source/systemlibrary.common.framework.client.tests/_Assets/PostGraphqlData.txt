@@ -1,0 +1,4 @@
+﻿{
+    "query": "query Query {field0: countries{name countryCode __typename}",
+    "variables": {}
+}
