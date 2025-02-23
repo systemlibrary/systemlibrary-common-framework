@@ -14,7 +14,7 @@ public class DocsAmbiguityControllerTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServiceOptions();
+                var options = new FrameworkOptions();
 
                 options.ApplicationParts = [
                     typeof(DocsAmbiguityControllerTests).Assembly
@@ -24,7 +24,7 @@ public class DocsAmbiguityControllerTests : BaseTest
             })
             .Configure(app =>
             {
-                var options = new FrameworkAppOptions();
+                var options = new FrameworkOptions();
 
                 options.UseHttpsRedirection = false;
 

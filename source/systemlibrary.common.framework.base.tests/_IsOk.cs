@@ -44,7 +44,7 @@ partial class BaseTest
                 if (s.Contains(enumKey.ToString(), StringComparison.OrdinalIgnoreCase))
                     return true;
 
-            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid", "Error", "Exception"))
+            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid ", "Invalid:", "Error ", "Exception ", "Error:", "Exception:"))
                 return true;
 
             return false;

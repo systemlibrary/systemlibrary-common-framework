@@ -6,7 +6,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder AddApplicationParts(IMvcBuilder builder, FrameworkServiceOptions options)
+    static IMvcBuilder AddApplicationParts(IMvcBuilder builder, FrameworkOptions options)
     {
         var executingAssembliy = Assembly.GetExecutingAssembly();
         var entryAssembly = Assembly.GetEntryAssembly();

@@ -2,42 +2,9 @@
 
 using Microsoft.AspNetCore.Mvc.Razor;
 
-namespace SystemLibrary.Common.Framework.App.Extensions;
+namespace SystemLibrary.Common.Framework;
 
-/// <summary>
-/// Web App Services Collection Options
-/// </summary>
-/// <remarks>
-/// </remarks>
-/// <example>
-/// Inside your startup.cs/program.cs...
-/// <code>
-/// public class CustomViewLocations : IViewLocationExpander
-/// {
-///     //...implement the interface
-///     public IEnumerable&lt;string&gt; ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable&lt;string&gt; viewLocations)
-///     {
-///         return new string[] {   
-///             "~/Folder2/{0}/Index.cshtml"
-///         }
-///     }
-/// }
-/// 
-/// public void ConfigureServices(IServiceCollection services)
-/// {
-///     var options = new FrameworkServicesOptions();
-///     options.UseMvc = false;
-///     // options.ViewLocationExpander = new CustomViewLocations();
-///     options.ViewLocations = new string[] {
-///         "~/Folder/{0}/Index.cshtml",
-///         "~/Folder/{1}/{0}.cshtml"
-///     }
-///     
-///     app.AddFrameworkServices(options);
-/// }
-/// </code>
-/// </example>
-public class FrameworkServiceOptions : FrameworkOptions
+partial class FrameworkOptions
 {
     /// <summary>
     /// Add multiple assemblies as a 'part' so controllers within the assemblies are tried matched against requests
@@ -51,7 +18,7 @@ public class FrameworkServiceOptions : FrameworkOptions
     /// <item>- Package 'System.Security.Cryptography.Pkcs' is required, not a direct dependency, but through SystemLibrary.Common.Framework. If you turn this on and it throws? Add the right version of System.Security.Cryptography.Pkcs</item>
     /// </list>
     /// </summary>
-    public bool AddRazorRuntimeCompilationOnSave = true;
+    public bool UseRazorRuntimeCompilationOnSave = true;
 
     /// <summary>
     /// Pass in an object that implements the interface if you want to extend View Locations
@@ -70,7 +37,7 @@ public class FrameworkServiceOptions : FrameworkOptions
     /// <example>
     /// Simple example:
     /// <code>
-    /// var options = new FrameworkServicesOptions();
+    /// var options = new FrameworkOptions();
     /// options.ViewLocations = new string[] { "~/Pages/{2}/{1}/{0}.cshtml" }
     /// </code>
     /// </example>
@@ -87,7 +54,7 @@ public class FrameworkServiceOptions : FrameworkOptions
     /// <example>
     /// Simple example:
     /// <code>
-    /// var options = new FrameworkServicesOptions();
+    /// var options = new FrameworkOptions();
     /// options.ViewLocations = new string[] { "~/Pages/{2}/{1}/{0}.cshtml" }
     /// </code>
     /// </example>
@@ -106,17 +73,12 @@ public class FrameworkServiceOptions : FrameworkOptions
     /// Forwards all Microsoft.Extensions.Logging.ILogger log events to your custom ILogWriter.
     /// <para>If enabled, an internal LogProvider is added to capture and route all logs.</para>
     /// </summary>
-    public bool ForwardILogger = false;
+    public bool UseForwardILogger = false;
 
     /// <summary>
     /// Set to true to add ResponseCaching services
     /// </summary>
     public bool UseResponseCaching = true;
-
-    /// <summary>
-    /// Allow synchronous IO, an IIS setting
-    /// </summary>
-    public bool AllowSynchronousIO = true;
 
     /// <summary>
     /// Registers special Type Converters to the System.ComponentModel.TypeDescriptor

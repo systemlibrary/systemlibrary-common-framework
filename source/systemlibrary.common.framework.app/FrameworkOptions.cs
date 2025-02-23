@@ -1,8 +1,48 @@
 ﻿using Microsoft.AspNetCore.Routing;
 
-namespace SystemLibrary.Common.Framework.App.Extensions;
+namespace SystemLibrary.Common.Framework;
 
-public abstract class FrameworkOptions
+/// <summary>
+/// Framework service and middelware options
+/// </summary>
+/// <remarks>
+/// </remarks>
+/// <example>
+/// Inside your startup.cs/program.cs...
+/// <code>
+/// FrameworkOptions Options = new FrameworkOptions { };
+/// 
+/// public class CustomViewLocations : IViewLocationExpander
+/// {
+///     //...implement the interface
+///     public IEnumerable&lt;string&gt; ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable&lt;string&gt; viewLocations)
+///     {
+///         return new string[] {   
+///             "~/Folder2/{0}/Index.cshtml"
+///         }
+///     }
+/// }
+/// 
+/// public void ConfigureServices(IServiceCollection services)
+/// {
+///     Options.UseMvc = false;
+///     // Options.ViewLocationExpander = new CustomViewLocations();
+///     Options.ViewLocations = new string[] {
+///         "~/Folder/{0}/Index.cshtml",
+///         "~/Folder/{1}/{0}.cshtml"
+///     }
+///     app.AddFrameworkServices(Options);
+/// }
+/// 
+/// public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+/// {
+///     Options.UseHttpRedrectionAndHsts = false;
+///     
+///     app.UseFrameworkMiddlewares(Options);
+/// }
+/// </code>
+/// </example>
+public partial class FrameworkOptions
 {
     /// <summary>
     /// Set to true to add services and middleware for controllers and api controllers
@@ -45,15 +85,9 @@ public abstract class FrameworkOptions
     public bool UseHttpsRedirection = true;
 
     /// <summary>
-    /// Set to true to register services and middleware for the OutputCache in ASPNET
+    /// Set to true to register services and middleware for the OutputCache
     /// </summary>
     public bool UseOutputCache = true;
-
-    /// <summary>
-    /// Set to true to register services and middleware for the OutputCache in ASPNET after the Authentication, so Authentication always triggers before checking output cache
-    /// <para>This is the output cache middleware from microsoft, completely different cache than the class Cache in this library</para>
-    /// </summary>
-    public bool UseOutputCacheAfterAuthentication = true;
 
     /// <summary>
     /// Set to true to add services and middleware Gzip compression

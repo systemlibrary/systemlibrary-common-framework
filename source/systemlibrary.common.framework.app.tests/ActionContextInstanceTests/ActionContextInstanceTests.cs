@@ -16,7 +16,7 @@ public class ActionContextInstanceTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServiceOptions();
+                var options = new FrameworkOptions();
 
                 options.ApplicationParts = [
                     typeof(ActionContextInstanceTests).Assembly
@@ -26,9 +26,8 @@ public class ActionContextInstanceTests : BaseTest
             })
             .Configure(app =>
             {
-                var options = new FrameworkAppOptions();
+                var options = new FrameworkOptions();
 
-                options.UseHsts = false;
                 options.UseHttpsRedirection = false;
 
                 app.UseFrameworkMiddlewares(null, options);

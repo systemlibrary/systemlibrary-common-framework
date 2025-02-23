@@ -21,7 +21,7 @@ public class HtmlHelperFactoryTests : BaseTest
             })
             .Configure(app =>
             {
-                var options = new FrameworkAppOptions();
+                var options = new FrameworkOptions();
 
                 options.UseHttpsRedirection = false;
 

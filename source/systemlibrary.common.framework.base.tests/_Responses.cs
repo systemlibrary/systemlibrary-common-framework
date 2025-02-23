@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Text;
-
-using Microsoft.AspNetCore.Http;
+﻿using System.Text;
 
 namespace SystemLibrary.Common.Framework.Tests;
 
@@ -19,7 +16,7 @@ partial class BaseTest
         var response = GetResponse(path, headers);
 
         if (!response.IsSuccessStatusCode)
-            Log.Dump("Not successful: " + path + " " + response.StatusCode);
+            Log.Dump("Not successful: " + path + " " + response.StatusCode + " " + response.ReasonPhrase);
 
         return response.Content.ReadAsStringAsync()
             .ConfigureAwait(false)
@@ -47,16 +44,20 @@ partial class BaseTest
 
     async Task<HttpResponseMessage> GetResponseAsync(string path, (string Key, string Value)[] headers)
     {
+        if(!path.StartsWith("/"))
+        {
+            path = "/" + path;
+        }
+
         var request = new HttpRequestMessage(HttpMethod.Get, path);
 
         if (headers != null)
         {
-
             foreach (var (key, value) in headers)
             {
                 if (key.Is() && value != null)
                 {
-                    if(key == "Content-Type")
+                    if (key == "Content-Type")
                     {
                         request.Content = new StringContent("", Encoding.UTF8, value);
                     }
@@ -65,7 +66,6 @@ partial class BaseTest
             }
         }
 
-    
         return await Client.SendAsync(request)
             .ConfigureAwait(false);
     }

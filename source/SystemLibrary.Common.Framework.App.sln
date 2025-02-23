@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLibrary.Common.Framew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLibrary.Common.Framework.Json", "systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj", "{B1B13FD8-79B3-49BD-B2D8-0BACBF7CDA90}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inherit", "Inherit", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -35,9 +37,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B0CB95B5-A084-4927-B5FD-4E3A211E4564} = {AF8EA433-DC04-4EAB-B067-D6723CF97E08}
+		{B0CB95B5-A084-4927-B5FD-4E3A211E4564} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{030850DE-0C16-4E0D-9FA8-735CF46A71AC} = {AF8EA433-DC04-4EAB-B067-D6723CF97E08}
-		{B1B13FD8-79B3-49BD-B2D8-0BACBF7CDA90} = {AF8EA433-DC04-4EAB-B067-D6723CF97E08}
+		{B1B13FD8-79B3-49BD-B2D8-0BACBF7CDA90} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8390EF5-99C5-4938-94B2-E1202956C91C}

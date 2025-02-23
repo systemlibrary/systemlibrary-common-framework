@@ -5,7 +5,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 static partial class IServiceCollectionExtensions
 {
-    static IServiceCollection UseViews(this IServiceCollection services, FrameworkServiceOptions options = null)
+    static IServiceCollection UseViews(this IServiceCollection services, FrameworkOptions options = null)
     {
         return options.ViewLocationExpander == null && options.ViewLocations == null && options.AreaViewLocations == null
             ? services

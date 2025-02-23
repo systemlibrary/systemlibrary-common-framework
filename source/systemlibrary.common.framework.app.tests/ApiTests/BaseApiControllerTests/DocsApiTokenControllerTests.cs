@@ -14,7 +14,7 @@ public class DocsApiTokenControllerTests : BaseTest
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                var options = new FrameworkServiceOptions();
+                var options = new FrameworkOptions();
 
                 options.ApplicationParts = [
                     typeof(DocsApiTokenControllerTests).Assembly
@@ -24,7 +24,7 @@ public class DocsApiTokenControllerTests : BaseTest
             })
             .Configure(app =>
             {
-                var options = new FrameworkAppOptions();
+                var options = new FrameworkOptions();
 
                 options.UseHttpsRedirection = false;
 

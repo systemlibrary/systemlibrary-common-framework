@@ -27,7 +27,7 @@ public static partial class IServiceCollectionExtensions
     /// <para>- Authentication and authorization services</para>
     /// - Output cache services
     /// <para>- Registers the main assembly and all its controllers (if any), as in: your Web Application Project's assembly</para>
-    /// Optionally, through the argument FrameworkServicesOptions: 
+    /// Optionally, through the argument FrameworkOptions: 
     /// <para>- Can register view locations</para>
     /// - Can register area view locations
     /// <para>- Can register one ViewLocationExpander</para>
@@ -38,7 +38,7 @@ public static partial class IServiceCollectionExtensions
     /// <code>
     /// public void ConfigureServices(IServiceCollection services)
     /// {
-    ///     var options = new FrameworkServicesOptions();
+    ///     var options = new FrameworkOptions();
     ///     
     ///     options.ViewLocations = new string[] {
     ///         "~/Views/{0}/index.cshtml"
@@ -54,22 +54,23 @@ public static partial class IServiceCollectionExtensions
     ///     
     ///     services.AddFrameworkServices&lt;TLogWriter&gt;(options);
     /// }
+    /// 
     /// </code>
     /// </example>
-    public static IServiceCollection AddFrameworkServices<TLogWriter>(this IServiceCollection serviceCollection, FrameworkServiceOptions options = null) where TLogWriter : class, ILogWriter
+    public static IServiceCollection AddFrameworkServices<TLogWriter>(this IServiceCollection serviceCollection, FrameworkOptions options = null) where TLogWriter : class, ILogWriter
     {
         if (serviceCollection == null) serviceCollection = new ServiceCollection();
 
         serviceCollection.AddScoped<ILogWriter, TLogWriter>();
-        
+
         return serviceCollection.AddFrameworkServices(options);
     }
-     
-    public static IServiceCollection AddFrameworkServices(this IServiceCollection serviceCollection, FrameworkServiceOptions options = null)
+
+    public static IServiceCollection AddFrameworkServices(this IServiceCollection serviceCollection, FrameworkOptions options = null)
     {
         serviceCollection.AddCommonServices();
 
-        options ??= new FrameworkServiceOptions();
+        options ??= new FrameworkOptions();
 
         if (options.UseExtendedEnumModelConverter)
         {
@@ -81,7 +82,7 @@ public static partial class IServiceCollectionExtensions
             }
         }
 
-        if (options.ForwardILogger)
+        if (options.UseForwardILogger)
         {
             serviceCollection.AddLogging(bld =>
             {
@@ -121,22 +122,49 @@ public static partial class IServiceCollectionExtensions
 
         serviceCollection.UseDataProtectionPolicy(options);
 
-        serviceCollection.AddAuthentication()
-             .AddCookie(opt =>
-             {
-                 opt.Cookie.SameSite = SameSiteMode.Strict;
-                 opt.Cookie.HttpOnly = true;
-             });
+        if (options.UseAuthentication)
+        {
+            if (options.UseCookiePolicy)
+            {
+                serviceCollection.AddAuthentication()
+                     .AddCookie(opt =>
+                     {
+                         opt.Cookie.SameSite = SameSiteMode.Strict;
+                         opt.Cookie.HttpOnly = true;
+                         opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                         opt.SlidingExpiration = true;
+                         opt.ExpireTimeSpan = TimeSpan.FromHours(24);
+                     });
+            }
+            else
+            {
+                serviceCollection.AddAuthentication()
+                     .AddCookie(opt =>
+                     {
+                         opt.Cookie.SameSite = SameSiteMode.Strict;
+                         opt.Cookie.HttpOnly = true;
+                     });
+            }
+        }
 
-        serviceCollection.AddAuthorization();
+        if(options.UseAuthorization)
+            serviceCollection.AddAuthorization();
 
         IMvcBuilder builder = serviceCollection.UseModelViewControllers(options);
+
+        serviceCollection.AddRouting(opt =>
+        {
+            opt.SuppressCheckForUnhandledSecurityMetadata = false;
+            opt.AppendTrailingSlash = false;
+            opt.LowercaseQueryStrings = false;
+            opt.LowercaseUrls = true;
+        });
 
         builder = builder.UseDefaultJsonConverters();
 
         builder = AddApplicationParts(builder, options);
 
-        if (options.AddRazorRuntimeCompilationOnSave)
+        if (options.UseRazorRuntimeCompilationOnSave)
             builder = AddRazorRuntimeCompilationOnSave(builder);
 
         if (builder != null)
@@ -147,16 +175,11 @@ public static partial class IServiceCollectionExtensions
         if (options.UseCookiePolicy)
             serviceCollection = serviceCollection.UseCookiePolicy();
 
-      
-
         // NOTE: Can this be Scoped instead?
         serviceCollection.TryAddTransient<HtmlHelperFactory, HtmlHelperFactory>();
 
-        if (options.AllowSynchronousIO)
-        {
-            serviceCollection.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });
-            serviceCollection.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
-        }
+        serviceCollection.Configure<IISServerOptions>(options => { options.AllowSynchronousIO = true; });
+        serviceCollection.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
 
         return serviceCollection;
     }

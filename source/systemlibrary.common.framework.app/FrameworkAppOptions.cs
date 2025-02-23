@@ -1,35 +1,12 @@
-﻿namespace SystemLibrary.Common.Framework.App.Extensions;
+﻿using System.Reflection;
 
-/// <summary>
-/// Web Application Builder Options
-/// <para>All options are 'true' (on) by default</para>
-/// Used as argument in 'app.CommonWebApplicationBuilder' function
-/// </summary>
-/// <example>
-/// Startup.cs/Program.cs:
-/// <code>
-/// public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-/// {
-///     var options = new FrameworkAppOptions();
-///     
-///     options.UseHttpRedrectionAndHsts = false;
-///     
-///     app.CommonWebApplicationBuilder(options);
-/// }
-/// </code>
-/// </example>
-public class FrameworkAppOptions : FrameworkOptions
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Routing;
+
+namespace SystemLibrary.Common.Framework;
+
+partial class FrameworkOptions
 {
-    /// <summary>
-    /// Adds middleware for http to https redirect client side, aka hsts
-    /// </summary>
-    public bool UseHsts = true;
-
-    /// <summary>
-    /// Adds the routing middleware that comes with Aspnet
-    /// </summary>
-    public bool UseRouting = true;
-
     /// <summary>
     /// Adds middleware for Authorization and Authentication attributes
     /// </summary>

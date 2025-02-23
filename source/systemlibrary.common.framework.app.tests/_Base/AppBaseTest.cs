@@ -9,22 +9,21 @@ namespace SystemLibrary.Common.Framework.App;
 
 public class AppBaseTest : BaseTest
 {
-    protected FrameworkServiceOptions FrameworkServicesOptions;
-    protected FrameworkAppOptions FrameworkAppOptions;
+    protected FrameworkOptions FrameworkOptions;
 
     public AppBaseTest()
     {
         WebHostBuilder = new WebHostBuilder()
             .ConfigureServices(services =>
             {
-                services = services.AddFrameworkServices<LogWriter>(FrameworkServicesOptions);
+                services = services.AddFrameworkServices<LogWriter>(FrameworkOptions);
             })
             .Configure(app =>
             {
-                if (FrameworkAppOptions == null)
-                    FrameworkAppOptions = new FrameworkAppOptions();
+                if (FrameworkOptions == null)
+                    FrameworkOptions = new FrameworkOptions();
 
-                FrameworkAppOptions.UseHttpsRedirection = false;
+                FrameworkOptions.UseHttpsRedirection = false;
 
                 app.Use(async (context, next) =>
                 {
@@ -61,7 +60,7 @@ public class AppBaseTest : BaseTest
                     }
                 });
 
-                app.UseFrameworkMiddlewares(null, FrameworkAppOptions);
+                app.UseFrameworkMiddlewares(null, FrameworkOptions);
             });
     }
 }

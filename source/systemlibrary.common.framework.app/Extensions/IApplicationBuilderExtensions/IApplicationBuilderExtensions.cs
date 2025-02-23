@@ -38,17 +38,17 @@ public static partial class IApplicationBuilderExtensions
     /// <code>
     /// public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     /// {
-    ///     var options = new FrameworkAppOptions();
+    ///     var options = new FrameworkOptions();
     ///     
     ///     app.UseFrameworkApp(options);
     /// }
     /// </code>
     /// </example>
-    public static IApplicationBuilder UseFrameworkMiddlewares(this IApplicationBuilder app, IWebHostEnvironment env, FrameworkAppOptions options = null)
+    public static IApplicationBuilder UseFrameworkMiddlewares(this IApplicationBuilder app, IWebHostEnvironment env, FrameworkOptions options = null)
     {
         ServiceProviderInstance.Instance = app.ApplicationServices;
 
-        options ??= new FrameworkAppOptions();
+        options ??= new FrameworkOptions();
 
         if (options.UseDeveloperPage)
             app.UseDeveloperExceptionPage();
@@ -56,11 +56,10 @@ public static partial class IApplicationBuilderExtensions
         if (options.UseForwardedHeaders)
             app.UseForwardedHeaders();
 
-        if (options.UseHsts)
-            app.UseHsts();
-
         if (options.UseHttpsRedirection)
+        {
             app.UseHttpsRedirection();
+        }
 
         if (options.UseStaticFilePolicy)
         {
@@ -111,23 +110,13 @@ public static partial class IApplicationBuilderExtensions
         if (options.UseCookiePolicy)
             app.UseCookiePolicy();
 
-        if (options.UseRouting)
-            app.UseRouting();
-
-        if (!options.UseOutputCacheAfterAuthentication)
-        {
-            if (options.UseOutputCache)
-                app.UseOutputCache();
-        }
+        app.UseRouting();
 
         if (options.UseAuthentication)
             app.UseAuthentication();
-            
-        if (options.UseOutputCacheAfterAuthentication)
-        {
-            if (options.UseOutputCache)
-                app.UseOutputCache();
-        }
+
+        if (options.UseOutputCache)
+            app.UseOutputCache();
 
         if (options.UseAuthorization)
             app.UseAuthorization();
@@ -137,10 +126,16 @@ public static partial class IApplicationBuilderExtensions
 
         if (options.UseControllers)
         {
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
                 //endpoints.MapControllerRoute("api/{controller}/{action}/{id?}", "api/{controller}/{action}/{id?}");
             });
+        }
+
+        if (options.UseHttpsRedirection)
+        {
+            app.UseHsts();
         }
 
         if (options.UseMvc)
@@ -158,7 +153,7 @@ public static partial class IApplicationBuilderExtensions
         }
 
         var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.EnablePrometheus;
-        if (enablePrometheusMetrics == true)
+        if (enablePrometheusMetrics)
         {
             app.UseEndpoints(endpoints =>
             {

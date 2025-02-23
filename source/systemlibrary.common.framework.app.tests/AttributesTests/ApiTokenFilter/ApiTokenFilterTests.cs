@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.App.Extensions;
@@ -20,7 +18,7 @@ public class ApiTokenFilterTests : BaseTest
             })
             .Configure(app =>
             {
-                var options = new FrameworkAppOptions();
+                var options = new FrameworkOptions();
 
                 options.UseHttpsRedirection = false;
 

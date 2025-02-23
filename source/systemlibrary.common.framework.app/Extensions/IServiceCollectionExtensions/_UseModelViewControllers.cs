@@ -7,7 +7,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IServiceCollectionExtensions
 {
-    static IMvcBuilder UseModelViewControllers(this IServiceCollection services, FrameworkServiceOptions options)
+    static IMvcBuilder UseModelViewControllers(this IServiceCollection services, FrameworkOptions options)
     {
         if (options.UseMvc)
         {
@@ -29,6 +29,7 @@ partial class IServiceCollectionExtensions
                 options.Conventions.Add(new UseApiControllersRouting());
             });
         }
+
 
         return default;
     }

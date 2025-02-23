@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-using SystemLibrary.Common.Framework.App.Extensions;
+using SystemLibrary.Common.Framework;
 
 internal static class Compress
 {
-    internal static bool IsEligibleForCompression(HttpContext context, FrameworkAppOptions options)
+    internal static bool IsEligibleForCompression(HttpContext context, FrameworkOptions options)
     {
         if (context?.Request == null)
             return false;
