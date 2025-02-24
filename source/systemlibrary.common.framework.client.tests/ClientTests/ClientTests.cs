@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SystemLibrary.Common.Framework.Tests;
+
 namespace SystemLibrary.Common.Framework.App.Tests;
 
 [TestClass]
-public partial class ClientTests
+public partial class ClientTests : BaseTest
 {
     [TestMethod]
     public void Measure_Multiple_Get_404_Throws_404()

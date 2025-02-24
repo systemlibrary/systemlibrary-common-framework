@@ -31,7 +31,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var employee = new Employee();
+        var employee = Employee.Create();
 
         var response = bin.Put(employee, MediaType.json);
 

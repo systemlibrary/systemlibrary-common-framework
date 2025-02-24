@@ -7,8 +7,8 @@
 /// </summary>
 /// <example>
 /// <code>
-///   var httpClient = new HttpBaseClient();
-///   var response = httpClient.Post&lt;string&gt;("https://systemlibrary.com/post", data, MediaType.textplain);
+///   var client = new Client();
+///   var response = client.Post&lt;string&gt;("https://systemlibrary.com/post", data, MediaType.textplain);
 /// </code>
 /// </example>
 public enum MediaType

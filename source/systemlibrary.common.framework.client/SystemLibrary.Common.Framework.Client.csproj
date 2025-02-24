@@ -9,6 +9,5 @@
 		<PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.36" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.13" />
 		<ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
-		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
 	</ItemGroup>
 </Project>

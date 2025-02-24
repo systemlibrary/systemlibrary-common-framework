@@ -43,11 +43,11 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var employee = new Employee();
+        var employee = Employee.Create();
 
         var response = bin.Post(employee, MediaType.json);
 
-        Assert.IsTrue(response.Data.Contains("John"));
+        Assert.IsTrue(response.Data.Contains("John"), response.Data);
     }
 
     [TestMethod]

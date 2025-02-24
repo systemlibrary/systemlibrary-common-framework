@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Net.Http;
-
-using SystemLibrary.Common.Framework;
+﻿using System.Collections.Concurrent;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -10,6 +6,8 @@ partial class Client
 {
     //TODO: https://stackoverflow.com/questions/20661652/progress-bar-with-httpclient/69826649#69826649
     //A way to get "current percentage of downloaded file/stream/uploading..."
+    //Would be awesome for any kind of react component, just showing a "progress spinner" instead of "random gif"
+    //That just jumps whenever whatever, after validation 10%, before sending request to an integration 25%, after integration response 80%, then 100% right before sending response (or 99%)
     partial class ClientCached
     {
         const int ThresholdRegenerateClientSeconds = 60;

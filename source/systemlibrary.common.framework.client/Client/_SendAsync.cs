@@ -12,7 +12,10 @@ partial class Client
         if (url.IsNot())
             throw new Exception("Url is missing when trying to make a " + method + " request");
 
+        Log.Dump(timeout);
         var options = GetRequestOptions(method, url, data, mediaType, timeout, headers, jsonSerializerOptions, cancellationToken);
+
+        Log.Dump(options);
 
         HttpResponseMessage response = null;
         Exception ex = null;

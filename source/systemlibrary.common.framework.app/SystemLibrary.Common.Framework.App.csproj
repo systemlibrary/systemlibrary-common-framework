@@ -13,7 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj" />
-		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" />
 	</ItemGroup>
 </Project>
