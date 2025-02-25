@@ -315,6 +315,7 @@ public static class TypeExtensions
         if (type == null) return false;
 
         return type.IsClass &&
+            type.Namespace != null &&
            !type.IsInterface &&
            !type.IsEnum &&
            !type.IsArray &&

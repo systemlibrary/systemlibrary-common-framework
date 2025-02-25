@@ -102,7 +102,7 @@ static internal class JsonSerializerOptionsInstance
                 PropertyNamingPolicy = null,
                 IncludeFields = JsonConfigInstance.IncludeFields,
                 IgnoreReadOnlyFields = JsonConfigInstance.IgnoreReadOnlyFields,
-                ReadCommentHandling = JsonConfigInstance.JsonCommentHandling,
+                ReadCommentHandling = JsonCommentHandling.Skip,
                 NumberHandling = JsonNumberHandling.AllowReadingFromString,
                 ReferenceHandler = ReferenceHandler.IgnoreCycles,
             };

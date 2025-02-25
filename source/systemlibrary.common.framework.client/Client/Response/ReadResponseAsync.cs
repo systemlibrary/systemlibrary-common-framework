@@ -1,12 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using System.Xml.Serialization;
 
-using SystemLibrary.Common.Framework;
 using SystemLibrary.Common.Framework.Extensions;
 
 namespace SystemLibrary.Common.Framework.App;
@@ -52,7 +46,7 @@ partial class Client
                 throw new Exception("Type: " + type.Name + " is not yet implemented for method ReadResponseAsync()");
         }
 
-        var contentType = response.Content.Headers?.ContentType?.MediaType;
+        var contentType = response.Content?.Headers?.ContentType?.MediaType;
 
         var isJson = contentType == null || contentType.Contains("json", StringComparison.OrdinalIgnoreCase);
 
@@ -65,7 +59,7 @@ partial class Client
         }
         else
         {
-            var isXml = contentType.Contains("xml", StringComparison.OrdinalIgnoreCase);
+            var isXml = contentType?.Contains("xml", StringComparison.OrdinalIgnoreCase) == true;
             if (isXml)
             {
                 var xml = await ReadResponseBodyAsStringAsync(response).ConfigureAwait(false);
@@ -84,6 +78,20 @@ partial class Client
                         throw new InvalidOperationException("Failed to deserialize XML content starting with: " + xml.MaxLength(8), ex);
                     }
                 }
+            }
+
+            else if (type == SystemType.ByteArrayType)
+            {
+                byte[] bytes;
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(ms);
+                        bytes = ms.ToArray();
+                    }
+                }
+                return (T)(object)bytes;
             }
 
             throw new Exception("Cannot deserialize " + type.Name + " from the response body. Set the generic return type to be <HttpResponseMessage>() and parse the content yourself, targetting url: " + url);

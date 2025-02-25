@@ -46,7 +46,7 @@ partial class ClientTests
 
 
     [TestMethod]
-    public void Get_wwwform_url_encoded_As_Body_Key_Value_Success()
+    public void Get_Anonymous_ContentType_Auto_Sends_Json_Returns_Ok()
     {
         var url = "https://httpbin.org/anything/payload";
 
@@ -60,11 +60,60 @@ partial class ClientTests
 
         var response = client.Get<string>(url, payload);
 
-        Assert.IsTrue(response != null);
-
-        Assert.IsTrue(response.Data.Contains("\"lastName\": \"World 2\""));
+        Assert.IsTrue(response?.Data?.Contains("\"lastName\": \"World 2\"") == true, "Error: response is wrong " + response?.Data);
     }
 
+    [TestMethod]
+    public void Post_Anonymous_ContentType_Auto_Sends_Json_Returns_Ok()
+    {
+        var url = "https://httpbin.org/anything/payload";
+
+        var payload = new
+        {
+            firstName = "Hello 1",
+            lastName = "World 2"
+        };
+
+        var client = new Client(throwOnUnsuccessful: false);
+
+        var response = client.Post<string>(url, payload);
+
+        Assert.IsTrue(response?.Data?.Contains("\"lastName\": \"World 2\"") == true, "Error: response is wrong " + response?.Data);
+    }
+
+    [TestMethod]
+    public void Get_Poco_ContentType_Auto_Sends_Json_Returns_Ok()
+    {
+        var url = "https://httpbin.org/anything/payload";
+
+        var payload = new Form();
+        
+        payload.file = "hello.txt";
+        payload.hello = "world";
+
+        var client = new Client(throwOnUnsuccessful: false);
+
+        var response = client.Get<string>(url, payload);
+
+        Assert.IsTrue(response?.Data?.Contains("\"data\": \"{\\\"file\\\":\\\"hello.txt\\\",\\\"hello\\\":\\\"world\\\"}\"") == true, "Error: response is wrong " + response?.Data);
+    }
+
+    [TestMethod]
+    public void Post_Poco_ContentType_Auto_Sends_Json_Returns_Ok()
+    {
+        var url = "https://httpbin.org/anything/payload";
+
+        var payload = new Form();
+
+        payload.file = "hello.txt";
+        payload.hello = "world";
+
+        var client = new Client(throwOnUnsuccessful: false);
+
+        var response = client.Get<string>(url, payload);
+
+        Assert.IsTrue(response?.Data?.Contains("\"data\": \"{\\\"file\\\":\\\"hello.txt\\\",\\\"hello\\\":\\\"world\\\"}\"") == true, "Error: response is wrong " + response?.Data);
+    }
 
     [TestMethod]
     public void Not_Found_Internet_Address()
@@ -73,7 +122,7 @@ partial class ClientTests
 
         var client = new Client(throwOnUnsuccessful: false);
 
-        var response = client.Post<string>(url, new { world = "hello" }, MediaType.json);
+        var response = client.Post<string>(url, new { world = "hello" }, ContentType.json);
 
         Assert.IsTrue(response != null, "response is null");
         Assert.IsTrue(response.Data == null, "Data is not null: " + response.Data);
@@ -90,7 +139,7 @@ partial class ClientTests
         var client = new Client(throwOnUnsuccessful: true);
         try
         {
-            var response = client.Post<string>(url, new { world = "hello" }, MediaType.json);
+            var response = client.Post<string>(url, new { world = "hello" }, ContentType.json);
 
             Assert.IsTrue(false, "Post towards url should throw");
         }
@@ -110,7 +159,7 @@ partial class ClientTests
         var client = new Client();
         try
         {
-            var response = client.Post<string>(url, new { world = "hello" }, MediaType.json);
+            var response = client.Post<string>(url, new { world = "hello" }, ContentType.json);
 
             Assert.IsTrue(false, "Post towards url should throw");
         }
@@ -128,7 +177,7 @@ partial class ClientTests
         var url = "https://do.not.exist.com/productsapi/product/items?itemid=1";
 
         var client = new Client(throwOnUnsuccessful: false);
-        var response = client.Post<string>(url, new { world = "hello" }, MediaType.json);
+        var response = client.Post<string>(url, new { world = "hello" }, ContentType.json);
 
         Assert.IsTrue(response.Data == null, "Post should return null data: " + response.Data);
         Assert.IsTrue(response.Response == null, "Post should return null response");

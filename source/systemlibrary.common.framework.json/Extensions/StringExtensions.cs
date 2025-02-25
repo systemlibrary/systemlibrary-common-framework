@@ -186,17 +186,24 @@ public static partial class StringExtensions
     {
         if (data.IsNot()) return false;
 
-        if (data.StartsWithAny("{", "[", " [", " {", "\r\n{", "\r\n[", "\n{", "\n["))
+        if (data.StartsWithAny("{", "[", " [", " {", "\r\n{", "\r\n[", "\n{", "\n[", "\n {", "\n [", "\t{", "\t["))
         {
-            if (data.EndsWithAny("}", "]",
-                "} ", "] ",
-                "}\n", "]\n",
-                "]" + Environment.NewLine, "}" + Environment.NewLine,
-                "]\r\n", "}\r\n",
-                "] \r\n", "} \r\n"
-                ))
-                return true;
+            return true;
+            //if (data.EndsWithAny("}", "]",
+            //    "} ", "] ",
+            //    "}\n", "]\n",
+            //    "]" + Environment.NewLine, "}" + Environment.NewLine,
+            //    "]\r\n", "}\r\n",
+            //    "] \r\n", "} \r\n"
+            //    ))
         }
         return false;
+    }
+
+    public static bool IsXml(this string data)
+    {
+        if (data.IsNot()) return false;
+
+        return data.StartsWithAny("<", "\n<", "\r\n<", " <") && data.Contains(">");
     }
 }

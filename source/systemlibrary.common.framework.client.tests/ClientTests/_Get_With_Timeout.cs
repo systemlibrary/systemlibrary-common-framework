@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SystemLibrary.Common.Framework.App.Tests;
 
@@ -12,7 +9,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.GetWithTimeout(7000);
+        var response = bin.GetWithTimeout(9222);
 
         Assert.IsTrue(response.StatusCode == System.Net.HttpStatusCode.OK);
         Assert.IsTrue(response.Data.Contains("httpbin.org"));

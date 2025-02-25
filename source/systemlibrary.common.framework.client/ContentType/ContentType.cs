@@ -2,16 +2,16 @@
 
 /// <summary>
 /// An enum of various media types that can be sent to the Client request methods
-/// <para>The 'MediaType' is sent as an 'Accept' HEADER in the request</para>
-/// <para>NOTE: Not all of them have been implemented yet though, but all will be sent as 'ACCEPT' header if specified, if you specify MediaType.none, no accept header is sent</para>
+/// <para>The 'ContentType' is sent as an 'Accept' HEADER in the request</para>
+/// <para>NOTE: Not all of them have been implemented yet though, but all will be sent as 'ACCEPT' header if specified, if you specify ContentType.none, no accept header is sent</para>
 /// </summary>
 /// <example>
 /// <code>
 ///   var client = new Client();
-///   var response = client.Post&lt;string&gt;("https://systemlibrary.com/post", data, MediaType.textplain);
+///   var response = client.Post&lt;string&gt;("https://systemlibrary.com/post", data, ContentType.text);
 /// </code>
 /// </example>
-public enum MediaType
+public enum ContentType
 {
     /// <summary>
     /// Sends data as application/json, if 'data' passed to the client through put/post/get already is a string, no conversion is made, else it is being converted to json string before data is sent
@@ -29,7 +29,7 @@ public enum MediaType
     /// Sends data as text/plain, if 'data' passed to the client through put/post/get already is a string, no conversion is made, else it is being converted to json string before data is sent
     /// </summary>
     [EnumValue("text/plain")]
-    plain,
+    text,
 
     [EnumValue("multipart/form-data")]
     multipartFormData,
@@ -60,7 +60,33 @@ public enum MediaType
 
     [EnumValue("json-patch+json")]
     jsonPatch,
-    
+
+    [EnumValue("image/png")]
+    png,
+
+    [EnumValue("image/jpeg")]
+    jpeg,
+
+    [EnumValue("image/gif")]
+    gif,
+
+    [EnumValue("image/webp")]
+    webp,
+
+    [EnumValue("image/svg+xml")]
+    svg,
+
+    [EnumValue("image/bmp")]
+    bmp,
+
+    [EnumValue("image/tiff")]
+    tiff,
+
+    [EnumValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document")]
+    docx,
+
+    [EnumValue("")]
+    Auto,
 
     [EnumValue("")]
     None

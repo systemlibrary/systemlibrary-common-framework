@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace SystemLibrary.Common.Framework.App.Tests;
+﻿namespace SystemLibrary.Common.Framework.App.Tests;
 
 class HttpBin : Client
 {
@@ -13,19 +9,19 @@ class HttpBin : Client
     {
     }
 
-    public ClientResponse<string> Head(MediaType mediaType)
+    public ClientResponse<string> Head()
     {
-        return Head<string>("http://httpbin.org", mediaType, timeoutMilliseconds: 3500);
+        return Head<string>("http://httpbin.org", timeoutMilliseconds: 3500);
     }
 
-    public ClientResponse<string> Delete(object data, MediaType mediaType)
+    public ClientResponse<string> Delete(object data, ContentType contentType)
     {
-        return Delete<string>(clientUrl + "/delete", data, mediaType);
+        return Delete<string>(clientUrl + "/delete", data, contentType);
     }
 
-    public ClientResponse<string> Put(object data, MediaType mediaType)
+    public ClientResponse<string> Put(object data, ContentType contentType)
     {
-        return Put<string>(clientUrl + "/put", data, mediaType);
+        return Put<string>(clientUrl + "/put", data, contentType);
     }
 
     public ClientResponse<string> Get()
@@ -33,38 +29,38 @@ class HttpBin : Client
         return Get<string>(clientUrl + "/get");
     }
 
-    public ClientResponse<string> Post(object data, MediaType mediaType, Dictionary<string, string> headers = null)
+    public ClientResponse<string> Post(object data, ContentType mediaType, Dictionary<string, string> headers = null)
     {
         return Post<string>(clientUrl + "/post", data, mediaType, headers: headers);
     }
 
     public ClientResponse<string> PostUrlEncoded(object data)
     {
-        return Post<string>(clientUrl + "/post", data, MediaType.xwwwformUrlEncoded);
+        return Post<string>(clientUrl + "/post", data, ContentType.xwwwformUrlEncoded);
     }
 
     public async Task<ClientResponse<string>> PostAsync(string data)
     {
-        return await PostAsync<string>(clientUrl + "/post", data, MediaType.plain, null, 10000);
+        return await PostAsync<string>(clientUrl + "/post", data, ContentType.text, null, 10000);
     }
 
     public ClientResponse<string> Get_Retry_Request_Against_Firewall(CancellationToken cancellationToken = default)
     {
-        return Get<string>(firewallClientUrl, MediaType.json, null, 200, null, cancellationToken);
+        return Get<string>(firewallClientUrl, ContentType.json, null, 200, null, cancellationToken);
     }
 
     public ClientResponse<string> Post_Retry_Request_Against_Firewall()
     {
-        return Post<string>(firewallClientUrl, "hello world", MediaType.json, null, 300);
+        return Post<string>(firewallClientUrl, "hello world", ContentType.json, null, 300);
     }
 
     public ClientResponse<string> GetWithCancellationToken(CancellationToken token)
     {
-        return Get<string>(clientUrl + "/delay/2", MediaType.json, null, 4000, null, token);
+        return Get<string>(clientUrl + "/delay/2", ContentType.json, null, 4000, null, token);
     }
 
     public ClientResponse<string> GetWithTimeout(int timeoutMilliseconds, int sleep = 3)
     {
-        return Get<string>(clientUrl + "/delay/" + sleep, MediaType.json, null, timeoutMilliseconds);
+        return Get<string>(clientUrl + "/delay/" + sleep, ContentType.json, null, timeoutMilliseconds);
     }
 }

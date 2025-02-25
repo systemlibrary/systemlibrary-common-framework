@@ -36,6 +36,9 @@ public static class SystemType
     public static Type EnumValueAttributeType = typeof(EnumValueAttribute);
     public static Type EnumTextAttributeType = typeof(EnumTextAttribute);
 
+    public static Type ByteArrayType = typeof(byte[]);
+    public static Type IntArrayType = typeof(int[]);
+
     public static Type Int16TypeNullable = typeof(short?);
     public static Type IntTypeNullable = typeof(int?);
     public static Type Int64TypeNullable = typeof(long?);

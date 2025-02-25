@@ -7,7 +7,7 @@ namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {
-    RequestOptions GetRequestOptions(HttpMethod method, string url, object data, MediaType mediaType, int timeout, IDictionary<string, string> headers, JsonSerializerOptions jsonSerializerOptions, CancellationToken cancellationToken)
+    RequestOptions GetRequestOptions(HttpMethod method, string url, object data, ContentType contentType, int timeout, IDictionary<string, string> headers, JsonSerializerOptions jsonSerializerOptions, CancellationToken cancellationToken)
     {
         var u = new System.Uri(url);
 
@@ -18,7 +18,7 @@ partial class Client
             Uri = u,
             UriLabel = GetUriLabel(this.GetType().Name, u),
             Headers = headers,
-            MediaType = mediaType,
+            ContentType = contentType,
             Data = data,
             JsonSerializerOptions = jsonSerializerOptions,
 

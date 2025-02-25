@@ -276,7 +276,7 @@ partial class Log
 
         if (IsVisited(type, reference, visited))
         {
-            Add(message, obj.GetType().Name + " ref: " + obj.GetHashCode() + " already printed, continue...", level);
+            Add(message, obj.GetType().Name + " ref: " + (obj.GetHashCode()) + " already printed, continue...", level);
             return true;
         }
 
@@ -503,6 +503,11 @@ partial class Log
         if (obj is CultureInfo cult)
             return "CultureInfo: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
 
+        if(obj is Uri uri)
+        {
+            return $"{uri.OriginalString} | Scheme: {uri.Scheme} | Host: {uri.Host} | Path: {uri.AbsolutePath} | Query: {(uri.Query.Is() ? "(empty)" : uri.Query)} | IsAbsolute: {uri.IsAbsoluteUri} | IsFile: {uri.IsFile} | Authority: {uri.Authority}";
+        }
+
         if (obj is bool?)
             return (obj as bool?).Value + "";
 
@@ -569,6 +574,11 @@ partial class Log
 
     static string PrintEnum(object item)
     {
-        return (item as Enum).ToText() + " (" + (item as Enum).ToValue() + ")";
+        var value = (item as Enum).ToValue();
+
+        if (value.Is())
+            return (item as Enum).ToText() + " (" + value + ")";
+
+        return (item as Enum).ToText();
     }
 }

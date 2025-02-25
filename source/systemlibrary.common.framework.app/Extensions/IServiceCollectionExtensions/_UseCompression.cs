@@ -8,7 +8,7 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 static partial class IServiceCollectionExtensions
 {
-    static string[] MimeTypesToCompress = new string[]
+    static string[] ContentTypesToCompress = new string[]
     {
         "text/html",
         "text/html; charset=utf-8",
@@ -44,7 +44,7 @@ static partial class IServiceCollectionExtensions
         services.AddResponseCompression(compression =>
         {
             compression.EnableForHttps = true;
-            compression.MimeTypes = MimeTypesToCompress;
+            compression.MimeTypes = ContentTypesToCompress;
             compression.Providers.Add<BrotliCompressionProvider>();
         });
 
@@ -58,7 +58,7 @@ static partial class IServiceCollectionExtensions
         services.AddResponseCompression(compression =>
         {
             compression.EnableForHttps = true;
-            compression.MimeTypes = MimeTypesToCompress;
+            compression.MimeTypes = ContentTypesToCompress;
             compression.Providers.Add<GzipCompressionProvider>();
         });
 

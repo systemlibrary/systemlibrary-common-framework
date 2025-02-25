@@ -11,7 +11,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Put("Hello world!", MediaType.plain);
+        var response = bin.Put("Hello world!", ContentType.text);
 
         Assert.IsTrue(response.Data.Contains("Hello world!"));
     }
@@ -21,7 +21,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Put("{ \"hello\": \"world\" }", MediaType.plain);
+        var response = bin.Put("{ \"hello\": \"world\" }", ContentType.text);
 
         Assert.IsTrue(response.Data.Contains(": \"world\""));
     }
@@ -33,7 +33,7 @@ partial class ClientTests
 
         var employee = Employee.Create();
 
-        var response = bin.Put(employee, MediaType.json);
+        var response = bin.Put(employee, ContentType.json);
 
         Assert.IsTrue(response.Data.Contains(": \"John\""));
     }
@@ -43,7 +43,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Put(new { name = "world" }, MediaType.json);
+        var response = bin.Put(new { name = "world" }, ContentType.json);
 
         Assert.IsTrue(response.Data.Contains(": \"world\""));
     }
@@ -57,7 +57,7 @@ partial class ClientTests
         {
             name = "world"
         };
-        var response = bin.Put(car, MediaType.json);
+        var response = bin.Put(car, ContentType.json);
 
         Assert.IsTrue(response.Data.Contains(": \"world\""));
     }
@@ -68,7 +68,7 @@ partial class ClientTests
         var client = new Client();
         try
         {
-            var res = client.Put<string>("https://httpbin.org/status/410", "", MediaType.plain, null, 5000);
+            var res = client.Put<string>("https://httpbin.org/status/410", "", ContentType.text, null, 5000);
 
             Assert.IsTrue(false, "Should throw, it should return status 410 GONE: " + res.StatusCode);
         }

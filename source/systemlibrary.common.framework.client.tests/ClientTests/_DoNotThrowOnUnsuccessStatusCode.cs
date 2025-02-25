@@ -19,7 +19,7 @@ partial class ClientTests
         try
         {
             var data = client.Get<HttpResponseMessage>(url,
-                MediaType.xwwwformUrlEncoded,
+                ContentType.xwwwformUrlEncoded,
                 headers: headers);
 
             Assert.IsTrue(false, "Should throw ex");
@@ -42,7 +42,7 @@ partial class ClientTests
         try
         {
             var data = client.Get<HttpResponseMessage>(url,
-                MediaType.xwwwformUrlEncoded,
+                ContentType.xwwwformUrlEncoded,
                 headers: headers);
 
             Assert.IsTrue(false, "Should throw ex");
@@ -63,7 +63,7 @@ partial class ClientTests
         var headers = GetHeaders();
 
         var data = client.Get<HttpResponseMessage>(url,
-            MediaType.xwwwformUrlEncoded,
+            ContentType.xwwwformUrlEncoded,
             headers: headers);
 
         Assert.IsNotNull(data);
@@ -80,7 +80,7 @@ partial class ClientTests
         var headers = GetHeaders();
 
         var data = client.Get<HttpResponseMessage>(url,
-            MediaType.xwwwformUrlEncoded,
+            ContentType.xwwwformUrlEncoded,
             headers: headers);
 
         Assert.IsNotNull(data);

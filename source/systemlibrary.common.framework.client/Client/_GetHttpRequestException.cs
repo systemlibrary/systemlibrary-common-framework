@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 using SystemLibrary.Common.Framework.Extensions;
 
@@ -11,7 +8,11 @@ partial class Client
 {
     static string GetRequestErrorMessage(RequestOptions options)
     {
-        return $"{options.Method} {options.Url} as {options.MediaType.ToValue()} with timeout: {options.Timeout}ms ";
+        var contentTypeValue = options.ContentType.ToValue();
+        if (contentTypeValue.IsNot())
+            contentTypeValue = options.ContentType.ToString();
+
+        return $"{options.Method} {options.Url} as {contentTypeValue} with timeout: {options.Timeout}ms.";
     }
 
     static HttpRequestException GetHttpRequestException(RequestOptions options, HttpResponseMessage response = null, Exception ex = null)
@@ -73,25 +74,4 @@ partial class Client
 
         return new HttpRequestException(message.ToString(), ex, response?.StatusCode ?? (ex as HttpRequestException)?.StatusCode);
     }
-
-    //static string GetHttpRequestExceptionMessage(RequestOptions options, HttpResponseMessage response, Exception ex)
-    //{
-    //    StringBuilder message = null;
-
-    //    if (response == null)
-    //    {
-    //        message = new StringBuilder(GetRequestErrorMessage(options), 512);
-    //    }
-    //    else
-    //    {
-    //        message = new StringBuilder($"{(int)response.StatusCode} " + GetRequestErrorMessage(options), 512);
-    //    }
-
-    //    if(ex != null)
-    //    {
-    //        message.Append(". Exception: " + ex.Message);
-    //    }
-
-    //    return message.ToString();
-    //}
 }

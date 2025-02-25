@@ -15,7 +15,7 @@ partial class IServiceCollectionExtensions
             {
                 opt.AllowEmptyInputInBodyModelBinding = false;
                 opt.CacheProfiles.Add("Default", new CacheProfile { Duration = 200, Location = ResponseCacheLocation.Any, VaryByHeader = "Accept-Language" });
-                opt.OutputFormatters.Add(new DefaultSupportedMediaTypes());
+                opt.OutputFormatters.Add(new OutputContentTypesSupported());
 
                 if (options.UseControllers)
                     opt.Conventions.Add(new UseApiControllersRouting());

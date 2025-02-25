@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
+
 namespace SystemLibrary.Common.Framework.App;
 
-internal class DefaultSupportedMediaTypes : StringOutputFormatter
+internal class OutputContentTypesSupported : StringOutputFormatter
 {
     static string[] BlockedExtensions =
     [
@@ -24,7 +25,7 @@ internal class DefaultSupportedMediaTypes : StringOutputFormatter
 
     static int BlockedExtensionsLength = BlockedExtensions.Length;
 
-    internal DefaultSupportedMediaTypes()
+    internal OutputContentTypesSupported()
     {
         SupportedMediaTypes.Add("*/*");
     }

@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace SystemLibrary.Common.Framework.Extensions;
 
@@ -109,5 +110,18 @@ public static class ObjectExtensions
         var options = JsonSerializerOptionsInstance.Current(null, jsonConverters);
 
         return JsonSerializer.Serialize(obj, options);
+    }
+
+    public static string Xml(this object obj)
+    {
+        if (obj == null) return null;
+
+        var serializer = new XmlSerializer(obj.GetType());
+
+        using var writer = new StringWriter();
+        
+        serializer.Serialize(writer, obj);
+
+        return writer.ToString();
     }
 }

@@ -13,7 +13,7 @@ partial class ClientTests
 
         var url = "https://httpbin.org/post";
 
-        var response = client.Post(url, data, MediaType.xwwwformUrlEncoded, deserialize: (responseText) => responseText.JsonPartial<HttpBinFormData>("form"));
+        var response = client.Post(url, data, ContentType.xwwwformUrlEncoded, deserialize: (responseText) => responseText.JsonPartial<HttpBinFormData>("form"));
 
         Assert.IsTrue(response.IsSuccess, "Not success " + response.Message);
 

@@ -7,15 +7,12 @@ namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {
-    async Task<ClientResponse<T>> SendAsync<T>(HttpMethod method, string url, object data, MediaType mediaType, int timeout, IDictionary<string, string> headers, JsonSerializerOptions jsonSerializerOptions, CancellationToken cancellationToken, Func<string, T> deserialize)
+    async Task<ClientResponse<T>> SendAsync<T>(HttpMethod method, string url, object data, ContentType contentType, int timeout, IDictionary<string, string> headers, JsonSerializerOptions jsonSerializerOptions, CancellationToken cancellationToken, Func<string, T> deserialize)
     {
         if (url.IsNot())
             throw new Exception("Url is missing when trying to make a " + method + " request");
 
-        Log.Dump(timeout);
-        var options = GetRequestOptions(method, url, data, mediaType, timeout, headers, jsonSerializerOptions, cancellationToken);
-
-        Log.Dump(options);
+        var options = GetRequestOptions(method, url, data, contentType, timeout, headers, jsonSerializerOptions, cancellationToken);
 
         HttpResponseMessage response = null;
         Exception ex = null;

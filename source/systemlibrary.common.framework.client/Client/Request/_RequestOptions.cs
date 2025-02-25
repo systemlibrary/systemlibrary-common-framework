@@ -23,7 +23,7 @@ partial class Client
         public bool UseRetryPolicy;
         public bool IgnoreSslErrors;
         public CancellationToken CancellationToken;
-        public MediaType MediaType;
+        public ContentType ContentType;
         public int RetryIndex;
 
         internal void Update(int retry)

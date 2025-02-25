@@ -9,7 +9,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Post("hello world", MediaType.plain);
+        var response = bin.Post("hello world", ContentType.text);
 
         Assert.IsTrue(response.Data.Contains("hello world"));
     }
@@ -33,7 +33,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Post("{ hello:\"world\" }", MediaType.json);
+        var response = bin.Post("{ hello:\"world\" }", ContentType.json);
 
         Assert.IsTrue(response.Data.Contains("world"));
     }
@@ -45,7 +45,7 @@ partial class ClientTests
 
         var employee = Employee.Create();
 
-        var response = bin.Post(employee, MediaType.json);
+        var response = bin.Post(employee, ContentType.json);
 
         Assert.IsTrue(response.Data.Contains("John"), response.Data);
     }

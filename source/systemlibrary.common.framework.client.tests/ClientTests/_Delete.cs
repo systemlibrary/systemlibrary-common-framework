@@ -9,7 +9,7 @@ partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Delete("{ \"hello\": \"world\"}", MediaType.json);
+        var response = bin.Delete("{ \"hello\": \"world\"}", ContentType.json);
 
         Assert.IsTrue(response.Data.Contains(": \"world\""));
     }

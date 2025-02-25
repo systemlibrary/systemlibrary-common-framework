@@ -15,7 +15,7 @@ partial class ClientTests
 
         var bin = new HttpBin();
 
-        var response = bin.Post(bytes, MediaType.json);
+        var response = bin.Post(bytes, ContentType.json);
 
         var form = response.Data.JsonPartial<Form>("json/form");
 
@@ -37,7 +37,7 @@ partial class ClientTests
 
         var bin = new HttpBin();
 
-        var response = bin.Post(bytes, MediaType.multipartFormData);
+        var response = bin.Post(bytes, ContentType.multipartFormData);
 
         var form = response.Data.JsonPartial<Form>("json/form");
 
@@ -54,7 +54,7 @@ partial class ClientTests
 
         var bin = new HttpBin();
 
-        var response = bin.Post(bytes, MediaType.multipartFormData);
+        var response = bin.Post(bytes, ContentType.multipartFormData);
 
         var headersResponse = response.Data.JsonPartial<Headers>();
 
@@ -71,10 +71,10 @@ partial class ClientTests
 
         var headers = new Dictionary<string, string>
         {
-            { "Content-Type", MediaType.multipartFormData.ToValue() }
+            { "Content-Type", ContentType.multipartFormData.ToValue() }
         };
 
-        var response = bin.Post(bytes, MediaType.multipartFormData, headers);
+        var response = bin.Post(bytes, ContentType.multipartFormData, headers);
 
         var headersResponse = response.Data.JsonPartial<Headers>();
 
@@ -90,7 +90,7 @@ partial class ClientTests
 
         var bin = new HttpBin();
 
-        var response = bin.Post(bytes, MediaType.multipartFormData);
+        var response = bin.Post(bytes, ContentType.multipartFormData);
 
         var headerResponse = response.Data.JsonPartial<Headers>("hEaDerS");
 
@@ -113,7 +113,7 @@ partial class ClientTests
 
         try
         {
-            var res = client.Post<string>(url, data, MediaType.json, headers: headers);
+            var res = client.Post<string>(url, data, ContentType.json, headers: headers);
 
             Log.Dump(res);
         }

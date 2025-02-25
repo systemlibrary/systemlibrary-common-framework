@@ -6,10 +6,10 @@ partial class Client
     {
         if (!UseRequestBreakerPolicy) return false;
 
-        if (options.MediaType == MediaType.html ||
-            options.MediaType == MediaType.javascript ||
-            options.MediaType == MediaType.octetStream ||
-            options.MediaType == MediaType.css) return false;
+        if (options.ContentType == ContentType.html ||
+            options.ContentType == ContentType.javascript ||
+            options.ContentType == ContentType.octetStream ||
+            options.ContentType == ContentType.css) return false;
 
         return !options.Url.IsFile();
     }

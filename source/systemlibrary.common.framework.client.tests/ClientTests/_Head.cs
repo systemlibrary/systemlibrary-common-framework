@@ -9,7 +9,7 @@ public partial class ClientTests
     {
         var bin = new HttpBin();
 
-        var response = bin.Head(MediaType.None);
+        var response = bin.Head();
 
         Assert.IsTrue(response.IsSuccess);
     }
