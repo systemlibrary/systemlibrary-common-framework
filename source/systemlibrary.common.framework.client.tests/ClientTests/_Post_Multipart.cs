@@ -115,11 +115,12 @@ partial class ClientTests
         {
             var res = client.Post<string>(url, data, ContentType.json, headers: headers);
 
-            Log.Dump(res);
+            IsOk(res.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed);
         }
         catch (Exception e)
         {
             Log.Dump(e);
+            throw;
         }
     }
 }

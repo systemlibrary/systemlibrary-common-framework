@@ -2,7 +2,7 @@
 
 namespace SystemLibrary.Common.Framework.App.Tests;
 
-public partial class ClientTests
+partial class ClientTests
 {
     [TestMethod]
     public void Head_Success()

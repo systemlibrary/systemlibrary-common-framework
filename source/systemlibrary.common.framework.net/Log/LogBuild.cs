@@ -40,6 +40,8 @@ partial class Log
 
         if (AppendClass(message, obj, level, maxLevel, visited)) return;
 
+        if (AppendKeyValuePair(message, obj, level, maxLevel, visited)) return;
+
         Add(message, obj.ToString(), level);
     }
 
@@ -113,6 +115,40 @@ partial class Log
         return false;
     }
 
+    static bool AppendKeyValuePair(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
+    {
+        var objType = obj.GetType();
+        if (objType.IsGenericType &&
+           objType.GetGenericTypeDefinition() == SystemType.KeyValueType)
+        {
+            var value = objType.GetProperty("Value").GetValue(obj);
+
+            if (value is IEnumerable enumerable)
+            {
+                // AppendEnumerable(message, enumerable, level, maxLevel, visited);
+
+                var key = objType.GetProperty("Key").GetValue(obj);
+                var list = ((Array)value).Cast<object>();
+                var joined = string.Join(", ", list);
+                if (list.Count() > 1)
+                {
+                    Add(message, "[" + key + ", [" + joined + "]]", level);
+                }
+                else
+                {
+                    Add(message, "[" + key + ", " + joined + "]", level);
+                }
+            }
+            else
+            {
+                Add(message, obj.ToString(), level);
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     static bool AppendEnumerable(StringBuilder message, object obj, int level, int maxLevel, List<int> visited)
     {
         var isList = obj is IEnumerable && obj is not string;
@@ -176,7 +212,8 @@ partial class Log
                 {
                     for (int k = 0; k < arr.GetLength(1); k++)
                     {
-                        message.Append(arr.GetValue(j, k) + " ");
+                        var val = arr.GetValue(j, k);
+                        message.Append(val + " ");
                     }
 
                     if (j + 1 < arr.GetLength(0))
@@ -497,15 +534,31 @@ partial class Log
            !(obj is ReadOnlyMemory<int>) &&
            !(obj is ReadOnlyMemory<string>))
         {
+            var objType = obj.GetType();
+            if (objType.IsGenericType &&
+               objType.GetGenericTypeDefinition() == SystemType.KeyValueType)
+            {
+                return null;
+            }
+
             return obj.ToString();
         }
 
         if (obj is CultureInfo cult)
             return "CultureInfo: " + cult.Name + ", two-letter-iso: " + cult.TwoLetterISOLanguageName + ", three-letter-iso: " + cult.ThreeLetterISOLanguageName;
 
-        if(obj is Uri uri)
+        if (obj is Uri uri)
         {
             return $"{uri.OriginalString} | Scheme: {uri.Scheme} | Host: {uri.Host} | Path: {uri.AbsolutePath} | Query: {(uri.Query.Is() ? "(empty)" : uri.Query)} | IsAbsolute: {uri.IsAbsoluteUri} | IsFile: {uri.IsFile} | Authority: {uri.Authority}";
+        }
+
+        if (obj is Version v)
+        {
+            return v.ToString();
+        }
+        if(obj is HttpMethod m)
+        {
+            return m.ToString();
         }
 
         if (obj is bool?)
@@ -568,7 +621,7 @@ partial class Log
 
         if (type.Name == "DBNull") return "null";
 
-        
+
         return null;
     }
 

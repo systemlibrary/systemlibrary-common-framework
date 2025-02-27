@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SystemLibrary.Common.Framework.App;
 
-public partial class Client
+partial class Client
 {
     static async Task<string> GetResponseBodyAsync(HttpResponseMessage response)
     {

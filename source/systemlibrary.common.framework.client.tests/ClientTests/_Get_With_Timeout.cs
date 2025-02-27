@@ -63,8 +63,6 @@ partial class ClientTests
         {
             var response = bin.GetWithTimeout(timeout, 7);
 
-            Log.Dump(response);
-
             Assert.IsTrue(false, "Should throw HttpRequestException as timeout is 123ms and retry timeout is less than the sleep of 11 seconds");
         }
         catch (HttpRequestException)

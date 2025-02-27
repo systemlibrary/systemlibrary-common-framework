@@ -43,7 +43,21 @@ partial class Client
                 return (T)(object)body.ToDateTimeOffset();
 
             else
-                throw new Exception("Type: " + type.Name + " is not yet implemented for method ReadResponseAsync()");
+                throw new Exception("Type: " + type.Name + " is not yet implemented for method ReadResponseAsync(), you can call your method with the generic type: <HttpResponseMessage>() and parse the response data yourself");
+        }
+
+        if (type == SystemType.ByteArrayType)
+        {
+            byte[] bytes;
+            using (var stream = await response.Content.ReadAsStreamAsync())
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await stream.CopyToAsync(ms);
+                    bytes = ms.ToArray();
+                }
+            }
+            return (T)(object)bytes;
         }
 
         var contentType = response.Content?.Headers?.ContentType?.MediaType;
@@ -80,21 +94,7 @@ partial class Client
                 }
             }
 
-            else if (type == SystemType.ByteArrayType)
-            {
-                byte[] bytes;
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        await stream.CopyToAsync(ms);
-                        bytes = ms.ToArray();
-                    }
-                }
-                return (T)(object)bytes;
-            }
-
-            throw new Exception("Cannot deserialize " + type.Name + " from the response body. Set the generic return type to be <HttpResponseMessage>() and parse the content yourself, targetting url: " + url);
+            throw new Exception("Cannot deserialize " + type.Name + " from the response body. Set the generic return type to be <HttpResponseMessage>() and parse the content yourself, for url: " + url);
         }
     }
 }

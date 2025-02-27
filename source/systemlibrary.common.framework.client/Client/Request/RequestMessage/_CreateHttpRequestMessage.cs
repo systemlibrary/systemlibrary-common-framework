@@ -1,8 +1,4 @@
-﻿using System.Text;
-
-using SystemLibrary.Common.Framework.Extensions;
-
-namespace SystemLibrary.Common.Framework.App;
+﻿namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {
@@ -14,12 +10,10 @@ partial class Client
 
             var contentType = GetContentType(options);
 
-            Log.Dump(contentType);
-
             SetRequestMessageContent(message, options, contentType);
-            Log.Dump("Set request message!");
+
             SetRequestMessageHeaders(message, options, contentType);
-            Log.Dump("Set request headers!");
+
             return message;
         }
     }

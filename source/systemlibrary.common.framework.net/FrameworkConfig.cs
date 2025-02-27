@@ -2,6 +2,7 @@
 
 internal class FrameworkConfig
 {
+    public string License { get; set; }
     public bool Debug { get; set; }
     public JsonConfig Json { get; set; }
     public LogConfig Log { get; set; }
