@@ -12,19 +12,21 @@ partial class FrameworkOptions
     public Assembly[] ApplicationParts = null;
 
     /// <summary>
-    /// Enabled re-compilation of .cshtml files upon saving .cshtml files
-    /// <list>
-    /// <item>- Avoids the need of a re-compilation of whole application for one small view change</item>
-    /// <item>- Package 'System.Security.Cryptography.Pkcs' is required, not a direct dependency, but through SystemLibrary.Common.Framework. If you turn this on and it throws? Add the right version of System.Security.Cryptography.Pkcs</item>
-    /// </list>
+    /// Pass in a string array of area view location formats
+    /// <para>Example:</para>
+    /// AreaViewLocations = new string[] { "~/Area/{2}/{1}/{0}.cshtml" };
     /// </summary>
-    public bool UseRazorRuntimeCompilationOnSave = true;
-
-    /// <summary>
-    /// Pass in an object that implements the interface if you want to extend View Locations
-    /// <para>Another option is to simply set 'ViewLocations' variable or 'AreaViewLocations'</para>
-    /// </summary>
-    public IViewLocationExpander ViewLocationExpander = null;
+    /// <remarks>
+    /// This sets area view locations
+    /// </remarks>
+    /// <example>
+    /// Simple example:
+    /// <code>
+    /// var options = new FrameworkOptions();
+    /// options.ViewLocations = new string[] { "~/Pages/{2}/{1}/{0}.cshtml" }
+    /// </code>
+    /// </example>
+    public string[] AreaViewLocations;
 
     /// <summary>
     /// Pass in a string array of view location formats
@@ -44,21 +46,10 @@ partial class FrameworkOptions
     public string[] ViewLocations = null;
 
     /// <summary>
-    /// Pass in a string array of area view location formats
-    /// <para>Example:</para>
-    /// AreaViewLocations = new string[] { "~/Area/{2}/{1}/{0}.cshtml" };
+    /// Forwards all Microsoft.Extensions.Logging.ILogger log events to your custom ILogWriter.
+    /// <para>If enabled, an internal LogProvider is added to capture and route all logs.</para>
     /// </summary>
-    /// <remarks>
-    /// This sets area view locations
-    /// </remarks>
-    /// <example>
-    /// Simple example:
-    /// <code>
-    /// var options = new FrameworkOptions();
-    /// options.ViewLocations = new string[] { "~/Pages/{2}/{1}/{0}.cshtml" }
-    /// </code>
-    /// </example>
-    public string[] AreaViewLocations;
+    public bool UseForwardILogger = false;
 
     /// <summary>
     /// Generate and enable data protection with a 31 days rotating key files
@@ -70,10 +61,12 @@ partial class FrameworkOptions
     public bool UseDataProtectionPolicy = false;
 
     /// <summary>
-    /// Forwards all Microsoft.Extensions.Logging.ILogger log events to your custom ILogWriter.
-    /// <para>If enabled, an internal LogProvider is added to capture and route all logs.</para>
+    /// Enabled auto-recompilation of .cshtml files upon saving .cshtml files
+    /// <list>
+    /// <item>- Avoids the need of a re-compilation of whole application for one small view change</item>
+    /// </list>
     /// </summary>
-    public bool UseForwardILogger = false;
+    public bool UseRazorRuntimeCompilationOnSave = false;
 
     /// <summary>
     /// Set to true to add ResponseCaching services
@@ -88,4 +81,10 @@ partial class FrameworkOptions
     /// Note: This is used when converting data in a response to a Model within a GET or POST method for instance, do not mix it with JSON Serialization, thats something else
     /// </remarks>
     public bool UseExtendedEnumModelConverter = true;
+
+    /// <summary>
+    /// Pass in an object that implements the interface if you want to extend View Locations
+    /// <para>Another option is to simply set 'ViewLocations' variable or 'AreaViewLocations'</para>
+    /// </summary>
+    public IViewLocationExpander ViewLocationExpander = null;
 }

@@ -1,21 +1,11 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Routing;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 partial class FrameworkOptions
 {
     /// <summary>
-    /// Adds middleware for Authorization and Authentication attributes
+    /// Adds middleware which responds with a exception page usually used in development environments and test environments
     /// </summary>
-    public bool UseAuthentication = true;
-
-    /// <summary>
-    /// Adds middleware for Authorization attributes
-    /// </summary>
-    public bool UseAuthorization = true;
+    public bool UseDeveloperPage = true;
 
     /// <summary>
     /// Adds middleware for static files and sets a few default settings:
@@ -53,8 +43,4 @@ partial class FrameworkOptions
     /// </remarks>
     public string[] StaticFilesRequestPaths = null;
 
-    /// <summary>
-    /// Adds middleware which responds with a exception page usually used in development environments and test environments
-    /// </summary>
-    public bool UseDeveloperPage = true;
 }

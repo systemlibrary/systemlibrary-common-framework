@@ -27,7 +27,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// </remarks>
 public class OriginFilterAttribute : BaseApiFilterAttribute
 {
-    string Match;
+    new string Match;
 
     /// <summary>
     /// match: either a regex, an exact string, or strings delimited by |

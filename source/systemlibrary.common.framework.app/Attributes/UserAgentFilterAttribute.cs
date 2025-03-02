@@ -30,7 +30,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// </remarks>
 public class UserAgentFilterAttribute : BaseApiFilterAttribute
 {
-    string Match;
+    new string Match;
 
     static HashSet<string> BlacklistedUserAgents = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {

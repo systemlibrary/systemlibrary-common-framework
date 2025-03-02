@@ -45,6 +45,16 @@ namespace SystemLibrary.Common.Framework;
 public partial class FrameworkOptions
 {
     /// <summary>
+    /// Adds middleware for Authorization and Authentication attributes
+    /// </summary>
+    public bool UseAuthentication = true;
+
+    /// <summary>
+    /// Adds middleware for Authorization attributes
+    /// </summary>
+    public bool UseAuthorization = true;
+
+    /// <summary>
     /// Set to true to add services and middleware for controllers and api controllers
     /// </summary>
     public bool UseControllers = true;
