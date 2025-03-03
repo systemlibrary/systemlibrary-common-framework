@@ -13,16 +13,16 @@ using SystemLibrary.Common.Framework.Extensions;
 namespace SystemLibrary.Common.Framework.App;
 
 /// <summary>
-/// Caching for web applications
-/// <para>Default duration is 180 seconds</para>
+/// Caching for applications
+/// <para>Default duration is 200 seconds</para>
 /// Try using auto-generating cache keys, which differentiate caching down to user roles.
 /// <para>- Cache things per user, by userId/email? Create your own cacheKey</para>
-/// <para>'Skip' means that the item will not be fetched from cache</para>
+/// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
 /// Skip options:
-/// <para>- skipForAuthenticatedUsers, false by default</para>
-/// - skipForAdmins, true by default
-/// <para>  * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-/// - skipFor, your own condition, must return True to skip
+/// <para>- ignoreForAuthenticated, false by default</para>
+/// - ignoreForAdmin, true by default
+/// <para>The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+/// - ignoreFor, your own condition, must return True to skip
 /// </summary>
 /// <remarks>
 /// Cache is configured to a max capacity of 320.000 items, divided by 8 cache containers, where any item added takes up 1 size
@@ -89,7 +89,7 @@ public static partial class Cache
         for (int i = 0; i < MaxCacheContainers; i++)
         {
             MemoryCacheOptions options = new MemoryCacheOptions();
-            options.ExpirationScanFrequency = TimeSpan.FromSeconds(90 + Randomness.Int(30));
+            options.ExpirationScanFrequency = TimeSpan.FromSeconds(90 + Randomness.Int(4) + (i * 5));
             options.SizeLimit = ContainerSizeLimitConfig;
             options.CompactionPercentage = 0.33;
 
@@ -157,19 +157,19 @@ public static partial class Cache
     /// </summary>
     /// <remarks>
     /// <para>A null value is never added to cache</para>
-    /// Default duration is 180 seconds
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// Default duration is 200 seconds
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="cacheKey">"" to use auto-generating of cacheKey, null to always skip cache</param>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <example>
     /// <code>
     /// var cacheKey = "key";
@@ -180,11 +180,11 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T TryGet<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
         try
         {
-            return Get(getItem, cacheKey, duration, condition, skipForAuthenticatedUsers, skipForAdmins, skipFor);
+            return Get(getItem, cacheKey, duration, condition, ignoreForAuthenticated, ignoreForAdmin, ignoreFor);
         }
         catch (Exception ex)
         {
@@ -200,18 +200,18 @@ public static partial class Cache
     /// </summary>
     /// <remarks>
     /// <para>A null value is never added to cache</para>
-    /// Default duration is 180 seconds
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// Default duration is 200 seconds
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <example>
     /// <code>
     /// var data = Cache.TryGet&lt;string&gt;(() => throw new Exception("does not crash application"));
@@ -219,11 +219,11 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T TryGet<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
         try
         {
-            return Get(getItem, "", duration, condition, skipForAuthenticatedUsers, skipForAdmins, skipFor);
+            return Get(getItem, "", duration, condition, ignoreForAuthenticated, ignoreForAdmin, ignoreFor);
         }
         catch (Exception ex)
         {
@@ -239,19 +239,19 @@ public static partial class Cache
     /// </summary>
     /// <remarks>
     /// <para>A null value is never added to cache</para>
-    /// Default duration is 180 seconds
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// Default duration is 200 seconds
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="cacheKey">"" to use auto-generating of cacheKey, null to always skip cache</param>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <example>
     /// <code>
     /// var data = Cache.TryGet&lt;string&gt;(() => throw new Exception("does not crash application"));
@@ -260,11 +260,11 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T TryGet<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
         try
         {
-            return Get(getItem, cacheKey, duration, condition, skipForAuthenticatedUsers, skipForAdmins, skipFor);
+            return Get(getItem, cacheKey, duration, condition, ignoreForAuthenticated, ignoreForAdmin, ignoreFor);
         }
         catch (Exception ex)
         {
@@ -280,19 +280,19 @@ public static partial class Cache
     /// <remarks>
     /// <para>A null value is never added to cache</para>
     /// Throws exception if getItem can throw
-    /// <para>Default duration is 180 seconds</para>
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// <para>Default duration is 200 seconds</para>
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="cacheKey">"" to use auto-generating of cacheKey, null to always skip cache</param>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <code>
     /// class CarService
     /// {
@@ -308,9 +308,9 @@ public static partial class Cache
     /// }
     /// </code>
     /// <returns>Returns T from cache or from getItem, or throws if getItem throws</returns>
-    public static T Get<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T Get<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
-        return Get(getItem, cacheKey, duration, condition, skipForAuthenticatedUsers, skipForAdmins, skipFor);
+        return Get(getItem, cacheKey, duration, condition, ignoreForAuthenticated, ignoreForAdmin, ignoreFor);
     }
 
     /// <summary>
@@ -319,18 +319,18 @@ public static partial class Cache
     /// <remarks>
     /// <para>A null value is never added to cache</para>
     /// Throws exception if getItem can throw
-    /// <para>Default duration is 180 seconds</para>
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// <para>Default duration is 200 seconds</para>
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <code>
     /// class CarService
     /// {
@@ -346,9 +346,9 @@ public static partial class Cache
     /// }
     /// </code>
     /// <returns>Returns T from cache or from getItem, or throws if getItem throws</returns>
-    public static T Get<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T Get<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
-        return Get(getItem, "", duration, condition, skipForAuthenticatedUsers, skipForAdmins, skipFor);
+        return Get(getItem, "", duration, condition, ignoreForAuthenticated, ignoreForAdmin, ignoreFor);
     }
 
     /// <summary>
@@ -357,19 +357,19 @@ public static partial class Cache
     /// <remarks>
     /// <para>A null value is never added to cache</para>
     /// Throws exception if getItem can throw
-    /// <para>Default duration is 180 seconds</para>
-    /// <para>'Skip' means that the item will not be fetched from cache</para>
+    /// <para>Default duration is 200 seconds</para>
+    /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
     /// Skip options:
-    /// <para>- skipForAuthenticatedUsers, false by default</para>
-    /// - skipForAdmins, true by default
-    /// <para>    * User must be part of any following roles case sensitive: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</para>
-    /// - skipFor, your own condition, must return True to skip
+    /// <para>- ignoreForAuthenticated, false by default</para>
+    /// - ignoreForAdmin, true by default
+    /// <para>  The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</para>
+    /// - ignoreFor, your own condition, must return True to skip
     /// </remarks>
     /// <param name="cacheKey">"" to use auto-generating of cacheKey, null to always skip cache</param>
     /// <param name="condition">Add to cache only if condition is true, for instance: data?.Count > 0</param>
-    /// <param name="skipForAuthenticatedUsers">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
-    /// <param name="skipForAdmins">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
-    /// <param name="skipFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
+    /// <param name="ignoreForAuthenticated">Skip cache for any user that is authenticated through the current HttpContext.User instance</param>
+    /// <param name="ignoreForAdmin">Skip cache for any user that is authenticated through the current HttpContext.User and is in any role: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators</param>
+    /// <param name="ignoreFor">Implement your own logic for when to skip cache, let it return true on your conditions to avoid caching</param>
     /// <example>
     /// Simplest example:
     /// <code>
@@ -400,7 +400,7 @@ public static partial class Cache
     ///     cacheKey: cacheKey,
     ///     duration: TimeSpan.FromSeconds(1),
     ///     condition: x => x != "hello world",
-    ///     skipForAuthenticatedUsers: false);
+    ///     ignoreForAuthenticated: false);
     /// 
     /// //'data' is equal to 'hello world', cache duration is 1 second, but it only adds the result to cache, if it is not equal to "hello world"
     /// // so in this scenario - "hello world" is never added to cache, and our function that returns "hello world" is always invoked
@@ -415,10 +415,10 @@ public static partial class Cache
     ///         return Cache.Get&lt;string&gt;(() => {
     ///             return Client.Get&lt;string&gt;("https://systemlibrary.com/api/cars?top=1");
     ///         },
-    ///         skipForAdmins: false);
+    ///         ignoreForAdmin: false);
     ///     }
     /// }
-    /// // This caches top 1 cars for every user, even admins, as we set 'skipForAdmins' to False
+    /// // This caches top 1 cars for every user, even admins, as we set 'ignoreForAdmin' to False
     /// </code>
     /// 
     /// Example without a cache key and with 'external' variables
@@ -444,14 +444,15 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns item from cache or getItem</returns>
-    public static T Get<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool skipForAuthenticatedUsers = false, bool skipForAdmins = true, Func<bool> skipFor = null)
+    public static T Get<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool ignoreForAuthenticated = false, bool ignoreForAdmin = true, Func<bool> ignoreFor = null)
     {
         if (cacheKey == null)
             return getItem();
 
-        if (SkipCache(skipForAuthenticatedUsers, skipForAdmins, skipFor))
+        if (SkipCache(ignoreForAuthenticated, ignoreForAdmin, ignoreFor))
         {
-            // Debug.Log("Skipped cache for: " + cacheKey);
+            if (EnablePrometheusConfig)
+                CacheMetrics.RecordCacheIgnored();
 
             return getItem();
         }
@@ -464,14 +465,19 @@ public static partial class Cache
 
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
-        // NOTE: cache[cacheIndex] is never null
+        // NOTE: cache[cacheIndex] is never null, but keeping it in case I've missed something
         if (cache[cacheIndex] == null)
             return getItem();
 
         var cached = cache[cacheIndex].Get(cacheKey);
 
         if (cached != null)
+        {
+            if (EnablePrometheusConfig)
+                CacheMetrics.RecordCacheHit();
+
             return (T)cached;
+        }
 
         object CacheFallbackLookup(Exception ex = null)
         {
@@ -483,7 +489,7 @@ public static partial class Cache
 
                 if (cachedFallback != null)
                 {
-                    Log.Warning(new Exception("Fallback cache match, key: " + cacheKey.MaxLength(22) + "...", ex));
+                    Log.Warning(new Exception("Fallback cache match, key: " + cacheKey.MaxLength(32) + "...", ex));
 
                     return cachedFallback;
                 }
@@ -501,8 +507,8 @@ public static partial class Cache
                 cached = CacheFallbackLookup();
                 if (cached != null)
                 {
-                    if(EnablePrometheusConfig)
-                        CacheMetrics.RecordCacheMissWithFallback();
+                    if (EnablePrometheusConfig)
+                        CacheMetrics.RecordCacheMissWithFallbackCounter();
 
                     return (T)cached;
                 }
@@ -514,19 +520,29 @@ public static partial class Cache
             if (cached != null)
             {
                 if (EnablePrometheusConfig)
-                    CacheMetrics.RecordCacheExceptionWithFallback();
+                    CacheMetrics.RecordCacheExceptionWithFallbackCounter();
 
                 return (T)cached;
             }
 
             if (EnablePrometheusConfig)
-                CacheMetrics.RecordCacheExceptionNoFallback();
+                CacheMetrics.RecordCacheLookupExceptionsCounter();
 
             throw ex;
         }
 
         if (cached != null && (condition == null || condition((T)cached)))
+        {
             Insert(cacheIndex, cacheKey, cached, duration);
+
+            if (EnablePrometheusConfig)
+                CacheMetrics.RecordCacheMiss();
+        }
+        else
+        {
+            if (EnablePrometheusConfig)
+                CacheMetrics.RecordCacheIgnored();
+        }
 
         return (T)cached;
     }
@@ -676,7 +692,7 @@ public static partial class Cache
 
     static string CreateCacheKey<T>(Func<T> getItem, Func<T, bool> condition)
     {
-        var key = new StringBuilder("common.web.cache", capacity: 383);
+        var key = new StringBuilder("SLF%", capacity: 383);
 
         var getItemMethod = getItem.Method;
 
@@ -907,7 +923,8 @@ public static partial class Cache
             if (claimsPrincipal?.Claims != null)
             {
                 var roles = claimsPrincipal.Claims
-                    .Where(c => c.Type == claimsIdentity.RoleClaimType || c.Type == "role" || c.Type == "Role")
+                    .Where(c => c.Type == claimsIdentity.RoleClaimType ||
+                           c.Type.Equals("role", StringComparison.OrdinalIgnoreCase))
                     .Select(x => x.Value);
 
                 if (roles != null)
@@ -918,17 +935,17 @@ public static partial class Cache
         return key.ToString();
     }
 
-    static bool SkipCache(bool skipForAuthenticatedUsers, bool skipForAdmins, Func<bool> skipFor)
+    static bool SkipCache(bool ignoreForAuthenticated, bool ignoreForAdmin, Func<bool> ignoreFor)
     {
-        if (skipForAuthenticatedUsers || skipForAdmins || skipFor != null)
+        if (ignoreForAuthenticated || ignoreForAdmin || ignoreFor != null)
         {
-            if (skipForAuthenticatedUsers && IsCurrentUserAuthenticated())
+            if (ignoreForAuthenticated && IsCurrentUserAuthenticated())
                 return true;
 
-            if (skipForAdmins && IsCurrentUserAdmin())
+            if (ignoreForAdmin && IsCurrentUserAdmin())
                 return true;
 
-            if (skipFor != null && skipFor())
+            if (ignoreFor != null && ignoreFor())
                 return true;
         }
 
@@ -1017,5 +1034,14 @@ public static partial class Cache
             return sum;
         }
     }
-
 }
+
+/*
+ * TODO:
+ * Reduce max key length in auto gen to 2048, chars, roughly 4KB down from 6KB
+ * - When the limit is reached log.error with 512 of the first chars of the cacheKey and continue
+ * - When the limit is reached, keep adding only 1 char or 1 digit for the remaining fields
+ * - Limit amount of fields to loop to 128, we do not need more fields than that to autogenerate a cacheKey from, that is insane if so
+ * - Also log.erorr if the field limit is reached and continue as normal
+ * 
+ * */

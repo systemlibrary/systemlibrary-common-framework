@@ -16,25 +16,12 @@
 	  <DefineConstants />
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Remove="Api\DocsTests.cs" />
-	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Api\DocsTests.cs" />
-	  <EmbeddedResource Include="ClientTests\_PostGraphqlData.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="ClientTests\Files\icon.png" />
-		<EmbeddedResource Include="ClientTests\Files\text.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.11" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.6.4" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.13" />
+		<PackageReference Include="Microsoft.NeT.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
 	</ItemGroup>
 
 	<ItemGroup>
