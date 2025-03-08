@@ -6,7 +6,6 @@ using System.Web;
 using Microsoft.AspNetCore.DataProtection;
 
 using SystemLibrary.Common.Framework;
-using SystemLibrary.Common.Framework.Attributes;
 using SystemLibrary.Common.Framework.Extensions;
 
 /// <summary>
@@ -1566,7 +1565,7 @@ public static partial class StringExtensions
     {
         if (path.IsNot()) return path;
 
-        if(path.IndexOf('\\') > -1)
+        if (path.IndexOf('\\') > -1)
         {
             path = path.Replace("\\", "/");
         }

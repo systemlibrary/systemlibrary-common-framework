@@ -14,7 +14,7 @@ namespace SystemLibrary.Common.Framework.App;
 
 /// <summary>
 /// Caching for applications
-/// <para>Default duration is 200 seconds</para>
+/// <para>Default duration is 3 minutes</para>
 /// Try using auto-generating cache keys, which differentiate caching down to user roles.
 /// <para>- Cache things per user, by userId/email? Create your own cacheKey</para>
 /// <para>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</para>
@@ -138,18 +138,17 @@ public static partial class Cache
     /// </remarks>
     /// <param name="cacheKey">CacheKey to set item as, if null or empty this does nothing</param>
     /// <param name="duration">Defaults to 180 seconds</param>
-    public static void Set<T>(string cacheKey, T item, TimeSpan duration = default)
+    public static void Set<T>(string cacheKey, T item, CacheDuration duration = default)
     {
         if (cacheKey.IsNot())
             return;
-
-        if (duration == default)
-            duration = TimeSpan.FromSeconds(DurationConfig);
 
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
         Insert(cacheIndex, cacheKey, item, duration);
     }
+
+
 
     /// <summary>
     /// Try get item from Cache as T
@@ -180,7 +179,7 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T TryGet<T>(string cacheKey, Func<T> getItem, CacheDuration duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         try
         {
@@ -219,7 +218,7 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T TryGet<T>(Func<T> getItem, CacheDuration duration, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         try
         {
@@ -260,7 +259,7 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns T from cache or from getItem. If getItem throws, the exception is logged as error and default is returned</returns>
-    public static T TryGet<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T TryGet<T>(Func<T> getItem, string cacheKey = "", CacheDuration duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         try
         {
@@ -308,7 +307,7 @@ public static partial class Cache
     /// }
     /// </code>
     /// <returns>Returns T from cache or from getItem, or throws if getItem throws</returns>
-    public static T Get<T>(string cacheKey, Func<T> getItem, TimeSpan duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T Get<T>(string cacheKey, Func<T> getItem, CacheDuration duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         return Get(getItem, cacheKey, duration, condition, skipWhenAuthenticated, skipWhenAdmin, skipWhen);
     }
@@ -346,7 +345,7 @@ public static partial class Cache
     /// }
     /// </code>
     /// <returns>Returns T from cache or from getItem, or throws if getItem throws</returns>
-    public static T Get<T>(Func<T> getItem, TimeSpan duration, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T Get<T>(Func<T> getItem, CacheDuration duration, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         return Get(getItem, "", duration, condition, skipWhenAuthenticated, skipWhenAdmin, skipWhen);
     }
@@ -444,7 +443,7 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>Returns item from cache or getItem</returns>
-    public static T Get<T>(Func<T> getItem, string cacheKey = "", TimeSpan duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
+    public static T Get<T>(Func<T> getItem, string cacheKey = "", CacheDuration duration = default, Func<T, bool> condition = null, bool skipWhenAuthenticated = false, bool skipWhenAdmin = true, Func<bool> skipWhen = null)
     {
         if (cacheKey == null)
             return getItem();
@@ -456,9 +455,6 @@ public static partial class Cache
 
             return getItem();
         }
-
-        if (duration == default)
-            duration = TimeSpan.FromSeconds(DurationConfig);
 
         if (cacheKey == "")
             cacheKey = CreateCacheKey(getItem, condition);
@@ -567,11 +563,8 @@ public static partial class Cache
     /// </code>
     /// </example>
     /// <returns>True if the block is allowed to execute; otherwise, false.</returns>
-    public static bool Lock(TimeSpan duration = default, string lockKey = null)
+    public static bool Lock(CacheDuration duration = default, string lockKey = null)
     {
-        if (duration == default)
-            duration = TimeSpan.FromSeconds(60);
-
         try
         {
             var callee = new StackFrame(1).GetMethod();
@@ -663,7 +656,7 @@ public static partial class Cache
         }
     }
 
-    static void Insert(int cacheIndex, string cacheKey, object item, TimeSpan duration)
+    static void Insert(int cacheIndex, string cacheKey, object item, CacheDuration duration)
     {
         if (cache[cacheIndex] == null) return;
 
@@ -673,9 +666,10 @@ public static partial class Cache
         }
         else
         {
+            var cacheDuration = GetCacheDuration(duration);
             cache[cacheIndex].Set(cacheKey, item, new MemoryCacheEntryOptions()
             {
-                AbsoluteExpiration = DateTime.Now.Add(duration),
+                AbsoluteExpiration = DateTime.Now.Add(cacheDuration),
                 Size = 1,
             });
 
@@ -683,7 +677,7 @@ public static partial class Cache
             {
                 cacheFallback[cacheIndex].Set(cacheKey, item, new MemoryCacheEntryOptions()
                 {
-                    AbsoluteExpiration = DateTime.Now.Add(duration).AddSeconds(FallbackDurationConfig),
+                    AbsoluteExpiration = DateTime.Now.Add(cacheDuration).AddSeconds(FallbackDurationConfig),
                     Size = 1,
                 });
             }
@@ -950,6 +944,13 @@ public static partial class Cache
         }
 
         return false;
+    }
+
+    static TimeSpan GetCacheDuration(CacheDuration duration)
+    {
+        if (duration == default)
+            return TimeSpan.FromSeconds(DurationConfig);
+        return TimeSpan.FromSeconds((int)duration);
     }
 
     static bool IsCurrentUserAuthenticated()

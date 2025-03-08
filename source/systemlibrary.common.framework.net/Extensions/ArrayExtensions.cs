@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace SystemLibrary.Common.Framework.Extensions;
+﻿namespace SystemLibrary.Common.Framework.Extensions;
 
 /// <summary>
 /// This class contains extension methods for Arrays

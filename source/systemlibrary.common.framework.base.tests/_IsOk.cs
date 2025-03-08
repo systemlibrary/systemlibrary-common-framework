@@ -27,13 +27,13 @@ partial class BaseTest
     {
         if (value == null) return true;
 
-        if(value is HttpStatusCode statusCode)
+        if (value is HttpStatusCode statusCode)
         {
-            return statusCode != HttpStatusCode.OK && 
+            return statusCode != HttpStatusCode.OK &&
                 statusCode != HttpStatusCode.Accepted;
         }
 
-        if(value is string s)
+        if (value is string s)
         {
             if (s.IsNot()) return true;
             var enumKeys = Enum.GetValues<HttpStatusCode>()
@@ -51,7 +51,7 @@ partial class BaseTest
         }
 
         return value == null ||
-               (value is int i && i <= 0) ||               
+               (value is int i && i <= 0) ||
                (value is double d && d <= 0) ||
                (value is float f && f <= 0) ||
                (value is bool b && !b) ||

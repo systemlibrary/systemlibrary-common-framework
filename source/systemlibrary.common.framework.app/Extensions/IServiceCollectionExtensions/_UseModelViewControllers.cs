@@ -22,7 +22,7 @@ partial class IServiceCollectionExtensions
             });
         }
 
-        if(options.UseControllers)
+        if (options.UseControllers)
         {
             return services.AddControllers(options =>
             {

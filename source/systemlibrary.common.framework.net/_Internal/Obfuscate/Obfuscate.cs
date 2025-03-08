@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 internal static class Obfuscate
 {

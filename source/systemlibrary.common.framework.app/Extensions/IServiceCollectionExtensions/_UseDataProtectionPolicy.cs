@@ -36,7 +36,7 @@ partial class IServiceCollectionExtensions
                 .DisableAutomaticKeyGeneration()
                 .PersistKeysToFileSystem(keyRingDirectory)
                 .SetApplicationName(appName)
-                .SetDefaultKeyLifetime(TimeSpan.FromDays( 31))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(31))
                 .Services;
         }
         else
@@ -63,7 +63,7 @@ partial class IServiceCollectionExtensions
 
         foreach (var file in files)
         {
-            if(file.FullName.Contains("key-") && file.Length > 1)
+            if (file.FullName.Contains("key-") && file.Length > 1)
             {
                 if (file.CreationTimeUtc < cutOffDate || file.LastWriteTimeUtc < cutOffDate)
                 {

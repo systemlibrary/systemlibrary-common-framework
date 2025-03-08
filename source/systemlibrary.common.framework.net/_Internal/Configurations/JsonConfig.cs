@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SystemLibrary.Common.Framework;
 
@@ -11,6 +10,6 @@ internal class JsonConfig
     public JsonIgnoreCondition JsonIgnoreCondition { get; set; } = JsonIgnoreCondition.WhenWritingNull;
     public bool WriteIndented { get; set; } = false;
     public bool IgnoreReadOnlyFields { get; set; } = true;
-    public bool IncludeFields { get;set; } = true;
+    public bool IncludeFields { get; set; } = true;
     public bool JsonSecureAttributesEnabled { get; set; } = true;
 }

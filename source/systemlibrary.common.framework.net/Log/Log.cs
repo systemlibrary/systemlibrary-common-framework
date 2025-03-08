@@ -258,7 +258,7 @@ public static partial class Log
         {
             if (LogIsOff)
             {
-                if(!WarningDumped)
+                if (!WarningDumped)
                 {
                     WarningDumped = true;
                     Log.Dump("[SystemLibrary.Common.Framework] Logging is unset for the framework and the default logging is set to 'none', will not log anything from here on.");

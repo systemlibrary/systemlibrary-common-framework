@@ -26,7 +26,7 @@ internal static class Debug
     {
         try
         {
-            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" +   o + "\n");
+            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
         }
         catch
         {

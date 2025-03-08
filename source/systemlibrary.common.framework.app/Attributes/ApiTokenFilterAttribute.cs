@@ -53,7 +53,7 @@ public class ApiTokenFilterAttribute : BaseApiFilterAttribute
             else
                 base.OnAccessDenied(context, this.HeaderName + " is incorrect");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             base.OnAccessDenied(context, this.HeaderName + " threw: " + ex.Message);
         }

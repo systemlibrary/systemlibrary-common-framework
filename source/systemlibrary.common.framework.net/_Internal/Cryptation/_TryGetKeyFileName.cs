@@ -5,8 +5,8 @@ partial class CryptationKey
     internal static string TryGetKeyFileName()
     {
         var keyFile = FindFrameworkKeyFile();
-        
-        if(keyFile.Is()) Debug.Log("Found framework key file in " + FrameworkKeyDirectory);
+
+        if (keyFile.Is()) Debug.Log("Found framework key file in " + FrameworkKeyDirectory);
 
         return Path.GetFileName(keyFile);
     }
@@ -48,7 +48,7 @@ partial class CryptationKey
                 if (validated != null) return validated.Replace("framework-key-", "");
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Log.Error(ex);
         }

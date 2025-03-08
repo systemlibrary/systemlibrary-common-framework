@@ -16,7 +16,7 @@ internal class JsonCompressConverter : BaseJsonConverter
 
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var value =  reader.GetBytesFromBase64(); //GetValue(ref reader, typeToConvert);
+        var value = reader.GetBytesFromBase64(); //GetValue(ref reader, typeToConvert);
 
         if (value == null) return typeToConvert.Default();
 

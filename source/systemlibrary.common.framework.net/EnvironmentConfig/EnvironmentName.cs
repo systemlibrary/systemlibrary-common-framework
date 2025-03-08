@@ -1,6 +1,4 @@
-﻿using SystemLibrary.Common.Framework.Attributes;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 /// <summary>
 /// Enum list of common built-in environment names allowed

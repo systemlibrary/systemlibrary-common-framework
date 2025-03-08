@@ -9,7 +9,7 @@ static partial class IServiceCollectionExtensions
 {
     static IServiceCollection UseCookiePolicy(this IServiceCollection services)
     {
-     
+
 
         return services.Configure<CookiePolicyOptions>(options =>
         {

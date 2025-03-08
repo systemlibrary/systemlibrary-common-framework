@@ -20,7 +20,7 @@ partial class BaseApiController
         var endpoints = new Dictionary<string, string>();
 
         var controllerType = GetType();
-        
+
         var methods = controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 
         var apiPath = GetApiPath(controllerType);
@@ -83,7 +83,7 @@ partial class BaseApiController
 
         return uniqueKey;
     }
-    
+
     static string ToCamelCase(string name)
     {
         if (name.Length <= 1)
@@ -130,7 +130,7 @@ partial class BaseApiController
 
         var namespacePath = UseApiControllersRouting.GetNamespaceAsPath(controllerType);
 
-        if(namespacePath == "")
+        if (namespacePath == "")
             return $"{ToCamelCase(path)}";
 
         return $"{namespacePath}/{ToCamelCase(path)}";

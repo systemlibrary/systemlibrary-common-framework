@@ -19,7 +19,7 @@ static partial class IServiceCollectionextensions
         var tempProvider = serviceCollection.BuildServiceProvider();
 
         ServiceProviderInstance.Instance = tempProvider;
-        
+
         HttpContextInstance.HttpContextAccessor = tempProvider.GetRequiredService<IHttpContextAccessor>();
 
         ActionContextInstance.ActionContextAccessor = tempProvider.GetRequiredService<IActionContextAccessor>();

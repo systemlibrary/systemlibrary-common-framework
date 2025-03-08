@@ -44,7 +44,7 @@ partial class BaseTest
 
     async Task<HttpResponseMessage> GetResponseAsync(string path, (string Key, string Value)[] headers)
     {
-        if(!path.StartsWith("/"))
+        if (!path.StartsWith("/"))
         {
             path = "/" + path;
         }

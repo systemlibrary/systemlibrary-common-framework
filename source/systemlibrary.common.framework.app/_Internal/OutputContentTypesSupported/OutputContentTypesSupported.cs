@@ -42,7 +42,7 @@ internal class OutputContentTypesSupported : StringOutputFormatter
 
         if (requestPath[l - 1] == '/') return true;
 
-        var extensionPosition = requestPath.LastIndexOf('.', l - 1, 7); 
+        var extensionPosition = requestPath.LastIndexOf('.', l - 1, 7);
 
         if (extensionPosition == -1) return true;
 

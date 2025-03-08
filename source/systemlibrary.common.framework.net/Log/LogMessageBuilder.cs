@@ -28,7 +28,7 @@ partial class Log
         {
             var message = new StringBuilder(256);
 
-            if(level != LogLevel.Unset && (int)level < 9999)
+            if (level != LogLevel.Unset && (int)level < 9999)
                 message.Append(level.ToString().ToUpper() + ": ");
 
             foreach (var obj in objects)

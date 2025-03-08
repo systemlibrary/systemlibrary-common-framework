@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SystemLibrary.Common.Framework.Extensions;
+﻿namespace SystemLibrary.Common.Framework.Extensions;
 
 /// <summary>
 /// Extension methods for IList of strings

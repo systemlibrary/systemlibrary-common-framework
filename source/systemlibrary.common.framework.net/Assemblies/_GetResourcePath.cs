@@ -36,7 +36,7 @@ partial class Assemblies
 
         foreach (var resource in embeddedResourceNames)
         {
-            if(resource.EndsWith(dottedEmbeddedResourceName, StringComparison.Ordinal))
+            if (resource.EndsWith(dottedEmbeddedResourceName, StringComparison.Ordinal))
                 return resource;
         }
 

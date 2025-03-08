@@ -80,7 +80,7 @@ partial class Log
             if (batch.Length > 0)
                 File.AppendAllText(FullFilePath, batch.ToString(), Encoding.UTF8);
 
-            if(messageCount > QueueDiscardThreshold)
+            if (messageCount > QueueDiscardThreshold)
             {
                 Queue.Clear();
                 try
@@ -96,7 +96,7 @@ partial class Log
         }
         catch
         {
-            Thread.Sleep(IntervalTimeMs/2);
+            Thread.Sleep(IntervalTimeMs / 2);
 
             try
             {

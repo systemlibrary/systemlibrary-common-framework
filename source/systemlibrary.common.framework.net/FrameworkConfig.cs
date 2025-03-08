@@ -29,7 +29,7 @@ internal static class FrameworkConfigInstance
     {
         get
         {
-            if(_Current == null)
+            if (_Current == null)
             {
                 lock (_CurrentLock)
                 {

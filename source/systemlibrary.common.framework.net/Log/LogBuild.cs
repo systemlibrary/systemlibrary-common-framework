@@ -556,7 +556,7 @@ partial class Log
         {
             return v.ToString();
         }
-        if(obj is HttpMethod m)
+        if (obj is HttpMethod m)
         {
             return m.ToString();
         }

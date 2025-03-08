@@ -9,7 +9,7 @@ internal static class MetricsAuthorizationMiddleware
         var authorizationValue = FrameworkConfigInstance.Current.Metrics.AuthorizationValue;
         var authorization = context.Request.Headers["Authorization"].ToString();
 
-        if(authorizationValue.IsNot() || "Basic " + authorizationValue == authorization)
+        if (authorizationValue.IsNot() || "Basic " + authorizationValue == authorization)
         {
             return true;
         }

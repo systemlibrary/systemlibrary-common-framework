@@ -147,7 +147,7 @@ public static partial class IServiceCollectionExtensions
             }
         }
 
-        if(options.UseAuthorization)
+        if (options.UseAuthorization)
             serviceCollection.AddAuthorization();
 
         IMvcBuilder builder = serviceCollection.UseModelViewControllers(options);

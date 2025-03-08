@@ -32,7 +32,7 @@ partial class Config<T>
                     }
                 }
             }
-            
+
             // Add transformation file for environment if found
             if (ConfigFileLoader.environmentNameLowered.Is())
             {
@@ -45,7 +45,7 @@ partial class Config<T>
                         files.Add(fileLowered);
                     }
             }
-            
+
             if (files.Count > 0)
             {
                 var builder = new ConfigurationBuilder();

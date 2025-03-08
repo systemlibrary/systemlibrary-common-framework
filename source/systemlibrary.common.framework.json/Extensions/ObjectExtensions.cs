@@ -119,7 +119,7 @@ public static class ObjectExtensions
         var serializer = new XmlSerializer(obj.GetType());
 
         using var writer = new StringWriter();
-        
+
         serializer.Serialize(writer, obj);
 
         return writer.ToString();
