@@ -15,11 +15,11 @@ public partial class StringExtensionsTests : BaseTest
         string data = null;
 
         var result = data.Is();
-        Assert.IsFalse(result , "Is null");
+        Assert.IsFalse(result, "Is null");
 
         data = "";
         result = data.Is();
-        Assert.IsFalse(result , "Is empty");
+        Assert.IsFalse(result, "Is empty");
 
         data = " ";
         result = data.Is();
@@ -595,7 +595,7 @@ public partial class StringExtensionsTests : BaseTest
         text = "";
         result = text.ToPhysicalPath();
 
-        var root = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\bin\\Release\\net8.0\\";
+        var root = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\bin\\Release\\net9.0\\";
         root = root.Replace("\\", "/");
 
         Assert.IsTrue(result == root, "1 " + result);
@@ -663,5 +663,124 @@ public partial class StringExtensionsTests : BaseTest
         text = "C:\\hello\\world\\";
         result = text.ToPhysicalPath();
         Assert.IsTrue(result == "C:/hello/world/", "17 " + result);
+    }
+
+    [TestMethod]
+    public void HashCompress_IsOK()
+    {
+        var first = "";
+        for (int i = 0; i < 100; i++)
+        {
+            string text = null;
+            string result = text.HashCompress();
+            Assert.IsTrue(result == "");
+
+            text = "";
+            result = text.HashCompress();
+            Assert.IsTrue(result == "", result);
+
+            text = "a";
+            result = text.HashCompress();
+            Assert.IsTrue(result == text, "A " + result);
+
+            text = "abcd";
+            result = text.HashCompress();
+            Assert.IsTrue(result == text, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcde";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 3 && result.Length <= 5, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdef";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 3 && result.Length <= 5, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefg";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 4 && result.Length <= 7, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+            if (first == "")
+                first = result;
+            Assert.IsTrue(first == result, "Next hashcompress within same appcontext generated a diff hash");
+
+            text = "abcdefgh";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 4 && result.Length <= 7, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghi";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 4 && result.Length <= 7, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghij";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 5 && result.Length <= 8, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijk";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 5 && result.Length <= 8, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijkl";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 5 && result.Length <= 8, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijkllmn";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 5 && result.Length <= 8, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 7 && result.Length <= 11, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij32";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 7 && result.Length <= 11, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghI192";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 7 && result.Length <= 11, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 7 && result.Length <= 11, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHIJ257";
+            result = text.HashCompress();
+            Assert.IsTrue(result.Length >= 7 && result.Length <= 11, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            text = "abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI256abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefGHI3096";
+            result = text.HashCompress();
+            Assert.IsTrue(result == "703233073g", result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+            // 12800 chars
+            text = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzZZZZzzzzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+            result = text.HashCompress();
+            Assert.IsTrue(result == "8991412800z", result + ": " + result.Length + " vs " + text.Length + " == " + text);
+        }
+    }
+
+    [TestMethod]
+    public void HashCompress_Generates_Same_key_In_Async_IsOK()
+    {
+        var result = Async.Tasks(
+            () => OnAsyncRun("Hello world"),
+            () => OnAsyncRun("Hello world"),
+            () => OnAsyncRun("Hello world"),
+            () => OnAsyncRun("Hello world"),
+            () => OnAsyncRun("Hello world"),
+            () => OnAsyncRun("Hello world")
+        );
+
+        Assert.IsTrue(result.Count == 6, "Async.Run did not execute all 6,: " + result.Count);
+
+        var first = result[0];
+
+        Assert.IsTrue(first.Length > 3, "Too short hash " + first);
+
+        foreach (var equals in result)
+            Assert.IsTrue(first == equals, "First did not match: " + equals);
+    }
+
+    static string OnAsyncRun(string input)
+    {
+        return input.HashCompress();
     }
 }

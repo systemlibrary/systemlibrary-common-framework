@@ -1355,6 +1355,84 @@ public static partial class StringExtensions
     }
 
     /// <summary>
+    /// One way hash compression, more efficient than Hashing
+    /// <para>Returns shorter strings for short strings</para>
+    /// <para>Returns shorter strings for long strings, but not a fixed size as real Hashing</para>
+    /// </summary>
+    public static string HashCompress(this string input)
+    {
+        if (input == null) return "";
+
+        var l = input.Length;
+
+        if (l <= 4) return input;
+
+        if (l <= 6)
+            return (input.GetHashCode() & 0xFFFF).ToString();
+
+        if (l <= 9)
+            return (input.GetHashCode() & 0xFFFFF).ToString();
+
+        if (l <= 16)
+            return (input.GetHashCode() & 0xFFFFFF).ToString();
+
+        if (l <= 256)
+            return (input.GetHashCode() & 0xFFFFFF).ToString() + l;
+
+        // GetHashCode() is slow so we loop over and multiply by a fast prime: 11
+        var count = 32;
+        int hash = 0;
+        var li = l - 1;
+        for (var i = 0; i < count; i++)
+        {
+            hash += (input[i] * 11) + (input[li - i] * 11);
+        }
+
+        hash += (input[l / 2] * 11);
+        hash += (input[l / 3] * 11);
+        hash += (input[l / 4] * 11);
+
+        return hash.ToString() + l + GetValidChar(input[l / 5]);
+    }
+
+    static char GetValidChar(char c)
+    {
+        if (InvalidHashCharacters.TryGetValue(c, out var replacement))
+        {
+            return replacement;
+        }
+
+        return (c > 31 && c < 255) ? c : 'X';
+    }
+
+    static Dictionary<char, char> InvalidHashCharacters = new Dictionary<char, char>
+    {
+        {'<', '_'},
+        {'&', 'Q'},
+        {'>', '_'},
+        {'`', 'Q'},
+        {'\n', '-'},
+        {' ', 'Z'},
+        {'/', '-'},
+        {'\\', '_'},
+        {'"', '.'},
+        {':', 'q'},
+        {';', 'z'},
+        {'}', '-'},
+        {'{', '_'},
+        {'(', '.'},
+        {')', '.'},
+        {'|', '_'},
+        {'*', '-'},
+        {'?', '-'},
+        {'%', 'z'},
+        {'#', 'z'},
+        {'@', 'Z'},
+        {'+', '-'},
+        {'=', '_'}
+    };
+
+    /// <summary>
     /// Decompress compressed data and return the result
     /// </summary>
     /// <example>

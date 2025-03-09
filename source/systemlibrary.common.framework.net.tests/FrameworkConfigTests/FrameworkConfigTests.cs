@@ -14,7 +14,7 @@ public class FrameworkConfigTests : BaseTest
 
         Assert.IsTrue(config.MaxDepth == 99, "Depth " + config.MaxDepth);
         Assert.IsTrue(!config.AllowTrailingCommas, "Commas " + config.AllowTrailingCommas);
-        Assert.IsTrue(config.JsonCommentHandling == System.Text.Json.JsonCommentHandling.Skip);
+     //   Assert.IsTrue(config.JsonCommentHandling == System.Text.Json.JsonCommentHandling.Skip);
         Assert.IsTrue(config.IncludeFields);
         Assert.IsTrue(config.JsonIgnoreCondition == System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault);
     }

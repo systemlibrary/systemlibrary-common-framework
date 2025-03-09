@@ -148,8 +148,6 @@ public static partial class Cache
         Insert(cacheIndex, cacheKey, item, duration);
     }
 
-
-
     /// <summary>
     /// Try get item from Cache as T
     /// <para>If getItem throws, the exception is logged as 'Error'</para>
@@ -686,7 +684,7 @@ public static partial class Cache
 
     static string CreateCacheKey<T>(Func<T> getItem, Func<T, bool> condition)
     {
-        var key = new StringBuilder("SLF%", capacity: 383);
+        var key = new StringBuilder("SLF%", capacity: 400);
 
         var getItemMethod = getItem.Method;
 
