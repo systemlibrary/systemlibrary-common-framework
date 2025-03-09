@@ -38,6 +38,14 @@ internal static class License
         return IsTierValid(Tier.Bronze);
     }
 
+    internal static string Generate(string companyId, string companyName, Tier tier)
+    {
+        companyId = companyId?.Replace("|", "#").MaxLength(32);
+        companyName = companyName?.Replace("|", "#").MaxLength(32);
+
+        return (companyId + "|" + companyName + "|" + tier + "|" + DateTime.Now.ToString("yyyy-MM-dd")).Encrypt(Marshal.PtrToStringAnsi(LicenseEncKey()));
+    }
+
     static bool IsTierValid(Tier tier)
     {
         if (TiersLicensed.TryGetValue(tier, out bool isValid) && TestLicense == null) return isValid;
@@ -51,7 +59,6 @@ internal static class License
 
         return TiersLicensed[tier];
     }
-
 
     static bool GetTierState(Tier licenseTier)
     {
@@ -132,13 +139,5 @@ internal static class License
         Log.Error("License: " + message);
 
         return false;
-    }
-
-    internal static string Generate(string companyId, string companyName, Tier tier)
-    {
-        companyId = companyId?.Replace("|", "#").MaxLength(32);
-        companyName = companyName?.Replace("|", "#").MaxLength(32);
-
-        return (companyId + "|" + companyName + "|" + tier + "|" + DateTime.Now.ToString("yyyy-MM-dd")).Encrypt(Marshal.PtrToStringAnsi(LicenseEncKey()));
     }
 }
