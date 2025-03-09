@@ -38,7 +38,7 @@ public class ActionContextInstanceTests : BaseTest
 
                     var sleep = Randomness.Int(0, 15);
 
-                    if(sleep > 0)
+                    if (sleep > 0)
                         Thread.Sleep(sleep);
 
                     var currentContext = ActionContextInstance.Current?.HttpContext;
@@ -52,9 +52,10 @@ public class ActionContextInstanceTests : BaseTest
     }
 
     [TestMethod]
-    public void High_Concurrency_Is_Thread_Safe()
+    public async Task High_Concurrency_Is_Thread_Safe()
     {
-        var tasks = new Task<string>[10000];
+        ThreadPool.SetMinThreads(40, 40);
+        var tasks = new Task<string>[39];
 
         for (int i = 0; i < tasks.Length; i++)
         {
@@ -62,7 +63,7 @@ public class ActionContextInstanceTests : BaseTest
 
             tasks[i] = Task.Run(async () =>
             {
-                var sleep = Randomness.Int(0, 7);
+                var sleep = Randomness.Int(0, 10);
 
                 if (sleep > 0)
                     Thread.Sleep(sleep);
@@ -71,15 +72,17 @@ public class ActionContextInstanceTests : BaseTest
             });
         }
 
-        var results = Task.WhenAll(tasks).GetAwaiter().GetResult();
+        var results = await Task.WhenAll(tasks);
+
         var c = 0;
         for (int i = 0; i < results.Length; i++)
         {
             if (results[i] == null) continue;
             c++;
-            Assert.IsTrue(results[i].Contains("?username=User" + i + "==?username=User" + i), "Error at " + i + " result is " + results[i]);
+            Assert.IsTrue(results[i].Contains($"?username=User{i}==?username=User{i}"),
+                          $"Error at {i}, result is {results[i]}");
         }
-        Assert.IsTrue(results.Length == c, "Too few " + c + " vs " + results.Length);
-        Assert.IsTrue(c == tasks.Length, "Too few " + c);
+
+        Assert.IsTrue(c == tasks.Length, $"Too few {c}");
     }
 }

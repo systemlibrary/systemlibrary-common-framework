@@ -449,7 +449,7 @@ partial class Log
 
     static void PrefixDateTime(StringBuilder message)
     {
-        message.Insert(0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\t");
+        message.Insert(0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff") + "\t");
     }
 
     static bool IsListTypePrintableAsOneLine(Type listTypeArg)

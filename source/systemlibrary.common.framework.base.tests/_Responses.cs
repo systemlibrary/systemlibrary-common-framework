@@ -26,13 +26,12 @@ partial class BaseTest
 
     protected async Task<string> GetResponseTextAsync(string path, params (string Key, string Value)[] headers)
     {
-        var response = await GetResponseAsync(path, headers).ConfigureAwait(false);
+        var response = await GetResponseAsync(path, headers);
 
         if (!response.IsSuccessStatusCode)
             Log.Dump("Not successful: " + path + " " + response.StatusCode);
 
-        return await response.Content.ReadAsStringAsync()
-                    .ConfigureAwait(false);
+        return await response.Content.ReadAsStringAsync();
     }
 
     HttpResponseMessage GetResponse(string path, (string Key, string Value)[] headers)
@@ -66,7 +65,6 @@ partial class BaseTest
             }
         }
 
-        return await Client.SendAsync(request)
-            .ConfigureAwait(false);
+        return await Client.SendAsync(request);
     }
 }
