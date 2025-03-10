@@ -123,7 +123,10 @@ partial class Log
         {
             var value = objType.GetProperty("Value").GetValue(obj);
 
-            if (value is IEnumerable enumerable)
+            if(value is string txt)
+                Add(message, txt, level);
+
+            else if (value is IEnumerable enumerable)
             {
                 // AppendEnumerable(message, enumerable, level, maxLevel, visited);
 

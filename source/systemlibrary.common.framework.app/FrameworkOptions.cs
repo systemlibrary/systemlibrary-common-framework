@@ -67,7 +67,7 @@ public partial class FrameworkOptions
     public bool UseMvc = true;
 
     /// <summary>
-    /// Optional: Additional endpoints configuration that is registered in front of RazorPages, Controllers and ApiControllers
+    /// Optional: dditional endpoint configuration registered before RazorPages, Controllers and ApiControllers
     /// </summary>
     /// <remarks>
     /// These endpoints will be called after StaticFiles, Routing, CookiePolicy, OutputCache, Authentication and Authorization, but before MVC
@@ -75,7 +75,7 @@ public partial class FrameworkOptions
     public Action<IEndpointRouteBuilder> BeforeDefaultEndpoints = null;
 
     /// <summary>
-    /// Optional: Additional endpoints configuration that is registered after RazorPages, Controllers and ApiControllers, but before Compression
+    /// Optional: Additional endpoint configuration registered after RazorPages, Controllers, and ApiControllers, but before response compression middleware
     /// </summary>
     public Action<IEndpointRouteBuilder> AfterDefaultEndpoints = null;
 

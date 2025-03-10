@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Configurations>Release</Configurations>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Include="../../readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="nuget-icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<PackageId>$(MSBuildProjectName)</PackageId>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<Version>$(Version)</Version>
+		<Title>SystemLibrary Common Framework</Title>
+		<Description>
+			Framework with default settings and classes for every &gt;= .NET 8 application
+			https://github.com/systemlibrary/systemlibrary-common-framework/#Description
+
+			Installation
+			https://systemlibrary.github.io/systemlibrary-common-framework/Install.html
+
+			Documentation with sample code
+			https://systemlibrary.github.io/systemlibrary-common-framework/
+		</Description>
+		<Copyright>Copyright © System Library</Copyright>
+		<PackageProjectUrl>https://www.systemlibrary.com/#SystemLibraryCommonFramework</PackageProjectUrl>
+		<PackageIcon>nuget-icon.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageTags>.NET Framework Web Client Extensions Config</PackageTags>
+		<PackageReleaseNotes>Latest version: https://github.com/systemlibrary/systemlibrary-common-framework#latest-release-notes</PackageReleaseNotes>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+
+
+</Project>

@@ -85,7 +85,7 @@ partial class Log
                 Queue.Clear();
                 try
                 {
-                    string overflowMessage = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Critical: log is overflown, log queue discarded due to threshold of {QueueDiscardThreshold} messages reached within {IntervalTimeMs}ms.\n";
+                    string overflowMessage = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Critical: [Log] overflow, log queue discarded due to threshold of {QueueDiscardThreshold} messages reached within {IntervalTimeMs}ms.\n";
 
                     File.AppendAllText(FullFilePath, overflowMessage, Encoding.UTF8);
                 }
