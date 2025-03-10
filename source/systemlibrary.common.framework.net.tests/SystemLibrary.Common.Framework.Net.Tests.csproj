@@ -9,6 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" ExcludeAssets="analyzers;contentFiles;build;" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="Configs\**\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
@@ -28,16 +32,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.8.2"  />
 		<PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
 		<PackageReference Include="Microsoft.Testing.Extensions.Telemetry" Version="*" ExcludeAssets="all" />
 		<PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="*" ExcludeAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" ExcludeAssets="analyzers;contentFiles;build;" />
 	</ItemGroup>
 
 	<ItemGroup>
