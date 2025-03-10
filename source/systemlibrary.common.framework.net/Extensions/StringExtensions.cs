@@ -1355,13 +1355,13 @@ public static partial class StringExtensions
     }
 
     /// <summary>
-    /// One way hash compression, more efficient than Hashing
-    /// <para>Returns shorter strings for short strings</para>
-    /// <para>Returns shorter strings for long strings, but not a fixed size as real Hashing</para>
+    /// Returns a short string representation of the data through hashing and sample hashing
+    /// <para>If inputs length is less than or equal to 4 returns input as is</para>
+    /// <para>If inputs length exceeds 256 length, we hash only the start, middle and end of the string, avoidiing a lot of CPU for the risk of more collisions</para>
     /// </summary>
-    public static string HashCompress(this string input)
+    public static string GetCompressedKey(this string input)
     {
-        if (input == null) return "";
+        if (input == null) return input;
 
         var l = input.Length;
 
@@ -1395,7 +1395,7 @@ public static partial class StringExtensions
         return hash.ToString() + l + GetValidChar(input[l / 5]);
     }
 
-    static char GetValidChar(char c)
+    internal static char GetValidChar(char c)
     {
         if (InvalidHashCharacters.TryGetValue(c, out var replacement))
         {
@@ -1405,7 +1405,7 @@ public static partial class StringExtensions
         return (c > 31 && c < 255) ? c : 'X';
     }
 
-    static Dictionary<char, char> InvalidHashCharacters = new Dictionary<char, char>
+    internal static Dictionary<char, char> InvalidHashCharacters = new Dictionary<char, char>
     {
         {'<', '_'},
         {'&', 'Q'},

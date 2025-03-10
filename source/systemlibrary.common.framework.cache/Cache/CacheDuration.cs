@@ -1,5 +1,4 @@
-﻿
-namespace SystemLibrary.Common.Framework.App;
+﻿namespace SystemLibrary.Common.Framework.App;
 
 public enum CacheDuration
 {

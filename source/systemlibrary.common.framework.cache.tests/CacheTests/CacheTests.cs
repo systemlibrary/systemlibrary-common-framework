@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Text;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SystemLibrary.Common.Framework.App.Tests;
 
@@ -45,17 +47,17 @@ public class CacheTests
         {
             return input.Name + input.Age + input.Year + input.Flag;
         });
-        var cacheKey = "SLF%<Add_To_Cache_Auto_CacheKey_Passing_Object_As_Field0_Adds_FieldAndPropValues_To_Key>b__0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>c__DisplayClass3_0System.StringinputNameTestPersonFlagTrueYear20001224000000AddressStreet 1000TS00:00:07Age87878Guide0a9536ad3cf4a0d91af438ffb3b8f7aFlag2TruePhone9004400044";
+        var cacheKey = "SLF%<Add_To_Cache_Auto_CacheKey_Passing_Object_As_Field0_Adds_FieldAndPropValues_To_Key>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass3_0Stringinput5TestPersonTrue20001224000000Street 100000:00:07487878e0a9536ad3cf4a0d91af438ffb3b8f7aTrue9004400044";
         Assert.IsTrue(cacheKey.Contains("TestPerson"), "Name");
         Assert.IsTrue(cacheKey.Contains("9004400044"), "Phone");
         Assert.IsTrue(cacheKey.Contains("Street 1000"), "Address");
-        Assert.IsTrue(cacheKey.Contains("Year20001224000000"), "Year");
+        Assert.IsTrue(cacheKey.Contains("20001224000000"), "Year");
         Assert.IsTrue(cacheKey.Contains("87878"), "Age");
         Assert.IsTrue(cacheKey.Contains("0a9536ad3cf4a0d"), "Guid");
 
         var cached = Cache.Get<string>(cacheKey);
 
-        Assert.IsTrue(cached.Is(), "Not in cache " + cacheKey.MaxLength(32));
+        Assert.IsTrue(cached.Is(), "Not in cache " + cacheKey);
         Assert.IsTrue(cached.Contains("TestPerson") && cached.Contains("87878"), "Invalid text");
 
         cached = Cache.Get<string>(cacheKey);
@@ -64,6 +66,7 @@ public class CacheTests
         Assert.IsTrue(cached.Contains("TestPerson") && cached.Contains("87878"), "Invalid text");
     }
 
+   
     [TestMethod]
     public void Add_To_Cache_Auto_CacheKey_Passing_Function_As_GetItem_Success()
     {
@@ -76,7 +79,7 @@ public class CacheTests
         Assert.IsTrue(cached.Is(), "No cached item");
         Assert.IsTrue(cached.Contains("55") && cached.Contains("World"), "Err 1: " + cached);
 
-        var cacheKey = "SLF%GetItemsFromFunctionSystemLibrary.Common.Framework.App.Tests.CacheTestsSystem.String";
+        var cacheKey = "SLF%GetItemsFromFunctionSystemLibrary.Common.Framework.App.TestsCacheTestsString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is(), "Not found");
         Assert.IsTrue(cached.Contains("55") && cached.Contains("World"), "Err 2: " + cached);
@@ -103,7 +106,7 @@ public class CacheTests
         Assert.IsTrue(cached.Is());
         Assert.IsTrue(cached.Contains("123"));
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Function_Without_Outside_Vars_Success>b__6_0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>cSystem.String";
+        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Function_Without_Outside_Vars_Success>b__6_0SystemLibrary.Common.Framework.App.Tests<>cString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is());
         Assert.IsTrue(cachedItem.Contains("123"));
@@ -115,13 +118,13 @@ public class CacheTests
         var cached = Cache.Get(() => GetText("Hello", 111, true));
         Assert.IsTrue(cached.Is(), "It is not  hello");
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>cSystem.String";
+        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_0SystemLibrary.Common.Framework.App.Tests<>cString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is(), "Does not exist 1");
         Assert.IsTrue(cachedItem.Contains("111"));
 
         var cached2 = Cache.Get(() => GetText("Hello", 222, true));
-        var cacheKey2 = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_1SystemLibrary.Common.Framework.App.Tests.CacheTests+<>cSystem.String";
+        var cacheKey2 = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_1SystemLibrary.Common.Framework.App.Tests<>cString";
         var cachedItem2 = Cache.Get<string>(cacheKey2);
         Assert.IsTrue(cachedItem2.Is(), "Does not exist 2");
         Assert.IsTrue(cachedItem2.Contains("222"));
@@ -139,7 +142,7 @@ public class CacheTests
         });
         Assert.IsTrue(cached.Is());
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Inline_Lambda_With_Outside_Vars_Vars_Are_Part_Of_CacheKey_Success>b__0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>c__DisplayClass8_0System.StringaHellob333cTrue";
+        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Inline_Lambda_With_Outside_Vars_Vars_Are_Part_Of_CacheKey_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass8_0StringaHellob333cTrue";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem?.Contains(b.ToString()) == true, "B not in value " + cachedItem);
         Assert.IsTrue(cachedItem?.Contains(c.ToString()) == true, "C not in value " + cachedItem);
@@ -160,7 +163,7 @@ public class CacheTests
         cached = Cache.Get(getItems);
         Assert.IsTrue(cached.Contains("555"));
 
-        var cacheKey = "SLF%<" + nameof(Auto_Create_CacheKey_By_Passing_Function_With_Outside_Vars_Success) + ">b__0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>c__DisplayClass9_0System.StringaHellob555cTrue";
+        var cacheKey = "SLF%<" + nameof(Auto_Create_CacheKey_By_Passing_Function_With_Outside_Vars_Success) + ">b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass9_0StringaHellob555cTrue";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Contains("555"));
     }
@@ -176,8 +179,7 @@ public class CacheTests
 
         var cached = Cache.Get(getItems);
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Dictionary_Success>b__0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>c__DisplayClass10_0System.Stringa1[Hello, World]";
-        //var cacheKey = "common.web.cache<Auto_Create_CacheKey_By_Passing_Dictionary_Success>b__0SystemLibrary.Common.Framework.App.Tests.CacheTests+<>c__DisplayClass10_0System.Stringa1";
+        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Dictionary_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass10_0Stringa1[Hello, World]";
         var item = Cache.Get<string>(cacheKey);
 
         Assert.IsTrue(item != null, "Wrong cachekey");
@@ -238,6 +240,12 @@ public class CacheTests
     static string GetText(string a, int b = 99, bool c = false)
     {
         return a + b + c + "";
+    }
+
+    public class AutoCacheKeyLongParams
+    {
+        public StringBuilder StringBuilder { get; set; }
+        public string LongString;
     }
 
     public class CacheKeyParams
@@ -462,5 +470,49 @@ public class CacheTests
 
             Assert.IsTrue(cached != null, "Wrong " + i);
         }
+    }
+
+    [TestMethod]
+    public void Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success()
+    {
+        var data = new AutoCacheKeyLongParams();
+
+        // 1152 chars
+        data.LongString = "zzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAA";
+        data.StringBuilder = new StringBuilder(data.LongString + " STRINGBUILDER");
+        
+        var data2 = new AutoCacheKeyLongParams();
+
+        // 1152 chars
+        data2.LongString = "zzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAAzzzzZZZZaaaaAAAA";
+        data2.StringBuilder = new StringBuilder(data.LongString + " STRINGBUILDER2");
+
+        var result = Cache.Get(() =>
+        {
+            return data.StringBuilder + " FROM CACHE";
+        });
+
+        var cacheKey = "SLF%<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cached = Cache.Get<string>(cacheKey);
+        Assert.IsTrue(cached.Is(), "Not in cache1 " + cacheKey);
+        Assert.IsTrue(cached.Contains(" STRINGBUILDER FROM CACHE"), cached);
+  
+        var result2 = Cache.Get(() =>
+        {
+            return data2.StringBuilder + " FROM CACHE";
+        });
+
+        var cacheKey2 = "SLF%<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__1SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cached2 = Cache.Get<string>(cacheKey2);
+        Assert.IsTrue(cached2.Is(), "Not in cache " + cacheKey);
+        Assert.IsTrue(cached2.Contains(" STRINGBUILDER2 FROM CACHE"), cached2);
+    }
+
+    static Func<string> CallOutlinedFunction(AutoCacheKeyLongParams data2)
+    {
+        return () =>
+        {
+            return data2.StringBuilder + " FROM CACHE";
+        };
     }
 }

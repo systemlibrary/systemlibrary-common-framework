@@ -457,6 +457,8 @@ public static partial class Cache
         if (cacheKey == "")
             cacheKey = CreateCacheKey(getItem, condition);
 
+        Log.Debug(cacheKey);
+
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
         // NOTE: cache[cacheIndex] is never null, but keeping it in case I've missed something
@@ -689,8 +691,9 @@ public static partial class Cache
         var getItemMethod = getItem.Method;
 
         key.Append(getItemMethod.Name);
-        key.Append(getItemMethod.DeclaringType?.FullName ?? "");
-        key.Append(getItemMethod.ReturnType?.FullName ?? "");
+        key.Append(getItemMethod?.DeclaringType?.Namespace + getItemMethod?.DeclaringType?.Name + "");
+        key.Append(getItemMethod.ReturnType?.Name ?? "");
+        
 
         var target = getItem.Target;
         if (target != null)
@@ -699,29 +702,11 @@ public static partial class Cache
             {
                 if (value is string text)
                 {
-                    if (text.Length > 48)
-                    {
-                        if (text.StartsWith("http") || text.StartsWith("/") || (text.Contains("?") && text.Contains("&")))
-                            key.Append(text.MaxLength(2048));
-
-                        else
-                            key.Append(text.Length + text[^4] + text.MaxLength(48) + text[^5]);
-                    }
-                    else
-                    {
-                        key.Append(text);
-                    }
+                    key.Append(text.GetCompressedKey());
                 }
                 else if (value is StringBuilder sb)
                 {
-                    if (sb.Length > 48)
-                    {
-                        key.Append(sb[^4] + "" + sb[^5] + "" + sb.Length + sb.MaxLength(48).ToString());
-                    }
-                    else
-                    {
-                        key.Append(sb.ToString());
-                    }
+                    key.Append(sb.GetCompressedKey());
                 }
                 else if (value is Guid g)
                 {
@@ -730,6 +715,10 @@ public static partial class Cache
                 else if (value is DateTime dt)
                 {
                     key.Append(dt.ToString("yyyyMMddHHmmss"));
+                }
+                else if (value is DateTimeOffset dto)
+                {
+                    key.Append(dto.ToString("yyyyMMddHHmmss"));
                 }
                 else if (IsToStringable(valueType))
                 {
@@ -755,11 +744,13 @@ public static partial class Cache
 
                 if (valueProperties?.Length > 0)
                 {
+                    key.Append(valueProperties.Length);
+
                     foreach (var pi in valueProperties)
                     {
                         if (!IsToStringable(pi.PropertyType)) continue;
 
-                        key.Append(pi.Name);
+                        // key.Append(pi.Name);
 
                         try
                         {
@@ -787,11 +778,13 @@ public static partial class Cache
 
                 if (valueFields?.Length > 0)
                 {
+                    key.Append(valueFields.Length);
+
                     foreach (var fi in valueFields)
                     {
                         if (!IsToStringable(fi.FieldType)) continue;
 
-                        key.Append(fi.Name);
+                        // key.Append(fi.Name);
 
                         try
                         {
@@ -827,7 +820,7 @@ public static partial class Cache
 
             void AppendValue(object value)
             {
-                if (key.Length > 3000) return;
+                if (key.Length > 2000) return;
 
                 if (value == null) return;
 
@@ -847,7 +840,7 @@ public static partial class Cache
 
             void AppendFieldArgument(FieldInfo field)
             {
-                if (key.Length > 3000) return;
+                if (key.Length > 2000) return;
 
                 if (field == null) return;
 
@@ -858,7 +851,7 @@ public static partial class Cache
                     return;
                 }
 
-                key.Append(field.Name.MaxLength(20));
+                // key.Append(field.Name.MaxLength(16));
 
                 try
                 {
@@ -904,9 +897,7 @@ public static partial class Cache
         var isAuthenticated = principal?.Identity?.IsAuthenticated == true;
 
         if (isAuthenticated)
-        {
             key.Append(isAuthenticated);
-        }
 
         if (principal is ClaimsPrincipal claimsPrincipal)
         {

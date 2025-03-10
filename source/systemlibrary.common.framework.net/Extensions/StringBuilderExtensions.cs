@@ -213,4 +213,45 @@ public static class StringBuilderExtensions
 
         return stringBuilder;
     }
+
+    /// <summary>
+    /// Returns a short string representation of the data through hashing and sample hashing
+    /// <para>If inputs length is less than or equal to 4 returns input as is</para>
+    /// <para>If inputs length exceeds 256 length, we hash only the start, middle and end of the string, avoidiing a lot of CPU for the risk of more collisions</para>
+    /// </summary>
+    public static string GetCompressedKey(this StringBuilder input)
+    {
+        if (input == null) return "";
+
+        var l = input.Length;
+
+        if (l <= 4) return input.ToString();
+
+        if (l <= 6)
+            return (input.GetHashCode() & 0xFFFF).ToString();
+
+        if (l <= 9)
+            return (input.GetHashCode() & 0xFFFFF).ToString();
+
+        if (l <= 16)
+            return (input.GetHashCode() & 0xFFFFFF).ToString();
+
+        if (l <= 256)
+            return (input.GetHashCode() & 0xFFFFFF).ToString() + l;
+
+        // GetHashCode() is slow so we loop over and multiply by a fast prime: 11
+        var count = 32;
+        int hash = 0;
+        var li = l - 1;
+        for (var i = 0; i < count; i++)
+        {
+            hash += (input[i] * 11) + (input[li - i] * 11);
+        }
+
+        hash += (input[l / 2] * 11);
+        hash += (input[l / 3] * 11);
+        hash += (input[l / 4] * 11);
+
+        return hash.ToString() + l + StringExtensions.GetValidChar(input[l / 5]);
+    }
 }
