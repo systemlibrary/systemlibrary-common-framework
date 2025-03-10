@@ -47,10 +47,12 @@ public class CacheTests
         {
             return input.Name + input.Age + input.Year + input.Flag;
         });
-        var cacheKey = "SLF%<Add_To_Cache_Auto_CacheKey_Passing_Object_As_Field0_Adds_FieldAndPropValues_To_Key>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass3_0Stringinput5TestPersonTrue20001224000000Street 100000:00:07487878e0a9536ad3cf4a0d91af438ffb3b8f7aTrue9004400044";
-        Assert.IsTrue(cacheKey.Contains("TestPerson"), "Name");
-        Assert.IsTrue(cacheKey.Contains("9004400044"), "Phone");
-        Assert.IsTrue(cacheKey.Contains("Street 1000"), "Address");
+
+        var cacheKey = Cache.PrevCacheKey;
+
+        Assert.IsTrue(cacheKey.Contains("TestPerson".GetCompressedKey()), "Name");
+        Assert.IsTrue(cacheKey.Contains("9004400044".GetCompressedKey()), "Phone");
+        Assert.IsTrue(cacheKey.Contains("Street 1000".GetCompressedKey()), "Address");
         Assert.IsTrue(cacheKey.Contains("20001224000000"), "Year");
         Assert.IsTrue(cacheKey.Contains("87878"), "Age");
         Assert.IsTrue(cacheKey.Contains("0a9536ad3cf4a0d"), "Guid");
@@ -142,7 +144,7 @@ public class CacheTests
         });
         Assert.IsTrue(cached.Is());
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Inline_Lambda_With_Outside_Vars_Vars_Are_Part_Of_CacheKey_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass8_0StringaHellob333cTrue";
+        var cacheKey = Cache.PrevCacheKey;
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem?.Contains(b.ToString()) == true, "B not in value " + cachedItem);
         Assert.IsTrue(cachedItem?.Contains(c.ToString()) == true, "C not in value " + cachedItem);
@@ -163,7 +165,7 @@ public class CacheTests
         cached = Cache.Get(getItems);
         Assert.IsTrue(cached.Contains("555"));
 
-        var cacheKey = "SLF%<" + nameof(Auto_Create_CacheKey_By_Passing_Function_With_Outside_Vars_Success) + ">b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass9_0StringaHellob555cTrue";
+        var cacheKey = Cache.PrevCacheKey;
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Contains("555"));
     }
@@ -179,7 +181,7 @@ public class CacheTests
 
         var cached = Cache.Get(getItems);
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Dictionary_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass10_0Stringa1[Hello, World]";
+        var cacheKey = Cache.PrevCacheKey;
         var item = Cache.Get<string>(cacheKey);
 
         Assert.IsTrue(item != null, "Wrong cachekey");

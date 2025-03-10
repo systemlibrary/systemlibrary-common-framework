@@ -65,6 +65,7 @@ public static partial class Cache
     internal static ConcurrentDictionary<int, FieldInfo[]> GenerateCacheKeyFields;
     internal static ConcurrentDictionary<int, FieldInfo[]> GenerateCacheKeyValueTypeFields;
     internal static ConcurrentDictionary<int, PropertyInfo[]> GenerateCacheKeyValueTypeProperties;
+    internal static string PrevCacheKey;
 
     static IPrincipal Principal()
     {
@@ -455,7 +456,10 @@ public static partial class Cache
         }
 
         if (cacheKey == "")
+        {
             cacheKey = CreateCacheKey(getItem, condition);
+            PrevCacheKey = cacheKey;
+        }
 
         Log.Debug(cacheKey);
 
