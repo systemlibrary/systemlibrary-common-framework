@@ -55,7 +55,7 @@ internal static partial class PartialJsonSearcher
 
         if (!value.IsJson())
         {
-            Debug.Log("PartialJsonSearcher.Search value is not JSON format: " + value);
+            Debug.Log("[PartialJsonSearcher] value is not JSON format: " + value);
 
             return default;
         }

@@ -461,7 +461,7 @@ public static partial class Cache
             PrevCacheKey = cacheKey;
         }
 
-        Log.Debug(cacheKey);
+        // Log.Debug(cacheKey);
 
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
@@ -489,7 +489,7 @@ public static partial class Cache
 
                 if (cachedFallback != null)
                 {
-                    Log.Warning(new Exception("Fallback cache match, key: " + cacheKey.MaxLength(32) + "...", ex));
+                    Log.Warning(new Exception("[Cache] Fallback match for key: " + cacheKey.MaxLength(48) + "...", ex));
 
                     return cachedFallback;
                 }
@@ -694,8 +694,7 @@ public static partial class Cache
 
         var getItemMethod = getItem.Method;
 
-        key.Append(getItemMethod.Name);
-        key.Append(getItemMethod?.DeclaringType?.Namespace + getItemMethod?.DeclaringType?.Name + "");
+        key.Append(getItemMethod?.DeclaringType?.Namespace + getItemMethod.Name + getItemMethod?.DeclaringType?.Name + "");
         key.Append(getItemMethod.ReturnType?.Name ?? "");
         
         var target = getItem.Target;
@@ -729,7 +728,7 @@ public static partial class Cache
                 }
                 else
                 {
-                    Debug.Log(valueType.Name + " cannot be ToString()'d for cacheKey: " + value);
+                    Debug.Log("[Cache] " + valueType.Name + " cannot be ToString()'d for cache key: " + value);
                 }
             }
 
@@ -823,9 +822,9 @@ public static partial class Cache
 
             void AppendValue(object value)
             {
-                if (key.Length > 2000) return;
-
                 if (value == null) return;
+
+                if (key.Length > 2000) return;
 
                 var valueType = value.GetType();
 
@@ -837,14 +836,12 @@ public static partial class Cache
                     AppendClass(value, valueType);
                 else
                 {
-                    Debug.Log(valueType.Name + " is a type that is not appendable to cacheKey (not implemented)");
+                    Debug.Log("[Cache] " + valueType.Name + " is a type that is not appendable to cacheKey (not implemented)");
                 }
             }
 
             void AppendFieldArgument(FieldInfo field)
             {
-                if (key.Length > 2000) return;
-
                 if (field == null) return;
 
                 var type = field.FieldType;
@@ -854,7 +851,11 @@ public static partial class Cache
                     return;
                 }
 
-                // key.Append(field.Name.MaxLength(16));
+                if (key.Length > 2000)
+                {
+                    key.Append(field.Name.MaxLength(4));
+                    return;
+                }
 
                 try
                 {
@@ -885,9 +886,21 @@ public static partial class Cache
 
             if (fields?.Length > 0)
             {
+                if (fields.Length > 64)
+                    fields = fields.Take(64).ToArray();
+
                 foreach (var field in fields)
                 {
                     AppendFieldArgument(field);
+                }
+
+                if(fields.Length == 64)
+                {
+                    global::Log.Error("[Cache] Variables to generate key from exceeds limit of 64: " + key.ToString().MaxLength(255));
+                }
+                else if (key.Length > 2000)
+                {
+                    global::Log.Error("[Cache] Auto generated key exceeds 2000 characters limit: " + key.ToString().MaxLength(255));
                 }
             }
         }
@@ -1028,13 +1041,3 @@ public static partial class Cache
         }
     }
 }
-
-/*
- * TODO:
- * Reduce max key length in auto gen to 2048, chars, roughly 4KB down from 6KB
- * - When the limit is reached log.error with 512 of the first chars of the cacheKey and continue
- * - When the limit is reached, keep adding only 1 char or 1 digit for the remaining fields
- * - Limit amount of fields to loop to 128, we do not need more fields than that to autogenerate a cacheKey from, that is insane if so
- * - Also log.erorr if the field limit is reached and continue as normal
- * 
- * */

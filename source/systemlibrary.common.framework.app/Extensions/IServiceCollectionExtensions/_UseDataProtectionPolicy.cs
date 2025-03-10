@@ -30,7 +30,7 @@ partial class IServiceCollectionExtensions
 
         if (keyRingFiles.Count > 0)
         {
-            Debug.Log("Key file already exists at: " + keyRingDirectory.FullName);
+            Debug.Log("[UseDataProtectionPolicy] Key file already exists at: " + keyRingDirectory.FullName);
 
             return services.AddDataProtection()
                 .DisableAutomaticKeyGeneration()
@@ -41,7 +41,7 @@ partial class IServiceCollectionExtensions
         }
         else
         {
-            Debug.Log("Generating key file at content root's parent: " + keyRingDirectory.FullName);
+            Debug.Log("[UseDataProtectionPolicy] Generating key file at content root's parent: " + keyRingDirectory.FullName);
 
             return services.AddDataProtection()
                 .PersistKeysToFileSystem(keyRingDirectory)

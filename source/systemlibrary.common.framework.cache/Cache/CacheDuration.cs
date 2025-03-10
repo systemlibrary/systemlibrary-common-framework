@@ -23,7 +23,7 @@ public enum CacheDuration
     M = 1200,
 
     /// <summary>
-    /// 2 hours for data rarely changing or large and expensive data
+    /// 2 hours for data weekly changing data or large and expensive data
     /// </summary>
     L = 7200,
 

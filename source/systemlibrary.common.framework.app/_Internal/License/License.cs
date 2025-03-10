@@ -136,7 +136,7 @@ internal static class License
 
     static bool Invalid(string message)
     {
-        Log.Error("License: " + message);
+        Log.Error("[License] " + message);
 
         return false;
     }

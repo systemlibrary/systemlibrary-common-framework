@@ -105,7 +105,7 @@ public static class Async
 
         if (Task.WhenAny(task, timeoutTask).Result == timeoutTask)
         {
-            Log.Error("Async.Run timed out after 30s without tasks finishing in time " + results.Count + "/" + tasks.Count());
+            Log.Error("[Async] Run timed out after 30s without tasks finishing in time " + results.Count + "/" + tasks.Count());
             taskCancellation.Cancel();
         }
         else

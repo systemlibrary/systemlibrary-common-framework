@@ -80,7 +80,7 @@ public class CacheTests
         Assert.IsTrue(cached.Is(), "No cached item");
         Assert.IsTrue(cached.Contains("55") && cached.Contains("World"), "Err 1: " + cached);
 
-        var cacheKey = "SLF%GetItemsFromFunctionSystemLibrary.Common.Framework.App.TestsCacheTestsString";
+        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.TestsGetItemsFromFunctionCacheTestsString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is(), "Not found");
         Assert.IsTrue(cached.Contains("55") && cached.Contains("World"), "Err 2: " + cached);
@@ -107,7 +107,7 @@ public class CacheTests
         Assert.IsTrue(cached.Is());
         Assert.IsTrue(cached.Contains("123"));
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Function_Without_Outside_Vars_Success>b__6_0SystemLibrary.Common.Framework.App.Tests<>cString";
+        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_CacheKey_By_Passing_Function_Without_Outside_Vars_Success>b__6_0<>cString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is());
         Assert.IsTrue(cachedItem.Contains("123"));
@@ -119,13 +119,13 @@ public class CacheTests
         var cached = Cache.Get(() => GetText("Hello", 111, true));
         Assert.IsTrue(cached.Is(), "It is not  hello");
 
-        var cacheKey = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_0SystemLibrary.Common.Framework.App.Tests<>cString";
+        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_0<>cString";
         var cachedItem = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cachedItem.Is(), "Does not exist 1");
         Assert.IsTrue(cachedItem.Contains("111"));
 
         var cached2 = Cache.Get(() => GetText("Hello", 222, true));
-        var cacheKey2 = "SLF%<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_1SystemLibrary.Common.Framework.App.Tests<>cString";
+        var cacheKey2 = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_CacheKey_By_Passing_Lambda_Without_Outside_Vars_Success>b__7_1<>cString";
         var cachedItem2 = Cache.Get<string>(cacheKey2);
         Assert.IsTrue(cachedItem2.Is(), "Does not exist 2");
         Assert.IsTrue(cachedItem2.Contains("222"));
@@ -492,7 +492,7 @@ public class CacheTests
         {
             return data.StringBuilder + " FROM CACHE";
         });
-        var cacheKey = "SLF%<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
         var cached = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cached.Is(), "Not in cache1 " + cacheKey);
         Assert.IsTrue(cached.Contains(" STRINGBUILDER FROM CACHE"), "Returned not the initial cached version: " + cached);
@@ -502,7 +502,7 @@ public class CacheTests
             return data2.StringBuilder + " FROM CACHE";
         });
 
-        var cacheKey2 = "SLF%<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__1SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cacheKey2 = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__1<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
         var cached2 = Cache.Get<string>(cacheKey2);
         Assert.IsTrue(cached2.Is(), "Not in cache " + cacheKey);
         Assert.IsTrue(cached2.Contains(" STRINGBUILDER2 FROM CACHE"), cached2);
