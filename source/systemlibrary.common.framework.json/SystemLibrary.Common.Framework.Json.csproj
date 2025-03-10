@@ -5,6 +5,8 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" ExcludeAssets="analyzers;buildTransitive;"/>
+		<ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" ExcludeAssets="analyzers;buildTransitive;">
+			<Private>false</Private>
+		</ProjectReference>
 	</ItemGroup>
 </Project>
