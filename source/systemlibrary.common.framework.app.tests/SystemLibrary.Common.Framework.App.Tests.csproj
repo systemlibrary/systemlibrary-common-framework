@@ -38,9 +38,12 @@
 	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsAmbiguityFormat.json" />
 	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsControllerFormat.json" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" ExcludeAssets="all" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.8.2" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.8.2" />
@@ -49,8 +52,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
-	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" ExcludeAssets="analyzers;contentFiles;"/>
+	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" ExcludeAssets="analyzers;contentFiles;"/>
 	</ItemGroup>
 
 </Project>
