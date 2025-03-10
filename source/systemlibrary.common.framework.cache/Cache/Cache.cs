@@ -435,7 +435,7 @@ public static partial class Cache
     /// }
     /// 
     /// // Returns top 10 cars from the API, and adds result to cache (assumes not null) for a duration of 180 seconds by default
-    /// // For simplicity, pretend an auto cache key looks like this: sysLib.web.CarService.GetCars_top=10_systemlibrary.com/api/cars_?filter=none_IsAuthenticated=false
+    /// // For simplicity, pretend an auto cache key looks like this: SLF%...
     /// 
     /// // Note: cache key is created with the outside variable "top", it is ".ToString'd", works on many types: bool, datetime, string, and simple POCO's with 1 depth level of properties/fields, not "class inside class" is not supported
     /// // Note: cache key for wether or not user is logged in is always appended so it always varies on "IsAuthenticated"
@@ -698,7 +698,6 @@ public static partial class Cache
         key.Append(getItemMethod?.DeclaringType?.Namespace + getItemMethod?.DeclaringType?.Name + "");
         key.Append(getItemMethod.ReturnType?.Name ?? "");
         
-
         var target = getItem.Target;
         if (target != null)
         {
@@ -718,11 +717,11 @@ public static partial class Cache
                 }
                 else if (value is DateTime dt)
                 {
-                    key.Append(dt.ToString("yyyyMMddHHmmss"));
+                    key.Append(dt.ToString("yyMMddHHmmss"));
                 }
                 else if (value is DateTimeOffset dto)
                 {
-                    key.Append(dto.ToString("yyyyMMddHHmmss"));
+                    key.Append(dto.ToString("yyMMddHHmmss"));
                 }
                 else if (IsToStringable(valueType))
                 {

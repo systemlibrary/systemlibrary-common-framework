@@ -38,7 +38,7 @@ public static class ConcurrentDictionaryExtensions
     }
 
     /// <summary>
-    /// Get T from a static concurrent dictionary based on a key 'Type' or adds it to dictionary before returnal
+    /// Get T from a static concurrent dictionary based on a key 'Type' or adds it to dictionary before returning
     /// </summary>
     /// <remarks>
     /// The static concurrent dictionary lives as long as application runs

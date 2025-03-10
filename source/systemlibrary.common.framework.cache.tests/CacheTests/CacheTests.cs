@@ -53,7 +53,7 @@ public class CacheTests
         Assert.IsTrue(cacheKey.Contains("TestPerson".GetCompressedKey()), "Name");
         Assert.IsTrue(cacheKey.Contains("9004400044".GetCompressedKey()), "Phone");
         Assert.IsTrue(cacheKey.Contains("Street 1000".GetCompressedKey()), "Address");
-        Assert.IsTrue(cacheKey.Contains("20001224000000"), "Year");
+        Assert.IsTrue(cacheKey.Contains("001224000000"), "Year");
         Assert.IsTrue(cacheKey.Contains("87878"), "Age");
         Assert.IsTrue(cacheKey.Contains("0a9536ad3cf4a0d"), "Guid");
 
@@ -68,7 +68,6 @@ public class CacheTests
         Assert.IsTrue(cached.Contains("TestPerson") && cached.Contains("87878"), "Invalid text");
     }
 
-   
     [TestMethod]
     public void Add_To_Cache_Auto_CacheKey_Passing_Function_As_GetItem_Success()
     {
@@ -493,11 +492,10 @@ public class CacheTests
         {
             return data.StringBuilder + " FROM CACHE";
         });
-
         var cacheKey = "SLF%<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0SystemLibrary.Common.Framework.App.Tests<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
         var cached = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cached.Is(), "Not in cache1 " + cacheKey);
-        Assert.IsTrue(cached.Contains(" STRINGBUILDER FROM CACHE"), cached);
+        Assert.IsTrue(cached.Contains(" STRINGBUILDER FROM CACHE"), "Returned not the initial cached version: " + cached);
   
         var result2 = Cache.Get(() =>
         {
