@@ -666,14 +666,14 @@ public partial class StringExtensionsTests : BaseTest
     }
 
     [TestMethod]
-    public void HashCompress_IsOK()
+    public void GetCompressedKey_IsOk()
     {
         var first = "";
         for (int i = 0; i < 100; i++)
         {
             string text = null;
             string result = text.GetCompressedKey();
-            Assert.IsTrue(result == "");
+            Assert.IsTrue(result == null);
 
             text = "";
             result = text.GetCompressedKey();
@@ -758,7 +758,7 @@ public partial class StringExtensionsTests : BaseTest
     }
 
     [TestMethod]
-    public void HashCompress_Generates_Same_key_In_Async_IsOK()
+    public void GetCompressedKey_Generates_Same_key_In_Async_IsOK()
     {
         var result = Async.Tasks(
             () => OnAsyncRun("Hello world"),
