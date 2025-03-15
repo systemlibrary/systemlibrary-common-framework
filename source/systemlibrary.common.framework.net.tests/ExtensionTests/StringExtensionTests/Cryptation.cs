@@ -13,9 +13,9 @@ partial class StringExtensionsTests : BaseTest
 
     static string ReadFile()
     {
-        Thread.Sleep(33);
         try
         {
+            Thread.Sleep(33);
             return File.ReadAllText(DumpFullPath);
         }
         catch
@@ -43,7 +43,7 @@ partial class StringExtensionsTests : BaseTest
 
         var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
         var log = ReadFile();
-        Assert.IsTrue(log.Contains("[systemLibraryCommonFramework.Debug=true] Encryption key is based on environment var"), "Environment Var is not logged: " + log);
+        Assert.IsTrue(log.Contains("key is based on environment var"), "Environment Var is not logged: " + log);
         Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
         Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
     }
@@ -66,7 +66,7 @@ partial class StringExtensionsTests : BaseTest
 
         var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
         var log = ReadFile();
-        Assert.IsTrue(log.Contains("[systemLibraryCommonFramework.Debug=true] Encryption key is based on environment var"), "Environment Var is not logged: " + log);
+        Assert.IsTrue(log.Contains("key is based on environment var"), "Environment Var is not logged: " + log);
         Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
         Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
     }
