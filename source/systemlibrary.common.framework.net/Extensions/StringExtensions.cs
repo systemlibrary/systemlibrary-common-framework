@@ -1054,9 +1054,7 @@ public static partial class StringExtensions
 
     /// <summary>
     /// Convert any uri to a application url, targetting files/folders inside your running app
-    /// 
     /// <para>Assume app is hosted in C:/www/syslib/</para>
-    /// 
     /// Examples: 
     /// http://www.systemlibrary.com/a returns C:\www\syslib\a 
     /// a returns C:/www/syslib/a
@@ -1153,18 +1151,19 @@ public static partial class StringExtensions
     }
 
     /// <summary>
-    /// Encrypt data with a random generated IV
-    /// <para>Key: If DataProtection has been setup</para>
-    /// If key file is used, uses the filename
-    /// <para>Else appName if set through SetApplicationName()</para>
-    /// Else assembly name
-    /// <para>Else no data protection usage: ABCDEFGHIJKLMNOPQRST123456789011</para>
+    /// Encrypt data using the global encryption key, with an optional IV. Key can be obtained in the following order of precedence:
+    /// <para>Command-line: sysLibEncKey if set.</para>
+    /// <para>Environment variable: frameworkEncKey if set.</para>
+    /// <para>Key file: frameworkEnc-&lt;your key&gt;.key if set.</para>
+    /// <para>Fallback: Defaults to 'ABCD...' if none of the above are set.</para>
+    /// <para>If no IV is provided, a random IV is used if addIV is true; otherwise, it’s 16 zero bytes.</para>
+    /// <para>The key must be 16 or 32 characters long. If IV is added, it’s placed in the first 16 bytes.</para>
     /// </summary>
-    /// <param name="addIV">Add the generated IV to the output or not</param>
+    /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// - Data protection key file is a XML file, file name starts with "key-"
-    /// <para>- Built-in keys are always hashed before used as the Key</para>
-    /// - Optionally add a random IV as the first 16 bytes of output. If you dont, the IV is 16 bytes of 0
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
+    /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>
     /// <example>
     /// <code>
@@ -1172,61 +1171,64 @@ public static partial class StringExtensions
     /// var encrypted = data.Encrypt();
     /// </code>
     /// </example>
-    /// <returns>Encrypted base64 string with IV in first 16 bytes, or null/empty if input was so</returns>
+    /// <returns>Returns an encrypted base64 string with the IV in the first 16 bytes, or null/empty.</returns>
     public static string Encrypt(this string data, bool addIV = true)
     {
         return Cryptation.Encrypt(data, CryptationKey.Current, null, addIV).ToBase64();
     }
 
     /// <summary>
-    /// Encrypt data with a key and an optional IV
-    /// <para>Key is null?: If DataProtection has been setup</para>
-    /// If key file is used, uses the filename
-    /// <para>Else appName if set through SetApplicationName()</para>
-    /// Else assembly name
-    /// <para>Else no data protection usage: ABCDEFGHIJKLMNOPQRST123456789011</para>
-    /// Optional IV: If IV is not set then use either; random IV if addIV is true else 16 bytes of 0
+    /// Encrypt data using a key, with an optional IV. The global encryption key can be obtained in the following order of precedence:
+    /// <para>Command-line: sysLibEncKey if set.</para>
+    /// <para>Environment variable: frameworkEncKey if set.</para>
+    /// <para>Key file: frameworkEnc-&lt;your key&gt;.key if set.</para>
+    /// <para>Fallback: Defaults to 'ABCD...' if none of the above are set.</para>
+    /// <para>If no IV is provided, a random IV is used if addIV is true; otherwise, it’s 16 zero bytes.</para>
+    /// <para>The key must be 16 or 32 characters long. If IV is added, it’s placed in the first 16 bytes.</para>
     /// </summary>
-    /// <param name="addIV">Add the generated IV to the output or not</param>
+    /// <param name="key">Provide a non-null key to use your own, instead of the global encryption key.</param>
+    /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// - Key must be 16 or 32 characters
-    /// <para>- Optionally add IV to the fist 16 bytes of output, if not? IV is 16 bytes of 0</para>
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
+    /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>
     /// <example>
     /// <code>
-    /// var key = "16 or 32 chars...";
     /// var data = "Hello world";
-    /// var encrypted = data.Encrypt(key);
+    /// var encrypted = data.Encrypt();
     /// </code>
     /// </example>
-    /// <returns>Encrypted base64 string with IV in first 16 bytes if 'addIV' was true, or null/empty if input was so</returns>
+    /// <returns>Returns an encrypted base64 string with the IV in the first 16 bytes, or null/empty.</returns>
     public static string Encrypt(this string data, string key, string IV = null, bool addIV = false)
     {
         return Encrypt(data, key.GetBytes() ?? CryptationKey.Current, IV.GetBytes(), addIV);
     }
 
+
     /// <summary>
-    /// Encrypt data with a key and an optional IV
-    /// <para>Key is null?: If DataProtection has been setup</para>
-    /// If key file is used, uses the filename
-    /// <para>Else appName if set through SetApplicationName()</para>
-    /// Else assembly name
-    /// <para>Else no data protection usage: ABCDEFGHIJKLMNOPQRST123456789011</para>
-    /// Optional IV: If IV is not set then use either; random IV if addIV is true else 16 bytes of 0
+    /// Encrypt data using a key, with an optional IV. The global encryption key can be obtained in the following order of precedence:
+    /// <para>Command-line: sysLibEncKey if set.</para>
+    /// <para>Environment variable: frameworkEncKey if set.</para>
+    /// <para>Key file: frameworkEnc-&lt;your key&gt;.key if set.</para>
+    /// <para>Fallback: Defaults to 'ABCD...' if none of the above are set.</para>
+    /// <para>If no IV is provided, a random IV is used if addIV is true; otherwise, it’s 16 zero bytes.</para>
+    /// <para>The key must be 16 or 32 characters long. If IV is added, it’s placed in the first 16 bytes.</para>
     /// </summary>
-    /// <param name="addIV">Add the generated IV to the output or not</param>
+    /// <param name="key">Provide a non-null key to use your own, instead of the global encryption key.</param>
+    /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// - Key must be 16 or 32 characters
-    /// <para>- Optionally add IV to the fist 16 bytes of output, if not? IV is 16 bytes of 0</para>
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
+    /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>
     /// <example>
     /// <code>
-    /// var key = "16 or 32 chars...".GetBytes();
     /// var data = "Hello world";
-    /// var encrypted = data.Encrypt(key);
+    /// var encrypted = data.Encrypt();
     /// </code>
     /// </example>
-    /// <returns>Encrypted base64 string with IV in first 16 bytes if 'addIV' was true, or null/empty if input was so</returns>
+    /// <returns>Returns an encrypted base64 string with the IV in the first 16 bytes, or null/empty.</returns>
     public static string Encrypt(this string data, byte[] key, byte[] IV = null, bool addIV = false)
     {
         if (key != null && key.Length != 16 && key.Length != 32)
@@ -1239,11 +1241,11 @@ public static partial class StringExtensions
     }
 
     /// <summary>
-    /// Returns the decrypted version of the cipher text
+    /// Returns the decrypted cipher text.
     /// </summary>
     /// <remarks>
-    /// Must pass same arguments as you did when you invoked .Encrypt()
-    /// <para>'addedIV' must be true if you set 'addIV' to 'true' during Encrypt()</para>
+    /// Must use the same arguments as in .Encrypt().
+    /// <para>addedIV must be true if addIV was true in .Encrypt().</para>
     /// </remarks>
     /// <example>
     /// <code>
@@ -1259,11 +1261,11 @@ public static partial class StringExtensions
     }
 
     /// <summary>
-    /// Returns the decrypted version of the cipher text
+    /// Returns the decrypted cipher text.
     /// </summary>
     /// <remarks>
-    /// Must pass same arguments as you did when you invoked .Encrypt()
-    /// <para>'addedIV' must be true if you set 'addIV' to 'true' during Encrypt()</para>
+    /// Must use the same arguments as in .Encrypt().
+    /// <para>addedIV must be true if addIV was true in .Encrypt().</para>
     /// </remarks>
     /// <example>
     /// <code>
@@ -1280,11 +1282,11 @@ public static partial class StringExtensions
     }
 
     /// <summary>
-    /// Returns the decrypted version of the cipher text
+    /// Returns the decrypted cipher text.
     /// </summary>
     /// <remarks>
-    /// Must pass same arguments as you did when you invoked .Encrypt()
-    /// <para>'addedIV' must be true if you set 'addIV' to 'true' during Encrypt()</para>
+    /// Must use the same arguments as in .Encrypt().
+    /// <para>addedIV must be true if addIV was true in .Encrypt().</para>
     /// </remarks>
     /// <example>
     /// <code>
@@ -1333,7 +1335,7 @@ public static partial class StringExtensions
 
     // CREDS TO: https://learn.microsoft.com/en-us/answers/questions/226531/c-best-method-to-reduce-size-of-large-string-data.html
     /// <summary>
-    /// Compress the input data and return
+    /// Compress the input data and return the result.
     /// </summary>
     /// <remarks>
     /// Returned value might be larger if the input is only a character or two.

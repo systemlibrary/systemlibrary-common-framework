@@ -23,14 +23,14 @@ public class LogDumpTests : BaseTest
     
     static string ReadFile()
     {
-        Thread.Sleep(66);
+        Thread.Sleep(33);
         try
         {
             return File.ReadAllText(DumpFullPath);
         }
         catch
         {
-            Thread.Sleep(25);
+            Thread.Sleep(33);
             return File.ReadAllText(DumpFullPath);
         }
     }
@@ -298,7 +298,7 @@ public class LogDumpTests : BaseTest
 
         var content = ReadFile();
 
-        Assert.IsTrue(content.Contains("Johnny"), "Missing Johnny");
+        Assert.IsTrue(content.Contains("Johnny"), "Missing Johnny " + content);
 
         Assert.IsTrue(content.Contains("Skipped as max depth reached"), "Max depth not reached");
     }

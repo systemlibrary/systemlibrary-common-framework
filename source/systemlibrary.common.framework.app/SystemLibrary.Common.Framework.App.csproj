@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Configurations>Release</Configurations>
 		<RootNamespace>SystemLibrary.Common.Framework</RootNamespace>
 	</PropertyGroup>
 
@@ -9,7 +8,11 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
-	
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.2" ExcludeAssets="analyzers;buildTransitive;contentFiles;" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj" ExcludeAssets="analyzers;buildTransitive;contentFiles;">
 			<Private>false</Private>

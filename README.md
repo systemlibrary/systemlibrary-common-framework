@@ -1,7 +1,7 @@
-# SystemLibrary Common Net
+# SystemLibrary Common Framework
 
 ## Description
-Framework with default settings and classes for every &gt;= .NET 8 application
+Framework with default settings and classes for every &gt;= .NET 9 application
 
 ### Features
 - Extensions for strings, arrays, lists, ...
@@ -21,11 +21,11 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - Client is built on top of HttpClient, with Polly's retry and circuit breakers with default settings 
 
 ## Requirements
-- &gt;= .NET 8
+- &gt;= .NET 9
 
 ## Latest Release Notes
-- 8.0.0.1
-- Initial version replacing SystemLibrary.Common.Framework and SystemLibrary.Common.Framework.App (init)
+- 9.0.0.1
+- Initial release
 
 #### Version history 
 - View git history of this file if interested

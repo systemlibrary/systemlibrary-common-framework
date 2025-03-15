@@ -1,6 +1,4 @@
 <Project>
-	
-	
   
 	<PropertyGroup>
 		<Version>9.0.0.1</Version>
@@ -15,10 +13,11 @@
 		<EnableSourceLink>false</EnableSourceLink>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<Deterministic>true</Deterministic>
+		<Deterministic>false</Deterministic>
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
 		<DOTNET_CLI_TELEMETRY_OPTOUT>true</DOTNET_CLI_TELEMETRY_OPTOUT>
+		<MSBuildVerbosity>quiet</MSBuildVerbosity>
 	</PropertyGroup>
 	
 	<PropertyGroup>
@@ -37,5 +36,6 @@
 		<IncludeSymbols>False</IncludeSymbols>
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
 		<AnalysisLevel>none</AnalysisLevel>
+		<DisableTestResults>true</DisableTestResults>
 	</PropertyGroup>
 </Project>

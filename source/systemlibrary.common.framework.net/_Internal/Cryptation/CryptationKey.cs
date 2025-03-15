@@ -4,38 +4,32 @@ namespace SystemLibrary.Common.Framework;
 
 internal static partial class CryptationKey
 {
-    internal static string FrameworkKeyDirectory;
-
     internal static readonly string _KeyFileFullName;
 
     internal static string KeyStart;
 
-    internal static readonly byte[] Current = Encoding.UTF8.GetBytes(GetKey());
+    internal static byte[] Current = Encoding.UTF8.GetBytes(GetKey());
 
-    static string GetKey()
+    internal static string GetKey()
     {
-        var key = TryGetKeyFileName();
+        var key = TryGetFrameworkEncKey();
 
-        if (key.Is())
+        if (key.IsNot())
         {
-            Debug.Log("Encryption key from key file: " + key.MaxLength(3) + "...");
-        }
-        else
-        {
-            key = AppInstance.AppName;
+            key = TryGetKeyFileName();
 
-            if (key != "app")
+            if (key.Is())
             {
-                Debug.Log("Encryption key is based on 'ApplicationName': " + key.MaxLength(3) + "...");
+                Debug.Log("[Encryption] key from key file: " + key.MaxLength(3) + "...");
             }
             else
             {
                 key = "ABCDEFGHIJKLMNOPQRST123456789011";
 
-                if (FrameworkKeyDirectory.Is())
-                    Debug.Log("Encryption key is default 'ABC...' as 'Framework Key File' is not found in FrameworkKeyDirectory, nor was 'ApplicationName' set in appSettings/AddDataProtection");
+                if (CryptationKeyDirectory.Path.Is())
+                    Debug.Log("[Encryption] key is default 'ABC...' as 'Framework Enc Key File' is not found in FrameworkKeyDirectory");
                 else
-                    Debug.Log("Encryption key is default 'ABC...' as 'FrameworkKeyDirectory' is not set in FrameworkBuilder.Create(), nor is 'ApplicationName' set in appSettings/AddDataProtection");
+                    Debug.Log("[Encryption] key is default 'ABC...' as no other framework enc key has been set");
             }
         }
 
@@ -52,4 +46,9 @@ internal static partial class CryptationKey
 
         return error;
     }
+}
+
+internal static partial class CryptationKeyDirectory
+{
+    internal static string Path;
 }

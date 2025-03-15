@@ -87,4 +87,10 @@ partial class FrameworkOptions
     /// <para>Another option is to simply set 'ViewLocations' variable or 'AreaViewLocations'</para>
     /// </summary>
     public IViewLocationExpander ViewLocationExpander = null;
+
+    /// <summary>
+    /// Set the directory path containing the frameworkEnc.key file.
+    /// <para>C:\src\FrameworkEnc-hello-world.key, where "hello-world" is the key used to encrypt and decrypt data with the Encrypt() and Decrypt() methods.</para>
+    /// </summary>
+    public string FrameworkKeyDirectory = null;
 }

@@ -11,14 +11,14 @@ public class LogWriterTests : BaseTest
 
     static string ReadFile()
     {
-        Thread.Sleep(50);
+        Thread.Sleep(33);
         try
         {
             return File.ReadAllText(DumpFullPath);
         }
         catch
         {
-            Thread.Sleep(25);
+            Thread.Sleep(33);
             return File.ReadAllText(DumpFullPath);
         }
     }

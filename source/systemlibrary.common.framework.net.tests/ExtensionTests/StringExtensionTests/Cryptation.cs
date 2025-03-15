@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using System.Text;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,75 +9,65 @@ namespace SystemLibrary.Common.Framework;
 
 partial class StringExtensionsTests : BaseTest
 {
-    [TestMethod]
-    public void Cryptation_With_Custom_Key_Ring_File_Even_AppName_Is_Set_Success()
+    const string DumpFullPath = "C:\\Logs\\systemlibrary-common-framework-tests.log";
+
+    static string ReadFile()
     {
-        var serviceCollection = new ServiceCollection();
-
-        serviceCollection
-            .AddDataProtection()
-            .SetApplicationName("CustomAppNameUsedAsKey")
-            .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
-
-        var tmpServiceProvider = serviceCollection.BuildServiceProvider();
-
-        var fileName = "key-13F7D4C1-E781-4824-8270-0BE22A226220.xml";
-        var fileContent = "key encryption";
-        var dir = AppInstance.ContentRootPath;
-
-        if (File.Exists(dir + "\\" + fileName))
+        Thread.Sleep(33);
+        try
         {
-            File.Delete(dir + "\\" + fileName);
-            Thread.Sleep(10);
+            return File.ReadAllText(DumpFullPath);
         }
-
-        File.AppendAllText(dir + "\\" + fileName, fileContent);
-
-        var data = "Hello world";
-
-        //var oldServiceProvider = ServiceProviderInstance.Instance;
-
-        ServiceProviderInstance.Instance = tmpServiceProvider;
-
-        var enc = data.Encrypt();
-        var dec = enc.Decrypt();
-
-        // ServiceProviderInstance.Instance = oldServiceProvider;
-
-        if (File.Exists(dir + "\\" + fileName))
-            File.Delete(dir + "\\" + fileName);
-
-        var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
-
-        Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
-        Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
-
+        catch
+        {
+            Thread.Sleep(12);
+            return File.ReadAllText(DumpFullPath);
+        }
     }
 
     [TestMethod]
-    public void Cryptation_With_DataProtection_AppName_Success()
+    public void Encrypt_Decrypt_With_Key_From_Environment_Var_Is_Success()
     {
-        var serviceCollection = new ServiceCollection();
-
-        serviceCollection
-            .AddDataProtection()
-            .SetApplicationName("CustomAppNameUsedAsKey")
-            .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100));
-
-        var emptyProvider = serviceCollection.BuildServiceProvider();
-
-        ServiceProviderInstance.Instance = emptyProvider;
+        Environment.SetEnvironmentVariable("frameworkEncKey", "hello world");
 
         var data = "Hello world";
 
+        var prevKey = CryptationKey.Current;
+
+        CryptationKey.Current = Encoding.UTF8.GetBytes(CryptationKey.GetKey());
+        
         var enc = data.Encrypt();
-
-        var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
-
-        Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
-
         var dec = enc.Decrypt();
 
+        CryptationKey.Current = prevKey;
+
+        var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
+        var log = ReadFile();
+        Assert.IsTrue(log.Contains("[systemLibraryCommonFramework.Debug=true] Encryption key is based on environment var"), "Environment Var is not logged: " + log);
+        Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
+        Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
+    }
+
+    [TestMethod]
+    public void Encrypt_Decrypt_With_Key_From_Environment_Var_UpperCased_Is_Success()
+    {
+        Environment.SetEnvironmentVariable("FRAMEWORKENCKEY", "hello world");
+
+        var data = "Hello world";
+
+        var prevKey = CryptationKey.Current;
+
+        CryptationKey.Current = Encoding.UTF8.GetBytes(CryptationKey.GetKey());
+
+        var enc = data.Encrypt();
+        var dec = enc.Decrypt();
+
+        CryptationKey.Current = prevKey;
+
+        var prev = "1hGSKl2xIGoboY7NmkctiEZCS52o6+C2MeGTBe5YAYQ=";
+        var log = ReadFile();
+        Assert.IsTrue(log.Contains("[systemLibraryCommonFramework.Debug=true] Encryption key is based on environment var"), "Environment Var is not logged: " + log);
+        Assert.IsTrue(prev.Length == enc.Length && enc.EndsWith("="), "Enc with default 32 char key changed: " + enc);
         Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
     }
 

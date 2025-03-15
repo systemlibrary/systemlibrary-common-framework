@@ -6,23 +6,23 @@ partial class CryptationKey
     {
         var keyFile = FindFrameworkKeyFile();
 
-        if (keyFile.Is()) Debug.Log("Found framework key file in " + FrameworkKeyDirectory);
+        if (keyFile.Is()) Debug.Log("[Encryption] found file in " + CryptationKeyDirectory.Path);
 
         return Path.GetFileName(keyFile);
     }
 
     static string FindFrameworkKeyFile()
     {
-        if (FrameworkKeyDirectory.IsNot()) return null;
+        if (CryptationKeyDirectory.Path.IsNot()) return null;
 
-        if (FrameworkKeyDirectory.Contains(".xml"))
+        if (CryptationKeyDirectory.Path.IsFile())
         {
-            throw new Exception("FrameworkKeyDirectory that you've set contains an extension: " + FrameworkKeyDirectory + ". Please specify a directory path, for instance: C:/temp or /temp");
+            throw new Exception("[Encryption] FrameworkKeyDirectory you've set contains an extension: " + CryptationKeyDirectory.Path + ". Please specify a directory path, for instance: C:/temp or /temp and put the frameworkKey.enc file within the folder. Remember the filename contains the key, so we do not want that in code.");
         }
 
         try
         {
-            var fileNames = Directory.GetFiles(FrameworkKeyDirectory, "*.xml", SearchOption.TopDirectoryOnly);
+            var fileNames = Directory.GetFiles(CryptationKeyDirectory.Path, "*.key", SearchOption.TopDirectoryOnly);
 
             if (fileNames == null || fileNames.Length == 0) return null;
 
@@ -45,7 +45,10 @@ partial class CryptationKey
             {
                 var validated = ValidateFileName(fullFileName);
 
-                if (validated != null) return validated.Replace("framework-key-", "");
+                if (validated != null) return validated
+                        .Replace("frameworkenc-", "")
+                        .Replace("frameworkEnc-", "")
+                        .Replace("FrameworkEnc-", "");
             }
         }
         catch (Exception ex)
@@ -60,7 +63,9 @@ partial class CryptationKey
     {
         if (fullFileName.Length <= 20) return null;
 
-        if (!fullFileName.Contains("framework-key-")) return null;
+        if (!fullFileName.Contains("frameworkenc-") &&
+            !fullFileName.Contains("frameworkEnc-") &&
+            !fullFileName.Contains("FrameworkEnc-")) return null;
 
         return fullFileName;
     }

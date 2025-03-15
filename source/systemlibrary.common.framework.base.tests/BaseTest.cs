@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
@@ -45,13 +43,11 @@ public abstract partial class BaseTest
         }
     }
 
-    static MethodInfo[] Methods;
-    protected void MapTestActions(IApplicationBuilder app)
+    protected void MapActions(IApplicationBuilder app)
     {
-        if (Methods == null)
-            Methods = this.GetType().GetMethods();
+        var methods = this.GetType().GetMethods();
 
-        foreach (var method in Methods)
+        foreach (var method in methods)
         {
             var methodName = method.Name;
 
@@ -82,4 +78,3 @@ public abstract partial class BaseTest
         }
     }
 }
-

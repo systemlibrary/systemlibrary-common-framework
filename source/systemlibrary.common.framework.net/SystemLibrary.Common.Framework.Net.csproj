@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
 	<PropertyGroup>
-		<Configurations>Release</Configurations>
 		<RootNamespace>SystemLibrary.Common.Framework</RootNamespace>
 	</PropertyGroup>
 
@@ -9,6 +9,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="prometheus-net" Version="8.2.1" ExcludeAssets="analyzers;buildTransitive;build;runtime;" />
+		<PackageReference Include="prometheus-net" Version="8.2.1" ExcludeAssets="analyzers;" />
 	</ItemGroup>
 </Project>

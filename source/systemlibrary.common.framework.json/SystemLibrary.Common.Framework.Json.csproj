@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NeT.Sdk">
 	<PropertyGroup>
-		<Configurations>Release</Configurations>
 		<RootNamespace>SystemLibrary.Common.Framework</RootNamespace>
 	</PropertyGroup>
 	

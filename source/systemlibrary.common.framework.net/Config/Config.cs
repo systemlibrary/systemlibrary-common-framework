@@ -215,24 +215,24 @@ public abstract partial class Config<T> where T : class
 
             var attribute = property.GetCustomAttribute<ConfigDecryptAttribute>();
 
-            // Not a decrypt property
+            // Neither 'Decrypt' end suffix nor ConfigDecrypt attribute exists on property, continue as its a normal property
             if (!isEligibleForDecryption && attribute == null) continue;
 
-            // Name convention mismatch, but propertyName not specified, not able to decrypt
-            if (!isEligibleForDecryption && attribute.PropertyName.IsNot())
+            // Either 'Customer Property Name' set in attribute, or fallback the the property itself, removing 'Decrypt'
+            // Allows a '[ConfigDecrypt]' directly on the property without specifing a name, the property itself will be decrypted
+            var encryptedPropertyName = attribute?.PropertyName ?? property.Name.ReplaceAllWith("", "Decrypt");
+
+            if (encryptedPropertyName.IsNot())
             {
-                Debug.Log("Config did not decrypt " + property.Name + " as DecryptAttribute 'PropertyName' is null/blank");
+                Debug.Log("[Config] Property name in ConfigDecrypt-attribute is blank or space, that's not a valid C# property name, continuing...");
                 continue;
             }
-
-            var encryptedPropertyName = attribute?.PropertyName ??
-                property.Name.ReplaceAllWith("", "Decrypt");
 
             var encryptedProperty = FindEncryptedProperty(properties, encryptedPropertyName);
 
             if (encryptedProperty == null)
             {
-                Debug.Log("Config did not decrypt " + property.Name + " as the encrypted property was not found: " + encryptedPropertyName);
+                Debug.Log("[Config] Property " + type.Name + "." + encryptedPropertyName + " was not found, so cannot decrypt a non existing property, continuing...");
                 continue;
             }
 
@@ -240,7 +240,8 @@ public abstract partial class Config<T> where T : class
 
             if (cipherText == null)
             {
-                Debug.Log("Config property " + encryptedProperty.Name + " is null, decrypting nothing, continue...");
+                Log.Warning("[Config] Property " + type.Name + "." + encryptedProperty.Name + " is null, decrypting nothing, continuing...");
+
                 continue;
             }
 
@@ -252,7 +253,7 @@ public abstract partial class Config<T> where T : class
             }
             else
             {
-                Debug.Log("Decrypting " + encryptedProperty.Name + " returned null");
+                Debug.Log("[Config] Decryption of " + type.Name + "." + encryptedProperty.Name + " returned null, continuing...");
             }
         }
     }

@@ -2,19 +2,31 @@
 	<PropertyGroup>
 		<Configurations>Release</Configurations>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<DependsOnTargets>BuildModules</DependsOnTargets>
 	</PropertyGroup>
+
+	<Target Name="BuildModules" BeforeTargets="Build">
+		<Message Importance="high" Text="Building framework after other projects." />
+	</Target>
 	
 	<ItemGroup>
 		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
 		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		
+		<None Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		
+		<None Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		
+		<None Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+
+		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -26,6 +38,15 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" Exclude="all"/>
+	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" Exclude="all" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.cache\SystemLibrary.Common.Framework.Cache.csproj" Exclude="all" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.client\SystemLibrary.Common.Framework.Client.csproj" Exclude="all" />
+	  <ProjectReference Include="..\systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj" Exclude="all"/>
+	  <ProjectReference Include="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" Exclude="all"/>
 	</ItemGroup>
 
 	<PropertyGroup>

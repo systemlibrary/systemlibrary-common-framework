@@ -68,9 +68,11 @@ public static partial class IServiceCollectionExtensions
 
     public static IServiceCollection AddFrameworkServices(this IServiceCollection serviceCollection, FrameworkOptions options = null)
     {
-        serviceCollection.AddCommonServices();
-
         options ??= new FrameworkOptions();
+
+        CryptationKeyDirectory.Path = options.FrameworkKeyDirectory;
+        
+        serviceCollection.AddCommonServices();
 
         if (options.UseExtendedEnumModelConverter)
         {

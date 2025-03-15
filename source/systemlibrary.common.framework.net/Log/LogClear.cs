@@ -21,14 +21,14 @@
         }
         catch
         {
-            Thread.Sleep(15);
+            Thread.Sleep(7);
             try
             {
                 File.WriteAllText(FullFilePath, string.Empty);
             }
             catch
             {
-                Thread.Sleep(30);
+                Thread.Sleep(14);
                 try
                 {
                     File.WriteAllText(FullFilePath, string.Empty);

@@ -29,16 +29,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_All_IsOk.txt" />
-	  <EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_Url_And_Empty_IsOk.txt" />
+		<EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_All_IsOk.txt" />
+		<EmbeddedResource Include="ExtensionsTests\HttpRequestExtensionsTests\Extension_Methods_Returns_Url_And_Empty_IsOk.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsHttpVerbFormat.json" />
-	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsAmbiguityFormat.json" />
-	  <EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsControllerFormat.json" />
+		<EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsHttpVerbFormat.json" />
+		<EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsAmbiguityFormat.json" />
+		<EmbeddedResource Include="ApiTests\BaseApiControllerTests\DocsControllerFormat.json" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" ExcludeAssets="all" />
 	</ItemGroup>
@@ -52,8 +52,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" ExcludeAssets="analyzers;contentFiles;"/>
-	  <ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" ExcludeAssets="analyzers;contentFiles;"/>
+		<ProjectReference Include="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" />
+		<ProjectReference Include="..\systemlibrary.common.framework.base.tests\SystemLibrary.Common.Framework.Base.Tests.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appSettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

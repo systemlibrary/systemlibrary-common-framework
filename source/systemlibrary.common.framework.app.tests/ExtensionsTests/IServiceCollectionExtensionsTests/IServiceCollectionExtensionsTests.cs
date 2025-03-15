@@ -49,7 +49,7 @@ public class IServiceCollectionExtensionsTests : BaseTest
 
                 app.UseFrameworkMiddlewares(null, FrameworkOptions);
 
-                MapTestActions(app);
+                MapActions(app);
             });
     }
 
