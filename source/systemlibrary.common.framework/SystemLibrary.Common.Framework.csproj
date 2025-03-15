@@ -12,21 +12,21 @@
 	</Target>
 	
 	<ItemGroup>
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
 		
-		<None Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
 		
-		<None Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
 		
-		<None Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-
-		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
-		<None Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.json\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Json.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		
+		<None Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml" Pack="true" PackagePath="lib\$(TargetFramework)" />
+		<None Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll" Pack="true" PackagePath="lib\$(TargetFramework)" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -55,7 +55,7 @@
 		<Version>$(Version)</Version>
 		<Title>SystemLibrary Common Framework</Title>
 		<Description>
-			Framework with default settings and classes for every &gt;= .NET 8 application
+			Framework with default settings and classes for every &gt;= .NET 9 application
 			https://github.com/systemlibrary/systemlibrary-common-framework/#Description
 
 			Installation

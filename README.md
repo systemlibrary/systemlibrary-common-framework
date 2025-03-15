@@ -4,21 +4,18 @@
 Framework with default settings and classes for every &gt;= .NET 9 application
 
 ### Features
-- Extensions for strings, arrays, lists, ...
-- Dump.Write() "equivalent" to console.log in javascript
-- Config&lt;&gt; class which automaps a json file and its data to the C# class, also runs transformations based on EnvironmentName
-- Enum extensions and attributes such as [EnumText] and [EnumValue]
-- Json() extension method available on all objects
-- JsonPartial() extension method available on all objects, converting only a part of the json string to a C# class
-- Encrypt and Decrypt out of the box through string and byte[] extensions, uses AES CBC PKCS7
-- Obfuscate and Deobfuscate out of the box through string extensions
-- Fire and forget in Async.Run()
-- ToBase64() and FromBase64() through string and byte[] extensions
-- ToHash(), ToSha1(), ToSha256() through Stream, string and byte[] extensions
-- Service Locator in Services.Get&lt;&gt;()
-- Cache items through Cache.Get&lt;&gt;()
-- Log to your own ILogWriter through the global Log class
-- Client is built on top of HttpClient, with Polly's retry and circuit breakers with default settings 
+- Config – Inherit class to auto-map JSON config files to C# classes by name, with environment-based transformations.
+- Log – Global instance with a Dump method, equivalent to JavaScript's console.log.
+- Cache – Global sharded instance with fallback and metrics, and automatic cache key generation.
+- Client – Http Client with automatic retry and circuit breaker policies and metrics
+- Preconfigured Middlewares & Services – Available via AddFrameworkServices() and AddFrameworkMiddlewares(), including HTTPS redirection, output caching, authentication, and more.
+- Seamless JSON Serialization – Through .Json() and .PartialJson() methods for easy conversions.
+- Encryption – Easily encrypt with global key management via file, CLI, or environment variable, using string and byte[] extensions, with AES CBC PKCS7 encryption.
+- String Extensions – ToBase64, ToSHA256, ToMD5, ToSHA1, Obfuscate and Compress on strings and byte arrays.
+- Services - Global instance service locator 
+- Enhanced Enums – Attributes EnumText, EnumValue for flexible JSON deserialization.
+- API – BaseApiController with attributes such as OriginFilter, UserAgentFilter and ApiTokenFilter attributes for flexible request validation.
+- Self-Documenting APIs – Auto-generates API documentation at /docs, listing methods, parameters, and paths. 
 
 ## Requirements
 - &gt;= .NET 9
@@ -46,4 +43,4 @@ Framework with default settings and classes for every &gt;= .NET 9 application
 - [Send us an email](mailto:support@systemlibrary.com)
 
 ## License
-- Free
+- Free with Tiered Pricing for additional features

@@ -25,7 +25,7 @@ public class StringExtensionsTests : BaseTest
             return File.ReadAllText(DumpFullPath);
         }
     }
-   
+
     void CreateWebHostBuilder()
     {
         var options = new FrameworkOptions
@@ -58,8 +58,10 @@ public class StringExtensionsTests : BaseTest
         IsOk(text == "Hello world", "Got " + text);
 
         var log = ReadFile();
+        if (log.Length < 1)
+            log = ReadFile();
 
-        Assert.IsTrue(log.Contains("key from key file"), "Key not from ke file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file...");
+        Assert.IsTrue(log.Contains("key from key file"), "Key not from ke file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file..." + log);
     }
 
     public string FrameworkKeyDirectory_Is_Set_Encrypts_With_Partial_FileName_IsOk_Action()
