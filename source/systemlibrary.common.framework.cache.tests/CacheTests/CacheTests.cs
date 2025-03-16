@@ -492,7 +492,7 @@ public class CacheTests
         {
             return data.StringBuilder + " FROM CACHE";
         });
-        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cacheKey = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__0<>c__DisplayClass22_0String165362a1166169850Z1152165197a1167169850Z1152";
         var cached = Cache.Get<string>(cacheKey);
         Assert.IsTrue(cached.Is(), "Not in cache1 " + cacheKey);
         Assert.IsTrue(cached.Contains(" STRINGBUILDER FROM CACHE"), "Returned not the initial cached version: " + cached);
@@ -502,9 +502,9 @@ public class CacheTests
             return data2.StringBuilder + " FROM CACHE";
         });
 
-        var cacheKey2 = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__1<>c__DisplayClass22_0String1653621166a1698501152Z1651971167a1698501152Z";
+        var cacheKey2 = "SLF%SystemLibrary.Common.Framework.App.Tests<Auto_Create_Cache_Key_Long_String_Long_StringBuilder_Success>b__1<>c__DisplayClass22_0String165362a1166169850Z1152165197a1167169850Z1152";
         var cached2 = Cache.Get<string>(cacheKey2);
-        Assert.IsTrue(cached2.Is(), "Not in cache " + cacheKey);
+        Assert.IsTrue(cached2.Is(), "Not in cache2 " + cacheKey);
         Assert.IsTrue(cached2.Contains(" STRINGBUILDER2 FROM CACHE"), cached2);
     }
 

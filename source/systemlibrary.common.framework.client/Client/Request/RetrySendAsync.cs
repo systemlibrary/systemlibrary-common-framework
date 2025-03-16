@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using SystemLibrary.Common.Framework.Licensing;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -54,16 +52,13 @@ partial class Client
 
                 if (retry != maxRetries - 1)
                 {
+                    IncrementMetric(options, response, retry);
+
                     if (!IsEligibleForRetry(options, response, retry, ex))
                     {
-                        if (EnablePrometheusConfig)
-                            IncrementMetric(options, response, retry);
-
                         // Response is success or no more retries so we break
                         break;
                     }
-
-                    // Debug.Log("Retry count: " + (retry + 1) + " " + options.Url + ": " + response?.StatusCode);
 
                     ex = null;
                     response = null;
@@ -71,8 +66,7 @@ partial class Client
                 }
                 else
                 {
-                    if (EnablePrometheusConfig)
-                        IncrementMetric(options, response, retry);
+                    IncrementMetric(options, response, retry);
                 }
             }
 
@@ -81,6 +75,10 @@ partial class Client
 
         static void IncrementMetric(RequestOptions options, HttpResponseMessage response, int retry)
         {
+            if (!EnablePrometheusConfig) return;
+
+            if (!License.Gold()) return;
+
             if (response?.IsSuccessStatusCode == true)
             {
                 var statusCode = (int)(response?.StatusCode ?? 0);

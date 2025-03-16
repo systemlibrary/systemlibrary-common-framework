@@ -3,6 +3,8 @@ using System.Text.Json;
 
 using Polly.CircuitBreaker;
 
+using SystemLibrary.Common.Framework.Licensing;
+
 namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
@@ -114,7 +116,7 @@ partial class Client
         }
         catch (BrokenCircuitException bce)
         {
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 ClientRequestCounter.WithLabels(options.UriLabel, "circuit_broken", "0").Inc();
 
             return (response, bce);

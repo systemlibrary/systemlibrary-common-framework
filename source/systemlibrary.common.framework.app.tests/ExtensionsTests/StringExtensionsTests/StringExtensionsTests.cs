@@ -17,11 +17,12 @@ public class StringExtensionsTests : BaseTest
     {
         try
         {
+            Thread.Sleep(12);
             return File.ReadAllText(DumpFullPath);
         }
         catch
         {
-            Thread.Sleep(4);
+            Thread.Sleep(12);
             return File.ReadAllText(DumpFullPath);
         }
     }
@@ -58,10 +59,8 @@ public class StringExtensionsTests : BaseTest
         IsOk(text == "Hello world", "Got " + text);
 
         var log = ReadFile();
-        if (log.Length < 1)
-            log = ReadFile();
 
-        Assert.IsTrue(log.Contains("key from key file"), "Key not from ke file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file..." + log);
+        Assert.IsTrue(log.Contains("key from key file"), "key not from key file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file..." + log);
     }
 
     public string FrameworkKeyDirectory_Is_Set_Encrypts_With_Partial_FileName_IsOk_Action()

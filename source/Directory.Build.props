@@ -1,7 +1,7 @@
 <Project>
   
 	<PropertyGroup>
-		<Version>9.0.0.1</Version>
+		<Version>9.0.0.13</Version>
 		<Product>$(MSBuildProjectName) $(Version)</Product>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>

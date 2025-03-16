@@ -7,6 +7,7 @@ using Microsoft.Extensions.FileProviders;
 using Prometheus;
 
 using SystemLibrary.Common.Framework.Extensions;
+using SystemLibrary.Common.Framework.Licensing;
 
 namespace SystemLibrary.Common.Framework.App.Extensions;
 
@@ -152,37 +153,40 @@ public static partial class IApplicationBuilderExtensions
             });
         }
 
-        var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.EnablePrometheus;
+        var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.Enable;
         if (enablePrometheusMetrics)
         {
-            app.UseEndpoints(endpoints =>
+            if (License.Gold())
             {
-                Debug.Log("[IApplicationBuilder] Adding /metrics endpoint");
-
-                Metrics.SuppressDefaultMetrics();
-
-                endpoints.MapGet("/metrics", async context =>
+                app.UseEndpoints(endpoints =>
                 {
-                    if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context))
-                    {
-                        Debug.Log("[MetricsAuthorizationMiddleware] 401 Unauthorized");
-                        return;
-                    }
+                    Debug.Log("[IApplicationBuilder] Adding /metrics endpoint");
 
-                    Debug.Log("[MetricsAuthorizationMiddleware] 200 Authorized");
+                    Metrics.SuppressDefaultMetrics();
 
-                    try
+                    endpoints.MapGet("/metrics", async context =>
                     {
-                        await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error(ex);
+                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context))
+                        {
+                            Debug.Log("[MetricsAuthorizationMiddleware] 401 Unauthorized");
+                            return;
+                        }
 
-                        throw;
-                    }
+                        Debug.Log("[MetricsAuthorizationMiddleware] 200 Authorized");
+
+                        try
+                        {
+                            await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+
+                            throw;
+                        }
+                    });
                 });
-            });
+            }
         }
 
         return app;

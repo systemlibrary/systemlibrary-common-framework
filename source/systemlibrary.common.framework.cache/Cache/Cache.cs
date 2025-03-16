@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Caching.Memory;
 
 using SystemLibrary.Common.Framework.Extensions;
+using SystemLibrary.Common.Framework.Licensing;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -449,7 +450,7 @@ public static partial class Cache
 
         if (SkipCache(skipWhenAuthenticated, skipWhenAdmin, skipWhen))
         {
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 CacheMetrics.RecordCacheIgnored();
 
             return getItem();
@@ -461,7 +462,7 @@ public static partial class Cache
             PrevCacheKey = cacheKey;
         }
 
-        // Log.Debug(cacheKey);
+        Log.Debug(cacheKey);
 
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
@@ -473,7 +474,7 @@ public static partial class Cache
 
         if (cached != null)
         {
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 CacheMetrics.RecordCacheHit();
 
             return (T)cached;
@@ -483,15 +484,18 @@ public static partial class Cache
         {
             if (FallbackDurationConfig > 0)
             {
-                if (cacheFallback[cacheIndex] == null) return null;
-
-                var cachedFallback = cacheFallback[cacheIndex].Get(cacheKey);
-
-                if (cachedFallback != null)
+                if (License.Gold())
                 {
-                    Log.Warning(new Exception("[Cache] Fallback match for key: " + cacheKey.MaxLength(48) + "...", ex));
+                    if (cacheFallback[cacheIndex] == null) return null;
 
-                    return cachedFallback;
+                    var cachedFallback = cacheFallback[cacheIndex].Get(cacheKey);
+
+                    if (cachedFallback != null)
+                    {
+                        Log.Warning(new Exception("[Cache] Fallback match for key: " + cacheKey.MaxLength(48) + "...", ex));
+
+                        return cachedFallback;
+                    }
                 }
             }
             return null;
@@ -507,7 +511,7 @@ public static partial class Cache
                 cached = CacheFallbackLookup();
                 if (cached != null)
                 {
-                    if (EnablePrometheusConfig)
+                    if (EnablePrometheusConfig && License.Gold())
                         CacheMetrics.RecordCacheMissWithFallbackCounter();
 
                     return (T)cached;
@@ -519,13 +523,13 @@ public static partial class Cache
             cached = CacheFallbackLookup(ex);
             if (cached != null)
             {
-                if (EnablePrometheusConfig)
+                if (EnablePrometheusConfig && License.Gold())
                     CacheMetrics.RecordCacheExceptionWithFallbackCounter();
 
                 return (T)cached;
             }
 
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 CacheMetrics.RecordCacheLookupExceptionsCounter();
 
             throw ex;
@@ -535,12 +539,12 @@ public static partial class Cache
         {
             Insert(cacheIndex, cacheKey, cached, duration);
 
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 CacheMetrics.RecordCacheMiss();
         }
         else
         {
-            if (EnablePrometheusConfig)
+            if (EnablePrometheusConfig && License.Gold())
                 CacheMetrics.RecordCacheIgnored();
         }
 

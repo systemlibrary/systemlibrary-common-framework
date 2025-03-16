@@ -57,6 +57,9 @@ public class LicenseTierTests : BaseTest
         IsOk(License.Bronze());
         IsOk(License.Silver());
         IsOk(License.Gold());
+        IsOk(License.Bronze());
+        IsOk(License.Silver());
+        IsOk(License.Gold());
     }
 
     [TestMethod]

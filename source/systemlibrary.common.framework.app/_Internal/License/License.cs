@@ -16,6 +16,18 @@ internal static class License
     [DllImport("SystemLibrary.Common.Framework.LicenseEncKey.dll", CallingConvention = CallingConvention.StdCall)]
     public static extern IntPtr LicenseEncKey();
 
+    static string _GetLicenseEncKey;
+    static string GetLicenseEncKey
+    {
+        get
+        {
+            if (_GetLicenseEncKey == null)
+                _GetLicenseEncKey = Marshal.PtrToStringAnsi(LicenseEncKey());
+
+            return _GetLicenseEncKey;
+        }
+    }
+
     static Dictionary<Tier, bool> TiersLicensed = new Dictionary<Tier, bool>();
 
     static object _lock = new object();
@@ -48,7 +60,8 @@ internal static class License
 
     static bool IsTierValid(Tier tier)
     {
-        if (TiersLicensed.TryGetValue(tier, out bool isValid) && TestLicense == null) return isValid;
+        if (TiersLicensed.ContainsKey(tier) && TestLicense == null)
+            return TiersLicensed[tier];
 
         lock (_lock)
         {
@@ -62,18 +75,17 @@ internal static class License
 
     static bool GetTierState(Tier licenseTier)
     {
-        if (!EnvironmentConfig.IsProd)
+        if (EnvironmentConfig.IsLocal)
         {
             if (!BypassEnvironmentCheck) return true;
         }
-
         var license = TestLicense ?? AppSettings.Current.SystemLibraryCommonFramework.License;
 
         if (license.IsNot()) return false;
-
+        
         try
         {
-            license = license.Decrypt(Marshal.PtrToStringAnsi(LicenseEncKey()));
+            license = license.Decrypt(GetLicenseEncKey);
         }
         catch
         {

@@ -147,7 +147,7 @@ partial class Client
         {
             if (_EnablePrometheusConfig == null)
             {
-                _EnablePrometheusConfig = AppSettings.Current?.SystemLibraryCommonFramework?.Metrics?.EnablePrometheus;
+                _EnablePrometheusConfig = AppSettings.Current?.SystemLibraryCommonFramework?.Metrics?.Enable;
 
                 if (_EnablePrometheusConfig == null)
                 {

@@ -1,10 +1,14 @@
-﻿namespace SystemLibrary.Common.Framework.App;
+﻿using SystemLibrary.Common.Framework.Licensing;
+
+namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {
     bool IsEligibleForRequestBreakerPolicy(RequestOptions options)
     {
         if (!UseRequestBreakerPolicy) return false;
+
+        if (!License.Gold()) return false;
 
         if (options.ContentType == ContentType.html ||
             options.ContentType == ContentType.javascript ||

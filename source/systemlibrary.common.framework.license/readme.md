@@ -17,3 +17,5 @@ From MSYS64 shell:
 cd /mingw64/bin
 
 ./g++ -shared -o "C:/syslib/systemlibrary-common-framework/source/systemlibrary.common.framework.license/SystemLibrary.Common.Framework.LicenseEncKey.dll" "C:/syslib/systemlibrary-common-framework/source/systemlibrary.common.framework.license/licenseEncKey.cpp" -fPIC -nodefaultlibs -nostartfiles
+
+./g++ -shared -o "C:/syslib/systemlibrary-common-framework/source/systemlibrary.common.framework.license/SystemLibrary.Common.Framework.LicenseEncKey.so" "C:/syslib/systemlibrary-common-framework/source/systemlibrary.common.framework.license/licenseEncKey.cpp" -fPIC -nodefaultlibs -nostartfiles

@@ -2,6 +2,6 @@
 
 internal class MetricsConfig
 {
-    public bool EnablePrometheus { get; set; } = true;
+    public bool Enable { get; set; } = true;
     public string AuthorizationValue { get; set; } = "Demo";
 }

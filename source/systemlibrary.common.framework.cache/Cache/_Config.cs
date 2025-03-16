@@ -13,6 +13,6 @@ partial class Cache
 
 
     static bool? _EnablePrometheusConfig;
-    static bool EnablePrometheusConfig => _EnablePrometheusConfig ??= FrameworkConfigInstance.Current.Metrics.EnablePrometheus;
+    static bool EnablePrometheusConfig => _EnablePrometheusConfig ??= FrameworkConfigInstance.Current.Metrics.Enable;
 
 }

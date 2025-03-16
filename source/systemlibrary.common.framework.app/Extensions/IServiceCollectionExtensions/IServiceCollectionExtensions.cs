@@ -124,6 +124,9 @@ public static partial class IServiceCollectionExtensions
 
         serviceCollection.UseDataProtectionPolicy(options);
 
+        if (options.UseCookiePolicy)
+            serviceCollection = serviceCollection.UseCookiePolicy();
+
         if (options.UseAuthentication)
         {
             if (options.UseCookiePolicy)
@@ -135,7 +138,7 @@ public static partial class IServiceCollectionExtensions
                          opt.Cookie.HttpOnly = true;
                          opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                          opt.SlidingExpiration = true;
-                         opt.ExpireTimeSpan = TimeSpan.FromHours(24);
+                         opt.ExpireTimeSpan = TimeSpan.FromHours(20);
                      });
             }
             else
@@ -173,9 +176,6 @@ public static partial class IServiceCollectionExtensions
             serviceCollection = builder.Services;
 
         serviceCollection = serviceCollection.UseViews(options);
-
-        if (options.UseCookiePolicy)
-            serviceCollection = serviceCollection.UseCookiePolicy();
 
         // NOTE: Can this be Scoped instead?
         serviceCollection.TryAddTransient<HtmlHelperFactory, HtmlHelperFactory>();
