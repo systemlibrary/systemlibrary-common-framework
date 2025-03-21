@@ -10,7 +10,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.2" ExcludeAssets="analyzers;buildTransitive;contentFiles;" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.14" ExcludeAssets="analyzers;buildTransitive;contentFiles;" />
 	</ItemGroup>
 
 	<ItemGroup>

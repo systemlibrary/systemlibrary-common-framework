@@ -56,9 +56,9 @@ partial class CryptationKey
 
                 if (validated != null)
                     return validated
-                        .Replace("frameworkenc-", "")
-                        .Replace("frameworkEnc-", "")
-                        .Replace("FrameworkEnc-", "");
+                        .Replace("enc-", "")
+                        .Replace("ENC-", "")
+                        .Replace("Enc-", "");
             }
         }
         catch (Exception ex)
@@ -73,9 +73,9 @@ partial class CryptationKey
     {
         if (fullFileName.Length <= 20) return null;
 
-        if (!fullFileName.Contains("frameworkenc-") &&
-            !fullFileName.Contains("frameworkEnc-") &&
-            !fullFileName.Contains("FrameworkEnc-")) return null;
+        if (!fullFileName.Contains("enc-") &&
+            !fullFileName.Contains("ENC-") &&
+            !fullFileName.Contains("Enc-")) return null;
 
         return fullFileName;
     }

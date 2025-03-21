@@ -85,7 +85,7 @@ public class Startup
 
 			"cache": {
 			  "duration": 180,
-			  "containerSizeLimit": 60000,
+			  "containerSizeLimit": 40000,
 			  "fallbackDuration": 300 // [Gold Tier]
 			},
 

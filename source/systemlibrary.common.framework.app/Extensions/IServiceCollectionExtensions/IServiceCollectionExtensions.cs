@@ -70,7 +70,7 @@ public static partial class IServiceCollectionExtensions
     {
         options ??= new FrameworkOptions();
 
-        CryptationKeyDirectory.Path = options.FrameworkEncKeyDir;
+        CryptationKeyDirectory.Path = options.EncKeyDir;
         
         serviceCollection.AddCommonServices();
 

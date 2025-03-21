@@ -595,7 +595,7 @@ public partial class StringExtensionsTests : BaseTest
         text = "";
         result = text.ToPhysicalPath();
 
-        var root = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\bin\\Release\\net9.0\\";
+        var root = "C:\\syslib\\systemlibrary-common-framework\\source\\systemlibrary.common.framework.net.tests\\bin\\Release\\net8.0\\";
         root = root.Replace("\\", "/");
 
         Assert.IsTrue(result == root, "1 " + result);

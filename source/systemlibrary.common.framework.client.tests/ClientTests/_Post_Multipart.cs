@@ -99,10 +99,11 @@ partial class ClientTests
     }
 
     [TestMethod]
-    public void Post_Gives_Forbidden_With_Message_Part_Of_Response()
+    public void Post_Invalid_Authorization_Returns_405_MethodNotAllowed()
     {
         var client = new Client(throwOnUnsuccessful: false);
-        var url = "https://some.forbidden.com/test.asp";
+
+        var url = "https://httpbin.org/status/405";
 
         var data = "{\"category\":\"test\",\"calltime\":\"22:22:22\",\"serviceid\":\"a47ec985-c8c4-4118\",\"action\":\"add\",\"phoneNumber\":\"99999974\"}";
 

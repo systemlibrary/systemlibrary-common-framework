@@ -1153,7 +1153,7 @@ public static partial class StringExtensions
     /// <summary>
     /// Encrypt data using the global encryption key, with an optional IV. Key can be obtained in the following order of precedence:
     /// <para>Command-line: sysLibEncKey if set.</para>
-    /// <para>Environment variable: frameworkEncKey if set.</para>
+    /// <para>Environment variable: FrameworkEncKey if set.</para>
     /// <para>Key file: frameworkEnc-&lt;your key&gt;.key if set.</para>
     /// <para>Fallback: Defaults to 'ABCD...' if none of the above are set.</para>
     /// <para>If no IV is provided, a random IV is used if addIV is true; otherwise, it’s 16 zero bytes.</para>
@@ -1161,7 +1161,7 @@ public static partial class StringExtensions
     /// </summary>
     /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as the key is not directly used.
     /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
     /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>
@@ -1189,7 +1189,7 @@ public static partial class StringExtensions
     /// <param name="key">Provide a non-null key to use your own, instead of the global encryption key.</param>
     /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as the key is not directly used.
     /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
     /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>
@@ -1218,7 +1218,7 @@ public static partial class StringExtensions
     /// <param name="key">Provide a non-null key to use your own, instead of the global encryption key.</param>
     /// <param name="addIV">Use a random IV if set to true, otherwise, it's 16 zero bytes.</param>
     /// <remarks>
-    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as they key is not directly used.
+    /// The global encryption key is hashed before used as the key, adding a obfuscation to the cipher text even if your key is leaked as the key is not directly used.
     /// <para>Key file can be put in any parent folder of your application, example: C:\data\frameworkEnc-hello-world-123.key</para>
     /// <para>FrameworkEncKey variable can be set as either upper, pascal, lower, or camel cased.</para>
     /// </remarks>

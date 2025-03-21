@@ -1,11 +1,11 @@
 <Project>
   
 	<PropertyGroup>
-		<Version>9.0.0.14</Version>
+		<Version>8.0.0.1</Version>
 		<Product>$(MSBuildProjectName) $(Version)</Product>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<OutputType>Library</OutputType>
 	</PropertyGroup>
 	

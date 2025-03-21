@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SystemLibrary.Common.Framework.App.Extensions;
@@ -31,7 +29,7 @@ public class StringExtensionsTests : BaseTest
     {
         var options = new FrameworkOptions
         {
-            FrameworkKeyDirectory = "C:\\temp\\"
+            EncKeyDir = "C:\\temp\\"
         };
 
         WebHostBuilder = new WebHostBuilder()
@@ -60,7 +58,7 @@ public class StringExtensionsTests : BaseTest
 
         var log = ReadFile();
 
-        Assert.IsTrue(log.Contains("key from key file"), "key not from key file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file..." + log);
+        Assert.IsTrue(log.Contains("found file in"), "key not from key file, or it sometimes errors as we run all tests (multiple 'applications'), they fight over one log file..." + log);
     }
 
     public string FrameworkKeyDirectory_Is_Set_Encrypts_With_Partial_FileName_IsOk_Action()
