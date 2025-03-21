@@ -4,6 +4,7 @@ internal class FrameworkConfig
 {
     public string License { get; set; }
     public bool Debug { get; set; }
+    public string FrameworkEncKey { get; set; }
     public JsonConfig Json { get; set; }
     public LogConfig Log { get; set; }
     public CacheConfig Cache { get; set; }

@@ -22,7 +22,9 @@ partial class IServiceCollectionExtensions
             return services;
         }
 
-        var keyRingDirectory = new DirectoryInfo(AppInstance.ContentRootPath).Parent;
+        var root = new DirectoryInfo(AppInstance.ContentRootPath);
+
+        var keyRingDirectory = new DirectoryInfo(Path.Combine(root.FullName, "App_Data", "DataProtectionKeys"));
 
         var keyRingFiles = GetValidKeyFiles(keyRingDirectory);
 
@@ -36,7 +38,7 @@ partial class IServiceCollectionExtensions
                 .DisableAutomaticKeyGeneration()
                 .PersistKeysToFileSystem(keyRingDirectory)
                 .SetApplicationName(appName)
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(31))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(365 * 100))
                 .Services;
         }
         else
@@ -46,7 +48,7 @@ partial class IServiceCollectionExtensions
             return services.AddDataProtection()
                 .PersistKeysToFileSystem(keyRingDirectory)
                 .SetApplicationName(appName)
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(31))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(365*100))
                 .Services;
         }
     }
@@ -59,22 +61,16 @@ partial class IServiceCollectionExtensions
 
         if (files == null || files.Length == 0) return validFiles;
 
-        var cutOffDate = DateTime.UtcNow.AddDays(-60);
-
         foreach (var file in files)
         {
             if (file.FullName.Contains("key-") && file.Length > 1)
             {
-                if (file.CreationTimeUtc < cutOffDate || file.LastWriteTimeUtc < cutOffDate)
-                {
-                    file.Delete();
-                }
-                else
-                {
-                    validFiles.Add(file);
-                }
+                validFiles.Add(file);
             }
         }
+
+        // Sleep application slightly as the deletion of files must be really successfully on disc
+        System.Threading.Thread.Sleep(2);
 
         return validFiles;
     }

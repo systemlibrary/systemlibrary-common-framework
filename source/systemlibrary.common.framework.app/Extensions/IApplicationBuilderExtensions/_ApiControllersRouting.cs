@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 using SystemLibrary.Common.Framework.App;
+using SystemLibrary.Common.Framework.Extensions;
 
-namespace SystemLibrary.Common.Framework.Extensions;
+namespace SystemLibrary.Common.Framework;
 
 public class UseApiControllersRouting : IControllerModelConvention
 {

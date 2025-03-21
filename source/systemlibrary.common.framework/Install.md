@@ -58,7 +58,7 @@ public class Startup
 		"systemLibraryCommonFramework": {
 			"license": "",	// Send email to support@systemlibrary.com
 			"debug": false, // Enable framework debugging information
-
+			"frameworkEncKey": null, // Set the global enc key in your pipeline if you cant use file, cli or env path in the pipeline
 			"log": {
 			  "level": "Warning",
 			  "fullFilePath": "%HomeDrive%/Logs/Dump.log",

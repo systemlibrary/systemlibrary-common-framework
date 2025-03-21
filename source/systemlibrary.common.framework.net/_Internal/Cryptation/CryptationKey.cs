@@ -12,25 +12,31 @@ internal static partial class CryptationKey
 
     internal static string GetKey()
     {
-        var key = TryGetFrameworkEncKey();
+        var key = TryGetKeyFromCLI();
+
+        if (key.IsNot())
+        {
+            key = TryGetKeyFromAppSettings();
+        }
+
+        if (key.IsNot())
+        {
+            key = TryGetKeyFromEnvironmentVariable();
+        }
 
         if (key.IsNot())
         {
             key = TryGetKeyFileName();
+        }
 
-            if (key.Is())
-            {
-                Debug.Log("[Encryption] key from key file: " + key.MaxLength(3) + "...");
-            }
+        if (key.IsNot())
+        {
+            key = "ABCDEFGHIJKLMNOPQRST123456789011";
+
+            if (CryptationKeyDirectory.Path.Is())
+                Debug.Log("[Encryption] key is default 'ABC...' as 'Framework Enc Key File' is not found in FrameworkKeyDirectory");
             else
-            {
-                key = "ABCDEFGHIJKLMNOPQRST123456789011";
-
-                if (CryptationKeyDirectory.Path.Is())
-                    Debug.Log("[Encryption] key is default 'ABC...' as 'Framework Enc Key File' is not found in FrameworkKeyDirectory");
-                else
-                    Debug.Log("[Encryption] key is default 'ABC...' as no other framework enc key has been set");
-            }
+                Debug.Log("[Encryption] key is default 'ABC...' as no other framework enc key has been set");
         }
 
         KeyStart = key.MaxLength(3);
@@ -40,11 +46,9 @@ internal static partial class CryptationKey
 
     internal static string GetExceptionMessage(string cipherText)
     {
-        var error = "Could not decrypt value starting with: " + cipherText.MaxLength(4);
-
-        error += "\nTried decrypt with key starting with: " + KeyStart + "...";
-
-        return error;
+        return 
+            $"Could not decrypt value starting with: {cipherText.MaxLength(4)}\n" +
+            $"Tried decrypting with key: {KeyStart}...";
     }
 }
 

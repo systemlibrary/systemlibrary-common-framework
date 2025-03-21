@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-using SystemLibrary.Common.Framework;
+namespace SystemLibrary.Common.Framework;
 
 internal static class MetricsAuthorizationMiddleware
 {

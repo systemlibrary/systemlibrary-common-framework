@@ -54,6 +54,8 @@ public static partial class IApplicationBuilderExtensions
         if (options.UseDeveloperPage)
             app.UseDeveloperExceptionPage();
 
+        app.Use(BlacklistedRequestMiddleware.Use);
+
         if (options.UseForwardedHeaders)
             app.UseForwardedHeaders();
 
@@ -74,7 +76,7 @@ public static partial class IApplicationBuilderExtensions
 
                     StaticFileOptions staticFileOptions = new StaticFileOptions
                     {
-                        ServeUnknownFileTypes = options.StaticFilesServeUnknownFileTypes,
+                        ServeUnknownFileTypes = true,
                         HttpsCompression = HttpsCompressionMode.Compress,
                         RedirectToAppendTrailingSlash = false,
                         OnPrepareResponse = ctx =>
@@ -93,7 +95,7 @@ public static partial class IApplicationBuilderExtensions
             {
                 StaticFileOptions staticFileOptions = new StaticFileOptions
                 {
-                    ServeUnknownFileTypes = options.StaticFilesServeUnknownFileTypes,
+                    ServeUnknownFileTypes = true,
                     HttpsCompression = HttpsCompressionMode.Compress,
                     RedirectToAppendTrailingSlash = false,
                     OnPrepareResponse = ctx =>

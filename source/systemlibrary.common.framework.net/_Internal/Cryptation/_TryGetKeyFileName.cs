@@ -13,16 +13,25 @@ partial class CryptationKey
 
     static string FindFrameworkKeyFile()
     {
-        if (CryptationKeyDirectory.Path.IsNot()) return null;
+        var path = CryptationKeyDirectory.Path;
 
-        if (CryptationKeyDirectory.Path.IsFile())
+        if (path.IsNot()) return null;
+
+        if (path.IsFile())
         {
-            throw new Exception("[Encryption] FrameworkKeyDirectory you've set contains an extension: " + CryptationKeyDirectory.Path + ". Please specify a directory path, for instance: C:/temp or /temp and put the frameworkKey.enc file within the folder. Remember the filename contains the key, so we do not want that in code.");
+            throw new Exception("[Encryption] FrameworkKeyDirectory you've set contains an extension: " + path + ". Please specify a directory path, for instance: C:/temp or /temp and put the frameworkKey.enc file within the folder. Remember the filename contains the key, so we do not want that in code.");
+        }
+
+        if (path.StartsWith("./"))
+        {
+            path = Path.Combine(AppInstance.ContentRootPath, path.Substring(2));
+
+            Debug.Log("[Encryption] Key directory path resolved to: " + path);
         }
 
         try
         {
-            var fileNames = Directory.GetFiles(CryptationKeyDirectory.Path, "*.key", SearchOption.TopDirectoryOnly);
+            var fileNames = Directory.GetFiles(path, "*.key", SearchOption.TopDirectoryOnly);
 
             if (fileNames == null || fileNames.Length == 0) return null;
 
@@ -45,7 +54,8 @@ partial class CryptationKey
             {
                 var validated = ValidateFileName(fullFileName);
 
-                if (validated != null) return validated
+                if (validated != null)
+                    return validated
                         .Replace("frameworkenc-", "")
                         .Replace("frameworkEnc-", "")
                         .Replace("FrameworkEnc-", "");

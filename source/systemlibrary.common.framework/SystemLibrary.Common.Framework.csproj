@@ -80,21 +80,20 @@
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<Version>$(Version)</Version>
 		<Title>SystemLibrary Common Framework</Title>
-		<Description>
-			Framework with default settings and classes for every &gt;= .NET 9 application
-			https://github.com/systemlibrary/systemlibrary-common-framework/#Description
+		<Description>Framework for every &gt;= .NET 9 application: 
+https://github.com/systemlibrary/systemlibrary-common-framework/#Description
 
-			Installation
-			https://systemlibrary.github.io/systemlibrary-common-framework/Install.html
+Installation: 
+https://systemlibrary.github.io/systemlibrary-common-framework/Install.html
 
-			Documentation with sample code
-			https://systemlibrary.github.io/systemlibrary-common-framework/
+Documentation with sample code:
+https://systemlibrary.github.io/systemlibrary-common-framework/
 		</Description>
 		<Copyright>Copyright © System Library</Copyright>
 		<PackageProjectUrl>https://www.systemlibrary.com/#SystemLibraryCommonFramework</PackageProjectUrl>
 		<PackageIcon>nuget-icon.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<PackageTags>.NET Framework Web Client Extensions Config</PackageTags>
+		<PackageTags>.NET Framework Web Client Extensions Config Cache Metrics</PackageTags>
 		<PackageReleaseNotes>Latest version: https://github.com/systemlibrary/systemlibrary-common-framework#latest-release-notes</PackageReleaseNotes>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
