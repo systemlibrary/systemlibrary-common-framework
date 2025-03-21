@@ -30,11 +30,37 @@ internal static class AppInstance
         {
             if (_AspNetCoreEnvironment == null)
             {
-                _AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                try
+                {
+                    _AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+                }
+                catch(Exception ex)
+                {
+                    Debug.Log("[AppInstance] ASPNETCORE_ENVIRONMENT could not be read " + ex.Message);
+                }
+
+                if (_AspNetCoreEnvironment.IsNot())
+                {
+                    var args = Environment.GetCommandLineArgs();
+                    _AspNetCoreEnvironment = args?
+                        .FirstOrDefault(a => a.StartsWith("--environment ", StringComparison.OrdinalIgnoreCase))?
+                        .Split(' ')[1];
+
+                    if (_AspNetCoreEnvironment.IsNot())
+                    {
+                        _AspNetCoreEnvironment = args?
+                            .FirstOrDefault(a => a.StartsWith("--e ", StringComparison.OrdinalIgnoreCase))?
+                            .Split(' ')[1];
+                    }
+                    if (_AspNetCoreEnvironment.IsNot())
+                    {
+                        _AspNetCoreEnvironment = args?
+                            .FirstOrDefault(a => a.StartsWith("--environment=", StringComparison.OrdinalIgnoreCase))?
+                            .Split('=')[1];
+                    }
+                }
 
                 _AspNetCoreEnvironment ??= "";
-
-                //Debug.Log("ASPNETCORE_ENVIRONMENT is " + _AspNetCoreEnvironment);
             }
 
             return _AspNetCoreEnvironment;
