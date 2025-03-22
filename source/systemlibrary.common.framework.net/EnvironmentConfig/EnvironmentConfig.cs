@@ -255,6 +255,7 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
 
     /// <summary>
     /// Returns true if both IsLocal and IsProd are false
+    /// <para>Note: returns true for Test, PreProduction, Sandbox, Stage, QA and more...</para>
     /// </summary>
     public static readonly bool IsTest = Current.EnvironmentName == EnvironmentName.AT ||
         Current.EnvironmentName == EnvironmentName.Integration ||

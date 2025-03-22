@@ -63,12 +63,16 @@ internal static class License
         if (TiersLicensed.ContainsKey(tier) && TestLicense == null)
             return TiersLicensed[tier];
 
+        Debug.Log("[License] Check license tier " + tier);
+
         lock (_lock)
         {
             if (TiersLicensed.TryGetValue(tier, out bool isValid2) && TestLicense == null) return isValid2;
 
             TiersLicensed[tier] = GetTierState(tier);
         }
+
+        Debug.Log("[License] Licenseed: " + TiersLicensed[tier]);
 
         return TiersLicensed[tier];
     }

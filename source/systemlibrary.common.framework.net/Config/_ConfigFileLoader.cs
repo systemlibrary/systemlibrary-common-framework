@@ -4,7 +4,7 @@ namespace SystemLibrary.Common.Framework;
 
 internal static class ConfigFileLoader
 {
-    // ConfigurationRoot is usually 'appSettings.json' and its values if it exists
+    // ConfigurationRoot is usually 'appsettings.json' and its values if it exists
     internal static IConfigurationRoot ConfigRoot;
 
     internal static string environmentNameLowered = AppInstance.AspNetCoreEnvironment.ToLower();

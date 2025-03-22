@@ -17,7 +17,7 @@ using SystemLibrary.Common.Framework;
 /// <para>If ILogWriter is not registered, this will use Log.Dump. Note: Log.Dump should not be used in production for performance and disc reasons.</para>
 /// </remarks>
 /// <example>
-/// Configure log options in appSettings.json
+/// Configure log options in appsettings.json
 /// <code>
 /// {
 ///     "systemLibraryCommonFramework": {

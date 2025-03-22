@@ -8,7 +8,7 @@ Files can be placed in:
 - `~/*.json`, `~/*.xml`
 - `~/Configs/**.[json|xml]`
 - `~/Configurations/**.[json|xml]`
-- Or appended to `appSettings.json`
+- Or appended to `appsettings.json`
 
 ## Environment Transformations
 

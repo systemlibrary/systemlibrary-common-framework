@@ -52,11 +52,11 @@ partial class FrameworkOptions
     public bool UseForwardILogger = false;
 
     /// <summary>
-    /// Generate and enable data protection with a 31 days rotating key files
-    /// <para>Parent folder of 'ContentRoot' will be used as the destination for the key files</para>
-    /// <para>Key files older than 60 days will be deleted automatically, meaning older data encrypted is not possible to decrypt, for instance old login cookies, which forces people to relogin every 60 days at minimum</para>
-    /// - string extension methods EncryptUsingKeyRing and DecryptUsingKeyRing will use the generated files internally
+    /// Generates a single key file once, reusable across all environments, which expires in 100 years.
+    /// <para>Parent folder of 'ContentRoot' will be used as the destination for the key file</para>
+    /// - string extension methods EncryptUsingKeyRing and DecryptUsingKeyRing will use the generated file internally
     /// <para>- cookies read over http will be encrypted and decrypted with the key file, if you host your app over several instances, they must all share the same key of course</para>
+    /// <para>You can enable it and copy the key file out to the pipeline and other environments, and gitignore the file as it should be stored seperately</para>
     /// </summary>
     public bool UseDataProtectionPolicy = false;
 

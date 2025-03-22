@@ -162,20 +162,14 @@ public static partial class IApplicationBuilderExtensions
             {
                 app.UseEndpoints(endpoints =>
                 {
-                    Debug.Log("[IApplicationBuilder] Adding /metrics endpoint");
+                    Debug.Log("[MetricsMiddleware] Adding /metrics endpoint");
 
                     Metrics.SuppressDefaultMetrics();
 
                     endpoints.MapGet("/metrics", async context =>
                     {
-                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context))
-                        {
-                            Debug.Log("[MetricsAuthorizationMiddleware] 401 Unauthorized");
-                            return;
-                        }
-
-                        Debug.Log("[MetricsAuthorizationMiddleware] 200 Authorized");
-
+                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
+                        
                         try
                         {
                             await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
@@ -188,6 +182,10 @@ public static partial class IApplicationBuilderExtensions
                         }
                     });
                 });
+            }
+            else
+            {
+                Debug.Log("[MetricsMiddleware] Metrics enable is set to true, but license tier is not gold or above, not registering /metrics endpoint");
             }
         }
 

@@ -86,9 +86,9 @@ Installation:
 https://systemlibrary.github.io/systemlibrary-common-framework/Install.html
 
 Documentation with sample code:
-https://systemlibrary.github.io/systemlibrary-common-framework/
-		</Description>
+https://systemlibrary.github.io/systemlibrary-common-framework/</Description>
 		<Copyright>Copyright © System Library</Copyright>
+		<Owners>System Library</Owners>
 		<PackageProjectUrl>https://www.systemlibrary.com/#SystemLibraryCommonFramework</PackageProjectUrl>
 		<PackageIcon>nuget-icon.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>

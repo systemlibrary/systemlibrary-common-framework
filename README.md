@@ -4,24 +4,24 @@
 Framework with default settings and classes for every &gt;= .NET 8 application
 
 ### Features
+- Preconfigured – Available via AddFrameworkServices() and AddFrameworkMiddlewares(), including HTTPS redirection, output caching, authentication, and more.
 - Config – Inherit class to auto-map JSON config files to C# classes by name, with environment-based transformations.
 - Log – Global instance with a Dump method, equivalent to JavaScript's console.log.
 - Cache – Global sharded instance with fallback and metrics, and automatic cache key generation.
 - Client – Http Client with automatic retry and circuit breaker policies and metrics
-- Preconfigured Middlewares & Services – Available via AddFrameworkServices() and AddFrameworkMiddlewares(), including HTTPS redirection, output caching, authentication, and more.
-- Seamless JSON Serialization – Through .Json() and .PartialJson() methods for easy conversions.
+- JSON – .Json() and .PartialJson() extension methods for easy conversions.
 - Encryption – Easily encrypt with global key management via file, CLI, or environment variable, using string and byte[] extensions, with AES CBC PKCS7 encryption.
 - String Extensions – ToBase64, ToSHA256, ToMD5, ToSHA1, Obfuscate and Compress on strings and byte arrays.
 - Services - Global instance service locator 
 - Enhanced Enums – Attributes EnumText, EnumValue for flexible JSON deserialization.
-- API – BaseApiController with attributes such as OriginFilter, UserAgentFilter and ApiTokenFilter attributes for flexible request validation.
+- API – BaseApiController with attributes OriginFilter, UserAgentFilter and ApiTokenFilter attributes for request validation.
 - Self-Documenting APIs – Auto-generates API documentation at /docs, listing methods, parameters, and paths. 
 
 ## Requirements
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.2
+- 8.0.0.3
 - Removed a dependency
 
 #### Version history 

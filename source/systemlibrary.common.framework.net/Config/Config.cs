@@ -10,7 +10,7 @@ namespace SystemLibrary.Common.Framework;
 /// Class for loading and reading configuration files (XML, JSON, or config) as a class, applying transformations when present, and decrypting encrypted properties.
 /// <para>Configurations can be placed in the following locations:</para>
 /// ~/*.json, ~/*.xml, ~/Configs/**.[json|xml], or ~/Configurations/**.[json|xml]
-/// <para>Or appended to your existing appSettings.json file.</para>
+/// <para>Or appended to your existing appsettings.json file.</para>
 /// Transformations are applied based on the ASPNETCORE_ENVIRONMENT variable passed to your application.
 /// <para>Recommended places to set ASPNETCORE_ENVIRONMENT:</para>
 /// - launchSettings.json when using IIS Express
@@ -175,7 +175,7 @@ public abstract partial class Config<T> where T : class
         var type = typeof(T);
 
         if (Current == null)
-            throw new Exception(type.Name + " could not be created. A '" + type.Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appSettings.json named '" + type.Name + "' is also supported.");
+            throw new Exception(type.Name + " could not be created. A '" + type.Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appsettings.json named '" + type.Name + "' is also supported.");
 
         try
         {

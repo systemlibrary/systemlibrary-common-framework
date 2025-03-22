@@ -18,7 +18,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// - retries once on OPTION, PATCH, HEAD, CONNECT, TRACE
 /// </summary>
 /// <remarks>
-/// Every client uses the Default configurations, which you can override in appSettings.json
+/// Every client uses the Default configurations, which you can override in appsettings.json
 /// <para>Most default configurations can again be overriden in the Clients constructor</para>
 /// Each HttpClient pool behind the scenes, is based on scheme, url, port and timeout
 /// <para>Each method also take an additional timeout parameter, a different timeout will target a different HttpClient</para>
@@ -29,7 +29,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// - But it's now up to you now: You want a new instance? Injection? Create your own static wrapper? Sure!
 /// </remarks>
 /// <example>
-/// Configure the client in appSettings.json, heres the default:
+/// Configure the client in appsettings.json, heres the default:
 /// "client": {
 ///   "timeout": 40001,
 ///   "retryTimeout": 10000, // The second retry will use half this duration, which is only used if useRetryPolicy is true

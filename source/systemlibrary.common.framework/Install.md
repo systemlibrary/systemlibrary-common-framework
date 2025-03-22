@@ -12,7 +12,7 @@
 ## First time usage
 1. Create any new empty .NET 9 project, for instance a new Asp.Net Core Empty project
 2. Add SystemLibrary.Common.Framework nuget package
-3. Add appSettings.json at root of the project
+3. Add appsettings.json at root of the project
 4. Add Startup.cs at root of the web project
 
 
@@ -52,7 +52,7 @@ public class Startup
 ## Package Configurations
 * All default and configurable settings for this package.
 
-###### appSettings.json:
+###### appsettings.json:
 ```json  
 	{
 		"systemLibraryCommonFramework": {

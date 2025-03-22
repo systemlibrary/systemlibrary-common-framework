@@ -29,7 +29,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// Cache is configured to a max capacity of 320.000 items, divided by 8 cache containers, where any item added takes up 1 size
 /// <para>Each container is configured to a max capacity of 40.000 items, once reached 33% of the oldest are removed, ready to be GC'ed</para>
 /// A null value is never added to cache
-/// <para>Overwrite default cache configurations in appSettings.json:</para>
+/// <para>Overwrite default cache configurations in appsettings.json:</para>
 /// - duration: 180, minimum 1
 /// <para>- fallbackDuration: 300, set to 0 or negative to disable fallback cache globally</para>
 /// - containerSizeLimit: 60000, minimum 10
@@ -40,7 +40,7 @@ namespace SystemLibrary.Common.Framework.App;
 /// - Always adds built-in prefix
 /// </remarks>
 /// <example>
-/// Configure the cache in appSettings.json, heres the default:
+/// Configure the cache in appsettings.json, heres the default:
 /// <code>
 /// {
 ///     "systemLibraryCommonFramework": {
@@ -694,13 +694,32 @@ public static partial class Cache
 
     static string CreateCacheKey<T>(Func<T> getItem, Func<T, bool> condition)
     {
+        // TODO: Rewrite into expressions for performance gains (benchmark it)
+        /*
+         Pseudo code:
+        var lambda = getItem as LambdaExpression;
+        var key = new StringBuilder("SLF%", capacity: 400);
+        foreach (var parameter in lambda.Parameters)
+        {
+            var parameterValue = GetParameterValue(parameter, lambda);
+            key.Append($"{parameter.Name}={parameterValue}");
+        }
+        static object GetParameterValue(ParameterExpression parameter, LambdaExpression lambda)
+        {
+            var compiledLambda = lambda.Compile();
+            var result = compiledLambda.DynamicInvoke();
+            // Log the result determine how it looks like...
+            return result;
+        }
+        */
+
         var key = new StringBuilder("SLF%", capacity: 400);
 
         var getItemMethod = getItem.Method;
 
         key.Append(getItemMethod?.DeclaringType?.Namespace + getItemMethod.Name + getItemMethod?.DeclaringType?.Name + "");
         key.Append(getItemMethod.ReturnType?.Name ?? "");
-        
+
         var target = getItem.Target;
         if (target != null)
         {
@@ -898,7 +917,7 @@ public static partial class Cache
                     AppendFieldArgument(field);
                 }
 
-                if(fields.Length == 64)
+                if (fields.Length == 64)
                 {
                     global::Log.Error("[Cache] Variables to generate key from exceeds limit of 64: " + key.ToString().MaxLength(255));
                 }

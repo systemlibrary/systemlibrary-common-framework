@@ -25,7 +25,7 @@ public abstract partial class BaseTest
                 {
                     if (_Client != null) return Client;
 
-                    var appSettingsPath = AppContext.BaseDirectory + "appSettings.json";
+                    var appSettingsPath = AppContext.BaseDirectory + "appsettings.json";
 
                     if (File.Exists(appSettingsPath))
                     {
