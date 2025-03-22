@@ -7,7 +7,7 @@
 [![Latest version](https://img.shields.io/nuget/v/SystemLibrary.Common.Framework)](https://www.nuget.org/packages/SystemLibrary.Common.Framework)
 
 ## Requirements
-- &gt;= .NET 9
+- &gt;= .NET 8
 
 ## First time usage
 1. Create any new empty .NET 9 project, for instance a new Asp.Net Core Empty project

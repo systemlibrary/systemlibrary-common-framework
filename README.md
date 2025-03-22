@@ -1,7 +1,7 @@
 # SystemLibrary Common Framework
 
 ## Description
-Framework with default settings and classes for every &gt;= .NET 9 application
+Framework with default settings and classes for every &gt;= .NET 8 application
 
 ### Features
 - Config – Inherit class to auto-map JSON config files to C# classes by name, with environment-based transformations.
@@ -18,11 +18,11 @@ Framework with default settings and classes for every &gt;= .NET 9 application
 - Self-Documenting APIs – Auto-generates API documentation at /docs, listing methods, parameters, and paths. 
 
 ## Requirements
-- &gt;= .NET 9
+- &gt;= .NET 8
 
 ## Latest Release Notes
-- 9.0.0.1
-- Initial release
+- 8.0.0.2
+- Removed a dependency
 
 #### Version history 
 - View git history of this file if interested

@@ -28,7 +28,6 @@ public class IServiceCollectionExtensionsTests : BaseTest
         FrameworkOptions.UseExtendedEnumModelConverter = false;
         FrameworkOptions.UseForwardedHeaders = false;
         FrameworkOptions.UseResponseCaching = false;
-        FrameworkOptions.UseRazorRuntimeCompilationOnSave = false;
         FrameworkOptions.UseStaticFilePolicy = false;
         FrameworkOptions.UseAuthentication = false;
         FrameworkOptions.UseAuthorization = false;

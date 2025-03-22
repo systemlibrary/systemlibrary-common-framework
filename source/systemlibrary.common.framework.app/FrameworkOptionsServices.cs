@@ -61,14 +61,6 @@ partial class FrameworkOptions
     public bool UseDataProtectionPolicy = false;
 
     /// <summary>
-    /// Enabled auto-recompilation of .cshtml files upon saving .cshtml files
-    /// <list>
-    /// <item>- Avoids the need of a re-compilation of whole application for one small view change</item>
-    /// </list>
-    /// </summary>
-    public bool UseRazorRuntimeCompilationOnSave = false;
-
-    /// <summary>
     /// Set to true to add ResponseCaching services
     /// </summary>
     public bool UseResponseCaching = true;

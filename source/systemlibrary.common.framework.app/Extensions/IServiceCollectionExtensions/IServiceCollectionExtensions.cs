@@ -169,8 +169,11 @@ public static partial class IServiceCollectionExtensions
 
         builder = AddApplicationParts(builder, options);
 
-        if (options.UseRazorRuntimeCompilationOnSave)
-            builder = AddRazorRuntimeCompilationOnSave(builder);
+        // REMOVED: This takes a toll on the bin/obj folders by default in consumers projects
+        // making it not suitable for api's, test projects, libraries
+        // Consumers will have to opt-in and register this themselves manually as it comes with too much bloat
+        //if (options.UseRazorRuntimeCompilationOnSave)
+        //    builder = AddRazorRuntimeCompilationOnSave(builder);
 
         if (builder != null)
             serviceCollection = builder.Services;

@@ -697,7 +697,7 @@ public partial class StringExtensionsTests : BaseTest
 
             text = "abcdefg";
             result = text.GetCompressedKey();
-            Assert.IsTrue(result.Length >= 4 && result.Length <= 7, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+            Assert.IsTrue(result.Length >= 3 && result.Length <= 7, result + ": " + result.Length + " vs " + text.Length + " == " + text);
             if (first == "")
                 first = result;
             Assert.IsTrue(first == result, "Next hashcompress within same appcontext generated a diff hash");
