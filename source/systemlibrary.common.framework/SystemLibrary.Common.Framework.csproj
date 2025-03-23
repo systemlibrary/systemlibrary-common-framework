@@ -48,10 +48,12 @@
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
+		
 		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
+		
 		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
@@ -68,6 +70,7 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<None Include="..\Directory.Build.props" Link="Directory.Build.props" />
 		<None Include="nuget-icon.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
