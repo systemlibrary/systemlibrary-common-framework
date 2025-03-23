@@ -19,5 +19,5 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
         Current.EnvironmentName == EnvironmentName.Sandbox ||
         Current.EnvironmentName == EnvironmentName.AT;
 
-    public static bool IsLocal => !IsTest && !IsProd;
+    public static bool IsLocal => !(IsTest || IsProd);
 }

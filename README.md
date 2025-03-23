@@ -21,8 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.3
-- Removed a dependency
+- 8.0.0.4
+- Added debug logging for the license check
 
 #### Version history 
 - View git history of this file if interested

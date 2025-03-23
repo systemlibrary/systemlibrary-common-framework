@@ -22,6 +22,10 @@ public class ConfigTransformationTests : BaseTest
             Assert.IsTrue(config.NewDateTime.ToString("yyyy-MM-dd HH:mm:ss") == "2024-12-24 13:44:15", "NewDateTime has transformed to " + config.NewDateTime);
 
             Assert.IsTrue(config.Child.Color == "orange");
+
+            Assert.IsTrue(EnvironmentConfig.IsLocal == false);
+            Assert.IsTrue(EnvironmentConfig.IsTest == false);
+            Assert.IsTrue(EnvironmentConfig.IsProd == true);
         }
         else if (environmentName == "LOCAL")
         {
@@ -32,6 +36,10 @@ public class ConfigTransformationTests : BaseTest
             Assert.IsTrue(config.NewDateTime.ToString("yyyy-MM-dd HH:mm:ss") == "2024-12-24 13:44:05", "NewDateTime has transformed to " + config.NewDateTime);
 
             Assert.IsTrue(config.Child.Color == "white");
+
+            Assert.IsTrue(EnvironmentConfig.IsLocal == true);
+            Assert.IsTrue(EnvironmentConfig.IsTest == false);
+            Assert.IsTrue(EnvironmentConfig.IsProd == false);
         }
         else
         {

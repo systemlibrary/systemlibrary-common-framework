@@ -246,7 +246,7 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
     /// <summary>
     /// Returns true if both IsTest and IsProd are false.
     /// </summary>
-    public static readonly bool IsLocal = !IsProd && !IsTest;
+    public static readonly bool IsLocal = !(IsProd || IsTest);
 
     /// <summary>
     /// Returns true if the environment is set to 'prod' or 'production', otherwise false.

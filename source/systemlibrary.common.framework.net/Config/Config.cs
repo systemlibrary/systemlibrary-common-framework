@@ -175,7 +175,7 @@ public abstract partial class Config<T> where T : class
         var type = typeof(T);
 
         if (Current == null)
-            throw new Exception(type.Name + " could not be created. A '" + type.Name + ".json' file must exist and it cannot be empty. File mustbe in ~/Configs or ~/Configurations or a section in root of appsettings.json named '" + type.Name + "' is also supported.");
+            throw new Exception(type.Name + " could not be created. A '" + type.Name + ".json' file must exist and it cannot be empty. File must be in ~/Configs or ~/Configurations or a section in root of appsettings.json named '" + type.Name + "'.");
 
         try
         {

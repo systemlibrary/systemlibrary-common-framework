@@ -63,8 +63,6 @@ internal static class License
         if (TiersLicensed.ContainsKey(tier) && TestLicense == null)
             return TiersLicensed[tier];
 
-        Debug.Log("[License] Check license tier " + tier);
-
         lock (_lock)
         {
             if (TiersLicensed.TryGetValue(tier, out bool isValid2) && TestLicense == null) return isValid2;
@@ -72,7 +70,7 @@ internal static class License
             TiersLicensed[tier] = GetTierState(tier);
         }
 
-        Debug.Log("[License] Licenseed: " + TiersLicensed[tier]);
+        Debug.Log("[License] " + tier + ": " + TiersLicensed[tier]);
 
         return TiersLicensed[tier];
     }
@@ -84,6 +82,8 @@ internal static class License
             if (!BypassEnvironmentCheck) return true;
         }
         var license = TestLicense ?? AppSettings.Current.SystemLibraryCommonFramework.License;
+
+        Debug.Log("[License] checking " + license);
 
         if (license.IsNot()) return false;
         

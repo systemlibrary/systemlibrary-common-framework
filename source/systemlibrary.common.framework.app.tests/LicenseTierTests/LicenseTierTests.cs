@@ -21,6 +21,29 @@ public class LicenseTierTests : BaseTest
     }
 
     [TestMethod]
+    public void Generate_New_License()
+    {
+        var companyId = "-999";
+        var companyName = "Demo";
+        var tier = License.Tier.Gold;
+
+        var license = License.Generate(companyId, companyName, tier);
+
+        License.TestLicense = license;
+
+        if (tier == License.Tier.Gold)
+            IsOk(License.Gold());
+
+        if (tier == License.Tier.Silver)
+            IsOk(License.Silver());
+
+        if (tier == License.Tier.Bronze)
+            IsOk(License.Bronze());
+
+        Log.Dump("New license: " + license);
+    }
+
+    [TestMethod]
     public void Bronze_Is_Part_Of_Silver_Tier()
     {
         var isValid = License.Bronze();
@@ -76,4 +99,6 @@ public class LicenseTierTests : BaseTest
         IsOk(License.Silver());
         IsOk(License.Gold());
     }
+
+
 }
