@@ -21,8 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.5
-- IsLocal check (bugfix)
+- 8.0.0.10
+- IsLocal, IsTest, IsProd as static properties cached with a static nullable bool (fix)
 
 #### Version history 
 - View git history of this file if interested

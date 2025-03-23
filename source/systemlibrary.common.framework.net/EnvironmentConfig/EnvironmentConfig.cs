@@ -246,28 +246,61 @@ public class EnvironmentConfig : EnvironmentConfig<EnvironmentConfig, Environmen
     /// <summary>
     /// Returns true if both IsTest and IsProd are false.
     /// </summary>
-    public static readonly bool IsLocal = !(IsProd || IsTest);
+    public static bool IsLocal
+    {
+        get
+        {
+            if(_IsLocal == null)
+            {
+                _IsLocal = !(IsProd || IsTest);
+            }
+            return _IsLocal.Value;
+        }
+    }
+    static bool? _IsLocal;
 
     /// <summary>
     /// Returns true if the environment is set to 'prod' or 'production', otherwise false.
     /// </summary>
-    public static readonly bool IsProd = Current.EnvironmentName == EnvironmentName.Prod || Current.EnvironmentName == EnvironmentName.Production;
+    public static bool IsProd
+    {
+        get
+        {
+            if(_IsProd == null)
+            {
+                _IsProd = Current.EnvironmentName == EnvironmentName.Prod || Current.EnvironmentName == EnvironmentName.Production;
+            }
+            return _IsProd.Value;
+        }
+    }
+    static bool? _IsProd;
 
     /// <summary>
     /// Returns true if both IsLocal and IsProd are false
     /// <para>Note: returns true for Test, PreProduction, Sandbox, Stage, QA and more...</para>
     /// </summary>
-    public static readonly bool IsTest = Current.EnvironmentName == EnvironmentName.AT ||
-        Current.EnvironmentName == EnvironmentName.Integration ||
-        Current.EnvironmentName == EnvironmentName.PreProd ||
-        Current.EnvironmentName == EnvironmentName.PreProduction ||
-        Current.EnvironmentName == EnvironmentName.QA ||
-        Current.EnvironmentName == EnvironmentName.Sandbox ||
-        Current.EnvironmentName == EnvironmentName.Stage ||
-        Current.EnvironmentName == EnvironmentName.Staging ||
-        Current.EnvironmentName == EnvironmentName.Test ||
-        Current.EnvironmentName == EnvironmentName.UAT ||
-        Current.EnvironmentName == EnvironmentName.UnitTest;
+    public static bool IsTest
+    {
+        get
+        {
+            if (_IsTest == null)
+            {
+                _IsTest = Current.EnvironmentName == EnvironmentName.AT ||
+                    Current.EnvironmentName == EnvironmentName.Integration ||
+                    Current.EnvironmentName == EnvironmentName.PreProd ||
+                    Current.EnvironmentName == EnvironmentName.PreProduction ||
+                    Current.EnvironmentName == EnvironmentName.QA ||
+                    Current.EnvironmentName == EnvironmentName.Sandbox ||
+                    Current.EnvironmentName == EnvironmentName.Stage ||
+                    Current.EnvironmentName == EnvironmentName.Staging ||
+                    Current.EnvironmentName == EnvironmentName.Test ||
+                    Current.EnvironmentName == EnvironmentName.UAT ||
+                    Current.EnvironmentName == EnvironmentName.UnitTest;
+            }
+            return _IsTest.Value;
+        }
+    }
+    static bool? _IsTest;
 
     /// <summary>
     /// Returns the application's root folder full path.
