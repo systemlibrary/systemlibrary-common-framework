@@ -21,8 +21,9 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.10
-- IsLocal, IsTest, IsProd as static properties cached with a static nullable bool (fix)
+- 8.0.0.11
+- Encryption searches parent up to 8 parent folders for a key file (fix)
+- Encryption using a key file replaces ext with old ext to support enc/dec of encrypted values on the Library (fix)
 
 #### Version history 
 - View git history of this file if interested

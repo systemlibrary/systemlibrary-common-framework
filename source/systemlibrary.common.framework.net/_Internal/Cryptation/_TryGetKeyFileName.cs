@@ -6,9 +6,59 @@ partial class CryptationKey
     {
         var keyFile = FindFrameworkKeyFile();
 
-        if (keyFile.Is()) Debug.Log("[Encryption] found file in " + CryptationKeyDirectory.Path);
+        if (keyFile.IsNot())
+        {
+            keyFile = FindFrameworkKeyFileInContentRootParent();
+
+            if (keyFile.Is())
+            {
+                Debug.Log("[Encryption] found file a parent folder " + keyFile.MaxLength(6));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            Debug.Log("[Encryption] found file in " + CryptationKeyDirectory.Path);
+        }
+
+        keyFile = keyFile.Substring(0, keyFile.Length - 4) + ".xml";
 
         return Path.GetFileName(keyFile);
+    }
+
+    static string FindFrameworkKeyFileInContentRootParent()
+    {
+        var path = EnvironmentConfig.ContentRootPath;
+
+        if (path.IsNot()) return null;
+
+        var parent = new DirectoryInfo(path).Parent;
+
+        int num = 9;
+
+        var keyFile = (string)null;
+
+        while (keyFile == null && num > 0)
+        {
+            if (parent == null)
+            {
+                return null;
+            }
+
+            num--;
+
+            keyFile = FindKeyFileInPath(parent.FullName);
+
+            if (keyFile.IsNot())
+            {
+                parent = parent.Parent;
+            }
+        }
+
+        return keyFile;
     }
 
     static string FindFrameworkKeyFile()
@@ -29,6 +79,11 @@ partial class CryptationKey
             Debug.Log("[Encryption] Key directory path resolved to: " + path);
         }
 
+        return FindKeyFileInPath(path);
+    }
+
+    static string FindKeyFileInPath(string path)
+    {
         try
         {
             var fileNames = Directory.GetFiles(path, "*.key", SearchOption.TopDirectoryOnly);

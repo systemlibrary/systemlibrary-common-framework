@@ -71,6 +71,17 @@ partial class StringExtensionsTests : BaseTest
         Assert.IsTrue(dec == data, "Decrypt has changed: " + dec);
     }
 
+    // UNCOMMENT: An run alone without a log file existing
+    //[TestMethod]
+    //public void Encrypt_Decrypt_With_Key_From_Parent_Folder_Is_Success()
+    //{
+    //    var prevKey = CryptationKey.Current;
+
+    //    var log = ReadFile();
+
+    //    Assert.IsTrue(log.Contains("[Encryption] found file a parent folder"), "Parent folder did not have a key file");
+    //}
+
     [TestMethod]
     public void Cryptation_Built_In_Key_Iv_Success()
     {

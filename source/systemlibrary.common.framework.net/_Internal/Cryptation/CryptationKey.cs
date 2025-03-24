@@ -4,8 +4,6 @@ namespace SystemLibrary.Common.Framework;
 
 internal static partial class CryptationKey
 {
-    internal static readonly string _KeyFileFullName;
-
     internal static string KeyStart;
 
     internal static byte[] Current = Encoding.UTF8.GetBytes(GetKey());
