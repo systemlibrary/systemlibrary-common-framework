@@ -21,8 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.12
-- ContentRootPath now ignores \\Tests\\ and \\Test\\ too to support one common output folder for all tests (fix)
+- 8.0.0.13
+- Log.Debug of cache key in Cache removed (fix)
 
 #### Version history 
 - View git history of this file if interested

@@ -459,10 +459,9 @@ public static partial class Cache
         if (cacheKey == "")
         {
             cacheKey = CreateCacheKey(getItem, condition);
-            PrevCacheKey = cacheKey;
-        }
 
-        Log.Debug(cacheKey);
+            // PrevCacheKey = cacheKey;
+        }
 
         var cacheIndex = cacheKey.GetHashCode() & 7;
 
