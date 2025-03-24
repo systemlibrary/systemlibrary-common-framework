@@ -34,7 +34,7 @@ internal static class AppInstance
                 {
                     _AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Debug.Log("[AppInstance] ASPNETCORE_ENVIRONMENT could not be read " + ex.Message);
                 }
@@ -98,6 +98,9 @@ internal static class AppInstance
                     bool IsWithinBin()
                     {
                         if (_ContentRootPath.Contains(".Tests\\", StringComparison.OrdinalIgnoreCase) || _ContentRootPath.Contains(".Test\\", StringComparison.OrdinalIgnoreCase))
+                            return false;
+
+                        if (_ContentRootPath.Contains("\\Tests\\", StringComparison.OrdinalIgnoreCase) || _ContentRootPath.Contains("\\Test\\", StringComparison.OrdinalIgnoreCase))
                             return false;
 
                         return _ContentRootPath.Contains("\\bin\\", StringComparison.OrdinalIgnoreCase) ||
