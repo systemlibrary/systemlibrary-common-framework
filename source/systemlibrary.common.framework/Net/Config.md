@@ -13,7 +13,7 @@ Files can be placed in:
 ## Environment Transformations
 
 Transformations apply based on `ASPNETCORE_ENVIRONMENT`, set via:
-- `launchSettings.json` (IIS Express)
+- `launchSettings.json` (IIS Expr232ess)
 - `web.config` (IIS)
 - `mstest.runsettings` (unit tests)
 - CLI (`--configuration`)

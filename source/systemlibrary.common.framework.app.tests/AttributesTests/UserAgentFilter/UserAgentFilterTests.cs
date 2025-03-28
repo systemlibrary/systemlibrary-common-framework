@@ -9,6 +9,16 @@ namespace SystemLibrary.Common.Framework.App;
 [TestClass]
 public class UserAgentFilterTests : BaseTest
 {
+    [TestMethod]
+    public void AConfigTests()
+    {
+        var a  = AConfig.Current;
+
+        Assert.IsTrue(a != null, "A is null");
+
+        Assert.IsTrue(a.ApiUrl == "www", "Api Url is " + a.ApiUrl);
+    }
+
     public UserAgentFilterTests()
     {
         WebHostBuilder = new WebHostBuilder()

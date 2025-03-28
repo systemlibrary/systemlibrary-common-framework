@@ -9,7 +9,7 @@ internal static class ConfigFileLoader
 
     internal static string environmentNameLowered = AppInstance.AspNetCoreEnvironment.ToLower();
 
-    internal static string[] ConfigurationFilesLowered;
+    internal static string[] ConfigurationFiles;
 
     static ConfigFileLoader()
     {
@@ -17,36 +17,34 @@ internal static class ConfigFileLoader
 
         var appSettingsBuilder = new ConfigurationBuilder();
 
-        var allFoundConfigurationFiles = ConfigAsyncDirectorySearcher.Search();
+        var allConfigurationFiles = ConfigAsyncDirectorySearcher.Search();
 
-        if (allFoundConfigurationFiles != null)
+        if (allConfigurationFiles != null)
         {
-            var tempConfigFiles = allFoundConfigurationFiles
+            ConfigurationFiles = allConfigurationFiles
               .SelectMany(arr => arr)
               .Where(FilterValidConfigurationFileNames)
               .ToArray();
 
-            ConfigurationFilesLowered = Array.ConvertAll(tempConfigFiles, s => s.ToLower());
+            var appsettingFiles = ConfigurationFiles.Where(FilterByAppsettings).ToArray();
 
-            var appSettingFilesLowered = ConfigurationFilesLowered.Where(FilterAppSettingFiles).ToArray();
-
-            AddConfigurationFilesAndTransformationFiles(appSettingsBuilder, appSettingFilesLowered);
+            AddConfigurationFilesAndTransformationFiles(appSettingsBuilder, appsettingFiles);
         }
         else
-            ConfigurationFilesLowered = [];
+            ConfigurationFiles = [];
 
         ConfigRoot = appSettingsBuilder
             .AddEnvironmentVariables()
             .Build();
     }
 
-    static bool FilterAppSettingFiles(string fileLowered)
+    static bool FilterByAppsettings(string configFile)
     {
-        if (fileLowered.IsNot()) return false;
+        if (configFile.IsNot()) return false;
 
-        fileLowered = fileLowered.ToLower();
-
-        return (fileLowered.Contains("\\appsettings.") || fileLowered.Contains("/appsettings.")) && fileLowered.EndsWithAny(StringComparison.OrdinalIgnoreCase, ".json", ".xml", ".config");
+        return (configFile.Contains("\\appsettings.", StringComparison.OrdinalIgnoreCase) ||
+            configFile.Contains("/appsettings.", StringComparison.OrdinalIgnoreCase)) &&
+            configFile.EndsWithAny(StringComparison.OrdinalIgnoreCase, ".json", ".xml", ".config");
     }
 
     static bool FilterValidConfigurationFileNames(string file)

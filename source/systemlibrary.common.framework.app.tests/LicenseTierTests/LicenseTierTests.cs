@@ -23,8 +23,9 @@ public class LicenseTierTests : BaseTest
     [TestMethod]
     public void Generate_New_License()
     {
-        var companyId = "-999";
-        var companyName = "Demo";
+        var companyId = "-1";
+        // FullCompanyNameWithoutSpaces_<BrRegNumber OR phoneNumber OR email>";
+        var companyName = "SystemLibrary";
         var tier = License.Tier.Gold;
 
         var license = License.Generate(companyId, companyName, tier);

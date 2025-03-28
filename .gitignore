@@ -9,6 +9,7 @@
 [Oo]bj/
 [Bb]in/
 [Tt]est[Rr]esult/
+[Tt]est[Rr]esults/
 
 # Benchmarks
 **/*.Artifacts/

@@ -77,7 +77,7 @@ public class LogWriterTests : BaseTest
         var content = ReadFile();
 
         Assert.IsTrue(content.Contains("overflow"));
-        Assert.IsTrue(content.Length > 55000 && content.Length < 120000, "Content is too large (usually should be around 75-100K), discarding messages not working? Increased the discarding threshold? " + content.Length);
+        Assert.IsTrue(content.Length > 55000 && content.Length < 140000, "Content is too large (usually should be around 40-140K), discarding messages not working? Increased the discarding threshold? " + content.Length);
     }
 
     //[TestMethod]

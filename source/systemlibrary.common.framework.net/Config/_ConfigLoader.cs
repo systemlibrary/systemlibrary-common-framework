@@ -10,25 +10,25 @@ partial class Config<T>
         {
             var type = typeof(T);
 
-            var configNameLowered = type.Name.ToLower();
+            var configName = type.Name;
 
             var files = new List<string>();
             // Find the "master" config file for the current config T
 
-            foreach (var fileLowered in ConfigFileLoader.ConfigurationFilesLowered)
+            foreach (var configFile in ConfigFileLoader.ConfigurationFiles)
             {
-                if (fileLowered.IsNot()) continue;
+                if (configFile.IsNot()) continue;
 
-                if (!fileLowered.Contains(configNameLowered + ".")) continue;
+                if (!configFile.Contains(configName + ".", StringComparison.OrdinalIgnoreCase)) continue;
 
-                var values = fileLowered.Split('.');
+                var values = configFile.Split('.');
 
-                if (values != null && values.Length > 1 && values[^2].Contains(configNameLowered))
+                if (values != null && values.Length > 1 && values[^2].Contains(configName, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (values[^2].Contains("\\" + configNameLowered) ||
-                        values[^2].Contains("/" + configNameLowered))
+                    if (values[^2].Contains("\\" + configName, StringComparison.OrdinalIgnoreCase) ||
+                        values[^2].Contains("/" + configName, StringComparison.OrdinalIgnoreCase))
                     {
-                        files.Add(fileLowered);
+                        files.Add(configFile);
                     }
                 }
             }
@@ -36,13 +36,13 @@ partial class Config<T>
             // Add transformation file for environment if found
             if (ConfigFileLoader.environmentNameLowered.Is())
             {
-                var configTransformationName = configNameLowered + "." + ConfigFileLoader.environmentNameLowered + ".";
+                var configTransformationName = configName + "." + ConfigFileLoader.environmentNameLowered + ".";
 
-                foreach (var fileLowered in ConfigFileLoader.ConfigurationFilesLowered)
-                    if (fileLowered.Contains(configTransformationName) &&
-                        !files.Contains(fileLowered))
+                foreach (var configFile in ConfigFileLoader.ConfigurationFiles)
+                    if (configFile.Contains(configTransformationName, StringComparison.OrdinalIgnoreCase) &&
+                        !files.Contains(configFile))
                     {
-                        files.Add(fileLowered);
+                        files.Add(configFile);
                     }
             }
 

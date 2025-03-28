@@ -1,4 +1,6 @@
-﻿namespace SystemLibrary.Common.Framework;
+﻿using System.Collections;
+
+namespace SystemLibrary.Common.Framework;
 
 internal static class Debug
 {
@@ -24,23 +26,31 @@ internal static class Debug
 
     internal static void Write(object o)
     {
+        var m = o?.ToString();
+
+        if (o is Array arr)
+            o += " (" + arr?.Length + ")";
+
+        else if (o is IList list)
+            o += " (" + list?.Count + ")";
+
         try
         {
-            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
+            System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + m + "\n");
         }
         catch
         {
-            Thread.Sleep(8);
+            Thread.Sleep(6);
             try
             {
-                System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
+                System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + m + "\n");
             }
             catch
             {
                 try
                 {
-                    Thread.Sleep(8);
-                    System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + o + "\n");
+                    Thread.Sleep(6);
+                    System.IO.File.AppendAllText(@"C:\logs\DebugWrite.log", DateTime.Now.ToString() + "\t" + m + "\n");
                 }
                 catch
                 {

@@ -94,41 +94,57 @@ internal static class AppInstance
                     if (_ContentRootPath.IsNot())
                         _ContentRootPath = new DirectoryInfo(AppContext.BaseDirectory).FullName;
 
-
-                    bool IsWithinBin()
+                    bool IsWithinBin(string dir)
                     {
-                        if (_ContentRootPath.Contains(".Tests\\", StringComparison.OrdinalIgnoreCase) || _ContentRootPath.Contains(".Test\\", StringComparison.OrdinalIgnoreCase))
+                        if (dir.Contains(".Tests\\", StringComparison.OrdinalIgnoreCase) || dir.Contains(".Test\\", StringComparison.OrdinalIgnoreCase))
                             return false;
 
-                        if (_ContentRootPath.Contains("\\Tests\\", StringComparison.OrdinalIgnoreCase) || _ContentRootPath.Contains("\\Test\\", StringComparison.OrdinalIgnoreCase))
+                        if (dir.Contains("\\Tests\\", StringComparison.OrdinalIgnoreCase) || dir.Contains("\\Test\\", StringComparison.OrdinalIgnoreCase))
                             return false;
 
-                        return _ContentRootPath.Contains("\\bin\\", StringComparison.OrdinalIgnoreCase) ||
-                            _ContentRootPath.Contains("/bin/", StringComparison.OrdinalIgnoreCase) ||
-                            _ContentRootPath.EndsWith("/bin", StringComparison.OrdinalIgnoreCase) ||
-                            _ContentRootPath.EndsWith("\\bin", StringComparison.OrdinalIgnoreCase);
+                        return dir.Contains("\\bin\\", StringComparison.OrdinalIgnoreCase) ||
+                            dir.Contains("/bin/", StringComparison.OrdinalIgnoreCase) ||
+                            dir.EndsWith("/bin", StringComparison.OrdinalIgnoreCase) ||
+                            dir.EndsWith("\\bin", StringComparison.OrdinalIgnoreCase);
                     }
 
-                    while (IsWithinBin())
+                    var temp = _ContentRootPath;
+                    var i = 8;
+
+                    while (IsWithinBin(temp))
                     {
-                        var temp = _ContentRootPath;
+                        i--;
+                        if (i < 0) break;
 
-                        _ContentRootPath = new DirectoryInfo(_ContentRootPath).Parent?.FullName;
+                        temp = new DirectoryInfo(temp).Parent?.FullName;
 
-                        if (_ContentRootPath == null)
+                        if (temp.IsNot())
+                            break;
+                    }
+
+                    var wasWithinBin = temp != _ContentRootPath;
+                    if (wasWithinBin)
+                    {
+                        var files = Directory.GetFiles(temp, "*.csproj", SearchOption.TopDirectoryOnly);
+
+                        if (files?.Length == 1)
                         {
                             _ContentRootPath = temp;
-                            break;
+                        }
+                        else
+                        {
+                            var appsettingFiles = Directory.GetFiles(temp, "appsettings.json", SearchOption.TopDirectoryOnly);
+                            if (files?.Length >= 1)
+                            {
+                                _ContentRootPath = temp;
+                            }
                         }
                     }
 
-                    if (_ContentRootPath.EndsWith("\\", StringComparison.Ordinal))
-                        _ContentRootPath = _ContentRootPath.Substring(0, _ContentRootPath.Length - 1);
+                    _ContentRootPath = _ContentRootPath.Replace("\\", "/");
 
                     if (_ContentRootPath.EndsWith("/", StringComparison.Ordinal))
                         _ContentRootPath = _ContentRootPath.Substring(0, _ContentRootPath.Length - 1);
-
-                    _ContentRootPath = _ContentRootPath.Replace("\\", "/");
                 }
             }
 

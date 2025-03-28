@@ -296,18 +296,14 @@ internal static class ConfigAsyncDirectorySearcher
         {
             var contentRootDirectory = AppInstance.ContentRootPath;
 
-            if (!contentRootDirectory.EndsWith("/", StringComparison.Ordinal) && !contentRootDirectory.EndsWith("\\", StringComparison.Ordinal))
-            {
-                if (contentRootDirectory.Contains("/", StringComparison.Ordinal))
-                    contentRootDirectory += "/";
-                else
-                    contentRootDirectory += "\\";
-            }
+            var root = Path.Combine(contentRootDirectory);
+            var configs = Path.Combine(contentRootDirectory, "Configs");
+            var configurations = Path.Combine(contentRootDirectory, "Configurations");
 
             ConfigurationFiles = Async.Parallel(
-                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory, false),
-                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configs\\", true),
-                () => ConfigFileSearcher.GetConfigurationFilesInFolder(contentRootDirectory + "configurations\\", true)
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(root, false),
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(configs, true),
+                () => ConfigFileSearcher.GetConfigurationFilesInFolder(configurations, true)
             );
         }
         return ConfigurationFiles;
