@@ -68,9 +68,11 @@ public static partial class IApplicationBuilderExtensions
         {
             var contentRootPath = env?.WebRootPath ?? EnvironmentConfig.ContentRootPath;
 
-            if (options.StaticFilesRequestPaths.Is())
+            Debug.Log("[StaticFilePolicy] root is: " + contentRootPath);
+
+            if (options.StaticRequestPaths.Is())
             {
-                foreach (var staticFilePath in options.StaticFilesRequestPaths)
+                foreach (var staticFilePath in options.StaticRequestPaths)
                 {
                     if (staticFilePath == null) continue;
 
@@ -82,7 +84,7 @@ public static partial class IApplicationBuilderExtensions
                         OnPrepareResponse = ctx =>
                         {
                             if (ctx.Context.Response.Headers.ContainsKey("Cache-Control") != true)
-                                ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesMaxAgeSeconds);
+                                ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesClientCacheSeconds);
                         },
                     };
 
@@ -101,7 +103,7 @@ public static partial class IApplicationBuilderExtensions
                     OnPrepareResponse = ctx =>
                     {
                         if (ctx.Context.Response.Headers.ContainsKey("Cache-Control") != true)
-                            ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesMaxAgeSeconds);
+                            ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesClientCacheSeconds);
                     },
                 };
                 staticFileOptions.FileProvider = new PhysicalFileProvider(contentRootPath);

@@ -70,8 +70,12 @@ internal static class AppInstance
     static string _ContentRootPath;
     static object _ContentRootPathLock = new object();
 
-    // Does not end with slash
-    // Cannot be inside 'bin', if so, the parent of 'bin' is returned, exception is if project name ends in .Test(s)</para>
+    /// <summary>
+    /// Returns the content root path without ending slash
+    /// <para>Usually the parent of the 'bin' folder, where appsettings.json resides</para>
+    /// <para>Exception 1: if the content root path found contains .test(s) or \test(s)\ it is returned as is, so Test projects can run from the output compiled folder</para>
+    /// <para>Exception 2: if the content root path contains \lib\ it is returned as is, supporting multiple project builds into the same lib folder</para>
+    /// </summary>
     internal static string ContentRootPath
     {
         get
@@ -94,12 +98,15 @@ internal static class AppInstance
                     if (_ContentRootPath.IsNot())
                         _ContentRootPath = new DirectoryInfo(AppContext.BaseDirectory).FullName;
 
-                    bool IsWithinBin(string dir)
+                    bool IsInBinOrLib(string dir)
                     {
                         if (dir.Contains(".Tests\\", StringComparison.OrdinalIgnoreCase) || dir.Contains(".Test\\", StringComparison.OrdinalIgnoreCase))
                             return false;
 
                         if (dir.Contains("\\Tests\\", StringComparison.OrdinalIgnoreCase) || dir.Contains("\\Test\\", StringComparison.OrdinalIgnoreCase))
+                            return false;
+
+                        if (dir.Contains("\\lib\\", StringComparison.OrdinalIgnoreCase))
                             return false;
 
                         return dir.Contains("\\bin\\", StringComparison.OrdinalIgnoreCase) ||
@@ -111,7 +118,7 @@ internal static class AppInstance
                     var temp = _ContentRootPath;
                     var i = 8;
 
-                    while (IsWithinBin(temp))
+                    while (IsInBinOrLib(temp))
                     {
                         i--;
                         if (i < 0) break;
@@ -122,23 +129,10 @@ internal static class AppInstance
                             break;
                     }
 
-                    var wasWithinBin = temp != _ContentRootPath;
+                    var wasWithinBin = temp.Is() && temp != _ContentRootPath;
                     if (wasWithinBin)
                     {
-                        var files = Directory.GetFiles(temp, "*.csproj", SearchOption.TopDirectoryOnly);
-
-                        if (files?.Length == 1)
-                        {
-                            _ContentRootPath = temp;
-                        }
-                        else
-                        {
-                            var appsettingFiles = Directory.GetFiles(temp, "appsettings.json", SearchOption.TopDirectoryOnly);
-                            if (files?.Length >= 1)
-                            {
-                                _ContentRootPath = temp;
-                            }
-                        }
+                        _ContentRootPath = temp;
                     }
 
                     _ContentRootPath = _ContentRootPath.Replace("\\", "/");

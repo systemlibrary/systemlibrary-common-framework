@@ -1,9 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputPath>$(SolutionDir)bin\$(ProjectType)\$(Configuration)\</OutputPath>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 		<RootNamespace>SystemLibrary.Common.Framework.App</RootNamespace>

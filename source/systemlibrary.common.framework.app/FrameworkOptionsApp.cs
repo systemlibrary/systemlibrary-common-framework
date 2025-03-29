@@ -20,9 +20,9 @@ partial class FrameworkOptions
     /// <para>Default: 14 days</para>
     /// </summary>
     /// <remarks>
-    /// Requires UseStaticFiles set to True, and the header 'max-age' cannot be added already in the response
+    /// Requires UseStaticFiles set to True, and the header 'max-age' cannot be added already in the response, if so this does nothing
     /// </remarks>
-    public int StaticFilesMaxAgeSeconds = 1209600;
+    public int StaticFilesClientCacheSeconds = 1209600;
 
     /// <summary>
     /// Set the relative paths of where most static content is served from
@@ -32,6 +32,6 @@ partial class FrameworkOptions
     /// <remarks>
     /// Requires UseStaticFiles set to True
     /// </remarks>
-    public string[] StaticFilesRequestPaths = null;
+    public string[] StaticRequestPaths = null;
 
 }

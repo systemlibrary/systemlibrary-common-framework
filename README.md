@@ -21,10 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.14
-- Config class requires Configs or Configurations folder name which is case sensitive on Linux and not on Windows (fix)
-- Config class matches case insensitive files, so a C# config class can be pascal, while json configuration file can be all lower for instance (fix)
-- ContentRootPath in Environment now checks if there is a csproj 
+- 8.0.0.15
+- ContentRootPath now also supports \lib\ as a folder to be returned as is, supporting multiple projects to same output folder (feature)
 
 #### Version history 
 - View git history of this file if interested

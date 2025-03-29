@@ -31,6 +31,8 @@ public abstract partial class BaseTest
                     {
                         var configuration = new ConfigurationBuilder().AddJsonFile(appSettingsPath, optional: false, reloadOnChange: false).Build();
 
+                        if (_Client != null) return Client;
+
                         WebHostBuilder = WebHostBuilder.UseConfiguration(configuration);
                     }
 
