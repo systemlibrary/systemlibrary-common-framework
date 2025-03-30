@@ -5,56 +5,53 @@ namespace SystemLibrary.Common.Framework.Extensions;
 internal static class BlacklistedRequestMiddleware
 {
     static string[] BlockedExtensions = [
-        ".exe", ".dll", ".iso", ".msi", ".ps1", ".cmd", ".sh", ".bash",
-        ".vbs", ".dmg", ".config", ".env", ".ini", ".key", ".pem",
-        ".cshtml", ".cs"
+        ".exe", ".dll", ".iso", ".msi", ".ps1", ".cmd", ".sh", ".bash", ".vbs", ".dmg",
+        ".config", ".env", ".ini", ".key", ".pem", ".cshtml", ".cs", ".sql",
+        ".bat", ".jar", ".php", ".py", ".pl", ".rb", ".go", ".vb", ".vbs", ".hta"
     ];
 
     static int BlockedExtensionsLength = BlockedExtensions.Length;
 
     public static async Task Use(HttpContext context, RequestDelegate next)
     {
-        var requestPath = context?.Request?.Path.Value;
-
-        if (requestPath == null)
+        string text = context?.Request?.Path.Value;
+        if (text == null)
         {
             await next(context);
             return;
         }
 
-        var l = requestPath.Length;
-
-        if (l <= 5)
+        int length = text.Length;
+        if (length <= 5)
         {
             await next(context);
             return;
         }
 
-        if (requestPath.StartsWith("/app_data/", StringComparison.OrdinalIgnoreCase) ||
-            requestPath.StartsWith("/properties/", StringComparison.OrdinalIgnoreCase) ||
-            requestPath.StartsWith("/bin/", StringComparison.OrdinalIgnoreCase))
+        if (text.StartsWith("/app_data/", StringComparison.OrdinalIgnoreCase) ||
+            text.StartsWith("/properties/", StringComparison.OrdinalIgnoreCase) ||
+            text.StartsWith("/bin/", StringComparison.OrdinalIgnoreCase) ||
+            text.StartsWith("/obj/", StringComparison.OrdinalIgnoreCase))
         {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            context.Response.Headers.TryAdd("Reason", "Access denied by Common Framework");
+            context.Response.StatusCode = 403;
             return;
         }
 
-        if (requestPath[l - 1] == '/')
-        {
-            await next(context);
-            return;
-        }
-
-        var extensionPosition = requestPath.LastIndexOf('.', l - 1, 7);
-
-        if (extensionPosition == -1)
+        if (text[length - 1] == '/')
         {
             await next(context);
             return;
         }
 
-        var extensionLength = l - extensionPosition;
+        int num = text.LastIndexOf('.', length - 1, 7);
+        if (num == -1)
+        {
+            await next(context);
+            return;
+        }
 
-        if (extensionLength < 3)
+        if (length - num < 3)
         {
             await next(context);
             return;
@@ -62,9 +59,10 @@ internal static class BlacklistedRequestMiddleware
 
         for (int i = 0; i < BlockedExtensionsLength; i++)
         {
-            if (requestPath.EndsWith(BlockedExtensions[i], StringComparison.OrdinalIgnoreCase))
+            if (text.EndsWith(BlockedExtensions[i], StringComparison.OrdinalIgnoreCase))
             {
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                context.Response.Headers.TryAdd("Reason", "Access denied by Common Framework");
+                context.Response.StatusCode = 403;
                 return;
             }
         }

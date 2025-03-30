@@ -21,8 +21,11 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.15
-- ContentRootPath now also supports \lib\ as a folder to be returned as is, supporting multiple projects to same output folder (feature)
+- 8.0.0.16
+- BlacklistedRequestMiddleware added few more extensions to block: bat, jar, php, py, pl (feature)
+- StaticFilePolicy with env.WebRootPath set also registers a default set of folders by naming convetions as other web root paths, for instance /static, /public/, /assets/ and more (feature)
+- StaticFilePolicy wihtout env.WebRootPath set registers ContentRootPath as the root for all files, file structure in your Project is then 1-1 matching the request structure (feature)
+- FrameworkOptions - added UseHsts (feature)
 
 #### Version history 
 - View git history of this file if interested

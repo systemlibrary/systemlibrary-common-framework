@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Extensions.FileProviders;
-
-using Prometheus;
 
 using SystemLibrary.Common.Framework.Extensions;
-using SystemLibrary.Common.Framework.Licensing;
 
 namespace SystemLibrary.Common.Framework.App.Extensions;
 
@@ -51,66 +45,19 @@ public static partial class IApplicationBuilderExtensions
 
         options ??= new FrameworkOptions();
 
+        app.Use(BlacklistedRequestMiddleware.Use);
+
         if (options.UseDeveloperPage)
             app.UseDeveloperExceptionPage();
-
-        app.Use(BlacklistedRequestMiddleware.Use);
 
         if (options.UseForwardedHeaders)
             app.UseForwardedHeaders();
 
         if (options.UseHttpsRedirection)
-        {
             app.UseHttpsRedirection();
-        }
 
         if (options.UseStaticFilePolicy)
-        {
-            var contentRootPath = env?.WebRootPath ?? EnvironmentConfig.ContentRootPath;
-
-            Debug.Log("[StaticFilePolicy] root is: " + contentRootPath);
-
-            if (options.StaticRequestPaths.Is())
-            {
-                foreach (var staticFilePath in options.StaticRequestPaths)
-                {
-                    if (staticFilePath == null) continue;
-
-                    StaticFileOptions staticFileOptions = new StaticFileOptions
-                    {
-                        ServeUnknownFileTypes = true,
-                        HttpsCompression = HttpsCompressionMode.Compress,
-                        RedirectToAppendTrailingSlash = false,
-                        OnPrepareResponse = ctx =>
-                        {
-                            if (ctx.Context.Response.Headers.ContainsKey("Cache-Control") != true)
-                                ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesClientCacheSeconds);
-                        },
-                    };
-
-                    staticFileOptions.FileProvider = new PhysicalFileProvider(contentRootPath);
-                    staticFileOptions.RequestPath = new PathString(staticFilePath);
-                    app.UseStaticFiles(staticFileOptions);
-                }
-            }
-            else
-            {
-                StaticFileOptions staticFileOptions = new StaticFileOptions
-                {
-                    ServeUnknownFileTypes = true,
-                    HttpsCompression = HttpsCompressionMode.Compress,
-                    RedirectToAppendTrailingSlash = false,
-                    OnPrepareResponse = ctx =>
-                    {
-                        if (ctx.Context.Response.Headers.ContainsKey("Cache-Control") != true)
-                            ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=" + options.StaticFilesClientCacheSeconds);
-                    },
-                };
-                staticFileOptions.FileProvider = new PhysicalFileProvider(contentRootPath);
-                staticFileOptions.RequestPath = new PathString("");
-                app.UseStaticFiles(staticFileOptions);
-            }
-        }
+            UseStaticFilePolicy(app, env, options);
 
         if (options.UseCookiePolicy)
             app.UseCookiePolicy();
@@ -138,10 +85,8 @@ public static partial class IApplicationBuilderExtensions
             });
         }
 
-        if (options.UseHttpsRedirection)
-        {
+        if (options.UseHsts)
             app.UseHsts();
-        }
 
         if (options.UseMvc)
             app.UseEndpoints(endpoints => endpoints.MapRazorPages());
@@ -157,39 +102,7 @@ public static partial class IApplicationBuilderExtensions
             });
         }
 
-        var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.Enable;
-        if (enablePrometheusMetrics)
-        {
-            if (License.Gold())
-            {
-                app.UseEndpoints(endpoints =>
-                {
-                    Debug.Log("[MetricsMiddleware] Adding /metrics endpoint");
-
-                    Metrics.SuppressDefaultMetrics();
-
-                    endpoints.MapGet("/metrics", async context =>
-                    {
-                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
-                        
-                        try
-                        {
-                            await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(ex);
-
-                            throw;
-                        }
-                    });
-                });
-            }
-            else
-            {
-                Debug.Log("[MetricsMiddleware] Metrics enable is set to true, but license tier is not gold or above, not registering /metrics endpoint");
-            }
-        }
+        UseMetrics(app);
 
         return app;
     }

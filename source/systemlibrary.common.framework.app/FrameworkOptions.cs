@@ -36,7 +36,7 @@ namespace SystemLibrary.Common.Framework;
 /// 
 /// public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 /// {
-///     Options.UseHttpRedrectionAndHsts = false;
+///     Options.UseHttpsRedirection = false;
 ///     
 ///     app.UseFrameworkMiddlewares(Options);
 /// }
@@ -93,6 +93,12 @@ public partial class FrameworkOptions
     /// Set to true to add services and middleware to use http to https redirection
     /// </summary>
     public bool UseHttpsRedirection = true;
+
+    /// <summary>
+    /// Set to true to add middleware for using HSTS, which adds the Strict-Transport-Security header.
+    /// <para>Client side redirection</para>
+    /// </summary>
+    public bool UseHsts = true;
 
     /// <summary>
     /// Set to true to register services and middleware for the OutputCache
