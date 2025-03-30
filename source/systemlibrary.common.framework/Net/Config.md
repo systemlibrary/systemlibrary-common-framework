@@ -13,20 +13,22 @@ Files can be placed in:
 ## Environment Transformations
 
 Transformations apply based on `ASPNETCORE_ENVIRONMENT`, set via:
-- `launchSettings.json` (IIS Expr232ess)
+- `launchSettings.json` (IIS Express)
 - `web.config` (IIS)
 - `mstest.runsettings` (unit tests)
-- CLI (`--configuration`)
+- CLI (`--environment`)
 
 ## Encryption Handling
 
-Encrypted properties, such as `ApiPassword`, can be decrypted by creating a corresponding `ApiPasswordDecrypt` property. This will hold the decrypted value of ApiToken.
+Encrypted properties, such as `ApiPassword`, can be decrypted by creating a corresponding `ApiPasswordDecrypt` property. This will hold the decrypted value of ApiPassword property.
 
 ## Usage
 
 - Create a YourConfig.[json|xml|config]
+- Add the 'ApiPassword' to configuration file, the encrypted version
 - Create a class YourConfig inheriting `Config<T>`, matching the file name.
-- Access it via `YourConfig.Current`
+- Create two string properties `ApiPassword` and `ApiPasswordDecrypt`
+- Access it via `YourConfig.Current.ApiPasswordDecrypt`
 
 
 ## Environment-Specific Overrides

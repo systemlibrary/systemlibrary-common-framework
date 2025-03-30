@@ -6,8 +6,8 @@ internal static class BlacklistedRequestMiddleware
 {
     static string[] BlockedExtensions = [
         ".exe", ".dll", ".iso", ".msi", ".ps1", ".cmd", ".sh", ".bash", ".vbs", ".dmg",
-        ".config", ".env", ".ini", ".key", ".pem", ".cshtml", ".cs", ".sql",
-        ".bat", ".jar", ".php", ".py", ".pl", ".rb", ".go", ".vb", ".vbs", ".hta"
+        ".config", ".env", ".ini", ".key", ".pem", ".cshtml", ".cs", ".sql", ".mdf", ".tsx", ".jsx",
+        ".bat", ".jar", ".php", ".py", ".pl", ".rb", ".go", ".vb", ".vbs", ".hta", ".bak", ".db", ".pfx", ".crt"
     ];
 
     static int BlockedExtensionsLength = BlockedExtensions.Length;
@@ -28,8 +28,11 @@ internal static class BlacklistedRequestMiddleware
             return;
         }
 
+
         if (text.StartsWith("/app_data/", StringComparison.OrdinalIgnoreCase) ||
             text.StartsWith("/properties/", StringComparison.OrdinalIgnoreCase) ||
+            text.StartsWith("/configs/", StringComparison.OrdinalIgnoreCase) ||
+            text.StartsWith("/configurations/", StringComparison.OrdinalIgnoreCase) ||
             text.StartsWith("/bin/", StringComparison.OrdinalIgnoreCase) ||
             text.StartsWith("/obj/", StringComparison.OrdinalIgnoreCase))
         {
@@ -54,6 +57,13 @@ internal static class BlacklistedRequestMiddleware
         if (length - num < 3)
         {
             await next(context);
+            return;
+        }
+
+        if(text.Contains("appsettings.", StringComparison.OrdinalIgnoreCase))
+        {
+            context.Response.Headers.TryAdd("Reason", "Access denied by Common Framework");
+            context.Response.StatusCode = 403;
             return;
         }
 
