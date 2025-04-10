@@ -39,7 +39,7 @@ partial class Log
         if (AppendEnumerable(message, obj, level, maxLevel, visited)) return;
 
         if (AppendClass(message, obj, level, maxLevel, visited)) return;
-
+        
         if (AppendKeyValuePair(message, obj, level, maxLevel, visited)) return;
 
         Add(message, obj.ToString(), level);
@@ -128,17 +128,46 @@ partial class Log
 
             else if (value is IEnumerable enumerable)
             {
-                // AppendEnumerable(message, enumerable, level, maxLevel, visited);
-
                 var key = objType.GetProperty("Key").GetValue(obj);
-                var list = ((Array)value).Cast<object>();
-                var joined = string.Join(", ", list);
-                if (list.Count() > 1)
+
+                if (value is Array arr)
                 {
-                    Add(message, "[" + key + ", [" + joined + "]]", level);
+                    var array = arr.Cast<object>();
+                    var joined = string.Join(", ", array);
+                    if (array.Count() > 1)
+                    {
+                        Add(message, "[" + key + ", [" + joined + "]]", level);
+                    }
+                    else
+                    {
+                        Add(message, "[" + key + ", " + joined + "]", level);
+                    }
                 }
-                else
+                else if (value is IDictionary dictionary)
                 {
+                    // TODO: Create a decent way to print any dictionary (nested dictionary, etc)
+                    var ident = new string('\t', level);
+                    var joined = "{\n" + ident;
+                    foreach (var dk in  dictionary.Keys)
+                    {
+                        joined += dk + ": ";
+                        var v = dictionary[dk];
+                        if(v != null)
+                        {
+                            var sb = new StringBuilder("");
+
+                            Append(sb, v, 0, maxLevel, visited);
+
+                            joined += sb.ToString();
+                        }
+                        joined += "\n" + ident;
+                    }
+                    Add(message, "[" + key + ", " + joined + "}]", level);
+                }
+                else if (value is IList list)
+                {
+                    var joined = string.Join(", ", list.Cast<object>());
+
                     Add(message, "[" + key + ", " + joined + "]", level);
                 }
             }

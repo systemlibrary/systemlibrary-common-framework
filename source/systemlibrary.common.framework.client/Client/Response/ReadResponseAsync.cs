@@ -69,7 +69,6 @@ partial class Client
             using (response)
             using (var contentStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 return await contentStream.JsonAsync<T>(jsonSerializerOptions, cancellationToken);
-            //return await JsonSerializer.DeserializeAsync<T>(contentStream, jsonSerializerOptions, cancellationToken).ConfigureAwait(false);
         }
         else
         {

@@ -1361,7 +1361,7 @@ public static partial class StringExtensions
     /// <para>If inputs length is less than or equal to 4 returns input as is</para>
     /// <para>If inputs length exceeds 256 length, we hash only the start, middle and end of the string, avoidiing a lot of CPU for the risk of more collisions</para>
     /// </summary>
-    public static string GetCompressedKey(this string input)
+    public static string GetCompressedKey(this string input, bool forceSameHash = false)
     {
         if (input == null) return input;
 
@@ -1369,17 +1369,20 @@ public static partial class StringExtensions
 
         if (l <= 4) return input;
 
-        if (l <= 6)
-            return (input.GetHashCode() & 0xFFFF).ToString();
+        if (!forceSameHash)
+        {
+            if (l <= 6)
+                return (input.GetHashCode() & 0xFFFF).ToString();
 
-        if (l <= 9)
-            return (input.GetHashCode() & 0xFFFFF).ToString();
+            if (l <= 9)
+                return (input.GetHashCode() & 0xFFFFF).ToString();
 
-        if (l <= 16)
-            return (input.GetHashCode() & 0xFFFFFF).ToString();
+            if (l <= 16)
+                return (input.GetHashCode() & 0xFFFFFF).ToString();
 
-        if (l <= 256)
-            return (input.GetHashCode() & 0xFFFFFF).ToString() + l;
+            if (l <= 256)
+                return (input.GetHashCode() & 0xFFFFFF).ToString() + l;
+        }
 
         // GetHashCode() is slow so we loop over and multiply by a fast prime: 11
         var count = 32;

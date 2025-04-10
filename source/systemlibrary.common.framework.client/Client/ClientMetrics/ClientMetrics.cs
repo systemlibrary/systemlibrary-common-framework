@@ -1,6 +1,4 @@
-﻿using System;
-
-using Prometheus;
+﻿using Prometheus;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -55,6 +53,10 @@ partial class Client
 
             i = end - 1;
         }
+
+        // All rooted paths, like www.site.com/path/, /path2 and /longerPath3/ all gets same label: www.site.com
+        if (slashCount == 0)
+            return typeName.Split("/")[0];
 
         return typeName;
     }

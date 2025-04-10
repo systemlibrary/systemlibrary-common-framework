@@ -1,4 +1,6 @@
-﻿using SystemLibrary.Common.Framework.Licensing;
+﻿using System.Net;
+
+using SystemLibrary.Common.Framework.Licensing;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -91,7 +93,7 @@ partial class Client
             }
             else
             {
-                ClientRequestCounter.WithLabels(options.UriLabel, "failed", response?.StatusCode.ToString() ?? "0").Inc();
+                ClientRequestCounter.WithLabels(options.UriLabel, "failed", ((int)(response?.StatusCode ?? (HttpStatusCode)504)).ToString()).Inc();
             }
         }
     }

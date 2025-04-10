@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 
 using SystemLibrary.Common.Framework.Extensions;
@@ -705,7 +706,7 @@ public static partial class Cache
         }
         static object GetParameterValue(ParameterExpression parameter, LambdaExpression lambda)
         {
-            var compiledLambda = lambda.Compile();
+            var compiledLambda = lambda.Compile(); // Lookup in internal cache dictionary 
             var result = compiledLambda.DynamicInvoke();
             // Log the result determine how it looks like...
             return result;
@@ -951,6 +952,11 @@ public static partial class Cache
                 if (roles != null)
                     key.Append(string.Join("", roles));
             }
+        }
+        var raw = HttpContextInstance.Current?.Request?.QueryString.Value;
+        if(raw != null && raw.Length > 0)
+        {
+            key.Append(raw.GetCompressedKey());
         }
 
         return key.ToString();

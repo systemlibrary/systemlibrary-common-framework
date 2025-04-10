@@ -54,7 +54,7 @@ public class LogWriterTests : BaseTest
         CleanDumpFile();
 
         Log.Dump("Err");
-     
+
         var content = ReadFile();
 
         Assert.IsTrue(content.Contains("Err"), "Does not contain 'Err': " + content);
@@ -163,5 +163,41 @@ public class LogWriterTests : BaseTest
         Assert.IsTrue(content.Contains("hello3"));
         Assert.IsTrue(content.Contains("hello5"));
         Assert.IsTrue(content.Contains("hello6"));
+    }
+
+    [TestMethod]
+    public void Write_Dictionary_With_Dictionary_Success()
+    {
+        CleanDumpFile();
+
+        var dict = new Dictionary<string, Dictionary<string, string>>();
+        dict.Add("Hello1", new Dictionary<string, string>()
+        {
+            { "outer1", "world1" },
+            { "outer2", "world2" }
+        });
+        Log.Dump(dict);
+
+        var dict2 = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+        dict2.Add("Hello2", new Dictionary<string, Dictionary<string, string>>()
+        {
+            { "innerWorld",
+                new Dictionary<string, string>() {
+                { "inner1key", "inner1world" },
+                { "inner2key", "inner2world" },
+            } },
+        });
+        Log.Error(dict2);
+
+        var content = ReadFile();
+        Assert.IsTrue(content.Contains("outer1"));
+        Assert.IsTrue(content.Contains("outer2"));
+        Assert.IsTrue(content.Contains("world1"));
+        Assert.IsTrue(content.Contains("world2"));
+
+        Assert.IsTrue(content.Contains("inner1world"));
+        Assert.IsTrue(content.Contains("inner2world"));
+        Assert.IsTrue(content.Contains("innerWorld"));
+
     }
 }

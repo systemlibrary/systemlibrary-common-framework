@@ -71,7 +71,7 @@ public static partial class Log
                     var temp = FrameworkConfigInstance.Current.Log.Level;
 
                     // Not specified for the package 'systemLibraryCommonFramework', let's check the global logging level
-                    if (temp == null || temp == LogLevel.Unset)
+                    if (temp == LogLevel.Unset)
                     {
                         // If 'none' is the default logging level, no logs should occur at all, except Log.Write always bypassed, same does Log.Dump (but this writes to physical drive)
                         var defaultLogLevel = AppSettings.Current.Logging.LogLevel.Default.ToLower();

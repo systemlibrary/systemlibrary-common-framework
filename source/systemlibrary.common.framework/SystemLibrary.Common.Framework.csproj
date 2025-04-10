@@ -6,8 +6,16 @@
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 	</PropertyGroup>
 
+	<Target Name="BuildDependencies" BeforeTargets="Build">
+		<MSBuild Projects="..\systemlibrary.common.framework.net\SystemLibrary.Common.Framework.Net.csproj" Targets="Build" Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="..\systemlibrary.common.framework.json\SystemLibrary.Common.Framework.Json.csproj" Targets="Build" Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="..\systemlibrary.common.framework.app\SystemLibrary.Common.Framework.App.csproj" Targets="Build" Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="..\systemlibrary.common.framework.client\SystemLibrary.Common.Framework.Client.csproj" Targets="Build" Properties="Configuration=$(Configuration)" />
+		<MSBuild Projects="..\systemlibrary.common.framework.cache\SystemLibrary.Common.Framework.Cache.csproj" Targets="Build" Properties="Configuration=$(Configuration)" />
+	</Target>
+	
 	<ItemGroup>
-		<Content Visible="false" Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Net.dll">
+		<Content Visible="false" Include="..\systemlibrary.common.framework.net\bin\$(Configuration)\net8.0\SystemLibrary.Common.Framework.Net.dll">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
@@ -48,15 +56,33 @@
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
-		
+
 		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.App.xml">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
-		
+
+		<!-- For Windows x64 -->
 		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll">
 			<Pack>true</Pack>
-			<PackagePath>lib\$(TargetFramework)</PackagePath>
+			<PackagePath>runtimes\win-x64\native\SystemLibrary.Common.Framework.LicenseEncKey.dll</PackagePath>
+		</Content>
+
+		<!-- For Windows arm64 -->
+		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll">
+			<Pack>true</Pack>
+			<PackagePath>runtimes\win-arm64\native\SystemLibrary.Common.Framework.LicenseEncKey.dll</PackagePath>
+		</Content>
+
+		<!-- For Linux x64 -->
+		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll">
+			<Pack>true</Pack>
+			<PackagePath>runtimes\linux-x64\native\SystemLibrary.Common.Framework.LicenseEncKey.dll</PackagePath>
+		</Content>
+		<!-- For Linux arm64 -->
+		<Content Visible="false" Include="..\systemlibrary.common.framework.app\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.LicenseEncKey.dll">
+			<Pack>true</Pack>
+			<PackagePath>runtimes\linux-arm64\native\SystemLibrary.Common.Framework.LicenseEncKey.dll</PackagePath>
 		</Content>
 	</ItemGroup>
 
@@ -102,6 +128,5 @@ https://systemlibrary.github.io/systemlibrary-common-framework/</Description>
 		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 	</PropertyGroup>
-
 
 </Project>

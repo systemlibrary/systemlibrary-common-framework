@@ -21,8 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.17
-- BlacklistedRequestMiddleware added few more extensions to block: mdf, tsx, bak and also blocking Configs and Configurations folder (feature)
+- 8.0.0.19
+- Log threw exception when building a message of nested dictionaries (fix)
 
 #### Version history 
 - View git history of this file if interested
@@ -44,3 +44,7 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 
 ## License
 - Free with Tiered Pricing for additional features
+
+### Dependencies
+- [Chart.js](https://github.com/chartjs/Chart.js), licensed under the MIT License.
+- [Prometheus-net](https://www.nuget.org/packages/prometheus-net), licensed under the MIT License.

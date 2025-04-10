@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace SystemLibrary.Common.Framework.Tests;
 
@@ -12,6 +13,7 @@ public abstract partial class BaseTest
 
     TestServer Server;
     HttpClient _Client;
+    protected IWebHost _Host;
 
     protected IWebHostBuilder WebHostBuilder;
 
@@ -43,6 +45,29 @@ public abstract partial class BaseTest
             }
             return _Client;
         }
+    }
+
+    protected async Task HostStart()
+    {
+        var appSettingsPath = AppContext.BaseDirectory + "appsettings.json";
+
+        if (File.Exists(appSettingsPath))
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile(appSettingsPath, optional: false, reloadOnChange: false).Build();
+
+            WebHostBuilder = WebHostBuilder.UseConfiguration(configuration);
+        }
+
+        WebHostBuilder.UseKestrel().UseUrls("http://localhost:50001");
+
+        _Host = WebHostBuilder.Build();
+
+        await _Host.RunAsync();
+    }
+
+    protected async Task HostStop()
+    {
+        await _Host.StopAsync();
     }
 
     protected void MapActions(IApplicationBuilder app)

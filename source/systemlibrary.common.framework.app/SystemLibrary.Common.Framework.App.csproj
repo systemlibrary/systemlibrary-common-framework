@@ -2,11 +2,18 @@
 	<PropertyGroup>
 		<RootNamespace>SystemLibrary.Common.Framework</RootNamespace>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="_Internal\MetricsUI\index.html" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="..\systemlibrary.common.framework.license\SystemLibrary.Common.Framework.LicenseEncKey.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="_Internal\MetricsUI\Index.html" />
 	</ItemGroup>
 
 	<ItemGroup>
