@@ -1,0 +1,130 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+    }
+    
+    canvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .metric-text {
+        font-size: 18px;
+        color: #333;
+        margin-top: 20px;
+    }
+
+    .chart-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container">
+    <div id="charts-container"></div>
+</div>
+
+<script>
+    const jsonData = {
+        "Metrics": [
+            { "Uri": "www.vg.no/sport", "Status": "success", "StatusCode": "200", "Count": 80 },
+            { "Uri": "www.vg.no/sport", "Status": "failed", "StatusCode": "404", "Count": 10 },
+            { "Uri": "www.vg.no/sport", "Status": "failed", "StatusCode": "502", "Count": 2 },
+            { "Uri": "www.vg.no/sport", "Status": "retry_success", "StatusCode": "200", "Count": 7 },
+            { "Uri": "www.vg.no/sport", "Status": "success", "StatusCode": "301", "Count": 1 },
+            { "Uri": "www.example.com/api", "Status": "success", "StatusCode": "200", "Count": 150 },
+            { "Uri": "www.example.com/api", "Status": "failed", "StatusCode": "500", "Count": 20 },
+            { "Uri": "www.example.com/api", "Status": "retry_success", "StatusCode": "200", "Count": 30 }
+        ]
+    };
+
+    const colorMap = {
+        "200": "#4caf50",  // Green
+        "404": "#f44336",  // Red
+        "502": "#d32f2f",  // Dark Red
+        "retry_success": "#81c784",  // Light Green
+        "301": "#cddc39"  // Light Green for Redirect
+    };
+
+    // Group metrics by URI
+    const metricsByUri = jsonData.Metrics.reduce((acc, metric) => {
+        if (!acc[metric.Uri]) acc[metric.Uri] = [];
+        acc[metric.Uri].push(metric);
+        return acc;
+    }, {});
+
+    // Loop through each URI and create a pie chart
+    const chartsContainer = document.getElementById('charts-container');
+
+    for (let uri in metricsByUri) {
+        // Create chart container div
+        const chartDiv = document.createElement('div');
+        chartDiv.classList.add('chart-container');
+
+        // Chart title (URI)
+        const chartTitle = document.createElement('div');
+        chartTitle.classList.add('chart-title');
+        chartTitle.textContent = `Metrics for ${uri}`;
+        chartDiv.appendChild(chartTitle);
+
+        // Canvas for the chart
+        const canvas = document.createElement('canvas');
+        // Ensure the canvas ID is unique by replacing unsafe characters in the URI
+        const canvasId = `chart-${uri.replace(/[^a-zA-Z0-9]/g, '-')}`;
+        canvas.id = canvasId;
+        chartDiv.appendChild(canvas);
+
+        chartsContainer.appendChild(chartDiv);
+
+        // Pie chart data preparation
+        const chartData = {
+            labels: [],
+            datasets: [{
+                data: [],
+                backgroundColor: [],
+                borderColor: [],
+                borderWidth: 1
+            }]
+        };
+
+        metricsByUri[uri].forEach(metric => {
+            chartData.labels.push(`${metric.Status} ${metric.StatusCode}`);
+            chartData.datasets[0].data.push(metric.Count);
+            chartData.datasets[0].backgroundColor.push(colorMap[metric.StatusCode] || colorMap[metric.Status]);
+            chartData.datasets[0].borderColor.push(colorMap[metric.StatusCode] || colorMap[metric.Status]);
+        });
+
+        // Create pie chart using Chart.js
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: chartData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                const value = tooltipItem.raw;
+                                return tooltipItem.label + ': ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>

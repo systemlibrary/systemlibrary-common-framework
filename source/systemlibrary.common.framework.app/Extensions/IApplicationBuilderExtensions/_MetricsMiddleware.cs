@@ -13,7 +13,7 @@ internal static class MetricsAuthorizationMiddleware
             "Basic " + authorizationValue == authorization ||
             authorizationValue == authorization)
         {
-            Debug.Log("[MetricsMiddleware] 200 Authorized");
+            Debug.Log("[Metrics] authorized");
 
             return true;
         }
@@ -26,7 +26,7 @@ internal static class MetricsAuthorizationMiddleware
             .GetAwaiter()
             .GetResult();
 
-        Debug.Log("[MetricsMiddleware] 401 Unauthorized");
+        Debug.Log("[MetricsMiddleware] unauthorized");
 
         return false;
     }

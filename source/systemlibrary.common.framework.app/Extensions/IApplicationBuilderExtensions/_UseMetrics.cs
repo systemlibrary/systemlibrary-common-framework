@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 using Prometheus;
 
@@ -8,22 +9,40 @@ namespace SystemLibrary.Common.Framework.App.Extensions;
 
 partial class IApplicationBuilderExtensions
 {
+    static DateTime? MetricLastReturned;
+    static string MetricViewCached;
+
     static void UseMetrics(IApplicationBuilder app)
     {
-        var enablePrometheusMetrics = AppSettings.Current.SystemLibraryCommonFramework.Metrics.Enable;
-        if (enablePrometheusMetrics)
+        var isMetricsEnabled = AppSettings.Current.SystemLibraryCommonFramework.Metrics.Enable;
+        if (isMetricsEnabled)
         {
             if (License.Gold())
             {
                 app.UseEndpoints(endpoints =>
                 {
-                    Debug.Log("[MetricsMiddleware] Adding /metrics endpoint");
+                    Debug.Log("[Metrics] added /metrics and /metrics/ui");
 
                     Metrics.SuppressDefaultMetrics();
 
                     endpoints.MapGet("/metrics", async context =>
                     {
                         if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
+
+                        if (context.Request.Headers.ContainsKey("metrics-ui"))
+                        {
+                            if (MetricLastReturned > DateTime.Now.AddSeconds(-20))
+                            {
+                                context.Response.ContentType = "text/html";
+                                context.Response.StatusCode = 200;
+
+                                await context.Response.WriteAsync("");
+
+                                return;
+                            }
+
+                            MetricLastReturned = DateTime.Now;
+                        }
 
                         try
                         {
@@ -36,11 +55,33 @@ partial class IApplicationBuilderExtensions
                             throw;
                         }
                     });
+
+                    endpoints.MapGet("/metrics/ui", async context =>
+                    {
+                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
+
+                        if (!(MetricLastReturned > DateTime.Now.AddSeconds(-20)))
+                        {
+                            Debug.Log("[Metrics] ui returned from 20s cache");
+
+                            var data = MetricsFetcher.Get(context);
+
+                            MetricViewCached = MetricsUI.GetHtmlView(data);
+                        }
+                        else
+                        {
+                            Debug.Log("[Metrics] recalculating");
+                        }
+
+                        context.Response.ContentType = "text/html";
+
+                        await context.Response.WriteAsync(MetricViewCached);
+                    });
                 });
             }
             else
             {
-                Debug.Log("[MetricsMiddleware] Metrics enable is set to true, but license tier is not gold or above, not registering /metrics endpoint");
+                Debug.Log("[Metrics] enabled, but license tier is not gold or above");
             }
         }
     }
