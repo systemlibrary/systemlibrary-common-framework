@@ -11,10 +11,10 @@ namespace SystemLibrary.Common.Framework;
 public class MetricOption
 {
     /// <summary>
-    /// Label of the pie chart, also used as the key to hold the option object for this particular pie chart
-    /// <para>Registering a MetricOption with the same Label will override any existing registration</para>
+    /// Set pie chart options for the specific display label, usually it is only the label, but if you use both category and status, the display label is made up of label and category, delimited by :
+    /// <para>Registering a new metric option with the same DisplayLabel will override previous registration</para>
     /// </summary>
-    public string Label;
+    public string DisplayLabel;
 
     /// <summary>
     /// True to show animation upon loading pie chart metric UI
@@ -22,12 +22,19 @@ public class MetricOption
     public bool ShowAnimation = true;
 
     /// <summary>
-    /// True to show the legend toolbar menu above the pie chart
+    /// True to show the legend toolbar menu above the pie chart, which will hide the 'DisplayLabel' for the pie chart
+    /// <para>Need to know the DisplayLabel for a pie chart? Simply set ShowLegend to false and recompile and check</para>
     /// </summary>
     public bool ShowLegend = false;
 
     /// <summary>
+    /// True to show a black border between each slice
+    /// </summary>
+    public bool ShowBorder = false;
+
+    /// <summary>
     /// Set the default text color of the pie chart
+    /// <para>Supports hex and rgb(0,0,0)</para>
     /// </summary>
     public string TextColor = "#fff";
 
@@ -42,6 +49,7 @@ internal class MetricOptionResponse
     public string label;
     public bool showAnimation;
     public bool showLegend;
+    public bool showBorder;
     public string textColor;
 }
 
@@ -87,9 +95,9 @@ public static class Metric
 
     public static void Init(MetricOption option = null)
     {
-        if (option?.Label == null) return;
+        if (option?.DisplayLabel == null) return;
 
-        var key = option.Label;
+        var key = option.DisplayLabel;
 
         if (MetricOptions.ContainsKey(key))
             MetricOptions.Remove(key, out _);

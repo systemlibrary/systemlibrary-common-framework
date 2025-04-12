@@ -41,63 +41,12 @@ public class MetricTests : BaseTest
         HostStart();
 
 
-        Metric.Inc("cache", "hit", status: "pissoff");
-        Metric.Inc("cache", "miss");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "miss");
-        Metric.Inc("cache", "hit");
-
-
         Metric.Init(new MetricOption
         {
-            Label = "cache",
-            ShowAnimation = true,  
-            ShowLegend = true,
-            Slices = [
-                new SliceOption
-                {
-                    Color = "green",
-                    Category = "hit",
-                    Order = 0,
-                },
-                new SliceOption
-                {
-                    Color = "red",
-                    Category = "hit",
-                    Order = 1,
-                }
-            ]
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Metric.Init(new MetricOption
-        {
-            Label = "url",
+            DisplayLabel = "url",
             ShowAnimation = true,
             ShowLegend = true,
+            ShowBorder = false,
             Slices = [
                 new SliceOption
                 {
@@ -125,6 +74,23 @@ public class MetricTests : BaseTest
             ]
         });
 
+        Metric.Inc("cache", "ssr", status: "hit");
+        Metric.Inc("cache", "ssr", status: "hit");
+        Metric.Inc("cache", "ssr", status: "hit");
+        Metric.Inc("cache", "ssr", status: "hit");
+        Metric.Inc("cache", "ssr", status: "miss");
+        Metric.Inc("cache", "ssr", status: "fail");
+        Metric.Inc("cache", "ssr", status: "fail");
+
+        Metric.Inc("cache", "miss");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "hit");
+        Metric.Inc("cache", "miss");
+        Metric.Inc("cache", "hit");
         Metric.Inc("url", "api", "500");
         Metric.Inc("url", "api", "404");
         Metric.Inc("url", "api", "404");

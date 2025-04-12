@@ -18,7 +18,7 @@ internal static class MetricsUI
     {
         var data = ParseMetricData(metricsData);
 
-        Log.Dump(data.Json());
+        Log.Debug(data.Json());
 
         return IndexTemplate.Replace("//@data@", data.Json());
     }
@@ -68,9 +68,10 @@ internal static class MetricsUI
             {
                 response.Options.Add(new MetricOptionResponse
                 {
-                    label = option.Value.Label,
+                    label = option.Value.DisplayLabel,
                     showAnimation = option.Value.ShowAnimation,
                     showLegend = option.Value.ShowLegend,
+                    showBorder = option.Value.ShowBorder,
                     textColor = option.Value.TextColor,
                 });
             }

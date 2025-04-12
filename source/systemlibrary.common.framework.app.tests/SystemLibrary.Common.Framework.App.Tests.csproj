@@ -4,7 +4,7 @@
 		<IsTestProject>true</IsTestProject>
 		<RootNamespace>SystemLibrary.Common.Framework.App</RootNamespace>
 		<Configurations>Release</Configurations>
-		<RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+		<RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 
