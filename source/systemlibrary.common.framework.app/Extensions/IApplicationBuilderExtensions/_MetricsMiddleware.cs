@@ -21,7 +21,7 @@ internal static class MetricsAuthorizationMiddleware
         // Give user option to prompt for an Auth?
         //context.Response.Headers["WWW-Authenticate"] = "Basic";
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-        context.Response.WriteAsync(StatusCodes.Status401Unauthorized.ToString() + ": Metric endpoint requires access through the Metric-Token header. The value required is set by the application developers.")
+        context.Response.WriteAsync(StatusCodes.Status401Unauthorized.ToString() + ": Metric endpoint requires access through the 'metricUIToken' header. The value required is set by the application developers.")
             .ConfigureAwait(false)
             .GetAwaiter()
             .GetResult();

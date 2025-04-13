@@ -63,7 +63,7 @@ partial class IApplicationBuilderExtensions
                         return;
                     }
 
-                    if (MetricLastReturned <= DateTime.Now.AddSeconds(-20))
+                    if (!(MetricLastReturned > DateTime.Now.AddSeconds(-20)))
                     {
                         Debug.Log("[Metrics] recalculating");
 

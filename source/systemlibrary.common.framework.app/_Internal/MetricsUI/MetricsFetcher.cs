@@ -13,6 +13,9 @@ internal static class MetricsFetcher
         var sb = new StringBuilder("");
 
         var err = (string)null;
+
+        var metricToken = FrameworkConfigInstance.Current.Metrics.MetricUIToken;
+
         for (int i = 0; i < 7; i++)
         {
             try
@@ -20,6 +23,9 @@ internal static class MetricsFetcher
                 using HttpClient client = new HttpClient();
 
                 client.DefaultRequestHeaders.Add("slcf-metrics-ui", "true");
+
+                if(metricToken.Is())
+                    client.DefaultRequestHeaders.Add("metricUIToken", metricToken);
 
                 var response = client.GetStringAsync(url)
                     .ConfigureAwait(false)
