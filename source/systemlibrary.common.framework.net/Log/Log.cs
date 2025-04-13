@@ -272,6 +272,13 @@ public static partial class Log
         // TODO: Optimize by 'fire and forget' the whole log message builder and dumping/logging
         var message = LogMessageBuilder.Get(obj, level);
 
+        var prefix = level.ToString().ToUpper() + ": ";
+        if (message.StartsWith(prefix + prefix + prefix))
+        {
+            global::SystemLibrary.Common.Framework.Debug.Write("Infinite loop - you're using the LogWriter to call the Log and LogBuilder, your LogWriter should write to somewhere the message, not pass it into the SystemLibrary.Common.Framework.Log...");
+            throw new Exception("Infinite loop - your ILogWriter implementation calls Log within SystemLibrary.Common.Framework. You have the message already, you must send it to somewhere for storage, your local disc, sentry, cloudwatch, firebase, azure app insight, splunk, log4net, serilog or similar...");
+        }
+
         if (LogWriter == null)
         {
             if (!WarningDumped)

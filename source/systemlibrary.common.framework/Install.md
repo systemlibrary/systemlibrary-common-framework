@@ -101,7 +101,7 @@ public class Startup
 
 			"metrics": {
 			  "enable": true, // [Gold Tier]
-			  "authorizationValue": "Demo"
+			  "metricUIToken": "Demo"
 			}
 		}
 	}

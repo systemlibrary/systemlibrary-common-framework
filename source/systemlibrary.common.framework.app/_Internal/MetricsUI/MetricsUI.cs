@@ -7,6 +7,7 @@ namespace SystemLibrary.Common.Framework;
 internal static class MetricsUI
 {
     static string IndexTemplate;
+
     const int DefaultLastOrder = 9999999;
 
     static MetricsUI()
@@ -17,8 +18,6 @@ internal static class MetricsUI
     internal static string GetHtmlView(string metricsData)
     {
         var data = ParseMetricData(metricsData);
-
-        Log.Debug(data.Json());
 
         return IndexTemplate.Replace("//@data@", data.Json());
     }

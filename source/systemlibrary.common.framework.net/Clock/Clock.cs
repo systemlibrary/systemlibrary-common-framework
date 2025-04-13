@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SystemLibrary.Common.Framework.App;
+namespace SystemLibrary.Common.Framework;
 
 /// <summary>
 /// A Clock to measure an actions execution time based on Stopwatch

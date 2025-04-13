@@ -4,6 +4,14 @@ using SystemLibrary.Common.Framework.Extensions;
 
 namespace SystemLibrary.Common.Framework.Licensing;
 
+public static class ALIcense
+{
+    public static string GetKey()
+    {
+        return License.GetKey();
+    }
+}
+
 internal static class License
 {
     internal enum Tier
@@ -27,6 +35,11 @@ internal static class License
             return _GetLicenseEncKey;
         }
     }
+    public static string GetKey()
+    {
+        return License.GetLicenseEncKey;
+    }
+
 
     static Dictionary<Tier, bool> TiersLicensed = new Dictionary<Tier, bool>();
 
@@ -68,9 +81,9 @@ internal static class License
             if (TiersLicensed.TryGetValue(tier, out bool isValid2) && TestLicense == null) return isValid2;
 
             TiersLicensed[tier] = GetTierState(tier);
-        }
 
-        Debug.Log("[License] " + tier + ": " + TiersLicensed[tier]);
+            Debug.Log("[License] " + tier + ": " + TiersLicensed[tier]);
+        }
 
         return TiersLicensed[tier];
     }

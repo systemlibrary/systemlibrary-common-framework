@@ -19,7 +19,7 @@ internal static class MetricsFetcher
             {
                 using HttpClient client = new HttpClient();
 
-                client.DefaultRequestHeaders.Add("metrics-ui", "true");
+                client.DefaultRequestHeaders.Add("slcf-metrics-ui", "true");
 
                 var response = client.GetStringAsync(url)
                     .ConfigureAwait(false)

@@ -33,5 +33,4 @@ partial class FrameworkOptions
     /// Requires UseStaticFiles set to True
     /// </remarks>
     public string[] StaticRequestPaths = null;
-
 }

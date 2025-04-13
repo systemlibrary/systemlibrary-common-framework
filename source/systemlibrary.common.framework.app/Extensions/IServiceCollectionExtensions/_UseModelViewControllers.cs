@@ -14,7 +14,9 @@ partial class IServiceCollectionExtensions
             return services.AddMvc(opt =>
             {
                 opt.AllowEmptyInputInBodyModelBinding = false;
-                opt.CacheProfiles.Add("Default", new CacheProfile { Duration = 200, Location = ResponseCacheLocation.Any, VaryByHeader = "Accept-Language" });
+
+                opt.CacheProfiles.Add("Default", new CacheProfile { Duration = 180, Location = ResponseCacheLocation.Any, VaryByHeader = "Accept-Language" });
+
                 opt.OutputFormatters.Add(new OutputContentTypesSupported());
 
                 if (options.UseControllers)

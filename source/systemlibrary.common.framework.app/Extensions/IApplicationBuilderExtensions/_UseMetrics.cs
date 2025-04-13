@@ -17,72 +17,70 @@ partial class IApplicationBuilderExtensions
         var isMetricsEnabled = AppSettings.Current.SystemLibraryCommonFramework.Metrics.Enable;
         if (isMetricsEnabled)
         {
-            if (License.Gold())
+            app.UseEndpoints(endpoints =>
             {
-                app.UseEndpoints(endpoints =>
+                Debug.Log("[Metrics] added /metrics and /metrics/ui");
+
+                Metrics.SuppressDefaultMetrics();
+
+                endpoints.MapGet("/metrics", async context =>
                 {
-                    Debug.Log("[Metrics] added /metrics and /metrics/ui");
+                    if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
 
-                    Metrics.SuppressDefaultMetrics();
-
-                    endpoints.MapGet("/metrics", async context =>
+                    if (context.Request.Headers.ContainsKey("slcf-metrics-ui"))
                     {
-                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
-
-                        if (context.Request.Headers.ContainsKey("metrics-ui"))
+                        if (MetricLastReturned > DateTime.Now.AddSeconds(-20))
                         {
-                            if (MetricLastReturned > DateTime.Now.AddSeconds(-20))
-                            {
-                                context.Response.ContentType = "text/html";
-                                context.Response.StatusCode = 200;
+                            context.Response.ContentType = "text/html";
+                            context.Response.StatusCode = 200;
 
-                                await context.Response.WriteAsync("");
+                            await context.Response.WriteAsync("");
 
-                                return;
-                            }
-
-                            MetricLastReturned = DateTime.Now;
+                            return;
                         }
+                        MetricLastReturned = DateTime.Now;
+                    }
 
-                        try
-                        {
-                            await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(ex);
-
-                            throw;
-                        }
-                    });
-
-                    endpoints.MapGet("/metrics/ui", async context =>
+                    try
                     {
-                        if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
+                        await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
 
-                        if (!(MetricLastReturned > DateTime.Now.AddSeconds(-20)))
-                        {
-                            Debug.Log("[Metrics] ui returned from 20s cache");
-
-                            var data = MetricsFetcher.Get(context);
-
-                            MetricViewCached = MetricsUI.GetHtmlView(data);
-                        }
-                        else
-                        {
-                            Debug.Log("[Metrics] recalculating");
-                        }
-
-                        context.Response.ContentType = "text/html";
-
-                        await context.Response.WriteAsync(MetricViewCached);
-                    });
+                        throw;
+                    }
                 });
-            }
-            else
-            {
-                Debug.Log("[Metrics] enabled, but license tier is not gold or above");
-            }
+
+                endpoints.MapGet("/metrics/ui", async context =>
+                {
+                    if (!MetricsAuthorizationMiddleware.AuthorizeMetricsRequest(context)) return;
+
+                    if (!License.Gold())
+                    {
+                        Debug.Log("[Metrics] enabled, but license tier is not gold or above");
+                        return;
+                    }
+
+                    if (MetricLastReturned <= DateTime.Now.AddSeconds(-20))
+                    {
+                        Debug.Log("[Metrics] recalculating");
+
+                        var data = MetricsFetcher.Get(context);
+
+                        MetricViewCached = MetricsUI.GetHtmlView(data);
+                    }
+                    else
+                    {
+                        Debug.Log("[Metrics] ui returned from 20s cache");
+                    }
+
+                    context.Response.ContentType = "text/html";
+
+                    await context.Response.WriteAsync(MetricViewCached);
+                });
+            });
         }
     }
 }

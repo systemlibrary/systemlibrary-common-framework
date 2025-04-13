@@ -40,7 +40,6 @@ public class MetricTests : BaseTest
     {
         HostStart();
 
-
         Metric.Init(new MetricOption
         {
             DisplayLabel = "url",
@@ -108,8 +107,7 @@ public class MetricTests : BaseTest
         Metric.Inc("loggedin");
         Metric.Inc("signedout");
 
-
-        Thread.Sleep(60000);
+        Thread.Sleep(15000);
 
         HostStop();
     }

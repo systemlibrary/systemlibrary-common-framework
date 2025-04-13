@@ -3,5 +3,5 @@
 internal class MetricsConfig
 {
     public bool Enable { get; set; } = true;
-    public string AuthorizationValue { get; set; } = "Demo";
+    public string MetricUIToken { get; set; } = "Demo";
 }

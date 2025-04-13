@@ -29,6 +29,7 @@
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
+		
 		<Content Visible="false" Include="..\systemlibrary.common.framework.cache\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Cache.xml">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
@@ -38,6 +39,7 @@
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
 		</Content>
+		
 		<Content Visible="false" Include="..\systemlibrary.common.framework.client\bin\$(Configuration)\$(TargetFramework)\SystemLibrary.Common.Framework.Client.xml">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
