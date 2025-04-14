@@ -32,7 +32,7 @@ Note: This does not affect Microsoft’s DataProtection, which handles tasks lik
 1. **Command-Line Argument (CLI)**: Example --frameworkEncKey=1234
 2. **AppSettings Configuration**: { "systemLibraryCommonFramework": { "frameworkEncKey": "1234" } }
 3. **Environment Variable**: set frameworkEncKey=1234
-4. **Key File from Directory**: options.enc = "C:\Keys\"
+4. **Key File from Directory**: options.EncKeyDir = "C:\Keys\"
 5. **Fallback Default**: If none are set, it defaults to `"ABCDEF..."`.
 
 ## UseDataProtectionPolicy – Persistent Key Management  

@@ -110,10 +110,7 @@ partial class CryptationKey
                 var validated = ValidateFileName(fullFileName);
 
                 if (validated != null)
-                    return validated
-                        .Replace("enc-", "")
-                        .Replace("ENC-", "")
-                        .Replace("Enc-", "");
+                    return validated.Replace("enc-", "", StringComparison.OrdinalIgnoreCase);
             }
         }
         catch (Exception ex)
@@ -128,9 +125,7 @@ partial class CryptationKey
     {
         if (fullFileName.Length <= 20) return null;
 
-        if (!fullFileName.Contains("enc-") &&
-            !fullFileName.Contains("ENC-") &&
-            !fullFileName.Contains("Enc-")) return null;
+        if (!fullFileName.Contains("enc-", StringComparison.OrdinalIgnoreCase)) return null;
 
         return fullFileName;
     }

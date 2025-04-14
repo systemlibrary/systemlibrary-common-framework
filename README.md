@@ -21,9 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.20
-- Polly dependency updated (fix)
-- License key updated (fix)
+- 8.0.0.21
+- KeyFileName containing -enc in case insensitive way fixed (fix)
 
 #### Version history 
 - View git history of this file if interested
