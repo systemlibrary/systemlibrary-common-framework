@@ -756,6 +756,49 @@ public partial class StringExtensionsTests : BaseTest
             Assert.IsTrue(result == "89914z12800", result + ": " + result.Length + " vs " + text.Length + " == " + text);
         }
     }
+    
+    [TestMethod]
+    public void GetCompressedKey_Same_Hash_IsOk()
+    {
+        string text = null;
+        string result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == null);
+
+        text = "";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == "", result);
+
+        text = "a";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == text, "A " + result);
+
+        text = "abcd";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == text, result + ": " + result.Length + " vs " + text.Length + " == " + text);
+
+        text = "abcde";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == "43565", result + " text" );
+
+        text = "abcdefghijabcdefghijabcdefghij32";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == "3460632", result + " " + text);
+
+        text = "abcdefghijabcdefghijabcdefghijk33";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == "3466133", result + " " + text);
+
+        text = "abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64";
+        result = text.GetCompressedKey(true);
+        Assert.IsTrue(result == "6926764", result + " " + text);
+
+        for(int i = 3; i < 300; i++)
+        {
+            text = Randomness.String(i);
+            result = text.GetCompressedKey(true);
+            Assert.IsTrue(result.Length >= 3 && result.Length < 32, result.Length + " "  + result +  " " + text + " " + i);
+        }
+    }
 
     [TestMethod]
     public void GetCompressedKey_Generates_Same_key_In_Async_IsOK()

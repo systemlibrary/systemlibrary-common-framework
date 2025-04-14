@@ -1386,12 +1386,19 @@ public static partial class StringExtensions
 
         // GetHashCode() is slow so we loop over and multiply by a fast prime: 11
         var count = 32;
+        if(l < 64)
+        {
+            count = l / 2;
+        }
         int hash = 0;
         var iEnd = l - 1;
         for (var i = 0; i < count; i++)
         {
             hash += (input[i] * 11) + (input[iEnd - i] * 11);
         }
+        
+        if (l <= 66)
+            return hash.ToString() + l;
 
         hash += (input[l / 2] * 11);
         hash += (input[l / 3] * 11);

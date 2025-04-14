@@ -60,8 +60,6 @@ public abstract partial class BaseTest
 
         WebHostBuilder.UseKestrel().UseUrls("http://localhost:50001");
 
-        Console.WriteLine("Server started at http://localhost:50001");
-
         _Host = WebHostBuilder.Build();
 
         await _Host.RunAsync();
