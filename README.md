@@ -21,12 +21,9 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.19
-- Log threw exception when building a message of nested dictionaries (fix)
-- ILogWriter calling Log.Error or similar, inifinte loop check will now cause a throw instead of running infinite (fix)
-- Metrics/UI added and now uses metricsUiToken to get access to the Charts (new)
-- Default CacheProfile if registering UseMvc is set, corresponds to default cache duration of 180s, down from 200s (fix)
-- LicenseKey moved to runtimes/ folder, preventing other packages that assumes /bin consists of only .NET dll's crashing (fix)
+- 8.0.0.20
+- Polly dependency updated (fix)
+- License key updated (fix)
 
 #### Version history 
 - View git history of this file if interested

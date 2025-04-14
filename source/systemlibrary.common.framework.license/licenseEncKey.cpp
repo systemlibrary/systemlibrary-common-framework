@@ -1,3 +1,3 @@
 extern "C" __declspec(dllexport) const char* LicenseEncKey() {
-    return "Gm-06kR0#gKm.!57";
+    return "gM-88kR0#Zki.!97";
 }

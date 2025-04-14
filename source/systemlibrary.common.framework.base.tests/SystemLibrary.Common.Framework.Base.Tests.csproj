@@ -5,7 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.14" ExcludeAssets="analyzers;buildTransitive;" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.15" ExcludeAssets="analyzers;buildTransitive;" />
 		<PackageReference Include="MSTest.TestFramework" Version="3.8.3" ExcludeAssets="analyzers;buildTransitive;" />
 	</ItemGroup>
 
