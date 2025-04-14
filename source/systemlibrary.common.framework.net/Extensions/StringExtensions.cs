@@ -1361,7 +1361,7 @@ public static partial class StringExtensions
     /// <para>If inputs length is less than or equal to 4 returns input as is</para>
     /// <para>If inputs length exceeds 256 length, we hash only the start, middle and end of the string, avoidiing a lot of CPU for the risk of more collisions</para>
     /// </summary>
-    public static string GetCompressedKey(this string input, bool forceSameHash = false)
+    public static string GetCompressedKey(this string input, bool deterministic = false)
     {
         if (input == null) return input;
 
@@ -1369,7 +1369,7 @@ public static partial class StringExtensions
 
         if (l <= 4) return input;
 
-        if (!forceSameHash)
+        if (!deterministic)
         {
             if (l <= 6)
                 return (input.GetHashCode() & 0xFFFF).ToString();

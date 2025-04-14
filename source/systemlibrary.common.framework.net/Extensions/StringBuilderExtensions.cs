@@ -227,20 +227,11 @@ public static class StringBuilderExtensions
 
         if (l <= 4) return input.ToString();
 
-        if (l <= 6)
-            return (input.GetHashCode() & 0xFFFF).ToString();
-
-        if (l <= 9)
-            return (input.GetHashCode() & 0xFFFFF).ToString();
-
-        if (l <= 16)
-            return (input.GetHashCode() & 0xFFFFFF).ToString();
-
-        if (l <= 256)
-            return (input.GetHashCode() & 0xFFFFFF).ToString() + l;
-
-        // GetHashCode() is slow so we loop over and multiply by a fast prime: 11
         var count = 32;
+        if (l < 64)
+        {
+            count = l / 2;
+        }
         int hash = 0;
         var iEnd = l - 1;
         for (var i = 0; i < count; i++)
@@ -248,10 +239,13 @@ public static class StringBuilderExtensions
             hash += (input[i] * 11) + (input[iEnd - i] * 11);
         }
 
+        if (l <= 66)
+            return hash.ToString() + l;
+
         hash += (input[l / 2] * 11);
         hash += (input[l / 3] * 11);
         hash += (input[l / 4] * 11);
 
-        return hash.ToString() + StringExtensions.GetValidChar(input[l / 5]) + l;
+        return hash.ToString() + l;
     }
 }

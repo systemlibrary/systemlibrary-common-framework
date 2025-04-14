@@ -298,4 +298,39 @@ public class StringBuilderExtensionsTests : BaseTest
         sb.MaxLength(3);
         Assert.IsTrue(sb.ToString() == "hel", "Max length 3 failed " + sb);
     }
+
+    [TestMethod]
+    public void GetCompressedKey_Success()
+    {
+        var text = new StringBuilder();
+        var result = text.GetCompressedKey();
+        Assert.IsTrue(result.Length == 0, "Err " + result);
+
+        text.Append("h");
+        result = text.GetCompressedKey();
+        Assert.IsTrue(result == "h", "Err " + result);
+
+        text.Append("hello world");
+        result = text.GetCompressedKey();
+        Assert.IsTrue(result == "1342012", "Err " + result);
+
+        text = new StringBuilder("abcdefghijabcdefghijabcdefghij32");
+        result = text.GetCompressedKey();
+        Assert.IsTrue(result == "3460632", result + " " + text);
+
+        text = new StringBuilder("abcdefghijabcdefghijabcdefghijk33");
+        result = text.GetCompressedKey();
+        Assert.IsTrue(result == "3466133", result + " " + text);
+
+        text = new StringBuilder("abcdefghijabcdefghijabcdefghij32abcdefghijabcdefghijabcdefghij64");
+        result = text.GetCompressedKey();
+        Assert.IsTrue(result == "6926764", result + " " + text);
+
+        for (int i = 3; i < 200; i++)
+        {
+            text = new StringBuilder(Randomness.String(i));
+            result = text.GetCompressedKey();
+            Assert.IsTrue(result.Length >= 3 && result.Length < 32, result.Length + " " + result + " " + text + " " + i);
+        }
+    }
 }
