@@ -59,7 +59,8 @@ partial class IApplicationBuilderExtensions
 
                     if (!License.Gold())
                     {
-                        Debug.Log("[Metrics] enabled, but license tier is not gold or above");
+                        Debug.Log("[Metrics] enabled, but UI for metrics requires gold tier license or above");
+                        await context.Response.WriteAsync("[Metrics] enabled, but UI for metrics requires gold tier license or above");
                         return;
                     }
 

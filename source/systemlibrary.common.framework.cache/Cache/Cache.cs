@@ -452,7 +452,7 @@ public static partial class Cache
         if (SkipCache(skipWhenAuthenticated, skipWhenAdmin, skipWhen))
         {
             if (EnablePrometheusConfig && License.Gold())
-                CacheMetrics.RecordCacheIgnored();
+                Metric.Inc("cache", "ignored");
 
             return getItem();
         }
@@ -475,7 +475,7 @@ public static partial class Cache
         if (cached != null)
         {
             if (EnablePrometheusConfig && License.Gold())
-                CacheMetrics.RecordCacheHit();
+                Metric.Inc("cache", "hit");
 
             return (T)cached;
         }
@@ -512,7 +512,7 @@ public static partial class Cache
                 if (cached != null)
                 {
                     if (EnablePrometheusConfig && License.Gold())
-                        CacheMetrics.RecordCacheMissWithFallbackCounter();
+                        Metric.Inc("cache", "cache_miss_returned_fallback");
 
                     return (T)cached;
                 }
@@ -524,13 +524,13 @@ public static partial class Cache
             if (cached != null)
             {
                 if (EnablePrometheusConfig && License.Gold())
-                    CacheMetrics.RecordCacheExceptionWithFallbackCounter();
+                    Metric.Inc("cache", "cache_exception_returned_fallback");
 
                 return (T)cached;
             }
 
             if (EnablePrometheusConfig && License.Gold())
-                CacheMetrics.RecordCacheLookupExceptionsCounter();
+                Metric.Inc("cache", "cache_exceptions");
 
             throw ex;
         }
@@ -540,12 +540,12 @@ public static partial class Cache
             Insert(cacheIndex, cacheKey, cached, duration);
 
             if (EnablePrometheusConfig && License.Gold())
-                CacheMetrics.RecordCacheMiss();
+                Metric.Inc("cache", "miss");
         }
         else
         {
             if (EnablePrometheusConfig && License.Gold())
-                CacheMetrics.RecordCacheIgnored();
+                Metric.Inc("cache", "ignored");
         }
 
         return (T)cached;
