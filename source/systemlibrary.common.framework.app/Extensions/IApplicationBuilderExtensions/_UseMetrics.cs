@@ -43,6 +43,8 @@ partial class IApplicationBuilderExtensions
 
                     try
                     {
+                        await context.Response.WriteAsync("");
+
                         await Metrics.DefaultRegistry.CollectAndExportAsTextAsync(context.Response.Body);
                     }
                     catch (Exception ex)
@@ -60,11 +62,13 @@ partial class IApplicationBuilderExtensions
                     if (!License.Gold())
                     {
                         Debug.Log("[Metrics] enabled, but UI for metrics requires gold tier license or above");
+
                         await context.Response.WriteAsync("[Metrics] enabled, but UI for metrics requires gold tier license or above");
+
                         return;
                     }
 
-                    if (!(MetricLastReturned > DateTime.Now.AddSeconds(-20)))
+                    if (MetricViewCached.IsNot() || !(MetricLastReturned > DateTime.Now.AddSeconds(-20)))
                     {
                         Debug.Log("[Metrics] recalculating");
 

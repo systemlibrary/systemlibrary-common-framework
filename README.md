@@ -21,8 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.23
-- Cache and Client metrics now uses Metric.Inc which is rendered as a pie chart in metrics/ui [Gold Tier] (fix)
+- 8.0.0.24
+- Metrics: /metrics/ui performance boosted [Gold Tier] (fix)
 
 #### Version history 
 - View git history of this file if interested

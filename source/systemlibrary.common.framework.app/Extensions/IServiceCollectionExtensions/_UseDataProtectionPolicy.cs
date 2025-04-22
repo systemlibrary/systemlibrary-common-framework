@@ -69,9 +69,6 @@ partial class IServiceCollectionExtensions
             }
         }
 
-        // Sleep application slightly as the deletion of files must be really successfully on disc
-        System.Threading.Thread.Sleep(2);
-
         return validFiles;
     }
 }

@@ -18,44 +18,61 @@ internal static class MetricsFetcher
 
         var sb = new StringBuilder("");
 
-        var err = (string)null;
-
         var metricToken = FrameworkConfigInstance.Current.Metrics.MetricUIToken;
 
-        for (int i = 0; i < 6; i++)
+        var responses = Async.Parallel<string>(
+            () => GetMetricsResponse(url, metricToken),
+            () => GetMetricsResponse(url, metricToken),
+            () => GetMetricsResponse(url, metricToken),
+            () => GetMetricsResponse(url, metricToken),
+            () => GetMetricsResponse(url, metricToken),
+            () => GetMetricsResponse(url, metricToken)
+        );
+
+        if (responses != null)
         {
-            try
+            foreach (var response in responses)
             {
-                using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(7500));
-                using var client = new HttpClient();
-
-                client.DefaultRequestHeaders.Add("slcf-metrics-ui", "true");
-
-                if (metricToken.Is())
-                    client.DefaultRequestHeaders.Add("metricUIToken", metricToken);
-
-                var response = client.GetStringAsync(url, cts.Token)
-                    .ConfigureAwait(false)
-                    .GetAwaiter()
-                    .GetResult();
-
                 if (response?.Length > 10)
                 {
                     sb.AppendLine("\n");
                     sb.Append(response);
                 }
             }
-            catch (Exception ex)
-            {
-                err = ex.ToString();
-            }
-        }
-
-        if (err != null)
-        {
-            Log.Error("[MetricsFetcher] exception occured: " + err);
         }
 
         return sb.ToString();
+    }
+
+    static string GetMetricsResponse(string url, string metricToken)
+    {
+        var handler = new SocketsHttpHandler
+        {
+            UseProxy = false
+        };
+        var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(5000));
+        var client = new HttpClient(handler);
+
+        client.Timeout = TimeSpan.FromMilliseconds(5000);
+
+        client.DefaultRequestHeaders.Add("slcf-metrics-ui", "true");
+
+        if (metricToken.Is())
+            client.DefaultRequestHeaders.Add("metricUIToken", metricToken);
+
+        try
+        {
+            return
+                client.GetStringAsync(url)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult()
+            ;
+        }
+        catch (Exception ex)
+        {
+            Log.Error("[MetricsFetcher] exception occured: " + ex.Message);
+            return null;
+        }
     }
 }
