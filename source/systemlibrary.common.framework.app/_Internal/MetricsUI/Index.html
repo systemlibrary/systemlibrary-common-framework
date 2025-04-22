@@ -52,9 +52,12 @@
             return window.slcfMetricChartsData?.Options?.find(opt => opt?.label === base) || {};
         }
 
-        function getAutoSliceColor(label, category, status) {
-            let value = normalize(category + status)
-            if (!value || value === '0') value = normalize(label)
+        function getAutoSliceColor(label, segment) {
+            let colorByValue = normalize(segment);
+
+            if(!colorByValue || colorByValue === '0') {
+                colorByValue = normalize(label);
+            }
 
           /*green: '#4CAF50',       // Status is OK, success
             lightGreen: '#81C784',  // Status OK after retry, redirects (e.g., 301, 302, 307, 308)
@@ -105,19 +108,18 @@
             ];
 
             for (let s of sliceColors)
-                if (s.match.some(k => value.includes(k)))
+                if (s.match.some(k => colorByValue.includes(k)))
                     return s.color
 
             return '#3F6FA9'
         }
 
-        function getColor(label, category, status) {
+        function getColor(label, segment) {
             const m = window.slcfMetricChartsData?.Metrics?.find(x =>
                 normalize(x.Label) === normalize(label) &&
-                normalize(x.Category) === normalize(category) &&
-                normalize(x.Status) === normalize(status)
-            )
-            return m?.Color?.length ? m.Color : getAutoSliceColor(label, category, status)
+                normalize(x.Segment) === normalize(segment));
+
+            return m?.Color?.length ? m.Color : getAutoSliceColor(label, segment)
         }
 
         function groupMetrics(metrics) {
@@ -139,30 +141,25 @@
 
             const grouped = {}
 
-            for (let m of metrics) {
-                const key = m.Status ? `${m.Label}:${m.Category}` : m.Label
-                const subKey = m.Status || m.Category || 'default'
-                const subKeyName = m.Status ? 'status' : (m.Category ? 'category' : null)
-                const color = getColor(m.Label, m.Category, m.Status)
+            for (const m of metrics) {
+                if(!m) 
+                {
+                    continue;
+                }
+                const key = m.Label
+                const segment = m.Segment || null
+                const color = getColor(m.Label, m.Segment)
 
-                if (!grouped[key]) grouped[key] = {
-                    subKeyName,
-                    data: []
-                }
-                const entry = subKeyName ? {
-                    [subKeyName]: subKey,
+                if (!grouped[key]) grouped[key] = []
+
+                grouped[key].push({
+                    segment,
                     count: m.Count,
                     color
-                } : {
-                    count: m.Count,
-                    color
-                }
-                grouped[key].data.push(entry)
+                })
             }
 
-            return Object.entries(grouped).map(([label, {
-                data
-            }]) => ({
+            return Object.entries(grouped).map(([label, data]) => ({
                 label,
                 data
             }))
@@ -170,6 +167,23 @@
 
         function getTitle(title) {
             return title.length > 25 ? title.substring(0, 24) + '...' : title
+        }
+
+        function getSliceLabel(segment, label) {
+
+            if (segment) return segment
+
+            if(label)
+            {
+                if (label.includes(':')) return label.split(':').pop()
+
+                if (label.includes(',')) return label.split(',').pop()
+
+                if (label.includes('/')) return label.split('/').pop()
+
+                return label
+            }
+            return "default";
         }
 
         const grouped = groupMetrics(window.slcfMetricChartsData?.Metrics)
@@ -187,16 +201,20 @@
 
                 const opt = getPieChartOption(item.label)
 
-                const labels = item.data.map(x => `${item.label}:${x.status || x.category || ''}`.replace(/:$/, ''))
-                const counts = item.data.map(x => x.count)
+                const labels = item.data.map(x => getSliceLabel(x.segment, item.label))
+                const slices = item.data.map(x => x.count)
                 const colors = item.data.map(x => x.color)
+
+                const showLegend = slices.length > 1 && opt.showLegend;
+
+                const animationName = easingOptions[Math.floor(Math.random() * easingOptions.length)];
 
                 new Chart(canvas, {
                     type: 'pie',
                     data: {
                         labels,
                         datasets: [{
-                            data: counts,
+                            data: slices,
                             borderColor: '#000',
                             borderWidth: opt.showBorder ? 1 : 0,
                             backgroundColor: colors
@@ -206,7 +224,7 @@
                     options: {
                         animation: {
                             duration: opt.showAnimation ? 888 : 0,
-                            easing: opt.showAnimation ? easingOptions[Math.floor(Math.random() * easingOptions.length)] : 'linear'
+                            easing: opt.showAnimation ? animationName : 'linear'
                         },
                         plugins: {
                             tooltip: {
@@ -218,7 +236,7 @@
                                 }
                             },
                             legend: {
-                                display: !opt.showLegend || false,
+                                display: showLegend,
                                 position: 'top',
                                 labels: {
                                     boxWidth: 12,
@@ -227,7 +245,7 @@
                                 }
                             },
                             title: {
-                                display: !opt.showLegend,
+                                display: true,
                                 text: getTitle(item.label),
                                 position: 'top',
                                 font: {

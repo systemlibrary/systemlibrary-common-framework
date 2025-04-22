@@ -40,104 +40,305 @@ public class MetricTests : BaseTest
     {
         HostStart();
 
-        Metric.Init(new MetricOption
+        MetricCharts.Add(new MetricChartOption
         {
-            DisplayLabel = "url",
+            MetricLabel = "www.vg.no:success",
             ShowAnimation = true,
             ShowLegend = true,
             ShowBorder = false,
+            TextColor = "#f1f1f1",
             Slices = [
                 new SliceOption
                 {
-                    Category = "api",
-                    Status = "404",
+                    Segment = "200",
                     Color = "orange",
-                    Order = 1
+                    Order = 155
                 },
-
                 new SliceOption
                 {
-                    Category = "api",
-                    Status = "200",
-                    Color = "green",
-                    Order = 0
-                },
-
-                new SliceOption
-                {
-                    Category = "api",
-                    Status = "500",
+                    Segment = "404",
                     Color = "red",
-                    Order = 2
+                    Order = 4
+                },
+                new SliceOption
+                {
+                    Segment = "301",
+                    Color = "black",
+                    Order = 1
                 }
             ]
         });
 
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
 
 
-        // This should be one pie chart, www.vg.no, with slice per category + status
-        Metric.Inc("www.vg.no", "circuit_broken", "0");
-        Metric.Inc("www.vg.no", "success", "200");
-        Metric.Inc("www.vg.no", "success", "200");
-        Metric.Inc("www.vg.no", "retry_success", "200");
-        Metric.Inc("www.vg.no", "retry_success", "200");
-        Metric.Inc("www.vg.no", "retry_success", "200");
-        Metric.Inc("www.vg.no", "failed", "404");
-        Metric.Inc("www.vg.no", "failed", "500");
-        Metric.Inc("www.vg.no", "failed", "500");
-        Metric.Inc("www.vg.no", "failed", "500");
-        Metric.Inc("www.vg.no", "failed", "500");
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
 
-        // This is a second pie chart, as it has only category, but the metric is for category + status
-        Metric.Inc("www.vg.no", "badgateway");
-        Metric.Inc("www.vg.no", "badgateway");
-        Metric.Inc("www.vg.no", "badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
 
-        // Pie chart over cache, with slice ssr+hit
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
 
-        /*
-         var piechartLabel = label + if status.Is() ? "#" meaning its a "sub chart" of cache somehow?
-         */
-        Metric.Inc("cache", "ssr", status: "hit");
-        Metric.Inc("cache", "ssr", status: "hit");
-        Metric.Inc("cache", "ssr", status: "hit");
-        Metric.Inc("cache", "ssr", status: "hit");
-        Metric.Inc("cache", "ssr", status: "miss");
-        Metric.Inc("cache", "ssr", status: "fail");
-        Metric.Inc("cache", "ssr", status: "fail");
-        Metric.Inc("cache", "fallback", status: "fail");
-        Metric.Inc("cache", "fallback", status: "hit");
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
 
-        Metric.Inc("cache", "hit");
-        Metric.Inc("cache", "miss");
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
 
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
 
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
 
-        //Metric.Inc("cache", "miss");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "miss");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("url", "api", "500");
-        //Metric.Inc("url", "api", "404");
-        //Metric.Inc("url", "api", "404");
-        //Metric.Inc("url", "api", "200");
-        //Metric.Inc("url", "api", "200");
-        //Metric.Inc("url", "api", "200");
-        //Metric.Inc("url", "api", "301");
-        //Metric.Inc("url", "api", "200");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "hit");
-        //Metric.Inc("cache", "miss");
-        //Metric.Inc("loggedin");
-        //Metric.Inc("loggedin");
-        //Metric.Inc("loggedin");
-        //Metric.Inc("signedout");
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
+
+        Metric.Inc("www.vg.no:circuit_broken", "0");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "200");
+        Metric.Inc("www.vg.no:success", "301");
+        Metric.Inc("www.vg.no:success", "404");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:retry_success", "200");
+        Metric.Inc("www.vg.no:failed", "404");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+        Metric.Inc("www.vg.no:failed", "500");
+
+        Metric.Inc("www.vg.no:badgateway");
+        Metric.Inc("www.vg.no:badgateway");
+
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "hit");
+        Metric.Inc("cache:ssr", "miss");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:ssr", "fail");
+        Metric.Inc("cache:fallback", "fail");
+        Metric.Inc("cache:fallback", "hit");
+
+        Metric.Inc("cache:hit");
+        Metric.Inc("cache:miss");
 
         Thread.Sleep(25000);
 

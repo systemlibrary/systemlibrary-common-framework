@@ -39,7 +39,8 @@ internal static class MetricsUI
             if (parts.Length != 2 || !double.TryParse(parts[1], out double value)) continue;
 
             var labels = ExtractLabels(parts[0]);
-            var existingMetric = FindExistingMetric(response, labels.label, labels.category, labels.status);
+
+            var existingMetric = FindExistingMetric(response, labels.label, labels.segment);
 
             if (existingMetric != null)
             {
@@ -50,24 +51,23 @@ internal static class MetricsUI
                 response.Metrics.Add(new MetricData
                 {
                     Label = labels.label,
-                    Category = labels.category,
-                    Status = labels.status,
+                    Segment = labels.segment,
                     Count = (int)value,
-                    Order = GetMetricSliceOrder(labels.label, labels.category, labels.status),
-                    Color = GetMetricSliceColor(labels.label, labels.category, labels.status)
+                    Order = GetMetricSliceOrder(labels.label, labels.segment),
+                    Color = GetMetricSliceColor(labels.label, labels.segment)
                 });
             }
         }
 
-        if (Metric.MetricOptions.Count > 0 && response.Metrics.Count > 0)
+        if (MetricCharts.MetricOptions.Count > 0 && response.Metrics.Count > 0)
         {
-            response.Options = new List<MetricOptionResponse>();
+            response.Options = new();
 
-            foreach (var option in Metric.MetricOptions)
+            foreach (var option in MetricCharts.MetricOptions)
             {
                 response.Options.Add(new MetricOptionResponse
                 {
-                    label = option.Value.DisplayLabel,
+                    label = option.Value.MetricLabel,
                     showAnimation = option.Value.ShowAnimation,
                     showLegend = option.Value.ShowLegend,
                     showBorder = option.Value.ShowBorder,
@@ -78,55 +78,52 @@ internal static class MetricsUI
         return response;
     }
 
-    static int GetMetricSliceOrder(string label, string category, string status)
+    static int GetMetricSliceOrder(string label, string segment)
     {
         var key = label;
 
-        if (!Metric.MetricOptions.ContainsKey(key)) return DefaultLastOrder;
+        if (!MetricCharts.MetricOptions.ContainsKey(key)) return DefaultLastOrder;
 
-        var option = Metric.MetricOptions[label];
+        var option = MetricCharts.MetricOptions[label];
 
-        var slice = option?.Slices?.FirstOrDefault(s => s.Category == category && s.Status == status);
+        var slice = option?.Slices?.FirstOrDefault(s => s.Segment == segment);
 
         return slice?.Order ?? DefaultLastOrder;
     }
 
-    static string GetMetricSliceColor(string label, string category, string status)
+    static string GetMetricSliceColor(string label, string segment)
     {
         var key = label;
 
-        if (!Metric.MetricOptions.ContainsKey(key)) return null;
+        if (!MetricCharts.MetricOptions.ContainsKey(key)) return null;
 
-        var option = Metric.MetricOptions[label];
+        var option = MetricCharts.MetricOptions[label];
 
-        var slice = option?.Slices?.FirstOrDefault(s => s.Category == category && s.Status == status);
+        var slice = option?.Slices?.FirstOrDefault(s => s.Segment == segment);
 
         return slice?.Color;
     }
 
-    static MetricData FindExistingMetric(MetricsResponse response, string label, string category, string status) =>
+    static MetricData FindExistingMetric(MetricsResponse response, string label, string segment) =>
         response.Metrics.FirstOrDefault(m =>
             m.Label == label &&
-            (m.Category == category || category == null) &&
-            (m.Status == status || status == null));
+            (m.Segment == segment || (segment.IsNot() && m.Segment.IsNot())));
 
-    static (string label, string category, string status) ExtractLabels(string metricName)
+    static (string label, string segment) ExtractLabels(string metric)
     {
-        var regex = new Regex(@"(\w+)=""([^""]+)""");
-        var matches = regex.Matches(metricName);
+        var regex = new Regex(@"(\w+)=""((?:[^""\\]|\\.)*)""");
+        string label = null, segment = null;
 
-        string label = "", category = null, status = null;
-
-        foreach (Match match in matches)
+        foreach (Match match in regex.Matches(metric))
         {
             var key = match.Groups[1].Value;
             var value = match.Groups[2].Value;
 
             if (key == "label") label = value;
-            else if (key == "category") category = value;
-            else if (key == "status") status = value;
+
+            else if (key == "segment") segment = value;
         }
 
-        return (label, category, status);
+        return (label ?? "", segment);
     }
 }

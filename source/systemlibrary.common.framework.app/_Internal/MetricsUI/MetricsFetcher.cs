@@ -8,7 +8,13 @@ internal static class MetricsFetcher
 {
     internal static string Get(HttpContext context)
     {
-        var url = $"{context.Request.Scheme}://{context.Request.Host}/metrics";
+        var origin = context.Request.Headers["Origin"].FirstOrDefault();
+
+        var forwardedHost = context.Request.Headers["X-Forwarded-Host"].FirstOrDefault();
+
+        var host = forwardedHost ?? origin ?? context.Request.Host.Value;
+
+        var url = $"{context.Request.Scheme}://{host}/metrics";
 
         var sb = new StringBuilder("");
 
@@ -16,18 +22,19 @@ internal static class MetricsFetcher
 
         var metricToken = FrameworkConfigInstance.Current.Metrics.MetricUIToken;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 6; i++)
         {
             try
             {
-                using HttpClient client = new HttpClient();
+                using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(7500));
+                using var client = new HttpClient();
 
                 client.DefaultRequestHeaders.Add("slcf-metrics-ui", "true");
 
-                if(metricToken.Is())
+                if (metricToken.Is())
                     client.DefaultRequestHeaders.Add("metricUIToken", metricToken);
 
-                var response = client.GetStringAsync(url)
+                var response = client.GetStringAsync(url, cts.Token)
                     .ConfigureAwait(false)
                     .GetAwaiter()
                     .GetResult();

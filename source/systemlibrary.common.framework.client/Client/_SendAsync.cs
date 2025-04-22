@@ -117,7 +117,7 @@ partial class Client
         catch (BrokenCircuitException bce)
         {
             if (EnablePrometheusConfig && License.Gold())
-                Metric.Inc(options.UriLabel, "circuit_broken", "0");
+                Metric.Inc(options.UriLabel, "circuit_broken:0");
 
             return (response, bce);
         }

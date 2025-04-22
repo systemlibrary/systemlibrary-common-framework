@@ -284,7 +284,7 @@ public static partial class Log
             if (!WarningDumped)
             {
                 WarningDumped = true;
-                Log.Dump("SystemLibrary.Common.Framework.App.ILogWriter is not registered as a service, will Log.Dump message...");
+                Log.Dump("[SystemLibrary.Common.Framework] ILogWriter is not registered as a service, will Log.Dump message...");
             }
             Log.Dump(message);
             return;

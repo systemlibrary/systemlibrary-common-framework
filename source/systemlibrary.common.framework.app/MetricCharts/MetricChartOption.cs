@@ -4,13 +4,14 @@
 /// Create a metric option and pass it into the Metric.Init method to control how the pie chart of a metric is rendered
 /// <para>Note: A pie chart's key is made up of label + category + status, so if you specify the exact same label, category and status, it overrides the existing one</para>
 /// </summary>
-public class MetricOption
+public class MetricChartOption
 {
     /// <summary>
-    /// Set pie chart options for the specific display label, usually it is only the label, but if you use both category and status, the display label is made up of label and category, delimited by :
-    /// <para>Registering a new metric option with the same DisplayLabel will override previous registration</para>
+    /// MetricLabel is the same label you use when you invoke Meric.Inc("cache"), to then define the look & feel of that pie chart
+    /// <para>Register a MetricLabel as null to register a default look & feel for all pie charts</para>
+    /// <para>Registering the same MetricLabel again, will override the first one</para>
     /// </summary>
-    public string DisplayLabel;
+    public string MetricLabel;
 
     /// <summary>
     /// True to show animation upon loading pie chart metric UI

@@ -530,7 +530,7 @@ public static partial class Cache
             }
 
             if (EnablePrometheusConfig && License.Gold())
-                Metric.Inc("cache", "cache_exceptions");
+                Metric.Inc("cache", "cache_exception_thrown");
 
             throw ex;
         }

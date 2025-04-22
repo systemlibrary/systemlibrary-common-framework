@@ -91,6 +91,7 @@ static internal class JsonSerializerOptionsInstance
     {
         get
         {
+            // Note: cannot be a singleton, it crashes occasionally in high concurrency apps
             var options = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder,

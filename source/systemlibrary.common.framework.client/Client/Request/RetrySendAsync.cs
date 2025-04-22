@@ -89,11 +89,11 @@ partial class Client
 
                 var statusCodeLabel = (statusCode == 301 || statusCode == 302) ? statusCode.ToString() : "200";
 
-                Metric.Inc(options.UriLabel, status, statusCodeLabel);
+                Metric.Inc(options.UriLabel, status + ":" + statusCodeLabel);
             }
             else
             {
-                Metric.Inc(options.UriLabel, "failed", ((int)(response?.StatusCode ?? (HttpStatusCode)504)).ToString());
+                Metric.Inc(options.UriLabel, "failed:" + ((int)(response?.StatusCode ?? (HttpStatusCode)504)).ToString());
             }
         }
     }

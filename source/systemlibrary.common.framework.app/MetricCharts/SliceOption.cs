@@ -3,14 +3,9 @@
 public class SliceOption
 {
     /// <summary>
-    /// Optional: if you call Metric.Inc with a category, specify the same category here to order and color it
+    /// Use the same segment text that you used when invoking Metric.Inc() to color and order it, or set segment to null to set a default color in the pie chart
     /// </summary>
-    public string Category;
-
-    /// <summary>
-    /// Optional: if you call Metric.Inc with a status, specify the same status here to order and color it
-    /// </summary>
-    public string Status;
+    public string Segment;
 
     /// <summary>
     /// Background color for the slice, pass either rgb, hex or a default predefined color name

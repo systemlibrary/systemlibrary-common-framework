@@ -1,8 +1,4 @@
-﻿using System.Collections.Concurrent;
-
-using Prometheus;
-
-namespace SystemLibrary.Common.Framework;
+﻿namespace SystemLibrary.Common.Framework;
 
 internal class MetricOptionResponse
 {
