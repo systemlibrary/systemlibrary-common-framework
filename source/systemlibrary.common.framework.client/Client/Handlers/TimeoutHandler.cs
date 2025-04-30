@@ -5,6 +5,14 @@ using System.Threading.Tasks;
 
 namespace SystemLibrary.Common.Framework.App;
 
+// TODO:
+// Add two more optional Handlers per client:
+// CacheHandler, if added it checks ETag, Cache policy headers and if you send something with a cache header and it exists
+// in IMemoryCache (I probably use the IMemoryCache instance here, not my own Cache.cs), we will see... a simplistic cache
+
+// RequestLimitHandler, defined a maximum requests per minute of 120, so max 2 per seconds,
+// optional to plugin and can modify the maximum requests per minute variable
+
 partial class Client
 {
     class TimeoutHandler : DelegatingHandler

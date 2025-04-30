@@ -153,9 +153,9 @@ public partial class Client
     /// var response = new Client().Get&lt;string&gt;("https://www.systemlibrary.com/get", data, ContentType.json, 2000);
     /// </code>
     /// </example>
-    public ClientResponse<T> Get<T>(string url, object payload, ContentType contentType = ContentType.Auto, IDictionary<string, string> headers = null, int timeoutMilliseconds = DefaultTimeout, JsonSerializerOptions jsonSerializerOptions = default, CancellationToken cancellationToken = default, Func<string, T> deserialize = null)
+    public ClientResponse<T> Get<T>(string url, ContentType contentType = ContentType.Auto, IDictionary<string, string> headers = null, int timeoutMilliseconds = DefaultTimeout,JsonSerializerOptions jsonSerializerOptions = default, object payload = null, CancellationToken cancellationToken = default, Func<string, T> deserialize = null)
     {
-        return GetAsync<T>(url, payload, contentType, headers, timeoutMilliseconds, jsonSerializerOptions, cancellationToken, deserialize)
+        return GetAsync<T>(url, contentType, headers, timeoutMilliseconds, jsonSerializerOptions, payload, cancellationToken, deserialize)
             .ConfigureAwait(false)
             .GetAwaiter()
             .GetResult();
@@ -170,26 +170,10 @@ public partial class Client
     /// var response = new Client().Get&lt;string&gt;("https://www.systemlibrary.com/get", data, ContentType.json, 2000);
     /// </code>
     /// </example>
-    public async Task<ClientResponse<T>> GetAsync<T>(string url, object payload, ContentType contentType = ContentType.Auto, IDictionary<string, string> headers = null, int timeoutMilliseconds = DefaultTimeout, JsonSerializerOptions jsonSerializerOptions = default, CancellationToken cancellationToken = default, Func<string, T> deserialize = null)
+    public async Task<ClientResponse<T>> GetAsync<T>(string url, ContentType contentType = ContentType.Auto, IDictionary<string, string> headers = null, int timeoutMilliseconds = DefaultTimeout, JsonSerializerOptions jsonSerializerOptions = default, object payload = null, CancellationToken cancellationToken = default, Func<string, T> deserialize = null)
     {
         return await SendAsync<T>(HttpMethod.Get, url, payload, contentType, timeoutMilliseconds, headers, jsonSerializerOptions, cancellationToken, deserialize)
             .ConfigureAwait(false);
-    }
-
-    /// <summary>
-    /// Send a HTTP GET request
-    /// </summary>
-    /// <example>
-    /// <code>
-    /// var response = new Client().Get&lt;string&gt;("https://www.systemlibrary.com/get", ContentType.json, 2000);
-    /// </code>
-    /// </example>
-    public ClientResponse<T> Get<T>(string url, ContentType contentType = ContentType.Auto, IDictionary<string, string> headers = null, int timeoutMilliseconds = DefaultTimeout, JsonSerializerOptions jsonSerializerOptions = default, CancellationToken cancellationToken = default, Func<string, T> deserialize = null)
-    {
-        return GetAsync<T>(url, contentType, headers, timeoutMilliseconds, jsonSerializerOptions, cancellationToken, deserialize)
-            .ConfigureAwait(false)
-            .GetAwaiter()
-            .GetResult();
     }
 
     /// <summary>

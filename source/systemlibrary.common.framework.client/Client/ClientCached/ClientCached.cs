@@ -24,7 +24,7 @@ partial class Client
         {
             var uri = options.Uri;
 
-            var key = $"CommonWeb{nameof(Client)}{nameof(GetClient)}{uri.Scheme.ToLowerInvariant()}{uri.Host.ToLowerInvariant()}{uri.Port}{options.GetTimeout()}{options.IgnoreSslErrors}";
+            var key = $"{uri.Host.ToLowerInvariant()}{uri.Port}{options.GetTimeout()}{options.IgnoreSslErrors}Slcf{nameof(Client)}{nameof(GetClient)}{uri.Scheme.ToLowerInvariant()}";
 
             if (options.ForceNewClient)
             {
@@ -53,14 +53,23 @@ partial class Client
         {
             var socketsHandler = new SocketsHttpHandler
             {
-                // Each http client's connection is reused for 280 seconds (slightly less than 5 min)
+                MaxConnectionsPerServer = 4096,
+
+                // TODO: A policy to auto decompress or not, both in appSettings and per client
+                //AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli,
+
+                // Each http client's connection is reused for 540 seconds - 9 minutes
                 // once reached, the connection is reestablished on next request no matter what
-                PooledConnectionLifetime = TimeSpan.FromSeconds(280),
-                // If a connection is idle for 55 seconds (slightly less than 1 min) it is removed
-                PooledConnectionIdleTimeout = TimeSpan.FromSeconds(55),
-                // Establish TLS/a con within 16 seconds, else we retry at least once which adds up to 36 seconds
-                ConnectTimeout = TimeSpan.FromSeconds(18),
+                PooledConnectionLifetime = TimeSpan.FromSeconds(540),
+                // If a connection is idle for 40 seconds it is removed
+                PooledConnectionIdleTimeout = TimeSpan.FromSeconds(40),
+                // Establish TLS/a con within 13 seconds, else we retry at least once which adds up to 26 seconds
+                ConnectTimeout = TimeSpan.FromSeconds(13),
+
+                // TODO: A flag to "useRedirectPolicy" to true or false
                 AllowAutoRedirect = true,
+                EnableMultipleHttp2Connections = true,
+                UseProxy = false
             };
 
             if (options.IgnoreSslErrors)
@@ -79,6 +88,7 @@ partial class Client
                     }
                 };
             }
+
 
             var timeoutHandler = new TimeoutHandler(options.GetTimeout(), socketsHandler);
 
@@ -125,7 +135,9 @@ partial class Client
                     }
                 }
             }
+
             Debug.Log("New client " + key);
+
             return client;
         }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 
 using SystemLibrary.Common.Framework.Extensions;
 
@@ -51,7 +52,12 @@ public static partial class IApplicationBuilderExtensions
             app.UseDeveloperExceptionPage();
 
         if (options.UseForwardedHeaders)
-            app.UseForwardedHeaders();
+        {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
+            });
+        }
 
         if (options.UseHttpsRedirection)
             app.UseHttpsRedirection();

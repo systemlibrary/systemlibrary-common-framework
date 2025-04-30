@@ -46,7 +46,7 @@ class HttpBin : Client
 
     public ClientResponse<string> Get_Retry_Request_Against_Firewall(CancellationToken cancellationToken = default)
     {
-        return Get<string>(firewallClientUrl, ContentType.json, null, 200, null, cancellationToken);
+        return Get<string>(firewallClientUrl, ContentType.json, null, 200, null, null, cancellationToken);
     }
 
     public ClientResponse<string> Post_Retry_Request_Against_Firewall()
@@ -56,7 +56,7 @@ class HttpBin : Client
 
     public ClientResponse<string> GetWithCancellationToken(CancellationToken token)
     {
-        return Get<string>(clientUrl + "/delay/2", ContentType.json, null, 4000, null, token);
+        return Get<string>(clientUrl + "/delay/2", ContentType.json, null, 4000, null, null, token);
     }
 
     public ClientResponse<string> GetWithTimeout(int timeoutMilliseconds, int sleep = 3)

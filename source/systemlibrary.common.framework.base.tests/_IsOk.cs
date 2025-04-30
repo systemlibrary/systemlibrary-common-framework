@@ -36,15 +36,19 @@ partial class BaseTest
         if (value is string s)
         {
             if (s.IsNot()) return true;
+
             var enumKeys = Enum.GetValues<HttpStatusCode>()
                    .Cast<HttpStatusCode>()
                    .Where(status => (int)status >= 400 && (int)status != 500);
 
             foreach (var enumKey in enumKeys)
-                if (s.Contains(enumKey.ToString(), StringComparison.OrdinalIgnoreCase))
+                if (s.Contains(enumKey.ToString(), StringComparison.Ordinal))
                     return true;
 
-            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid ", "Invalid:", "Error ", "Exception ", "Error:", "Exception:", "status\": 403", "status\": 404"))
+            if (s.ContainsAny(" Exception ", "\nException ", " Error ", "\nError ", " Invalid ", "\nInvalid "))
+                return true;
+
+            if (s.ContainsAny(StringComparison.OrdinalIgnoreCase, "Invalid:", "Error:", "Exception:", "status\": 403", "status\": 404"))
                 return true;
 
             return false;

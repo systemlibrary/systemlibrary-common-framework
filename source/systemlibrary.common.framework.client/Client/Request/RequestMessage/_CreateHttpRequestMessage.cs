@@ -1,4 +1,6 @@
-﻿namespace SystemLibrary.Common.Framework.App;
+﻿using System.Net;
+
+namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {

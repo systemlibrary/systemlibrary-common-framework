@@ -7,7 +7,7 @@ namespace SystemLibrary.Common.Framework.Attributes;
 /// <para>Useful when you want to hide productId's or similar in Frontend part of your application. Avoids having int's or ID's in the frontend, for attackers wanting to brute force endpoints taking INTs</para>
 /// </summary>
 /// <remarks>
-/// Does not support all property/field types, but at least supports: int, uint, int64, uint64 and string types
+/// Does not support all property/field types, but at least supports: int, int16, uint, int64, uint64 and string types
 /// </remarks>
 /// <example>
 /// Model.cs:

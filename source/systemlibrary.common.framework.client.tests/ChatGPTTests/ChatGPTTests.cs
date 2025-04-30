@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -47,7 +46,7 @@ public class ChatGPTTests : BaseTest
     [TestMethod]
     public void Get_NoPayload_DefaultsToJson()
     {
-        var result = _client.Get<string>("https://httpbin.org/get", null);
+        var result = _client.Get<string>("https://httpbin.org/get");
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -57,7 +56,7 @@ public class ChatGPTTests : BaseTest
     {
         var payload = new { Name = "John Kusack", Age = 30 };
 
-        var result = _client.Get<string>("https://postman-echo.com/get", payload);
+        var result = _client.Get<string>("https://postman-echo.com/get", payload: payload);
 
         Assert.IsTrue(result.Data.Contains("John Kusack"));
     }
@@ -67,7 +66,7 @@ public class ChatGPTTests : BaseTest
     {
         var payload = new Dictionary<string, string> { { "key", "value" } };
 
-        var result = _client.Get<string>("https://postman-echo.com/get", payload, ContentType.xwwwformUrlEncoded);
+        var result = _client.Get<string>("https://postman-echo.com/get", ContentType.xwwwformUrlEncoded, payload: payload);
 
         Assert.IsTrue(result.Data.Contains("value"));
     }
@@ -98,7 +97,7 @@ public class ChatGPTTests : BaseTest
     {
         var headers = new Dictionary<string, string> { { "Authorization", "Bearer token" } };
 
-        var result = _client.Get<string>("https://httpbin.org/get", null, ContentType.Auto, headers);
+        var result = _client.Get<string>("https://httpbin.org/get", ContentType.Auto, headers);
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -106,7 +105,7 @@ public class ChatGPTTests : BaseTest
     [TestMethod]
     public void Get_WithTimeout()
     {
-        var result = _client.Get<string>("https://httpbin.org/get", null, ContentType.Auto, null, 5000);
+        var result = _client.Get<string>("https://httpbin.org/get", ContentType.Auto, null, 5000);
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -121,7 +120,7 @@ public class ChatGPTTests : BaseTest
             return JsonSerializer.Deserialize<dynamic>(json);
         };
 
-        var result = _client.Get<dynamic>("https://httpbin.org/get", null, ContentType.Auto, null, DefaultTimeout, null, default, deserialize);
+        var result = _client.Get<dynamic>("https://httpbin.org/get", ContentType.Auto, null, DefaultTimeout, null, null, default, deserialize);
 
         Assert.IsTrue(invoked, "Deserialize not invoked");
         Assert.IsTrue(result.IsSuccess);
@@ -142,7 +141,7 @@ public class ChatGPTTests : BaseTest
         Assert.IsTrue(invoked, "Deserialize not invoked");
         Assert.IsTrue(result.IsSuccess);
     }
-    
+
 
     [TestMethod]
     public async Task Get_WithBytePayload_ReturnsExpectedResponse()

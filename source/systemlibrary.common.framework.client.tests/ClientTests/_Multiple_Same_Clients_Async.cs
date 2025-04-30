@@ -58,7 +58,7 @@ partial class ClientTests
 
         var client = new Client(throwOnUnsuccessful: false);
 
-        var response = client.Get<string>(url, payload);
+        var response = client.Get<string>(url, payload: payload);
 
         Assert.IsTrue(response?.Data?.Contains("\"lastName\": \"World 2\"") == true, "Error: response is wrong " + response?.Data);
     }
@@ -93,7 +93,7 @@ partial class ClientTests
 
         var client = new Client(throwOnUnsuccessful: false);
 
-        var response = client.Get<string>(url, payload);
+        var response = client.Get<string>(url, payload: payload);
 
         Assert.IsTrue(response?.Data?.Contains("\"data\": \"{\\\"file\\\":\\\"hello.txt\\\",\\\"hello\\\":\\\"world\\\"}\"") == true, "Error: response is wrong " + response?.Data);
     }
@@ -110,7 +110,7 @@ partial class ClientTests
 
         var client = new Client(throwOnUnsuccessful: false);
 
-        var response = client.Get<string>(url, payload);
+        var response = client.Get<string>(url, payload: payload);
 
         Assert.IsTrue(response?.Data?.Contains("\"data\": \"{\\\"file\\\":\\\"hello.txt\\\",\\\"hello\\\":\\\"world\\\"}\"") == true, "Error: response is wrong " + response?.Data);
     }

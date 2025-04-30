@@ -21,8 +21,12 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.24
-- Metrics: /metrics/ui performance boosted [Gold Tier] (fix)
+- 8.0.0.25
+- StringExtensions: Get, Post, Put, Delete wrapped over Client to easily 'fluently' invoke http requests (feature)
+- Client pooled connection doubled from 4.5 min to 9 minutes (optimize)
+- Client connect timeout reduced to 13 from 16, but theres always a retry so making it up to 26 sec (optimize)
+- Client MaxConnectionsPerServer set to 4096 so one public client cannot exhaust all ports (feature)
+- Client IdleConnection is set to 40s down from 55s (optimize)
 
 #### Version history 
 - View git history of this file if interested
