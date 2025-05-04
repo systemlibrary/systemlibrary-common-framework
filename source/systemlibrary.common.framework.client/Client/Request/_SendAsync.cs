@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace SystemLibrary.Common.Framework.App;
+﻿namespace SystemLibrary.Common.Framework.App;
 
 partial class Client
 {

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-using SystemLibrary.Common.Framework.Extensions;
+﻿using SystemLibrary.Common.Framework.Extensions;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -10,6 +8,8 @@ partial class Client
     {
         static void SetRequestMessageHeaders(HttpRequestMessage message, RequestOptions options, ContentType contentType)
         {
+            message.Headers.ExpectContinue = options.ExpectContinue;
+
             AddHeaders(message, options.Headers);
 
             message.Headers.TryAddWithoutValidation("Connection", "Keep-Alive");

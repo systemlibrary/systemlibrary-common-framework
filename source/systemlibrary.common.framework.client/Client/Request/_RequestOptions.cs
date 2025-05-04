@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading;
+﻿using System.Text.Json;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -22,6 +18,8 @@ partial class Client
         public bool ForceNewClient;
         public bool UseRetryPolicy;
         public bool IgnoreSslErrors;
+        public bool ExpectContinue;
+        public bool UseAutomaticDecompression;
         public CancellationToken CancellationToken;
         public ContentType ContentType;
         public int RetryIndex;

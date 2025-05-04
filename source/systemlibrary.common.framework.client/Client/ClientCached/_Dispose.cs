@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using SystemLibrary.Common.Framework.Extensions;
+﻿using SystemLibrary.Common.Framework.Extensions;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -14,13 +11,14 @@ partial class Client
 
         static void Dispose()
         {
+            if (DateTime.Now < Next) return;
+
             Task.Run(() => DisposeQueueInterval());
         }
 
         static void DisposeQueueInterval()
         {
-            if (DateTime.Now < Next)
-                return;
+            if (DateTime.Now < Next) return;
 
             var keys = DisposeQueue.Keys;
 
@@ -28,10 +26,9 @@ partial class Client
 
             lock (DisposeLock)
             {
-                if (DateTime.Now < Next)
-                    return;
+                if (DateTime.Now < Next) return;
 
-                Next = DateTime.Now.AddSeconds(30);
+                Next = DateTime.Now.AddSeconds(45);
             }
 
             Debug.Log("Check dispose queue for abandoned clients");

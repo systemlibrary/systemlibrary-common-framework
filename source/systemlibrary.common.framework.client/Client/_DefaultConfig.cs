@@ -2,6 +2,7 @@
 
 partial class Client
 {
+    // NOTE: These default are obsolete - or uses as fallback is null or anything strange is configured? Reconsider removal to ease maintenance
     internal const int DefaultTimeout = 40001;
     internal const int DefaultRetryTimeout = 10000;
     internal const bool DefaultThrowOnUnsuccessful = true;
@@ -9,7 +10,6 @@ partial class Client
     internal const bool DefaultUseRetryPolicy = true;
     internal const bool DefaultUseRequestBreakerPolicy = false;
     internal const int DefaultClientCacheDuration = 1200; // 20 minutes
-
 
     static int? _TimeoutConfig;
     static int TimeoutConfig
@@ -80,6 +80,34 @@ partial class Client
             return _UseRetryPolicyConfig.Value;
         }
     }
+
+    //static bool? _UseAutomaticDecompressionPolicyConfig;
+    static bool UseAutomaticDecompressionPolicyConfig = AppSettings.Current.SystemLibraryCommonFramework.Client.UseAutomaticDecompression;
+    //{
+    //    get
+    //    {
+    //        if (_UseAutomaticDecompressionPolicyConfig == null)
+    //            _UseAutomaticDecompressionPolicyConfig = 
+
+    //        return _UseAutomaticDecompressionPolicyConfig.Value;
+    //    }
+    //}
+
+    // NOTE: AppSettings.Current... should never be null and it is default set to the frameworks default values
+    // TODO: Clean up the rest, removing a layer of configurations and name it "Policy" perhaps...
+    // NOTE 2: Trying the optimized version just storing the flag statically instead of through a get property with lazy loaded...
+    // NOTE 3: Else the most optimized version is to use return _ExpectContinuePolicy ??= AppSettings.Current.SystemLibraryCommonFramework.Client.ExpectContinue;
+    //static bool? _ExpectContinuePolicy;
+    static bool ExpectContinuePolicy = AppSettings.Current.SystemLibraryCommonFramework.Client.ExpectContinue;
+    //{
+    //    get
+    //    {
+    //        if (_ExpectContinuePolicy == null)
+    //            _ExpectContinuePolicy = AppSettings.Current.SystemLibraryCommonFramework.Client.ExpectContinue;
+
+    //        return _ExpectContinuePolicy.Value;
+    //    }
+    //}
 
     static bool? _ThrowOnUnsuccessfulConfig;
     static bool ThrowOnUnsuccessfulConfig

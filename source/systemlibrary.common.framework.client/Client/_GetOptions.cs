@@ -22,8 +22,10 @@ partial class Client
             ForceNewClient = false,
 
             CancellationToken = cancellationToken,
-
+            ExpectContinue = ExpectContinue,
             UseRetryPolicy = UseRetryPolicy,
+            UseAutomaticDecompression = UseAutomaticDecompression,
+
             IgnoreSslErrors = IgnoreSslErrors,
 
             Timeout = GetTimeout(timeout),
@@ -33,7 +35,7 @@ partial class Client
 
     int GetTimeout(int timeout)
     {
-        // Not passed in a custom one 
+        // Not passed in a custom one so use the Client.Timeout from the client instance
         // Edge case: it might be passed in exactly the same so that would change the timeout
         if (timeout == DefaultTimeout)
         {

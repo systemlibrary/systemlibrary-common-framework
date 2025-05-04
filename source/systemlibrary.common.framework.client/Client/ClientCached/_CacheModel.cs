@@ -13,7 +13,14 @@ partial class Client
 
         public void Dispose()
         {
-            CachedClient?.Dispose();
+            try
+            {
+                CachedClient?.Dispose();
+            }
+            catch
+            {
+                // Swallow
+            }
             CachedClient = null;
         }
     }

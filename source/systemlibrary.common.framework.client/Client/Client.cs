@@ -104,6 +104,8 @@ namespace SystemLibrary.Common.Framework.App;
 public partial class Client
 {
     bool UseRetryPolicy;
+    bool UseAutomaticDecompression;
+    bool ExpectContinue;
     bool IgnoreSslErrors;
     bool ThrowOnUnsuccessful;
     int Timeout;
@@ -113,22 +115,27 @@ public partial class Client
     /// <summary>
     /// Create a new client
     /// </summary>
-    /// <param name="useRetryPolicy">Will retry 404 once, and adds one more retry with half retry-timeout for 502 and 504</param>
-    /// <param name="ignoreSslErrors">Ignore some common SSL errors that occurs, an expired or in-error SSL cert is still used to encrypt data</param>
-    /// <param name="timeout">Override default timeout for this Client</param>
-    /// <param name="retryTimeout">Override default retry timeout for this Client</param>
+    /// <param name="useRetryPolicy">Override default from appSettings</param>
+    /// <param name="ignoreSslErrors">Override default from appSettings</param>
+    /// <param name="timeout">Override default from appSettings</param>
+    /// <param name="retryTimeout">Override default from appSettings</param>
     /// <param name="throwOnUnsuccessful">Override default from appSettings</param>
     /// <param name="useRequestBreakerPolicy">Override default from appSettings</param>
+    /// <param name="useAutomaticDecompression">Override default from appSettings</param>
     public Client(
         int? timeout = null,
         bool? useRetryPolicy = null,
         bool? ignoreSslErrors = null,
         int? retryTimeout = null,
         bool? useRequestBreakerPolicy = null,
-        bool? throwOnUnsuccessful = null
+        bool? throwOnUnsuccessful = null,
+        bool? useAutomaticDecompression = null,
+        bool? expectContinue = null
         )
     {
         UseRetryPolicy = useRetryPolicy ?? UseRetryPolicyConfig;
+        UseAutomaticDecompression = useAutomaticDecompression ?? UseAutomaticDecompressionPolicyConfig;
+        ExpectContinue = expectContinue ?? ExpectContinuePolicy;
         IgnoreSslErrors = ignoreSslErrors ?? IgnoreSslErrorsConfig;
         ThrowOnUnsuccessful = throwOnUnsuccessful ?? ThrowOnUnsuccessfulConfig;
         UseRequestBreakerPolicy = useRequestBreakerPolicy ?? UseRequestBreakerPolicyConfig;

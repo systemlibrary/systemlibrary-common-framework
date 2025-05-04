@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Net.Sockets;
 
 namespace SystemLibrary.Common.Framework.App;
@@ -27,7 +25,7 @@ partial class Client
             if (ex != null)
             {
                 // A connection is forcibly closed by the remote host, for some reason, lets retry
-                // It might be a valid forcibly closage, as in too many requests so remote host denies us, but we only retry 1 time
+                // It might be a valid closed by force, as in too many requests, so remote host denies us, but we only retry 1 time
                 if (ex is HttpRequestException || ex is SocketException)
                 {
                     // One retry only
@@ -60,7 +58,7 @@ partial class Client
             HttpMethod method = options.Method;
 
             return
-                IsResponseEligibleForRetry(response, method) &&
+                IsResponseEligibleForRetry(response) &&
                 IsRequestEligibleForRetry(options, method, response?.StatusCode, retry);
         }
 
@@ -71,8 +69,8 @@ partial class Client
                 // FileRequest: 0 retries on 500
                 if (options.Url.IsFile()) return false;
 
-                // GET POST: 1 retry on 500
-                return (method == HttpMethod.Get || method == HttpMethod.Post) && retry == 0;
+                // GET: 1 retry on 500
+                return (method == HttpMethod.Get) && retry == 0;
             }
 
             if (responseStatusCode == HttpStatusCode.Unauthorized)
@@ -102,7 +100,7 @@ partial class Client
             return retry == 0;
         }
 
-        static bool IsResponseEligibleForRetry(HttpResponseMessage response, HttpMethod method)
+        static bool IsResponseEligibleForRetry(HttpResponseMessage response)
         {
             var statusCode = response?.StatusCode;
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Net;
 
 namespace SystemLibrary.Common.Framework.App;
 
@@ -53,24 +54,32 @@ partial class Client
         {
             var socketsHandler = new SocketsHttpHandler
             {
+                Expect100ContinueTimeout = TimeSpan.FromMilliseconds(200),
+                MaxResponseHeadersLength = 128,
                 MaxConnectionsPerServer = 4096,
+                // TODO: Figure out if this is nonsense or not, MS by default has is disabled
+                //KeepAlivePingDelay = TimeSpan.FromSeconds(55),
+                //KeepAlivePingTimeout = TimeSpan.FromSeconds(10),
+                //KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests,
 
-                // TODO: A policy to auto decompress or not, both in appSettings and per client
-                //AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli,
 
                 // Each http client's connection is reused for 540 seconds - 9 minutes
                 // once reached, the connection is reestablished on next request no matter what
                 PooledConnectionLifetime = TimeSpan.FromSeconds(540),
                 // If a connection is idle for 40 seconds it is removed
-                PooledConnectionIdleTimeout = TimeSpan.FromSeconds(40),
+                PooledConnectionIdleTimeout = TimeSpan.FromSeconds(29),
                 // Establish TLS/a con within 13 seconds, else we retry at least once which adds up to 26 seconds
                 ConnectTimeout = TimeSpan.FromSeconds(13),
 
                 // TODO: A flag to "useRedirectPolicy" to true or false
                 AllowAutoRedirect = true,
                 EnableMultipleHttp2Connections = true,
-                UseProxy = false
+                UseCookies = true,
+                UseProxy = false,
             };
+
+            if (options.UseAutomaticDecompression)
+                socketsHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli;
 
             if (options.IgnoreSslErrors)
             {
@@ -82,13 +91,12 @@ partial class Client
                             errors == System.Net.Security.SslPolicyErrors.RemoteCertificateNameMismatch ||
                             errors == System.Net.Security.SslPolicyErrors.RemoteCertificateNotAvailable)
                         {
-                            Log.Warning("Client: SslPolicy error occured, " + errors + ". Usually invalid or expired cert. IgnoreSslErrors is set to 'true' so continuing...");
+                            Log.Warning("[Client] A ssl policy error occured, " + errors + ". Usually invalid or expired cert. IgnoreSslErrors is set to 'true', continuing...");
                         }
                         return true;
                     }
                 };
             }
-
 
             var timeoutHandler = new TimeoutHandler(options.GetTimeout(), socketsHandler);
 
@@ -155,7 +163,7 @@ partial class Client
                 if (cachedModel != null)
                 {
                     cachedModel.Expires = DateTime.Now.AddMilliseconds(timeoutMilliseconds + 600000);
-                    DisposeQueue.TryAdd(key + DateTime.Now.ToString("HH:mm:ss.fffff") + "#" + Randomness.Int() + Randomness.String(6), cachedModel);
+                    DisposeQueue.TryAdd(key + DateTime.Now.ToString("HH:mm:ss.fffff") + Randomness.String(10), cachedModel);
                     Debug.Log("Moved client to dispose queue: " + key);
                 }
             }
