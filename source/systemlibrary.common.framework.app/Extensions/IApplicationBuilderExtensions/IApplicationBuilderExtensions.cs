@@ -73,6 +73,9 @@ public static partial class IApplicationBuilderExtensions
         if (options.UseAuthentication)
             app.UseAuthentication();
 
+        if (options.UseResponseCaching)
+            app.UseResponseCaching();
+
         if (options.UseOutputCache)
             app.UseOutputCache();
 

@@ -8,3 +8,6 @@ You implement `LogWriter : ILogWriter` to control where the message is stored.
 `Log.Error()` generates a log message and calls your `LogWriter` to store it.  
 
 If `ILogWriter` is not registered, `Log.Dump` is used (not recommended for production due to performance and disk usage).
+
+
+# Default Configurations

@@ -23,7 +23,7 @@ Cache provides application-level caching with auto-generated cache keys that dif
         "cache": {
             "duration": 180,
             "fallbackDuration": 300,    // [Gold Tier] Set to 0 to disable
-            "containerSizeLimit": 40000
+            "containerSizeLimit": 40001
         }
     }
 }

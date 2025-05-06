@@ -21,10 +21,8 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.26
-- Client: ExpectContinue option added, defaults to false (new)
-- Client: UseAutomaticDecompression option added, defaults to true (new)
- 
+- 8.0.0.27
+- ResponseCache middleware added if option "UseResponseCache" is set (fix)
 
 #### Version history 
 - View git history of this file if interested
