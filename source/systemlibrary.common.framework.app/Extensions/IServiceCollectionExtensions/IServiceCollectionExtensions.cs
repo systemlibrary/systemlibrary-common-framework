@@ -71,7 +71,7 @@ public static partial class IServiceCollectionExtensions
         options ??= new FrameworkOptions();
 
         CryptationKeyDirectory.Path = options.EncKeyDir;
-        
+
         serviceCollection.AddCommonServices();
 
         if (options.UseExtendedEnumModelConverter)
@@ -104,23 +104,11 @@ public static partial class IServiceCollectionExtensions
         if (options.UseBrotliResponseCompression)
             serviceCollection = serviceCollection.UseBrotliCompression();
 
-        if (options.UseOutputCache)
-            serviceCollection.AddOutputCache(opt1 =>
-            {
-                opt1.SizeLimit = 2500L * 1024 * 1024;       //2.5GB
-                opt1.MaximumBodySize = 8 * 1024 * 1024;     //8MB
-                opt1.UseCaseSensitivePaths = false;
-            });
+        serviceCollection = serviceCollection.AddMemoryCache();
 
-        if (options.UseResponseCaching)
-        {
-            serviceCollection.AddResponseCaching(opt2 =>
-            {
-                opt2.SizeLimit = 2500L * 1024 * 1024;       //2.5GB
-                opt2.MaximumBodySize = 8 * 1024 * 1024;     //8MB
-                opt2.UseCaseSensitivePaths = false;
-            });
-        }
+        serviceCollection = serviceCollection.UseOutputCache(options);
+
+        serviceCollection = serviceCollection.UseResponseCaching(options);
 
         serviceCollection.UseDataProtectionPolicy(options);
 

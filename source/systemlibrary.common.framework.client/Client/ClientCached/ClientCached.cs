@@ -76,6 +76,7 @@ partial class Client
                 EnableMultipleHttp2Connections = true,
                 UseCookies = true,
                 UseProxy = false,
+                Proxy = null,
             };
 
             if (options.UseAutomaticDecompression)

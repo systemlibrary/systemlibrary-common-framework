@@ -19,8 +19,12 @@ partial class IServiceCollectionExtensions
 
                 opt.OutputFormatters.Add(new OutputContentTypesSupported());
 
+                opt.Filters.AddService(typeof(OutputCacheTagFilter));
+
                 if (options.UseControllers)
+                {
                     opt.Conventions.Add(new UseApiControllersRouting());
+                }
             });
         }
 
@@ -28,6 +32,7 @@ partial class IServiceCollectionExtensions
         {
             return services.AddControllers(options =>
             {
+                options.Filters.AddService(typeof(OutputCacheTagFilter));
                 options.Conventions.Add(new UseApiControllersRouting());
             });
         }

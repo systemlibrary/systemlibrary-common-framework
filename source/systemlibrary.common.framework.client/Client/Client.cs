@@ -34,8 +34,10 @@ namespace SystemLibrary.Common.Framework.App;
 ///   "timeout": 40001,
 ///   "retryTimeout": 10000, // The second retry will use half this duration, which is only used if useRetryPolicy is true
 ///   "ignoreSslErrors": true,
-///   "useRetryPolicy": true, // one retry on 502 and 504 is GET/POST, cannot be turned off
 ///   "throwOnUnsuccessful": true,
+///   "expectContinue": false,
+///   "useRetryPolicy": true, // one retry on 502 and 504 is GET/POST, cannot be turned off
+///   "useAutomaticDecompression": true,
 ///   "useRequestBreakerPolicy": false,
 ///   "clientCacheDuration": 1200
 /// }

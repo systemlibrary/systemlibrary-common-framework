@@ -21,8 +21,9 @@ Framework with default settings and classes for every &gt;= .NET 8 application
 - &gt;= .NET 8
 
 ## Latest Release Notes
-- 8.0.0.27
-- ResponseCache middleware added if option "UseResponseCache" is set (fix)
+- 8.0.0.28
+- OutputCachePolicies added through CachePolicy enum (feature)
+- Client: proxy is set to null to shave off a few ms (optimization)
 
 #### Version history 
 - View git history of this file if interested

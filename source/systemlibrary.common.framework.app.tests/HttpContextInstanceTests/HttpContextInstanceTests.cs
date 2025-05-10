@@ -79,7 +79,7 @@ public class HttpContextInstanceTests : BaseTest
         {
             if (results[i] == null) continue;
             c++;
-            Assert.IsTrue(results[i].Contains("?username=User" + i + "|?username=User" + i), "Error at " + i + " result is " + results[i]);
+            Assert.IsTrue(results[i].Contains("?username=User" + i + "|?username=User" + i), "Error at " + i + " result is " + results[i] + " Expected " + "?username=User" + i + "|?username=User" + i);
         }
         Assert.IsTrue(results.Length == c, "Too few " + c + " vs " + results.Length);
         Assert.IsTrue(c > 10 && c == tasks.Length, "Too few: " + c);

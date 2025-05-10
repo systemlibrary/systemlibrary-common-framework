@@ -95,7 +95,9 @@ public class Startup
 			  "clientCacheDuration": 1200,
 			  "ignoreSslErrors": true,
 			  "throwOnUnsuccessful": true,
+			  "expectContinue": false,
 			  "useRetryPolicy": true,
+			  "useAutomaticDecompression": true,
 			  "useRequestBreakerPolicy": false // [Gold Tier]
 			},
 
