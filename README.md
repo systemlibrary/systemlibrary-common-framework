@@ -124,7 +124,7 @@ View git history of this file if interested
 [![Latest version](https://img.shields.io/nuget/v/SystemLibrary.Common.Framework)](https://www.nuget.org/packages/SystemLibrary.Common.Framework)
 
 ## License
-Free with Tiered Pricing for additional features
+Free with Tiered Pricing for additional features at https://www.systemlibrary.com/
 
 ### Dependencies
 - [Chart.js](https://github.com/chartjs/Chart.js), licensed under the MIT License.
