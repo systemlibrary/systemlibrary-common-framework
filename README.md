@@ -108,8 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.3.0.4
-- License, invalid but still local environments bypasses all license checks (fix)
+- 8.3.0.6
+- /docs/ endpoints with {} not duplicating action name (fix)
 
 #### Version history 
 View git history of this file if interested
