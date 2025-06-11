@@ -108,8 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.3.0.6
-- /docs/ endpoints with {} not duplicating action name (fix)
+- 8.3.0.7
+- GetCompressedKey - hashing the last and first char too (bug)
 
 #### Version history 
 View git history of this file if interested
