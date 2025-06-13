@@ -108,8 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.3.0.7
-- GetCompressedKey - hashing the last and first char too (bug)
+- 8.3.0.8
+- GetCompressedKey - less CPU cycles and memory usage per invocation, and fingerprints in large texts uses more samples (optimized)
 
 #### Version history 
 View git history of this file if interested
