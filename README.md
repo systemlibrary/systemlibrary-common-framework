@@ -108,8 +108,10 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.3.0.8
-- GetCompressedKey - less CPU cycles and memory usage per invocation, and fingerprints in large texts uses more samples (optimized)
+- 8.4.0.1
+- SystemType: renamed KeyValueType, DictionaryType, IDictionaryType, IListType to the generic type, ex IListGenericType (breaking change)
+- SystemType: added IsAnonmousType (new)
+- SystemType: added DecimalType, FloatType and others (new)
 
 #### Version history 
 View git history of this file if interested
