@@ -108,10 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.1
-- SystemType: renamed KeyValueType, DictionaryType, IDictionaryType, IListType to the generic type, ex IListGenericType (breaking change)
-- SystemType: added IsAnonmousType (new)
-- SystemType: added DecimalType, FloatType and others (new)
+- 8.4.0.2
+- Clock.Measure invoked the method once before clocking it (fix)
 
 #### Version history 
 View git history of this file if interested
