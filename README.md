@@ -108,8 +108,9 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.2
-- Clock.Measure invoked the method once before clocking it (fix)
+- 8.4.0.3
+- Metrics UI: title font size lowered and added a hover effect for long titles (fix)
+- Metrics UI: pie charts no longer duplicates stats, a lock mechanism is implemented (fix)
 
 #### Version history 
 View git history of this file if interested
