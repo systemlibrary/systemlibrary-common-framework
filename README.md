@@ -108,8 +108,10 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.6
-- License: Debug logs removed, DLLImport without extension works on linux containers (fix)
+- 8.4.0.7
+- Metrics: client metrics does not double count on failure and success, only one metric per client invocation (fix)
+- Metrics: returns plain/text on error so browsers on devices wont think its a downloadable file (fix)
+- Metrics: added one more request to the "total sum" as 6 requests sometimes all hits the same server (fix)
 
 #### Version history 
 View git history of this file if interested
