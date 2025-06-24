@@ -108,9 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.5
-- License: Preprocessor flags are not native to .NET, using no extension and cdecl call (fix)
-- IsTest now checks CI, Build and ContinousIntegration env names too (fix)
+- 8.4.0.6
+- License: Debug logs removed, DLLImport without extension works on linux containers (fix)
 
 #### Version history 
 View git history of this file if interested
