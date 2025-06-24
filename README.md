@@ -108,8 +108,9 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.4
-- License: license key file compiled with Zig and G++ for WIN64, WINARM, Linux64, LinuxARM and MACARM (fix)
+- 8.4.0.5
+- License: Preprocessor flags are not native to .NET, using no extension and cdecl call (fix)
+- IsTest now checks CI, Build and ContinousIntegration env names too (fix)
 
 #### Version history 
 View git history of this file if interested
