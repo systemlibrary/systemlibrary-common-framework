@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SystemLibrary.Common.Framework.App
+ </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SystemLibrary.Common.Framework.App
+ ">
+  
+
+    <link rel="shortcut icon" href="..//systemlibrary-common-framework/favicon.ico">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.vendor.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/main.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/custom.css">
+
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <script>
+      function display() {
+        var articles = document.querySelectorAll('article.hideonload');
+        if(articles && articles.length) {
+          for(var i = 0; i < articles.length; i++) {
+            if(articles[i].classList.contains('hideonload')) {
+              articles[i].classList.remove('hideonload');
+            }
+          }
+        }
+      }
+      setTimeout(display, 80);
+    </script>
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="..//systemlibrary-common-framework/index.html" onclick="return slcf__handleNavBrandClick(event)">
+                <img id="logo" class="svg" src="..//systemlibrary-common-framework/logo.png" alt="">
+                <span class="navbar-title">System Library Common Framework</span>
+              </a>
+              <script>
+              function slcf__handleNavBrandClick(e) {
+                if (e.altKey && window.history.length > 1) {
+                  e.preventDefault();
+                  history.back();
+                  return false;
+                }
+                return true;
+              }
+              </script>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+
+      <div id="custom-skipDocumentationFor" style="overflow: hidden;font-size: 1px;max-width: 1px; visibility: hidden; position: absolute; margin-left: -4000px;">
+        *.Benchmark*,*.Tests*,*.ApiTests*,*.BaseTest*,DelegateJsonConverter,CalleeCancelledRequestException,ClientResponse,ContentType,OutputCachePolicy
+      </div>
+
+      <div class="sidenav hide-when-search">
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <div class="sidetoggle collapse" id="sidetoggle">
+          <div id="sidetoc" class="hideonload"></div>
+        </div>
+      </div>
+
+      <script>
+        function sideTocShowOnLoad() {
+          var sidetoc = document.getElementById('sidetoc');
+          sidetoc.classList.remove('hideonload');
+        }
+
+        function hideLinksQueryBasedInToc() {
+          var skipDocumentationForContainer = document.getElementById('custom-skipDocumentationFor');
+          if (skipDocumentationForContainer) {
+            var innerHtml = skipDocumentationForContainer.innerHTML;
+
+            if (innerHtml && innerHtml.length > 1) {
+              var toc = document.getElementById('toc');
+              if (toc && toc.querySelector) {
+                var skipPatterns = innerHtml.split(',').map(x => x.trim()).filter(Boolean);
+
+                var links = toc.getElementsByTagName('a');
+                if (!links || links.length === 0) return;
+
+                for (var i = 0; i < links.length; i++) {
+                  var link = links[i];
+                  var path = link.pathname || '';
+                  var title = link.getAttribute('title') || '';
+
+                  for (var j = 0; j < skipPatterns.length; j++) {
+                    var pattern = skipPatterns[j];
+
+                    var matches = false;
+                    if (pattern.includes('*')) {
+                      var cleanPattern = pattern.replace(/\*/g, '');
+                      if (path.includes(cleanPattern)) matches = true;
+                    } else if (pattern.includes('.')) {
+                      if (path.startsWith('/' + pattern)) matches = true;
+                    } else {
+                      if (title.endsWith(pattern)) matches = true;
+                    }
+
+                    if (matches) {
+                      try {
+                        var parent = link.parentNode;
+                        if (parent && parent.remove) {
+                          var namespaceParent = parent.parentNode;
+                          parent.remove();
+
+                          if (namespaceParent && namespaceParent.classList.contains('level2')) {
+                            if (namespaceParent.children.length <= 1) {
+                              var nsGroup = namespaceParent.parentNode;
+                              if (nsGroup && nsGroup.remove) nsGroup.remove();
+                            }
+                          }
+                        }
+                      } catch (e) {
+                        console.warn("Error cleaning a TOC link:", e);
+                      }
+                      break; // stop checking once matched
+                    }
+                  }
+                }
+
+                if (typeof sideTocShowOnLoad === "function") sideTocShowOnLoad();
+              }
+            }
+          }
+        }
+
+        setTimeout(() => sideTocShowOnLoad(), 100);
+
+      </script>
+      <div class="article-row-container">
+        <div class="article row grid-right">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap hideonload" id="_content" data-uid="SystemLibrary.Common.Framework.App">
+
+  <h1 id="SystemLibrary_Common_Framework_App" data-uid="SystemLibrary.Common.Framework.App" class="text-break">SystemLibrary.Common.Framework.App
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.ActionContextInstance.html">ActionContextInstance</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.ActionContextInstance--description" class="namespace-summary-per-class"><p>An implementation of the 'old' thread safe singleton ActionContext we all know and love from .NET Framework</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.BaseApiController.html">BaseApiController</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.BaseApiController--description" class="namespace-summary-per-class"><p>Inherit BaseApiController to get an automatic documentation of all your api endpoints</p>
+<p>All controllers inheriting BaseApiController are automatically picked up if matching the request path</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.Cache.html">Cache</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.Cache--description" class="namespace-summary-per-class"><p>Caching for applications</p>
+<p>Default duration is 3 minutes</p>
+Try using auto-generating cache keys, which differentiate caching down to user roles.
+<p>- Cache things per user, by userId/email? Create your own cacheKey</p>
+<p>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</p>
+Skip options:
+<p>- skipWhenAuthenticated, false by default</p>
+- skipWhenAdmin, true by default
+<p>The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</p>
+- skipWhen, your own condition, must return True to skip
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.html"></a></h4>
+      <section id="SystemLibrary.Common.Framework.App.CalleeCancelledRequestException--description" class="namespace-summary-per-class"><p>The Callee Cancelled Request Exception is thrown when the callee (you) cancel's the request.</p>
+<ul>
+<li>To cancel a request you must pass a 'Cancellation Token', and then cancel the request through the Cancellation Token</li>
+</ul>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.Client.html">Client</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.Client--description" class="namespace-summary-per-class"><p>Client is a class for all http(s) requests in your project</p>
+<p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>
+useRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504
+<p>Options:</p>
+useRetryPolicy:
+<p> True: same as 'false', but adds:</p>
+- retries one additional time on 502, 504 GET, POST
+<p>- retries up to two times if response is null (timeout/no response)</p>
+- retries once on 401 GET, POST
+<p>- retries once on 404 GET</p>
+- retries once on 500 GET, POST
+<p>- retries once on 404, 500, 502 504 file request</p>
+- retries once on OPTION, PATCH, HEAD, CONNECT, TRACE
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.ClientResponse.html"></a></h4>
+      <section id="SystemLibrary.Common.Framework.App.ClientResponse--description" class="namespace-summary-per-class"><p>Base class of a ClientResponse</p>
+<p>- Contains the HttpResponseMessage itself </p>
+Used when you do not want to return 'object' nor generic type, but you want to be clear in what object is returned in your C# functions
+<p>- Contains 'data' variable for serializing purposes, so 'data' variable is never undefined in JS world (depends on the JSON serialization options youve set, but out of the box its null if not set)</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.ClientResponse-1.html">ClientResponse&lt;T&gt;</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.ClientResponse`1--description" class="namespace-summary-per-class"><p>The response that all Client methods returns</p>
+<p>Note that a response statuscode might be 200 OK, but the IsSuccess might be false in scenarios where no response were returned</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.HtmlHelperFactory.html">HtmlHelperFactory</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.HtmlHelperFactory--description" class="namespace-summary-per-class"><p>HtmlHelperFactory builds a new instance of IHtmlBuilder outside of your View Context</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.OutputCachePolicy.html"></a></h4>
+      <section id="SystemLibrary.Common.Framework.App.OutputCachePolicy--description" class="namespace-summary-per-class"><p>Add any OutputCachePolicy to the OutputCache attribute in the 'PolicyName' property</p>
+<p>
+Requires framework option UseControllers or UseMvc to be true
+</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.Services.html">Services</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.Services--description" class="namespace-summary-per-class"><p>Services is a global way to reuse the configured service provider and collection</p>
+</section>
+    <h3 id="enums">Enums
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.CacheDuration.html">CacheDuration</a></h4>
+      <section id="SystemLibrary.Common.Framework.App.CacheDuration--description" class="namespace-summary-per-class"></section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.App.ContentType.html"></a></h4>
+      <section id="SystemLibrary.Common.Framework.App.ContentType--description" class="namespace-summary-per-class"><p>An enum of various media types that can be sent to the Client request methods</p>
+<p>The 'ContentType' is sent as an 'Accept' HEADER in the request</p>
+<p>NOTE: Not all of them have been implemented yet though, but all will be sent as 'ACCEPT' header if specified, if you specify ContentType.none, no accept header is sent</p>
+</section>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <footer id="page-footer">
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br>
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br>
+            <span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/main.js"></script>
+  </div></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

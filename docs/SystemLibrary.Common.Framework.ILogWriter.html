@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ILogWriter
+ </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ILogWriter
+ ">
+  
+
+    <link rel="shortcut icon" href="..//systemlibrary-common-framework/favicon.ico">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.vendor.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/main.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/custom.css">
+
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <script>
+      function display() {
+        var articles = document.querySelectorAll('article.hideonload');
+        if(articles && articles.length) {
+          for(var i = 0; i < articles.length; i++) {
+            if(articles[i].classList.contains('hideonload')) {
+              articles[i].classList.remove('hideonload');
+            }
+          }
+        }
+      }
+      setTimeout(display, 80);
+    </script>
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="..//systemlibrary-common-framework/index.html" onclick="return slcf__handleNavBrandClick(event)">
+                <img id="logo" class="svg" src="..//systemlibrary-common-framework/logo.png" alt="">
+                <span class="navbar-title">System Library Common Framework</span>
+              </a>
+              <script>
+              function slcf__handleNavBrandClick(e) {
+                if (e.altKey && window.history.length > 1) {
+                  e.preventDefault();
+                  history.back();
+                  return false;
+                }
+                return true;
+              }
+              </script>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+
+      <div id="custom-skipDocumentationFor" style="overflow: hidden;font-size: 1px;max-width: 1px; visibility: hidden; position: absolute; margin-left: -4000px;">
+        *.Benchmark*,*.Tests*,*.ApiTests*,*.BaseTest*,DelegateJsonConverter,CalleeCancelledRequestException,ClientResponse,ContentType,OutputCachePolicy
+      </div>
+
+      <div class="sidenav hide-when-search">
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <div class="sidetoggle collapse" id="sidetoggle">
+          <div id="sidetoc" class="hideonload"></div>
+        </div>
+      </div>
+
+      <script>
+        function sideTocShowOnLoad() {
+          var sidetoc = document.getElementById('sidetoc');
+          sidetoc.classList.remove('hideonload');
+        }
+
+        function hideLinksQueryBasedInToc() {
+          var skipDocumentationForContainer = document.getElementById('custom-skipDocumentationFor');
+          if (skipDocumentationForContainer) {
+            var innerHtml = skipDocumentationForContainer.innerHTML;
+
+            if (innerHtml && innerHtml.length > 1) {
+              var toc = document.getElementById('toc');
+              if (toc && toc.querySelector) {
+                var skipPatterns = innerHtml.split(',').map(x => x.trim()).filter(Boolean);
+
+                var links = toc.getElementsByTagName('a');
+                if (!links || links.length === 0) return;
+
+                for (var i = 0; i < links.length; i++) {
+                  var link = links[i];
+                  var path = link.pathname || '';
+                  var title = link.getAttribute('title') || '';
+
+                  for (var j = 0; j < skipPatterns.length; j++) {
+                    var pattern = skipPatterns[j];
+
+                    var matches = false;
+                    if (pattern.includes('*')) {
+                      var cleanPattern = pattern.replace(/\*/g, '');
+                      if (path.includes(cleanPattern)) matches = true;
+                    } else if (pattern.includes('.')) {
+                      if (path.startsWith('/' + pattern)) matches = true;
+                    } else {
+                      if (title.endsWith(pattern)) matches = true;
+                    }
+
+                    if (matches) {
+                      try {
+                        var parent = link.parentNode;
+                        if (parent && parent.remove) {
+                          var namespaceParent = parent.parentNode;
+                          parent.remove();
+
+                          if (namespaceParent && namespaceParent.classList.contains('level2')) {
+                            if (namespaceParent.children.length <= 1) {
+                              var nsGroup = namespaceParent.parentNode;
+                              if (nsGroup && nsGroup.remove) nsGroup.remove();
+                            }
+                          }
+                        }
+                      } catch (e) {
+                        console.warn("Error cleaning a TOC link:", e);
+                      }
+                      break; // stop checking once matched
+                    }
+                  }
+                }
+
+                if (typeof sideTocShowOnLoad === "function") sideTocShowOnLoad();
+              }
+            }
+          }
+        }
+
+        setTimeout(() => sideTocShowOnLoad(), 100);
+
+      </script>
+      <div class="article-row-container">
+        <div class="article row grid-right">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap hideonload" id="_content" data-uid="SystemLibrary.Common.Framework.ILogWriter">
+
+
+  <h6 style="margin-top: 10px; margin-bottom: 20px; visibility:hidden; display:none;"><strong style='visibility: hidden; display:none;'>Namespace</strong><a class="xref" href="SystemLibrary.html">SystemLibrary</a>.<a class="xref" href="SystemLibrary.Common.html">Common</a>.<a class="xref" href="SystemLibrary.Common.Framework.html">Framework</a> <span class="h6-assembly-name" style="display: none; visibility: hidden;">SystemLibrary.Common.Framework.Net.dll</span></h6>
+
+  <div class="markdown level0 conceptual h1-class-conceptual"></div>
+
+  <div class="h1-class-summary-container">
+    <div class="markdown level0 summary h1-class-summary"><p>ILogWriter is responsible for storing log messages</p>
+<p>- Create a new class that implements ILogWriter</p>
+- Register your class as singleton implementation of the ILogWriter
+</div>
+  </div>
+
+  <h1 id="SystemLibrary_Common_Framework_ILogWriter" data-uid="SystemLibrary.Common.Framework.ILogWriter" class="text-break h1-class-header">ILogWriter
+</h1>
+  <h1 id="SystemLibrary_Common_Framework_ILogWriter" data-uid="SystemLibrary.Common.Framework.ILogWriter" class="h1-custom-display className">public interface ILogWriter</h1>
+
+
+  <div class="custom-menu-data custom-menu-data-first">
+    <h5 id="SystemLibrary_Common_Framework_ILogWriter_examples"><span class="custom-class-example custom-class-example-onclick">Examples</span></h5>
+
+    <div class="custom-menu-data-container custom-menu-data-container--example">
+      <div class="custom-menu-data-class-example" style="display: none;">
+        <div class="syslib-tab-menu-data--close">X</div>
+        <div class="codewrapper"><p>Program.cs/Startup.cs:</p>
+<pre><code class="lang-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddSingleton(typeof(YourLogWriter), typeof(ILogWriter));
+}
+
+OR:
+services.AddFrameworkServices&lt;YourLogWriter&gt;(</code></pre>
+<p>Your LogWriter implementation:</p>
+<pre><code class="lang-csharp">public class YourLogWriter : ILogWriter
+{ 
+    public void Error(string message) 
+    {
+        //Write message to slack? CloudWatch? Sentry.io? Local disc? Its up to you
+    }
+    ...
+}</code></pre>
+<p>Usage</p>
+<pre><code class="lang-csharp">// The hierarchy is as follows:
+Log.Write("hello world");
+Log.Critical("hello world");
+Log.Error("hello world");
+Log.Debug("hello world");
+Log.Warning("hello world");
+Log.Info("hello world");
+Log.Trace("hello world");</code></pre>
+<p>All calls to method in 'Log' will create a message, append various data, and pass it to your log writer</p>
+</div>
+        <div class="comment-examples-container-bottom"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="custom-menu-data">
+    <h5 id="SystemLibrary_Common_Framework_ILogWriter_arguments"><span class="custom-class-arguments custom-class-arguments-onclick">Arguments</span></h5>
+
+    <div class="custom-menu-data-container">
+      <div class="custom-menu-data-class-arguments" style="display: none;">
+        <div class="syslib-tab-menu-data--close">X</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class='custom-class-content-inline'>
+  <h3 id="methods">Methods
+</h3>
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of critical messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Critical_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Critical*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Critical_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Critical(System.String)" class="h4-custom-functionName">void Critical(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of debug messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Debug_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Debug*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Debug_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Debug(System.String)" class="h4-custom-functionName">void Debug(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of error messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Error_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Error*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Error_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Error(System.String)" class="h4-custom-functionName">void Error(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of information messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Information_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Information*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Information_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Information(System.String)" class="h4-custom-functionName">void Information(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of trace messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Trace_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Trace*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Trace_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Trace(System.String)" class="h4-custom-functionName">void Trace(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of warning messages</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Warning_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Warning*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Warning_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Warning(System.String)" class="h4-custom-functionName">void Warning(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+  <div class="custom-container">
+      <div class="custom-menu-summary-data">
+          <div class="markdown level1 summary member-summary"><p>Implement the writing of warning messages</p>
+<p>
+Note: Write() will always be invoked, even if you disable logging in appSettings
+</p>
+</div>
+          <div class="markdown level1 conceptual member-summary-conceptual"></div>
+      </div>
+
+
+
+      <a id="SystemLibrary_Common_Framework_ILogWriter_Write_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Write*"></a>
+
+      <div class="custom-menu-data">
+          <h4 id="SystemLibrary_Common_Framework_ILogWriter_Write_System_String_" data-uid="SystemLibrary.Common.Framework.ILogWriter.Write(System.String)" class="h4-custom-functionName">void Write(string message)</h4>
+          <div class="custom-menu-data-container">
+
+              <div class="custom-menu-data-arguments" style="display: none;">
+                  <div class="syslib-tab-menu-data--close">X</div>
+
+                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
+                  <table class="table table-bordered table-striped table-condensed">
+                      <thead>
+                          <tr>
+                              <th>Type</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+                              <td><span class="parametername">message</span></td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div class="extensionmethods-content">
+      <a class="xref" href="SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html#SystemLibrary_Common_Framework_Extensions_ObjectExtensions_Json_System_Object_System_Boolean_">ObjectExtensions.Json(object, bool)</a>
+  </div>
+  <div class="extensionmethods-content">
+      <a class="xref" href="SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html#SystemLibrary_Common_Framework_Extensions_ObjectExtensions_Json_System_Object_System_Text_Json_JsonSerializerOptions_System_Boolean_System_Text_Json_Serialization_JsonConverter___">ObjectExtensions.Json(object, JsonSerializerOptions, bool, params JsonConverter[])</a>
+  </div>
+  <div class="extensionmethods-content">
+      <a class="xref" href="SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html#SystemLibrary_Common_Framework_Extensions_ObjectExtensions_Json_System_Object_System_Text_Json_Serialization_JsonConverter___">ObjectExtensions.Json(object, params JsonConverter[])</a>
+  </div>
+  <div class="extensionmethods-content">
+      <a class="xref" href="SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html#SystemLibrary_Common_Framework_Extensions_ObjectExtensions_Xml_System_Object_">ObjectExtensions.Xml(object)</a>
+  </div>
+
+
+  <script>
+      let wrapperCloseModalClickEnabled = false;
+      function getItems(selector) {
+          return document.querySelectorAll(selector);
+      }
+
+      //CLASS FUNCTIONS
+      function getClassOrInterfaceNameIndex(parts) {
+          for (var i = 0; i < parts.length; i++) {
+              if (parts[i] === "class") {
+                  return i + 1;
+              }
+              if (parts[i] === "interface") {
+                  return i + 1;
+              }
+              if (parts[i] === "enum") {
+                  return i + 1;
+              }
+          }
+          return 0;
+      }
+
+      function getClassGenericStartIndex(parts, classNameIndex) {
+          let part = parts[classNameIndex];
+          if (part.includes("&lt;") && part.includes("&gt;")) {
+              return part.indexOf("&lt;");
+          }
+          if (part.includes("&lt;") && part.includes(",")) {
+              return part.indexOf("&lt;");
+          }
+          return 0;
+      }
+
+      function classHasMultipleGenerics(parts, classNameIndex) {
+          let part = parts[classNameIndex];
+          if (part.includes("&lt;")) {
+              if (part.includes(',')) {
+                  return true;
+              }
+          }
+          return false;
+      }
+
+      function getClassName(parts, classNameIndex) {
+          var genericStartIndex = getClassGenericStartIndex(parts, classNameIndex);
+          var hasMultipleGenerics = classHasMultipleGenerics(parts, classNameIndex);
+
+          if (genericStartIndex > 0) {
+              parts[classNameIndex] = parts[classNameIndex].substring(0, genericStartIndex);
+
+              if (hasMultipleGenerics) {
+                  return '<span class="classNameHeading">' + parts[classNameIndex] + '</span><span class="class-multigeneric">&lt;&gt;</span>';
+              } else {
+                  return '<span class="classNameHeading">' + parts[classNameIndex] + '</span><span class="class-generic">&lt;&gt;</span>';
+              }
+          }
+          return '<span class="classNameHeading">' + parts[classNameIndex] + '</span>';
+      }
+
+      function cleanCssName(text) {
+          if (text) {
+              text = text.replace('>', '').replace('<', '').replace('.', '').replace(']', '').replace('[', '');
+              text = text.replace(' ', '').replace('(', '').replace(')', '').replace(',', '');
+              text = text.replace('=', '').replace('?', '').replace(';', '').replace('!', '');
+
+              var genericIndex = text.indexOf('&lt');
+              if (genericIndex > 0) {
+                  text = text.substring(0, genericIndex) + "_generic_";
+              } else {
+                  text = text.replace('&', '');
+              }
+
+              text = text.toLowerCase();
+
+              if (text.includes('attributeusage')) {
+                  text = 'attributeusage';
+              }
+              return text;
+          }
+          return "";
+      }
+
+      function updateClassNames() {
+          var items = getItems(".h1-custom-display.className");
+          //.text-break.h1-class-header
+          for (var i = 0; i < items.length; i++) {
+              var value = items[i].innerHTML;
+              if (!value || value.length < 4 || !value.includes(' ')) {
+                  console.warn("Class is wrong: " + value);
+                  continue;
+              }
+
+              var parts = value.split(' ');
+              var classNameIndex = getClassOrInterfaceNameIndex(parts);
+
+              var startIndex = 0;
+              var tempIndex = classNameIndex;
+              while (tempIndex > 1) {
+                  startIndex++;
+                  tempIndex--;
+              }
+
+              for (var j = 0; j < parts.length; j++) {
+
+                  if (j < startIndex) {
+                      parts[j] = "";
+                  }
+                  else if (j > classNameIndex || parts[j] === "sealed" || parts[j] === "public") {
+                      parts[j] = "";
+                  } else if (j === classNameIndex) {
+                      parts[classNameIndex] = getClassName(parts, classNameIndex);
+                  } else {
+                      var cleanedClassSuffix = cleanCssName(parts[j]);
+                      if (cleanedClassSuffix !== null && cleanedClassSuffix.length > 1) {
+                          parts[j] = "<span class='classNameHeader className--" + cleanedClassSuffix + "'>" + parts[j] + "</span> ";
+                      }
+                  }
+              }
+
+              var innerHtml = parts.join('');
+              items[i].innerHTML = innerHtml + "<p class='classMargin'>{</p>";
+          }
+      }
+      //CLASS FUNCTIONS END
+
+      //FUNCTION FUNCTIONS
+      function getFunctionNameIndex(parts) {
+          for (var i = 0; i < parts.length; i++) {
+              if (parts[i].startsWith('[') || parts[i] === "" || parts[i] === " ") {
+                  continue;
+              }
+              var index = parts[i].indexOf('(');
+
+              if (index > 0) {
+                  var greaterthan = parts[i].indexOf("&gt;");
+                  if (greaterthan == -1) {
+                      //Non-generic function
+                      return i;
+                  }
+
+                  var lessthan = parts[i].indexOf("&lt;");
+                  if (lessthan == - 1) {
+                      return i - 1;
+                  }
+                  return i;
+              }
+          }
+          return 0;
+      }
+
+      function functionIsGeneric(parts, functionNameIndex) {
+          var part = parts[functionNameIndex];
+          var isGeneric = part.indexOf("&gt;") >= 0 || part.indexOf("&lt;") >= 0;
+
+          if (isGeneric) {
+              var genericStart = part.indexOf("&gt;");
+              var argumentsStart = part.indexOf('(');
+
+              if (argumentsStart > 0 && genericStart > 0) {
+                  return genericStart < argumentsStart;
+              }
+          }
+          return isGeneric;
+      }
+
+      function functionHasMultipleGenerics(parts, functionNameIndex) {
+          var part = parts[functionNameIndex];
+          return part.indexOf("&lt;") >= 0 && part.indexOf("&gt;") === -1
+      }
+
+      function functionHasArguments(parts, functionNameIndex) {
+          var p = parts[functionNameIndex];
+
+          var emptyArguments = p.includes("()");
+
+          if (emptyArguments) {
+              return !emptyArguments;
+          }
+
+          if (p.indexOf(',') >= 0) {
+              var nextPart = parts[functionNameIndex + 1];
+              emptyArguments = nextPart.includes("()");
+              if (emptyArguments) {
+                  return !emptyArguments;
+              } else {
+                  //Multigeneric function here
+                  for (var i = functionNameIndex + 1; i < parts.length; i++) {
+                      if (parts[i].indexOf('(') >= 0) {
+                          emptyArguments = parts[i].includes("()");
+                          break;
+                      }
+                  }
+                  return !emptyArguments;
+              }
+          } else {
+              if (parts[functionNameIndex + 1].indexOf(',') >= 0) {
+                  //Multigeneric function here
+              }
+          }
+          return !emptyArguments;
+      }
+
+      function getFunctionName(parts, functionNameIndex) {
+          var part = parts[functionNameIndex];
+
+          var hasArguments = functionHasArguments(parts, functionNameIndex);
+
+          var isGeneric = functionIsGeneric(parts, functionNameIndex);
+
+          var isMultiGeneric = functionHasMultipleGenerics(parts, functionNameIndex);
+
+          var genericStartIndex = part.indexOf('&lt;');
+          var funcStartIndex = part.indexOf('(');
+
+          if (genericStartIndex >= 0) {
+              part = part.substring(0, genericStartIndex);
+          }
+          if (funcStartIndex >= 0) {
+              part = part.substring(0, funcStartIndex);
+          }
+
+          var arg = hasArguments ? "<span class='custom-arguments custom-arguments-onclick'>( )</span>" : "<span class='custom-arguments custom-arguments-onclick custom-arguments--none'>( )</span>";
+
+          part = "<span class='custom-name custom-name-onclick'>" + part + "</span>";
+          if (isMultiGeneric) {
+              return part + "<span class='custom-arguments custom-arguments-onclick function-multigeneric'>&lt;&gt;</span>" + arg;
+          } else if (isGeneric) {
+              return part + "<span class='custom-arguments custom-arguments-onclick function-generic'>&lt;&gt;</span>" + arg;
+          }
+          return part + arg;
+      }
+
+      function updateFunctionNames() {
+          var items = getItems(".h4-custom-functionName");
+
+          for (var i = 0; i < items.length; i++) {
+              var value = items[i].innerHTML;
+
+              if (!value || value.length < 5 || !value.includes(' ') || !value.includes('(')) {
+                  items[i].classList.add("non-function-element");
+                  let isClickable = false;
+                  if (value.includes('{') && value.includes('}')) {
+                      items[i].classList.add("custom-property-name");
+                      items[i].classList.add("custom-property-name-onclick");
+                      var dataContainerTemp = items[i].nextElementSibling;
+                      if (dataContainerTemp && dataContainerTemp.classList.contains('custom-menu-data-container')) {
+                          var propertyCustomMenuData = dataContainerTemp.getElementsByClassName('custom-menu-data-name');
+                          if (typeof propertyCustomMenuData !== 'undefined' && propertyCustomMenuData && propertyCustomMenuData.length) {
+                              var propertyCustomMenuDataFirst = propertyCustomMenuData[0];
+                              if (propertyCustomMenuDataFirst) {
+                                  propertyCustomMenuDataFirst.classList.remove('custom-menu-data-name');
+                                  propertyCustomMenuDataFirst.classList.add('custom-menu-data-property-name');
+                                  isClickable = true;
+                              }
+                          }
+                      }
+                  } else {
+                      if (value.includes('protected ') || value.includes('private ') || value.includes('public ')) {
+                          items[i].classList.add("field-name");
+                      }
+                  }
+                  items[i].innerHTML = items[i].innerHTML.replace('readonly ', '').replace('public ', '').replace('override ', '').replace('protected ', '');
+
+                  if (isClickable === true) {
+                      let txt = items[i].innerHTML;
+                      if (txt && txt.length > 5 && txt[0] !== ' ') {
+                          txt = txt.replace(" ", "|<span|class='property-name-text'>");
+                          txt = txt.replace(" ", "</span> ");
+                          txt = txt.replace("|", " ").replace("|", " ");
+                          items[i].innerHTML = txt;
+                      }
+                  }
+
+                  items[i].innerHTML = items[i].innerHTML.replace('static ', '<span class="field-static-colored">static </span>');
+
+                  continue;
+              }
+
+              if (value.includes('[DocFxHide]')) {
+                  let parent = items[i].parentNode;
+                  if (parent) {
+                      if (parent.parentNode !== null && parent.parentNode.classList.contains("custom-container")) {
+                          parent.parentNode.classList.add("docfxhide-attribute");
+                      } else {
+                          parent.classList.add("docfxhide-attribute");
+                      }
+                  } else {
+                      items[i].classList.add("docfxhide-attribute");
+                  }
+                  continue;
+              }
+
+              var parts = value.split(' ');
+
+              var functionNameIndex = getFunctionNameIndex(parts);
+
+              parts[functionNameIndex] = getFunctionName(parts, functionNameIndex);
+
+              for (var j = 0; j < parts.length; j++) {
+                  if (j > functionNameIndex || parts[j] === "public" || parts[j].startsWith("[") || parts[j].endsWith("]")) {
+                      parts[j] = "";
+                  }
+                  else if (j < functionNameIndex) {
+                      parts[j] = "<span class='custom-keywords custom-keywords--" + cleanCssName(parts[j]) + "'>" + parts[j] + "</span> ";
+                  }
+              }
+
+              parts = parts.filter(x => typeof (x) !== 'undefined' && x !== "" && x !== null && x !== " ");
+
+              /*var argumentsPart = parts[parts.length-1];
+              if(argumentsPart) {
+                  argumentsPart = "<span class='custom-arguments custom-arguments-onclick'>" + argumentsPart + "</span>";
+                  parts[parts.length-1] = argumentsPart;
+              }*/
+
+              if (parts.length > 1) {
+                  var returnTypePart = parts[parts.length - 2];
+                  if (returnTypePart) {
+                      returnTypePart = returnTypePart.replace('custom-keywords', '').replace('custom-keywords', '');
+                      returnTypePart = "<span class='custom-returntype custom-returntype-onclick'>" + returnTypePart + "</span>";
+                      parts[parts.length - 2] = returnTypePart;
+                  }
+              }
+
+              var innerHtml = parts.join(' ');
+
+              innerHtml = innerHtml.toString()
+                  .replace('override', '')
+                  .replace('override', '')
+                  .replace('protected', '')
+                  .replace('protected', '');
+              items[i].innerHTML = innerHtml;
+          }
+
+          //Show 'view source' link for the class constructor next to 'Example'
+          if (items != null && items.length > 0) {
+              if (items[0] != null && items[0].id != null && items[0].id.includes('__ctor_') === true) {
+                  var viewSources = getItems('.custom-source-code-link-container');
+                  if (viewSources != null && viewSources.length > 0) {
+                      if (viewSources.length > 1) {
+                          viewSources[0].classList.add('custom-source-code-link-container--class');
+                      }
+                  }
+              }
+          }
+      }
+
+      function addEventsToTabCloseButtons() {
+          var i;
+
+          var closeButtons = document.getElementsByClassName("syslib-tab-menu-data--close");
+
+          for (i = 0; i < closeButtons.length; i++) {
+              closeButtons[i].addEventListener("click", function () {
+                  wrapperCloseModalClickEnabled = false;
+                  let par = this.parentNode;
+                  if (par.style.display === "block") {
+                      par.style.display = "none";
+                      if (par && par.classList && par.classList.contains('active')) {
+                          par.classList.toggle('active');
+                      }
+
+                      //Show footer when modal is not active
+                      var footer = document.getElementById("page-footer");
+                      if (footer && footer.classList) {
+                          if (footer.classList.contains('hidden')) {
+                              footer.classList.toggle('hidden');
+                          }
+                      }
+                  }
+              })
+          }
+
+          setTimeout(() => {
+              var sidetocs = document.getElementsByClassName('sidetoc');
+              if (sidetocs) {
+                  let wrapper = sidetocs[0];
+                  if (wrapper) {
+                      wrapper.addEventListener('click', function () {
+                          if (wrapperCloseModalClickEnabled === true) {
+                              wrapperCloseModalClickEnabled = false;
+                              var activeElements = document.getElementsByClassName('active');
+                              if (activeElements) {
+                                  for (var i = 0; i < activeElements.length; i++) {
+                                      let activeEle = activeElements[i];
+                                      if (activeEle && activeEle.style && activeEle.style.display === 'block') {
+                                          activeEle.style.display = 'none';
+                                          activeEle.classList.toggle('active');
+
+                                          //Show footer when modal is not active
+                                          var footer = document.getElementById("page-footer");
+                                          if (footer && footer.classList) {
+                                              if (footer.classList.contains('hidden')) {
+                                                  footer.classList.toggle('hidden');
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      });
+                  }
+              }
+          },
+              177
+          );
+      }
+
+      function addRemarksOnClickEvent(className) {
+          var remarks = document.getElementsByClassName(className);
+          if (remarks) {
+              for (var i = 0; i < remarks.length; i++) {
+                  var remark = remarks[i];
+                  if (remark && remark.classList) {
+                      var closeBtns = remark.parentNode.getElementsByClassName('custom-remarks-menu-data--close');
+                      if (closeBtns) {
+                          var closeBtn = closeBtns[0];
+                          if (closeBtn) {
+                              closeBtn.addEventListener("click", function (e) {
+                                  e.target.parentNode.classList.toggle('visible');
+                              });
+                          }
+                      }
+                      remark.addEventListener("click", function (e) {
+                          var remarkTexts = e.target.parentNode.getElementsByClassName(className + ' text');
+                          if (!remarkTexts || !remarkTexts.length) {
+                              remarkTexts = e.target.parentNode.parentNode.getElementsByClassName(className + ' text');
+                          }
+                          if (remarkTexts && remarkTexts.length) {
+                              var remarkText = remarkTexts[0];
+                              if (remarkText) {
+                                  remarkText.classList.toggle('visible');
+                              }
+                          }
+                      });
+                  }
+              }
+          }
+      }
+
+      function addEventDisplayMenuDataOnClickPart(partName) {
+          var i;
+
+          var parts = document.getElementsByClassName("custom-" + partName + "-onclick");
+
+          var menuDataClass = 'custom-menu-data-' + partName;
+
+          for (i = 0; i < parts.length; i++) {
+              var container = parts[i];
+              while (container) {
+                  container = container.parentNode;
+                  if (container && container.classList && container.classList.contains('custom-menu-data')) {
+                      break;
+                  }
+              }
+              if (container) {
+                  var menuDataCollection = container.getElementsByClassName(menuDataClass);
+                  if (typeof (menuDataCollection) === 'undefined' || !menuDataCollection) {
+                      continue;
+                  }
+                  var menuData = menuDataCollection[0];
+
+                  //MenuData do not exist at all, change button layout to red
+                  if (!menuData || !menuData.classList || !menuData.classList.contains(menuDataClass)) {
+                      if (menuDataClass.includes('-class-') >= 1) {
+                          parts[i].classList.toggle('hidden');
+                      } else {
+                          var h4 = container.getElementsByClassName('h4-custom-functionName');
+                          if (h4 && h4.length && h4.length > 0 && h4[0] && h4[0].id && h4[0].id.includes('_ctor_')) {
+                              //CTOR has no example, then just hide the whole CTOR line
+                              container.classList.toggle('hidden');
+                          }
+                          parts[i].classList.toggle('custom-menu-data-no-text');
+                      }
+                  }
+                  else {
+                      //MenuData is empty or contains only the "X" button, change button layout to red
+                      if (typeof menuData.children === 'undefined' || menuData.children === null || menuData.children.length <= 1) {
+                          if (menuDataClass.includes('-class-') >= 1) {
+                              parts[i].classList.toggle('hidden');
+                          }
+                          else {
+                              var h4 = container.getElementsByClassName('h4-custom-functionName');
+                              if (h4 && h4.length && h4.length > 0 && h4[0] && h4[0].id && (h4[0].id.includes('_ctor_') || h4[0].classList.contains('non-function-element'))) {
+                                  //CTOR has no example, then just hide the whole CTOR line
+                                  container.classList.toggle('hidden');
+                              }
+                              else {
+                                  parts[i].classList.toggle('custom-menu-data-no-text');
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+
+          for (i = 0; i < parts.length; i++) {
+              if (parts[i].classList.contains('custom-menu-data-no-text')) {
+                  continue;
+              }
+
+              parts[i].addEventListener("click", function (e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  var container = this.parentNode;
+                  while (container) {
+                      if (container && container.classList && container.classList.contains('custom-menu-data')) {
+                          break;
+                      }
+
+                      if (container && container.classList && container.classList.contains('col-md-10')) {
+                          break;
+                      }
+
+                      container = container.parentNode;
+                  }
+
+                  if (container) {
+
+                      var menuData = container.getElementsByClassName(menuDataClass)[0];
+
+                      if (menuData && menuData.classList && menuData.classList.contains(menuDataClass)) {
+
+                          if (menuData.classList.contains('active')) {
+                              //Hide current Menu Data if clicking the "function name" again
+                              menuData.style.display = "none";
+                              menuData.classList.toggle('active');
+
+                              //Show footer when modal is not active
+                              var footer = document.getElementById("page-footer");
+                              if (footer && footer.classList) {
+                                  if (footer.classList.contains('hidden')) {
+                                      footer.classList.toggle('hidden');
+                                  }
+                              }
+                          } else {
+                              //Hide footer when modal is active
+                              var footer = document.getElementById("page-footer");
+                              if (footer && footer.classList) {
+                                  if (!footer.classList.contains('hidden')) {
+                                      footer.classList.toggle('hidden');
+                                  }
+                              }
+                              //Hide all existing Menu Data's
+                              var menuDatas = document.getElementsByClassName(menuDataClass);
+                              if (menuDatas && menuDatas.length) {
+                                  for (var j = 0; j < menuDatas.length; j++) {
+                                      if (menuDatas[j].classList.contains('active')) {
+                                          menuDatas[j].classList.toggle('active');
+                                          menuDatas[j].style.display = 'none';
+                                      }
+                                  }
+                              }
+
+                              //Show just one Menu Data, the one we clicked
+                              menuData.style.display = "block";
+                              menuData.classList.toggle('active');
+
+                              setTimeout(() => {
+                                  wrapperCloseModalClickEnabled = true;
+                              }, 25);
+                          }
+                      }
+                  }
+              });
+          }
+      }
+
+      function removeEmptyPopup(query) {
+          var popup = document.getElementsByClassName(query);
+          if (popup) {
+              for (var i = 0; i < popup.length; i++) {
+                  if (popup[i]) {
+                      var data = popup[i].nextElementSibling;
+                      if (!data || data.childElementCount <= 1) {
+                          popup[i].remove();
+                          i = i - 1;
+                      }
+                  }
+              }
+          }
+      }
+      function removeEmptyPopups() {
+          removeEmptyPopup("custom-menu-data-class-arguments");
+          removeEmptyPopup("custom-menu-data-class-example");
+          removeEmptyPopup("custom-menu-data-name");
+          removeEmptyPopup("custom-menu-data-arguments");
+          removeEmptyPopup("custom-menu-data-returntype");
+          removeEmptyPopup("custom-menu-data-container");
+      }
+
+      function hideAllEmptyMarkdowns() {
+          var items = getItems('.markdown.level1.summary.member-summary');
+          if (items && items.length) {
+              for (var i = 0; i < items.length; i++) {
+                  if (items[i].children && items[i].children.length === 0) {
+                      items[i].classList.add("hidden");
+                  }
+                  if (items[i].value) {
+                      if (items[i].value.length <= 1) {
+                          items[i].classList.add("hidden");
+                      }
+                  }
+
+                  if (items[i].innerHTML) {
+                      if (items[i].innerHTML.length <= 1) {
+                          items[i].classList.add("hidden");
+                      }
+                  }
+
+                  if (items[i].innerText) {
+                      if (items[i].innerText.length <= 1) {
+                          items[i].classList.add("hidden");
+                      }
+                  }
+              }
+          }
+      }
+
+      function hideSourceLinksForDocfxHideAttribute() {
+          var items = getItems('.custom-source-code-link-container');
+
+          if (items != null && items.length > 0) {
+              for (var i = 0; i < items.length; i++) {
+                  var next = items[i].nextElementSibling;
+                  if (!next.classList.contains('custom-menu-data')) {
+                      next = next.nextElementSibling;
+                  }
+
+                  if (next.classList.contains('custom-menu-data')) {
+                      var docfxhideElement = next.getElementsByClassName('docfxhide-attribute');
+                      if (docfxhideElement !== null && docfxhideElement.length !== null && docfxhideElement.length === 1) {
+                          items[i].classList.add('docfxhide-attribute');
+                      }
+                  }
+              }
+          }
+      }
+
+      function hideSummariesInheritedFromClass() {
+          const topSummary = document.querySelector('.markdown.level0.summary.h1-class-summary p');
+
+          if (!topSummary || !topSummary.innerHTML) return;
+
+          const topHtmlText = topSummary.innerHTML.trim();
+          document.querySelectorAll('.markdown.level1.summary.member-summary').forEach(div => {
+              const p = div.querySelector('p');
+              if (p && p.innerHTML.trim() === topHtmlText) {
+                  p.classList.add('hidden');
+              }
+          });
+      }
+
+      function hideRemarksInheritedFromClass() {
+          const topRemark = document.querySelector('.custom-remarks.custom-remarks1.class-remarks h5');
+
+          if (!topRemark || !topRemark.innerHTML) return;
+
+          const topHtmlRemark = topRemark.innerHTML.trim();
+
+          document.querySelectorAll('.custom-remarks.custom-remarks2').forEach(div => {
+              const h5 = div.querySelector('h5');
+              if (h5 && h5.innerHTML.trim() === topHtmlRemark) {
+                  h5.classList.add('hidden');
+              }
+          });
+      }
+
+      function hideConstructorSummaryRemarksAndViewSource() {
+          const h3 = document.querySelector('h3#constructors');
+          const next = h3?.nextElementSibling;
+          if (next?.classList?.contains('custom-container') == true) {
+              next.classList.add('hidden');
+          }
+      }
+
+    
+
+      //FUNCTION FUNCTIONS END
+      setTimeout(updateFunctionNames, 5);
+      setTimeout(hideSummariesInheritedFromClass, 5);
+      setTimeout(hideRemarksInheritedFromClass, 5);
+      setTimeout(updateClassNames, 5);
+      setTimeout(hideConstructorSummaryRemarksAndViewSource, 10);
+      setTimeout(() => hideSourceLinksForDocfxHideAttribute(), 33);
+      setTimeout(() => hideAllEmptyMarkdowns(), 33);
+
+      setTimeout(() => addEventDisplayMenuDataOnClickPart('class-example'), 75);
+      setTimeout(() => addEventDisplayMenuDataOnClickPart('class-arguments'), 80);
+      setTimeout(() => addEventDisplayMenuDataOnClickPart('name'), 85);
+      setTimeout(() => addEventDisplayMenuDataOnClickPart('property-name'), 90);
+      //NOTE: Disabled clicking on args and return type - the sample should give enough info
+      //setTimeout(() => addEventDisplayMenuDataOnClickPart('arguments'), 40);
+      //setTimeout(() => addEventDisplayMenuDataOnClickPart('returntype'), 40);
+
+      setTimeout(addEventsToTabCloseButtons, 105);
+
+      setTimeout(() => addRemarksOnClickEvent('custom-remarks1'), 110);
+      setTimeout(() => addRemarksOnClickEvent('custom-remarks2'), 110);
+
+      // setTimeout(removeEmptyPopups, 60);
+  </script>
+
+  <p class='classMargin classMargin--end'>}</p>
+
+  </div>
+
+  </article></div>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <footer id="page-footer">
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br>
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br>
+            <span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/main.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

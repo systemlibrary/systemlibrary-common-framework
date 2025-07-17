@@ -1,0 +1,991 @@
+{
+  "source_base_path": "C:/syslib/systemlibrary-common-framework-private/source",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "SystemLibrary.Common.Framework_index.md",
+      "output": {
+        ".html": {
+          "relative_path": "SystemLibrary.Common.Framework_index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ActionContextInstance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ActionContextInstance.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.ActionContextInstance",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ActionContextInstance.yml\" sourcestartlinenumber=\"1\">An implementation of the 'old' thread safe singleton ActionContext we all know and love from .NET Framework</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.ApiTokenFilterAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.ApiTokenFilterAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Attributes.ApiTokenFilterAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.ApiTokenFilterAttribute.yml\" sourcestartlinenumber=\"1\">Filters access based on <code sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.ApiTokenFilterAttribute.yml\" sourcestartlinenumber=\"1\">api-token</code> header</p>\n<p>Optional: set a custom token header name</p>\n<p>Input:</p>\n`null`: Allows all\n<p>`*`: Allows all</p>\n- A regex: Value must satisfy the regex pattern\n<p>- A pipe separated list: Any part is within the Value in a case insensitive check</p>\n`text`: Value must match, case sensitive\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.BaseApiFilterAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.BaseApiFilterAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Attributes.BaseApiFilterAttribute",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"1\">Filters access based on <code sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"1\">Origin</code> header</p>\n<p>Input:</p>\n`null`: Allows all\n<p>`*`: Allows all</p>\n- A regex: Value must satisfy the regex pattern\n<p>- A pipe separated list: Any part is within the Value in a case insensitive check</p>\n`text`: Value must match, case sensitive\n<example>\n<pre><code class=\"lang-csharp\">[OriginFilter(null)] // Allows all\n[OriginFilter(\"*\")] // Allows all\n[OriginFilter(\"^[ab0-4]{4,}$\")] // Allow origin containing `a, b, 0, 1, 2, 3 or 4` with a minimum length of 4\n[OriginFilter(\"SystemLibrary\\.com\")] // Exact match of SystemLibrary.com, case sensitive\n[OriginFilter(\"test.systemlibrary\\.com|test2.systemlibrary.com\")] // Allow origins containing test.systemlibrary.com or test2.systemlibrary.com, case insensitive</code></pre>\n</example>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"1\">Filters access based on <code sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"1\">User-Agent</code> header</p>\n<p>NOTE: If attribute is added it blocks most known spiders, crawlers and bots even if you allow all</p>\n<p>Input:</p>\n`null`: Allows all\n<p>`*`: Allows all</p>\n- A regex: Value must satisfy the regex pattern\n<p>- A pipe separated list: Any part is within the Value in a case insensitive check</p>\n`text`: Value must match, case sensitive\n<example>\n<pre><code class=\"lang-csharp\">[UserAgentFilter(null)] // Allows all\n[UserAgentFilter(\"*\")] // Allows all\n[UserAgentFilter(\"^[ab0-4]{4,}$\")] // Allow user agents containing only `a, b, 0, 1, 2, 3 or 4` with a minimum length of 4\n[UserAgentFilter(\"User Agent\")] // Exact match of 'User Agent', case sensitive\n[UserAgentFilter(\"firefox|edg|chrome\")] // Allow user agents containing firefox or edg or chrome, case insensitive</code></pre>\n</example>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Attributes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Attributes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.BaseApiController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.BaseApiController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.BaseApiController",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.BaseApiController.yml\" sourcestartlinenumber=\"1\">Inherit BaseApiController to get an automatic documentation of all your api endpoints</p>\n<p>All controllers inheriting BaseApiController are automatically picked up if matching the request path</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Cache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Cache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Cache",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"1\">Caching for applications</p>\n<p>Default duration is 3 minutes</p>\nTry using auto-generating cache keys, which differentiate caching down to user roles.\n<p>- Cache things per user, by userId/email? Create your own cacheKey</p>\n<p>'Ignore' means the function will always be invoked directly, bypassing the cache entirely.</p>\nSkip options:\n<p>- skipWhenAuthenticated, false by default</p>\n- skipWhenAdmin, true by default\n<p>The user must belong to one of the following case-sensitive roles: Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins, admin, admins, administrator, administrators.</p>\n- skipWhen, your own condition, must return True to skip\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CacheDuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CacheDuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.CacheDuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.CalleeCancelledRequestException",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml\" sourcestartlinenumber=\"1\">The Callee Cancelled Request Exception is thrown when the callee (you) cancel's the request.</p>\n<ul sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml\" sourcestartlinenumber=\"2\">\n<li sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml\" sourcestartlinenumber=\"2\">To cancel a request you must pass a 'Cancellation Token', and then cancel the request through the Cancellation Token</li>\n</ul>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Client.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Client",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"1\">Client is a class for all http(s) requests in your project</p>\n<p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>\nuseRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504\n<p>Options:</p>\nuseRetryPolicy:\n<p> True: same as 'false', but adds:</p>\n- retries one additional time on 502, 504 GET, POST\n<p>- retries up to two times if response is null (timeout/no response)</p>\n- retries once on 401 GET, POST\n<p>- retries once on 404 GET</p>\n- retries once on 500 GET, POST\n<p>- retries once on 404, 500, 502 504 file request</p>\n- retries once on OPTION, PATCH, HEAD, CONNECT, TRACE\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.ClientResponse<T>",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse-1.yml\" sourcestartlinenumber=\"1\">The response that all Client methods returns</p>\n<p>Note that a response statuscode might be 200 OK, but the IsSuccess might be false in scenarios where no response were returned</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.ClientResponse",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ClientResponse.yml\" sourcestartlinenumber=\"1\">Base class of a ClientResponse</p>\n<p>- Contains the HttpResponseMessage itself </p>\nUsed when you do not want to return 'object' nor generic type, but you want to be clear in what object is returned in your C# functions\n<p>- Contains 'data' variable for serializing purposes, so 'data' variable is never undefined in JS world (depends on the JSON serialization options youve set, but out of the box its null if not set)</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ContentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ContentType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.ContentType",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.ContentType.yml\" sourcestartlinenumber=\"1\">An enum of various media types that can be sent to the Client request methods</p>\n<p>The 'ContentType' is sent as an 'Accept' HEADER in the request</p>\n<p>NOTE: Not all of them have been implemented yet though, but all will be sent as 'ACCEPT' header if specified, if you specify ContentType.none, no accept header is sent</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml\" sourcestartlinenumber=\"1\">HttpRequest extensions</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ApplicationBuilder object</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IServiceCollection</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Extensions.StringExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.HtmlHelperFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.HtmlHelperFactory",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml\" sourcestartlinenumber=\"1\">HtmlHelperFactory builds a new instance of IHtmlBuilder outside of your View Context</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.OutputCachePolicy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.OutputCachePolicy",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml\" sourcestartlinenumber=\"1\">Add any OutputCachePolicy to the OutputCache attribute in the 'PolicyName' property</p>\n<p>\nRequires framework option UseControllers or UseMvc to be true\n</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App.Services",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.App.Services.yml\" sourcestartlinenumber=\"1\">Services is a global way to reuse the configured service provider and collection</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.App.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.App",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Assemblies.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Assemblies.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Assemblies",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Assemblies.yml\" sourcestartlinenumber=\"1\">Static functions on whitelisted loaded assemblies</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Async",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.yml\" sourcestartlinenumber=\"1\">Run methods asynchronously without blocking.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml\" sourcestartlinenumber=\"1\">Marks a property as the placeholder for a decrypted config value.</p>\n<p>The property must be public, instance-level, with both get and set accessors.</p>\n<p>Used internally by Config to locate and decrypt values marked with DecryptAttribute on instantiation.</p>\n<p>Values must be encrypted using the parameterless Encrypt() method. See StringExtensions.Encrypt() for details.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml\" sourcestartlinenumber=\"1\">Compress and decompress a String, Long or Int property or field on serialization and deserialization</p>\n<p>Useful when you want to minify long texts before sending to Client or upon receiving</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml\" sourcestartlinenumber=\"1\">Encrypt and decrypt a String, Long or Int property or field on serialization and deserialization</p>\n<p>Useful when you want to hide productId's or similar in Frontend part of your application. Avoids having int's or ID's in the frontend, for attackers wanting to brute force endpoints taking INTs</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml\" sourcestartlinenumber=\"1\">Obfuscate and deobfuscate a String, Long or Int property or field on serialization and deserialization</p>\n<p>Useful when you want to hide productId's or similar in Frontend part of your application when an object is exposed through an API response for instance. Avoids having int's or ID's in the frontend, for attackers wanting to brute force endpoints taking INTs</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Attributes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Attributes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Clock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Clock.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Clock",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Clock.yml\" sourcestartlinenumber=\"1\">A Clock to measure an actions execution time based on Stopwatch</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Config-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Config-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Config<T>",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Config-1.yml\" sourcestartlinenumber=\"1\">Loads and reads configuration files (.xml, .json, or .config), applies transformations, and decrypts encrypted properties.</p>\n<p>Configs can be placed in:</p>\n<p>~/*.json, ~/*.xml, ~/Configs/**, ~/Configurations/**, or appended to appsettings.json.</p>\n<p>Transformations use the ASPNETCORE_ENVIRONMENT variable.</p>\n<p>Set ASPNETCORE_ENVIRONMENT in:</p>\n<p>- launchSettings.json (IIS Express/Kestrel)</p>\n<p>- web.config (IIS/IIS Express)</p>\n<p>- mstest.runsettings (unit tests)</p>\n<p>- command-line --configuration (executables)</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateJsonConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateJsonConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.DateJsonConverter",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.DateJsonConverter.yml\" sourcestartlinenumber=\"1\">Use to convert a DateTime into a string date 'yyyy-MM-dd', ignoring time</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeJsonConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.DateTimeJsonConverter",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml\" sourcestartlinenumber=\"1\">Use to convert a string to DateTime during Json() invocation with your own format</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml\" sourcestartlinenumber=\"1\">DateTime json converter that takes a string format</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DelegateJsonConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.DelegateJsonConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.DelegateJsonConverter",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumTextAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumTextAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.EnumTextAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumTextAttribute.yml\" sourcestartlinenumber=\"1\">Decorate the enum key with text.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumValueAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumValueAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.EnumValueAttribute",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.EnumValueAttribute.yml\" sourcestartlinenumber=\"1\">Decorate the enum key with a value.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.EnvironmentConfig<T, TEnvironmentNameEnum>",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig-2.yml\" sourcestartlinenumber=\"1\">EnvironmentConfig with an option to pass your own Configuration class, along with an enum that defines all environment names.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.EnvironmentConfig",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentConfig.yml\" sourcestartlinenumber=\"1\">Standard class for environmental configurations read from environmentConfig.json if exists</p>\n<p>If you've added more properties to environmentConfig.json than just the 'Name' you'd have to inherit 'EnvironmentConfig&lt;YourClass&gt;' and use that instead</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentName.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.EnvironmentName",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.EnvironmentName.yml\" sourcestartlinenumber=\"1\">Enum list of common built-in environment names allowed</p>\n<p>Config tranformations and EnvironmentName will work with other env-names, but the IsLocal, IsTest, and IsProd will not</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.ArrayExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for Arrays</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml\" sourcestartlinenumber=\"1\">Byte array extensions</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml\" sourcestartlinenumber=\"1\">Concurrent dictionary extensions</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.DynamicExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for Dynamic objects</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions<TEnum>",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for Enum as a Generic Type</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for Enums like ToText(), ToValue(), IsAny(), ...</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for IEnumerables</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.IListStringExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IList of strings</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on System.Security.Principal.IPrincipal</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IntExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.IntExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.IntExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.ObjectExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods on Object</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ReadOnlySpan</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StreamExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.StreamExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extensions for streams like reading content as json directly into class through JsonAsync()</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml\" sourcestartlinenumber=\"1\">String Builder extensions</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.TypeExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for Type</p>\n<p>For instance: Inherits()</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.UriExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions.UriExtensions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml\" sourcestartlinenumber=\"1\">This class contains extension methods for Uri</p>\n<p>For instance: GetPrimaryDomain(), etc...</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.FrameworkOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.FrameworkOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.FrameworkOptions",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.FrameworkOptions.yml\" sourcestartlinenumber=\"1\">Framework service and middelware options</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.HttpContextInstance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.HttpContextInstance.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.HttpContextInstance",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.HttpContextInstance.yml\" sourcestartlinenumber=\"1\">An implementation of the 'old' thread safe singleton HttpContext we all know and love from .NET Framework</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.ILogWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.ILogWriter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.ILogWriter",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.ILogWriter.yml\" sourcestartlinenumber=\"1\">ILogWriter is responsible for storing log messages</p>\n<p>- Create a new class that implements ILogWriter</p>\n- Register your class as singleton implementation of the ILogWriter\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Metric.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Metric.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Metric",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Metric.yml\" sourcestartlinenumber=\"1\">Metric class count metrics in memory and exposing it to Prometheus or the /metrics/ui endpoint if you are on Gold Tier license</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricChartOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricChartOption.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.MetricChartOption",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricChartOption.yml\" sourcestartlinenumber=\"1\">Create a metric option and pass it into the Metric.Init method to control how the pie chart of a metric is rendered</p>\n<p>Note: A pie chart's key is made up of label + category + status, so if you specify the exact same label, category and status, it overrides the existing one</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricCharts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricCharts.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.MetricCharts",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.MetricCharts.yml\" sourcestartlinenumber=\"1\">Static class to adjust each pie chart generated on the /metrics/ui endpoint</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Randomness.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.Randomness.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.Randomness",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.Randomness.yml\" sourcestartlinenumber=\"1\">Shortcut for generating random values using System.Random</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.SliceOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.SliceOption.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.SliceOption",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.SystemType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.SystemType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.SystemType",
+      "Summary": "<p sourcefile=\"systemlibrary.common.framework/SystemLibrary.Common.Framework.SystemType.yml\" sourcestartlinenumber=\"1\">A static class containing common typeof calls to optimize performance, as typeof can be slow. Use these predefined types whenever possible.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/SystemLibrary.Common.Framework.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "systemlibrary.common.framework/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "systemlibrary.common.framework/toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

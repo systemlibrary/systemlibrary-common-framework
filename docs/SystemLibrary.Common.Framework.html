@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SystemLibrary.Common.Framework
+ </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SystemLibrary.Common.Framework
+ ">
+  
+
+    <link rel="shortcut icon" href="..//systemlibrary-common-framework/favicon.ico">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.vendor.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/main.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/custom.css">
+
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <script>
+      function display() {
+        var articles = document.querySelectorAll('article.hideonload');
+        if(articles && articles.length) {
+          for(var i = 0; i < articles.length; i++) {
+            if(articles[i].classList.contains('hideonload')) {
+              articles[i].classList.remove('hideonload');
+            }
+          }
+        }
+      }
+      setTimeout(display, 80);
+    </script>
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="..//systemlibrary-common-framework/index.html" onclick="return slcf__handleNavBrandClick(event)">
+                <img id="logo" class="svg" src="..//systemlibrary-common-framework/logo.png" alt="">
+                <span class="navbar-title">System Library Common Framework</span>
+              </a>
+              <script>
+              function slcf__handleNavBrandClick(e) {
+                if (e.altKey && window.history.length > 1) {
+                  e.preventDefault();
+                  history.back();
+                  return false;
+                }
+                return true;
+              }
+              </script>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+
+      <div id="custom-skipDocumentationFor" style="overflow: hidden;font-size: 1px;max-width: 1px; visibility: hidden; position: absolute; margin-left: -4000px;">
+        *.Benchmark*,*.Tests*,*.ApiTests*,*.BaseTest*,DelegateJsonConverter,CalleeCancelledRequestException,ClientResponse,ContentType,OutputCachePolicy
+      </div>
+
+      <div class="sidenav hide-when-search">
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <div class="sidetoggle collapse" id="sidetoggle">
+          <div id="sidetoc" class="hideonload"></div>
+        </div>
+      </div>
+
+      <script>
+        function sideTocShowOnLoad() {
+          var sidetoc = document.getElementById('sidetoc');
+          sidetoc.classList.remove('hideonload');
+        }
+
+        function hideLinksQueryBasedInToc() {
+          var skipDocumentationForContainer = document.getElementById('custom-skipDocumentationFor');
+          if (skipDocumentationForContainer) {
+            var innerHtml = skipDocumentationForContainer.innerHTML;
+
+            if (innerHtml && innerHtml.length > 1) {
+              var toc = document.getElementById('toc');
+              if (toc && toc.querySelector) {
+                var skipPatterns = innerHtml.split(',').map(x => x.trim()).filter(Boolean);
+
+                var links = toc.getElementsByTagName('a');
+                if (!links || links.length === 0) return;
+
+                for (var i = 0; i < links.length; i++) {
+                  var link = links[i];
+                  var path = link.pathname || '';
+                  var title = link.getAttribute('title') || '';
+
+                  for (var j = 0; j < skipPatterns.length; j++) {
+                    var pattern = skipPatterns[j];
+
+                    var matches = false;
+                    if (pattern.includes('*')) {
+                      var cleanPattern = pattern.replace(/\*/g, '');
+                      if (path.includes(cleanPattern)) matches = true;
+                    } else if (pattern.includes('.')) {
+                      if (path.startsWith('/' + pattern)) matches = true;
+                    } else {
+                      if (title.endsWith(pattern)) matches = true;
+                    }
+
+                    if (matches) {
+                      try {
+                        var parent = link.parentNode;
+                        if (parent && parent.remove) {
+                          var namespaceParent = parent.parentNode;
+                          parent.remove();
+
+                          if (namespaceParent && namespaceParent.classList.contains('level2')) {
+                            if (namespaceParent.children.length <= 1) {
+                              var nsGroup = namespaceParent.parentNode;
+                              if (nsGroup && nsGroup.remove) nsGroup.remove();
+                            }
+                          }
+                        }
+                      } catch (e) {
+                        console.warn("Error cleaning a TOC link:", e);
+                      }
+                      break; // stop checking once matched
+                    }
+                  }
+                }
+
+                if (typeof sideTocShowOnLoad === "function") sideTocShowOnLoad();
+              }
+            }
+          }
+        }
+
+        setTimeout(() => sideTocShowOnLoad(), 100);
+
+      </script>
+      <div class="article-row-container">
+        <div class="article row grid-right">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap hideonload" id="_content" data-uid="SystemLibrary.Common.Framework">
+
+  <h1 id="SystemLibrary_Common_Framework" data-uid="SystemLibrary.Common.Framework" class="text-break">SystemLibrary.Common.Framework
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Assemblies.html">Assemblies</a></h4>
+      <section id="SystemLibrary.Common.Framework.Assemblies--description" class="namespace-summary-per-class"><p>Static functions on whitelisted loaded assemblies</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Async.html">Async</a></h4>
+      <section id="SystemLibrary.Common.Framework.Async--description" class="namespace-summary-per-class"><p>Run methods asynchronously without blocking.</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Clock.html">Clock</a></h4>
+      <section id="SystemLibrary.Common.Framework.Clock--description" class="namespace-summary-per-class"><p>A Clock to measure an actions execution time based on Stopwatch</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Config-1.html">Config&lt;T&gt;</a></h4>
+      <section id="SystemLibrary.Common.Framework.Config`1--description" class="namespace-summary-per-class"><p>Loads and reads configuration files (.xml, .json, or .config), applies transformations, and decrypts encrypted properties.</p>
+<p>Configs can be placed in:</p>
+<p>~/*.json, ~/*.xml, ~/Configs/**, ~/Configurations/**, or appended to appsettings.json.</p>
+<p>Transformations use the ASPNETCORE_ENVIRONMENT variable.</p>
+<p>Set ASPNETCORE_ENVIRONMENT in:</p>
+<p>- launchSettings.json (IIS Express/Kestrel)</p>
+<p>- web.config (IIS/IIS Express)</p>
+<p>- mstest.runsettings (unit tests)</p>
+<p>- command-line --configuration (executables)</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.DateJsonConverter.html">DateJsonConverter</a></h4>
+      <section id="SystemLibrary.Common.Framework.DateJsonConverter--description" class="namespace-summary-per-class"><p>Use to convert a DateTime into a string date 'yyyy-MM-dd', ignoring time</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.DateTimeJsonConverter.html">DateTimeJsonConverter</a></h4>
+      <section id="SystemLibrary.Common.Framework.DateTimeJsonConverter--description" class="namespace-summary-per-class"><p>Use to convert a string to DateTime during Json() invocation with your own format</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.html">DateTimeOffsetJsonConverter</a></h4>
+      <section id="SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter--description" class="namespace-summary-per-class"><p>DateTime json converter that takes a string format</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.DelegateJsonConverter.html"></a></h4>
+      <section id="SystemLibrary.Common.Framework.DelegateJsonConverter--description" class="namespace-summary-per-class"></section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.EnumTextAttribute.html">EnumTextAttribute</a></h4>
+      <section id="SystemLibrary.Common.Framework.EnumTextAttribute--description" class="namespace-summary-per-class"><p>Decorate the enum key with text.</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.EnumValueAttribute.html">EnumValueAttribute</a></h4>
+      <section id="SystemLibrary.Common.Framework.EnumValueAttribute--description" class="namespace-summary-per-class"><p>Decorate the enum key with a value.</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.EnvironmentConfig.html">EnvironmentConfig</a></h4>
+      <section id="SystemLibrary.Common.Framework.EnvironmentConfig--description" class="namespace-summary-per-class"><p>Standard class for environmental configurations read from environmentConfig.json if exists</p>
+<p>If you've added more properties to environmentConfig.json than just the 'Name' you'd have to inherit 'EnvironmentConfig&lt;YourClass&gt;' and use that instead</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.EnvironmentConfig-2.html">EnvironmentConfig&lt;T, TEnvironmentNameEnum&gt;</a></h4>
+      <section id="SystemLibrary.Common.Framework.EnvironmentConfig`2--description" class="namespace-summary-per-class"><p>EnvironmentConfig with an option to pass your own Configuration class, along with an enum that defines all environment names.</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.FrameworkOptions.html">FrameworkOptions</a></h4>
+      <section id="SystemLibrary.Common.Framework.FrameworkOptions--description" class="namespace-summary-per-class"><p>Framework service and middelware options</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.HttpContextInstance.html">HttpContextInstance</a></h4>
+      <section id="SystemLibrary.Common.Framework.HttpContextInstance--description" class="namespace-summary-per-class"><p>An implementation of the 'old' thread safe singleton HttpContext we all know and love from .NET Framework</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Metric.html">Metric</a></h4>
+      <section id="SystemLibrary.Common.Framework.Metric--description" class="namespace-summary-per-class"><p>Metric class count metrics in memory and exposing it to Prometheus or the /metrics/ui endpoint if you are on Gold Tier license</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.MetricChartOption.html">MetricChartOption</a></h4>
+      <section id="SystemLibrary.Common.Framework.MetricChartOption--description" class="namespace-summary-per-class"><p>Create a metric option and pass it into the Metric.Init method to control how the pie chart of a metric is rendered</p>
+<p>Note: A pie chart's key is made up of label + category + status, so if you specify the exact same label, category and status, it overrides the existing one</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.MetricCharts.html">MetricCharts</a></h4>
+      <section id="SystemLibrary.Common.Framework.MetricCharts--description" class="namespace-summary-per-class"><p>Static class to adjust each pie chart generated on the /metrics/ui endpoint</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Randomness.html">Randomness</a></h4>
+      <section id="SystemLibrary.Common.Framework.Randomness--description" class="namespace-summary-per-class"><p>Shortcut for generating random values using System.Random</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.SliceOption.html">SliceOption</a></h4>
+      <section id="SystemLibrary.Common.Framework.SliceOption--description" class="namespace-summary-per-class"></section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.SystemType.html">SystemType</a></h4>
+      <section id="SystemLibrary.Common.Framework.SystemType--description" class="namespace-summary-per-class"><p>A static class containing common typeof calls to optimize performance, as typeof can be slow. Use these predefined types whenever possible.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.ILogWriter.html">ILogWriter</a></h4>
+      <section id="SystemLibrary.Common.Framework.ILogWriter--description" class="namespace-summary-per-class"><p>ILogWriter is responsible for storing log messages</p>
+<p>- Create a new class that implements ILogWriter</p>
+- Register your class as singleton implementation of the ILogWriter
+</section>
+    <h3 id="enums">Enums
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.EnvironmentName.html">EnvironmentName</a></h4>
+      <section id="SystemLibrary.Common.Framework.EnvironmentName--description" class="namespace-summary-per-class"><p>Enum list of common built-in environment names allowed</p>
+<p>Config tranformations and EnvironmentName will work with other env-names, but the IsLocal, IsTest, and IsProd will not</p>
+</section>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <footer id="page-footer">
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br>
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br>
+            <span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/main.js"></script>
+  </div></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SystemLibrary.Common.Framework.Extensions
+ </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="SystemLibrary.Common.Framework.Extensions
+ ">
+  
+
+    <link rel="shortcut icon" href="..//systemlibrary-common-framework/favicon.ico">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.vendor.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/docfx.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/main.css">
+    <link rel="stylesheet" href="/systemlibrary-common-framework/styles/custom.css">
+
+    <meta property="docfx:navrel" content="">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <script>
+      function display() {
+        var articles = document.querySelectorAll('article.hideonload');
+        if(articles && articles.length) {
+          for(var i = 0; i < articles.length; i++) {
+            if(articles[i].classList.contains('hideonload')) {
+              articles[i].classList.remove('hideonload');
+            }
+          }
+        }
+      }
+      setTimeout(display, 80);
+    </script>
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="..//systemlibrary-common-framework/index.html" onclick="return slcf__handleNavBrandClick(event)">
+                <img id="logo" class="svg" src="..//systemlibrary-common-framework/logo.png" alt="">
+                <span class="navbar-title">System Library Common Framework</span>
+              </a>
+              <script>
+              function slcf__handleNavBrandClick(e) {
+                if (e.altKey && window.history.length > 1) {
+                  e.preventDefault();
+                  history.back();
+                  return false;
+                }
+                return true;
+              }
+              </script>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+
+      <div id="custom-skipDocumentationFor" style="overflow: hidden;font-size: 1px;max-width: 1px; visibility: hidden; position: absolute; margin-left: -4000px;">
+        *.Benchmark*,*.Tests*,*.ApiTests*,*.BaseTest*,DelegateJsonConverter,CalleeCancelledRequestException,ClientResponse,ContentType,OutputCachePolicy
+      </div>
+
+      <div class="sidenav hide-when-search">
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+        <div class="sidetoggle collapse" id="sidetoggle">
+          <div id="sidetoc" class="hideonload"></div>
+        </div>
+      </div>
+
+      <script>
+        function sideTocShowOnLoad() {
+          var sidetoc = document.getElementById('sidetoc');
+          sidetoc.classList.remove('hideonload');
+        }
+
+        function hideLinksQueryBasedInToc() {
+          var skipDocumentationForContainer = document.getElementById('custom-skipDocumentationFor');
+          if (skipDocumentationForContainer) {
+            var innerHtml = skipDocumentationForContainer.innerHTML;
+
+            if (innerHtml && innerHtml.length > 1) {
+              var toc = document.getElementById('toc');
+              if (toc && toc.querySelector) {
+                var skipPatterns = innerHtml.split(',').map(x => x.trim()).filter(Boolean);
+
+                var links = toc.getElementsByTagName('a');
+                if (!links || links.length === 0) return;
+
+                for (var i = 0; i < links.length; i++) {
+                  var link = links[i];
+                  var path = link.pathname || '';
+                  var title = link.getAttribute('title') || '';
+
+                  for (var j = 0; j < skipPatterns.length; j++) {
+                    var pattern = skipPatterns[j];
+
+                    var matches = false;
+                    if (pattern.includes('*')) {
+                      var cleanPattern = pattern.replace(/\*/g, '');
+                      if (path.includes(cleanPattern)) matches = true;
+                    } else if (pattern.includes('.')) {
+                      if (path.startsWith('/' + pattern)) matches = true;
+                    } else {
+                      if (title.endsWith(pattern)) matches = true;
+                    }
+
+                    if (matches) {
+                      try {
+                        var parent = link.parentNode;
+                        if (parent && parent.remove) {
+                          var namespaceParent = parent.parentNode;
+                          parent.remove();
+
+                          if (namespaceParent && namespaceParent.classList.contains('level2')) {
+                            if (namespaceParent.children.length <= 1) {
+                              var nsGroup = namespaceParent.parentNode;
+                              if (nsGroup && nsGroup.remove) nsGroup.remove();
+                            }
+                          }
+                        }
+                      } catch (e) {
+                        console.warn("Error cleaning a TOC link:", e);
+                      }
+                      break; // stop checking once matched
+                    }
+                  }
+                }
+
+                if (typeof sideTocShowOnLoad === "function") sideTocShowOnLoad();
+              }
+            }
+          }
+        }
+
+        setTimeout(() => sideTocShowOnLoad(), 100);
+
+      </script>
+      <div class="article-row-container">
+        <div class="article row grid-right">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap hideonload" id="_content" data-uid="SystemLibrary.Common.Framework.Extensions">
+
+  <h1 id="SystemLibrary_Common_Framework_Extensions" data-uid="SystemLibrary.Common.Framework.Extensions" class="text-break">SystemLibrary.Common.Framework.Extensions
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+</h3>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.ArrayExtensions.html">ArrayExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.ArrayExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods for Arrays</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.html">ByteArrayExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions--description" class="namespace-summary-per-class"><p>Byte array extensions</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html">ConcurrentDictionaryExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions--description" class="namespace-summary-per-class"><p>Concurrent dictionary extensions</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.DynamicExtensions.html">DynamicExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.DynamicExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods for Dynamic objects</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.EnumExtensions.html">EnumExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.EnumExtensions--description" class="namespace-summary-per-class"><p>Extension methods for Enums like ToText(), ToValue(), IsAny(), ...</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.html">EnumExtensions&lt;TEnum&gt;</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.EnumExtensions`1--description" class="namespace-summary-per-class"><p>This class contains extension methods for Enum as a Generic Type</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.html">IEnumerableExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods for IEnumerables</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.IListStringExtensions.html">IListStringExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.IListStringExtensions--description" class="namespace-summary-per-class"><p>Extension methods for IList of strings</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.html">IPrincipalExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions--description" class="namespace-summary-per-class"><p>Extension methods on System.Security.Principal.IPrincipal</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.IntExtensions.html">IntExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.IntExtensions--description" class="namespace-summary-per-class"></section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html">ObjectExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.ObjectExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods on Object</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html">ReadOnlySpanExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions--description" class="namespace-summary-per-class"><p>Extension methods for ReadOnlySpan</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.StreamExtensions.html">StreamExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.StreamExtensions--description" class="namespace-summary-per-class"><p>Extensions for streams like reading content as json directly into class through JsonAsync()</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.html">StringBuilderExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions--description" class="namespace-summary-per-class"><p>String Builder extensions</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.TypeExtensions.html">TypeExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.TypeExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods for Type</p>
+<p>For instance: Inherits()</p>
+</section>
+      <h4><a class="xref" href="SystemLibrary.Common.Framework.Extensions.UriExtensions.html">UriExtensions</a></h4>
+      <section id="SystemLibrary.Common.Framework.Extensions.UriExtensions--description" class="namespace-summary-per-class"><p>This class contains extension methods for Uri</p>
+<p>For instance: GetPrimaryDomain(), etc...</p>
+</section>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <footer id="page-footer">
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br>
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br>
+            <span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/docfx.js"></script>
+    <script type="text/javascript" src="..//systemlibrary-common-framework/styles/main.js"></script>
+  </div></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
