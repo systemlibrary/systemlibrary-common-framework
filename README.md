@@ -51,26 +51,30 @@ var value = Cache.Get<string>("key", () => Compute());
 ```
 
 ### 🌐 HTTP Client
-Client which caches underlying `HttpClient` with retry policies, circuit breaker, and metrics.
+Client which caches underlying `HttpClient` with automatic retry policies, metrics and a circuit breaker [Gold Tier].
 
 ```csharp
 var json = Client.Get<string>("https://api.example.com/data");
 var json2 = "https://api.example.com/data".Get<string>();
 ```
 
+### Metric UI
+A metric UI rendering a pie chart per metric with the option to set a token to lock down the UI
+
+```csharp
+/metrics/ui 
+```
+
 ### 📦 Extensions
-`.Json()`, `.PartialJson()`, `.Encrypt()`, `.Decrypt()`, `.ToBase64()`, `.FromBase64()`, `.Compress()`, `.Decompress()`, `.Obfuscate()`, `.Deobfuscate()`, `.Is()`, `.IsNot()`, `.GetCompressedKey` and more...
+`.Json()`, `.PartialJson()`, `.Encrypt()`, `.Decrypt()`, `.ToBase64()`, `.FromBase64()`, `.Compress()`, `.Decompress()`, `.Obfuscate()`, `.Deobfuscate()`, `.Is()`, `.IsNot()`, `.GetCompressedId()` and more...
 
 ```csharp
 var json = user.Json();
+var compressedId = json.GetCompressedId();
 var encrypted = json.Encrypt();
-var obfuscated = encrypted.Obfuscate();
-var compressedKey = obfuscated.GetCompressedKey();
-
-"hi".ToSha256();
-"hi".Compress();
-"hi".ToBase64();
-"hi".Obfuscate();
+var obfuscated = json.Obfuscate();
+var hash = json.ToSha1Hash();
+var base64 = json.ToBase64();
 ```
 
 ### 🔐 Encryption
@@ -82,12 +86,22 @@ var decrypted = encrypted.Decrypt();
 ```
 
 ### 🧩 Enhanced Enums
-Decorate enums with `[EnumText]` and `[EnumValue]` for better JSON control and use `ToValue()` or `ToText()` on the Enum.
+Decorate enums with `[EnumText]` and `[EnumValue]`, and a JsonConverter is registered and injected into MVC, serialization/deserialization uses the attributes too. Use `ToValue()` or `ToText()` on the Enum yourself.
 
 ```csharp
-enum Role { [EnumText("Administrator")] Admin }
+enum Role { 
+	[EnumValue("adm")]
+	[EnumText("Administrator")]
+	Admin,
+
+	Guest
+}
 ...
-var role = user.Role.ToText(); // `Administrator`
+var role = Role.Admin.ToText(); // `Administrator`
+var value = Role.Admin.ToValue(); // `adm`
+
+var role = Role.Guest.ToText(); // `Guest`
+var value = Role.Guest.ToValue(); // `Guest`
 ```
 
 ### 📡 BaseApiController
@@ -97,21 +111,33 @@ Automatic 📖 `/docs` endpoint listing all routes, inputs, and metadata.
 
 ```csharp
 [ApiTokenFilter(name: "hello", value: "world")]
-public class MyApi : BaseApiController { }
+public class MyApi : BaseApiController 
+{ 
+}
 ```
 
 ### 🔗 ModelBinder
 Model bindings auto-registered for DateTime and enum types — built to correctly parse most inputs into the values you actually want.
 ```csharp
-ActionResult Index(Role role, DateTime date) {
+public class Controller 
+{
+	ActionResult Index(Role role, DateTime date) 
+	{
+	}
 }
 ```
 
 ## Latest Release Notes
-- 8.4.0.7
-- Metrics: client metrics does not double count on failure and success, only one metric per client invocation (fix)
-- Metrics: returns plain/text on error so browsers on devices wont think its a downloadable file (fix)
-- Metrics: added one more request to the "total sum" as 6 requests sometimes all hits the same server (fix)
+- 8.5.0.1
+- Removed "t" and "token" from outputcache, added "realm" as a query param to consider (fix)
+- Renamed GetCompressedKey to GetCompressedId (breaking change)
+- Moved App attributes to App.Attributes namespace (breaking change)
+- Added metric, Vision, Guide and other documentations (new)
+- Adjusted XML comments in various classes and added few more samples (fix)
+- Configuration samples per module exists now only in Guide.md not in each summary of the class (clean)
+- Added ProjectReferences to the Framework.csproj, not sure if it is needed (WIP)
+- HttpRequestExtension.IsFileRequest added (new)
+- FrameworkOption.UseForwardLogToStd forwards all Log.Error, etc. to the console std stream, either the err or the out streams (new)
 
 #### Version history 
 View git history of this file if interested
@@ -124,6 +150,10 @@ View git history of this file if interested
 
 ## Nuget
 [![Latest version](https://img.shields.io/nuget/v/SystemLibrary.Common.Framework)](https://www.nuget.org/packages/SystemLibrary.Common.Framework)
+
+## Vision
+Futuristic vision to be a full framework:
+[Future Vision](https://github.com/systemlibrary/systemlibrary-common-framework/Vision.md)
 
 ## License
 Free with Tiered Pricing for additional features at https://www.systemlibrary.com/
