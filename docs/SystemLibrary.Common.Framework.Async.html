@@ -380,9 +380,9 @@ See the overloaded method if you want to ignore exceptions
           <div class="custom-remarks custom-remarks2 text">
               <div class="custom-remarks-menu-data--close">X</div>
               <div class="markdown level1 remarks"><p>Parallel swallows exceptions if the methods passed does throw</p>
-<p>Parallel requires the methods pass to always return a data</p>
+<p>Parallel requires the methods pass to always return data</p>
 <p>Null values returned from the methods will be filtered away</p>
-<p>Parallel usage is against local file system, file searches and CPU bound calculations</p>
+<p>Parallel usage is decent when you: do something towards local file system, file searches or CPU bound calculations</p>
 </div>
           </div>
       </div>
@@ -392,107 +392,13 @@ See the overloaded method if you want to ignore exceptions
       <div class="custom-menu-data">
           <h4 id="SystemLibrary_Common_Framework_Async_Parallel__1_System_Func___0____" data-uid="SystemLibrary.Common.Framework.Async.Parallel``1(System.Func{``0}[])" class="h4-custom-functionName">public static List&lt;T&gt; Parallel&lt;T&gt;(params Func&lt;T&gt;[] functions)</h4>
           <div class="custom-menu-data-container">
-
-              <div class="custom-menu-data-arguments" style="display: none;">
-                  <div class="syslib-tab-menu-data--close">X</div>
-                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Generic types</h5>
-                  <table class="table table-bordered table-striped table-condensed class-tmpl-partial-typeParameters-table">
-                      <thead>
-                          <tr>
-                              <th>Name</th>
-                              <th>Description</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td><span class="parametername">T</span></td>
-                              <td></td>
-                          </tr>
-                      </tbody>
-                  </table>
-
-                  <h5 class="typeParameters class-tmpl-partial-typeParameters">Methods arguments</h5>
-                  <table class="table table-bordered table-striped table-condensed">
-                      <thead>
-                          <tr>
-                              <th>Type</th>
-                              <th>Name</th>
-                              <th>Description</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;T&gt;[]</td>
-                              <td><span class="parametername">functions</span></td>
-                              <td></td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-
-              <div class="custom-menu-data-returntype" style="display: none;">
-                  <div class="syslib-tab-menu-data--close">X</div>
-
-                  <table class="table table-bordered table-striped table-condensed table-return">
-                      <thead>
-                          <tr>
-                              <th>Type</th>
-                              <th>Description</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;T&gt;</td>
-                              <td></td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-
-
-
-
-  <div class="custom-container">
-      <div class="custom-menu-summary-data">
-          <div class="markdown level1 summary member-summary"><p>Execute methods in a async manner, appending the range of results per function to the same list, and it halts execution till all functions passed as params has completed</p>
-</div>
-          <div class="markdown level1 conceptual member-summary-conceptual"></div>
-      </div>
-
-
-
-      <a id="SystemLibrary_Common_Framework_Async_Run_" data-uid="SystemLibrary.Common.Framework.Async.Run*"></a>
-
-      <div class="custom-menu-data">
-          <h4 id="SystemLibrary_Common_Framework_Async_Run__1_System_Func_System_Collections_Generic_IEnumerable___0_____" data-uid="SystemLibrary.Common.Framework.Async.Run``1(System.Func{System.Collections.Generic.IEnumerable{``0}}[])" class="h4-custom-functionName">public static List&lt;T&gt; Run&lt;T&gt;(params Func&lt;IEnumerable&lt;T&gt;&gt;[] functions)</h4>
-          <div class="custom-menu-data-container">
               <div class="custom-menu-data-name" style="display: none;">
                   <div class="syslib-tab-menu-data--close">X</div>
-                  <div class="codewrapper"><pre><code class="lang-csharp">class Car {
-    public string Name { get; set; }
-}
-
-class CarApi {
-    //Simple dummy method that pretends to return a list of cars based on the name from some API
-    List&lt;Car&gt; GetByName(string name) {
-        //Client exists in nuget package: SystemLibrary.Common.Framework.App
-        return Client.Get&lt;List&lt;Car&gt;&gt;("https://systemlibrary.com/cars/q=?" + name);   
-    }
-}
-
-var carApi = new CarApi();
-var cars = Async.Run&lt;Car&gt;(
-    () =&gt; carApi.GetByName("blue"),
-    () =&gt; carApi.GetByName("red"),
-    () =&gt; carApi.GetByName("orange")
-); 
-
-// Variable 'cars' is filled after all three api requests has completed.
-// Assume we got 2 blue, 3 red and 4 orange
-// 'cars' now contain a total of 9 objects of type 'Car'</code></pre>
+                  <div class="codewrapper"><pre><code class="lang-csharp">var responses = Async.Parallel&lt;string&gt;(
+    () =&gt; GetRedCars(url),
+    () =&gt; GetBlueCars(url),
+    () =&gt; GetGreenCars(url)
+);</code></pre>
 </div>
                   <div class="comment-examples-container-bottom"></div>
               </div>
@@ -526,7 +432,7 @@ var cars = Async.Run&lt;Car&gt;(
                       </thead>
                       <tbody>
                           <tr>
-                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;&gt;[]</td>
+                              <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;T&gt;[]</td>
                               <td><span class="parametername">functions</span></td>
                               <td></td>
                           </tr>

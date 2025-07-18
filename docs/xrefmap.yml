@@ -1385,22 +1385,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Async.Parallel(Of T)(ParamArray System.Func(Of T)())
   nameWithType: Async.Parallel<T>(params Func<T>[])
   nameWithType.vb: Async.Parallel(Of T)(ParamArray Func(Of T)())
-- uid: SystemLibrary.Common.Framework.Async.Run*
-  name: Run
-  href: systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.html#SystemLibrary_Common_Framework_Async_Run_
-  commentId: Overload:SystemLibrary.Common.Framework.Async.Run
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.Async.Run
-  nameWithType: Async.Run
-- uid: SystemLibrary.Common.Framework.Async.Run``1(System.Func{System.Collections.Generic.IEnumerable{``0}}[])
-  name: Run<T>(params Func<IEnumerable<T>>[])
-  href: systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.html#SystemLibrary_Common_Framework_Async_Run__1_System_Func_System_Collections_Generic_IEnumerable___0_____
-  commentId: M:SystemLibrary.Common.Framework.Async.Run``1(System.Func{System.Collections.Generic.IEnumerable{``0}}[])
-  name.vb: Run(Of T)(ParamArray Func(Of IEnumerable(Of T))())
-  fullName: SystemLibrary.Common.Framework.Async.Run<T>(params System.Func<System.Collections.Generic.IEnumerable<T>>[])
-  fullName.vb: SystemLibrary.Common.Framework.Async.Run(Of T)(ParamArray System.Func(Of System.Collections.Generic.IEnumerable(Of T))())
-  nameWithType: Async.Run<T>(params Func<IEnumerable<T>>[])
-  nameWithType.vb: Async.Run(Of T)(ParamArray Func(Of IEnumerable(Of T))())
 - uid: SystemLibrary.Common.Framework.Async.Tasks*
   name: Tasks
   href: systemlibrary.common.framework/SystemLibrary.Common.Framework.Async.html#SystemLibrary_Common_Framework_Async_Tasks_

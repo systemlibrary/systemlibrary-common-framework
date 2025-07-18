@@ -128,16 +128,10 @@ public class Controller
 ```
 
 ## Latest Release Notes
-- 8.5.0.1
-- Removed "t" and "token" from outputcache, added "realm" as a query param to consider (fix)
-- Renamed GetCompressedKey to GetCompressedId (breaking change)
-- Moved App attributes to App.Attributes namespace (breaking change)
-- Added metric, Vision, Guide and other documentations (new)
-- Adjusted XML comments in various classes and added few more samples (fix)
-- Configuration samples per module exists now only in Guide.md not in each summary of the class (clean)
-- Added ProjectReferences to the Framework.csproj, not sure if it is needed (WIP)
-- HttpRequestExtension.IsFileRequest added (new)
-- FrameworkOption.UseForwardLogToStd forwards all Log.Error, etc. to the console std stream, either the err or the out streams (new)
+- 8.5.0.2
+- Docs updated (fix)
+- Async.Run removed, not in use (clean)
+- Vision.md created (new)
 
 #### Version history 
 View git history of this file if interested
@@ -153,7 +147,7 @@ View git history of this file if interested
 
 ## Vision
 Futuristic vision to be a full framework:
-[Future Vision](https://github.com/systemlibrary/systemlibrary-common-framework/Vision.md)
+[Future Vision](https://github.com/systemlibrary/systemlibrary-common-framework/blob/main/Vision.md)
 
 ## License
 Free with Tiered Pricing for additional features at https://www.systemlibrary.com/
