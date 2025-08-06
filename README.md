@@ -108,10 +108,8 @@ ActionResult Index(Role role, DateTime date) {
 ```
 
 ## Latest Release Notes
-- 8.4.0.7
-- Metrics: client metrics does not double count on failure and success, only one metric per client invocation (fix)
-- Metrics: returns plain/text on error so browsers on devices wont think its a downloadable file (fix)
-- Metrics: added one more request to the "total sum" as 6 requests sometimes all hits the same server (fix)
+- 8.4.0.8
+- LastIndexOf - null exception (fix)
 
 #### Version history 
 View git history of this file if interested
