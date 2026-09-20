@@ -1170,6 +1170,369 @@
         }
       },
       "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Contact/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Contact/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Contribute/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Contribute/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/DocsApi/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "DocsApi/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/ApiFilters.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/ApiFilters.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/AppSettings.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/AppSettings.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Application.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Application.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Assemblies.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Assemblies.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Cache.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Cache.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Client.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Client.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Config.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Config.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Controllers.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Controllers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Dispatch.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Dispatch.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Encryption.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Encryption.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Enum.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Enum.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/EnvironmentConfig.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/EnvironmentConfig.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Extensions.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Extensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/FrameworkOptions.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/FrameworkOptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Hooks.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Hooks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/HttpContextInstance.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/HttpContextInstance.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Json.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Json.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Log.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Log.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Metrics.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Metrics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Security.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Security.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Services.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Services.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/ShardedDictionary.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/ShardedDictionary.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/StaticFiles.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/StaticFiles.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/SystemType.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/SystemType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Views.md",
+      "output": {
+        ".html": {
+          "relative_path": "Documentation/Views.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Install/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Install/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/License/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "License/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/Docs/Tutorial/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "Tutorial/Index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "systemlibrary.common.framework/Docs/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "systemlibrary.common.framework/Docs/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "systemlibrary.common.framework/Docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
     }
   ],
   "groups": [
