@@ -1,4 +1,5 @@
-﻿# Vision
+﻿
+# Vision
 
 This framework is already live on NuGet:  
 👉 [SystemLibrary.Common.Framework](https://www.nuget.org/packages/SystemLibrary.Common.Framework)
@@ -38,7 +39,7 @@ Below is where it’s headed. No fluff, just features.
 
 ---
 
-## [Gold Tier]
+## [Pro Tier]
 
 ### ORM
 - Full ORM on EntityFramework:
@@ -115,3 +116,39 @@ I’ve given Microsoft more than ten years since the first release of .NET (from
 and yet here we are, they havent even created IMemoryCache as a Sharded Cache so if you actually do have some 10K users, you will hit a bottleneck...
 
 So this framework exists to fix that.
+
+# Auth
+Configure authentication, extended authentication into:100:
+Claims that are part, duration, sliding expiration, ... max duration, 
+- Refresh: true/false, dont specify clientId/pwd to use DefaultCredentials in Azure
+- Scheme: Defaults to "Cookies", 
+- Keycloak (Docker)        → represents "enterprise hell" provider
+mock-oauth2-server       → fast, predictable, CI-friendly
+Entra ID (free tenant)   → real Azure, catches Microsoft-specific quirks
+"auth": {
+  "flow": "PKCE"      // browser holds token, calls APIs directly
+  "flow": "BFF"       // framework holds token, JS gets cookie only
+}
+"auth": {
+  "flow": "PKCE",
+  "clientId": "",
+  "callbackPath": "/auth/callback"
+}
+refresh: true  → store refresh_token in cookie, auto-renew access_token
+refresh: false → cookie lifetime IS the session, expire = re-login
+"auth": {
+  "scheme": "Cookies",
+  "duration": 60,
+  "slidingExpiration": true,
+  "maxDuration": 480,
+  "refresh": true,
+  "fingerprint": true,
+  "clientId": "",
+  "clientSecret": ""
+}
+
+"auth": {
+  "accessDuration": 720,    // minutes, 12h...
+  "refreshDuration": 30,    // days, require login once a month
+  sliding": false              // or true if you dont require new login...
+}

@@ -4,15 +4,16 @@
 Framework for every .NET application.
 
 ## Requirements
-&gt;= .NET 8
+&gt;= .NET 10
 
 ## Access & Contribute  
-[**GitHub Source**](https://github.com/systemlibrary/systemlibrary-common-framework-private)
+[**GitHub Source (private repository)**](https://github.com/systemlibrary/systemlibrary-common-framework-private)
 
-To request access, email `support@systemlibrary.com` with your GitHub username and specify the repo.
+To request access, email `support@systemlibrary.com` with your GitHub username.
 
 Read-only access is granted on request — no questions asked.  
-Once approved, you can fork, clone, and submit pull requests.
+
+Once approved, you can clone and submit pull requests.
 
 ## 🚀 Features
 
@@ -51,38 +52,39 @@ var value = Cache.Get<string>("key", () => Compute());
 ```
 
 ### 🌐 HTTP Client
-Client which caches underlying `HttpClient` with automatic retry policies, metrics and a circuit breaker [Gold Tier].
+Client which caches underlying `HttpClient` with automatic retry policies, metrics and a circuit breaker [Pro Tier].
 
 ```csharp
-var json = Client.Get<string>("https://api.example.com/data");
-var json2 = "https://api.example.com/data".Get<string>();
+var response1 = new Client().Get<string>("https://api.example.com/data");
+var response2 = "https://api.example.com/data".GetRequest<string>();
 ```
 
 ### Metric UI
-A metric UI rendering a pie chart per metric with the option to set a token to lock down the UI
+Out of the box a metric UI, rendering a pie chart per metric
 
 ```csharp
 /metrics/ui 
 ```
 
 ### 📦 Extensions
-`.Json()`, `.PartialJson()`, `.Encrypt()`, `.Decrypt()`, `.ToBase64()`, `.FromBase64()`, `.Compress()`, `.Decompress()`, `.Obfuscate()`, `.Deobfuscate()`, `.Is()`, `.IsNot()`, `.GetCompressedId()` and more...
+`.Json()`, `.PartialJson()`, `.Encrypt()`, `.Decrypt()`, `.ToBase64()`, `.FromBase64()`, `.Compress()`, `.Decompress()`, `.Obfuscate()`, `.Deobfuscate()`, `.Is()`, `.IsNot()`, `.GetSampledKey()` and more...
 
 ```csharp
 var json = user.Json();
-var compressedId = json.GetCompressedId();
+var sampledKey = json.GetSampledKey();
 var encrypted = json.Encrypt();
 var obfuscated = json.Obfuscate();
-var hash = json.ToSha1Hash();
+var hash = json.ToSha256Hash();
 var base64 = json.ToBase64();
 ```
 
 ### 🔐 Encryption
-Encrypt/decrypt using AES CBC PKCS7 via string/byte extensions with global key management.
+Encrypt/decrypt using either AES CBC, AES GCM or RSA via string/byte extensions with global key management.
 
 ```csharp
-var encrypted = "secret".Encrypt();
-var decrypted = encrypted.Decrypt();
+var encrypted = "secret".Encrypt(); // AES CBC PKCS7
+var encrypted = "secret".EncryptAesGcm();
+var encrypted = "secret".EncryptRsa();
 ```
 
 ### 🧩 Enhanced Enums
@@ -147,7 +149,7 @@ View git history of this file if interested
 
 ## Vision
 Futuristic vision to be a full framework:
-[Future Vision](https://github.com/systemlibrary/systemlibrary-common-framework/blob/main/Vision.md)
+Vision Vision](https://github.com/systemlibrary/systemlibrary-common-framework/blob/main/Vision.md)
 
 ## License
 Free with Tiered Pricing for additional features at https://www.systemlibrary.com/
