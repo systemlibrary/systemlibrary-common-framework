@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Encryption | System Library Common Framework </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Encryption | System Library Common Framework ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <link rel="stylesheet" href="../public/_extended.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/Docs/Documentation/Encryption.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.png" alt=" ">
+             
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="">
+<h1 id="encryption">Encryption</h1>
+
+<h2 id="description">Description</h2>
+<p>Extension methods for encrypting and decrypting strings and byte arrays using AES CBC, AES GCM, RSA, or the ASP.NET Data Protection key ring. All methods are available directly on <code>string</code> and <code>byte[]</code>.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>AES CBC</strong>: symmetric encryption, default algorithm, IV prepended to output</li>
+<li><strong>AES GCM</strong>: symmetric encryption with authentication tag, tamper-evident</li>
+<li><strong>RSA</strong>: asymmetric encryption using auto-generated or custom PEM key files</li>
+<li><strong>Key Ring</strong>: wraps ASP.NET Data Protection API — useful for short-lived tokens and cookies</li>
+<li><strong>Auto key discovery</strong>: key file is located automatically by scanning parent directories — no configuration required in most cases</li>
+</ul>
+<h2 id="behavior">Behavior</h2>
+<p><strong>Key resolution order</strong> at startup:</p>
+<ol>
+<li>CLI argument <code>--slcf-encryption-key=yourkey</code></li>
+<li>Environment variable <code>SLCF_ENCRYPTION_KEY</code></li>
+<li>Key file named <code>enc-*.key</code> in configured or auto-discovered directory</li>
+<li>Falls back to default key <code>ABCD...</code></li>
+</ol>
+<p>The resolved key is hashed together with 'app:name' to produce a final 32-byte AES key, meaning the same raw key produces different keys across different app names.</p>
+<p><strong>Key file discovery</strong> scans parent directories upward from the app root (up to 10 levels) looking for <code>enc-*.key</code>, <code>pem.pub</code> and <code>pem.priv</code> files. If multiple <code>.key</code> files exist the oldest is used — allowing key rotation without breaking existing encrypted values.</p>
+<p><strong>RSA</strong> key files are auto-generated on first use if none exist in the configured directory. Public key (<code>.pub</code>) is used for encryption, private key (<code>.priv</code>) for decryption.</p>
+<p><strong>Decryption caching</strong>: frequently decrypted short values (under 255 chars) are cached in memory — up to 64 entries per algorithm — to avoid repeated decryption overhead.</p>
+<p><strong>Key Ring</strong> uses the app name as the protection purpose — requires <code>app:name</code> to be set in appsettings in production or it throws.</p>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Default fallback key <code>ABC...</code> is shared across all framework users — never use it in production</li>
+<li>AES CBC key must be 16, 24 or 32 bytes — throws otherwise</li>
+<li>AES GCM IV must be 12 bytes, AES CBC IV must be 16 bytes — throws otherwise</li>
+<li>RSA requires a private key for decryption — throws if private key is missing</li>
+<li>Key Ring encrypted values cannot be decrypted across applications or after key ring rotation unless persistence is configured</li>
+<li>Encrypted values in config files may trigger GitHub secret scanning — add config paths to <code>.github/secret_scanning.yml</code> to suppress</li>
+</ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Store your <code>enc-*.key</code> file outside the repository as the filename after <code>enc-</code> is your encryption password.</p>
+<p>For stronger keys with unrestricted characters, pass the key via CLI argument <code>--slcf-encryption-key=</code> or environment variable <code>SLCF_ENCRYPTION_KEY</code>.</p>
+<p>Use minimum 32 characters mixing uppercase, lowercase, digits and symbols as the key — the longer and more random the better.</p>
+</div>
+<h2 id="appsettings">AppSettings</h2>
+<p>View all appsettings <a href="/documentation/AppSettings.html">here</a></p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br><span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br><span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span><br><br>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
+      }
+    </script>
+  </body>
+</html>

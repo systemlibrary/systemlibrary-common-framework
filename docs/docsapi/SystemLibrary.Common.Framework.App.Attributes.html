@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SystemLibrary.Common.Framework.App.Attributes | System Library Common Framework </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SystemLibrary.Common.Framework.App.Attributes | System Library Common Framework ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <link rel="stylesheet" href="../public/_extended.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.png" alt=" ">
+             
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="SystemLibrary.Common.Framework.App.Attributes">
+
+  <h1 id="SystemLibrary_Common_Framework_App_Attributes" data-uid="SystemLibrary.Common.Framework.App.Attributes" class="text-break">SystemLibrary.Common.Framework.App.Attributes</h1>
+
+
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.html">BaseFilterAttribute</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Base class for custom action filter attributes. Provides header value matching and access denied responses.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.html">OriginFilterAttribute</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Action filter that validates the <code>Origin</code> request header against a match pattern.<br>
+Match pattern rules:<br></p>
+<ul>
+<li><code>null</code> or <code>*</code>: allow all</li>
+<li>regex (contains <code>^$*?[</code>): origin must satisfy pattern</li>
+<li>pipe-delimited: must case-insensitively contain any one part</li>
+<li>wildcard: must case-insensitively satisfy wildcard pattern</li>
+<li>plain text: exact case-sensitive match</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.html">TokenFilterAttribute</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Action filter that validates a request token value against a match pattern.<br>
+The value is read from the <code>token</code> header or cookie by default.<br>
+Match pattern rules:<br></p>
+<ul>
+<li><code>null</code> or <code>*</code>: allow all</li>
+<li>regex (contains <code>^$*?[</code>): value must satisfy pattern</li>
+<li>pipe-delimited: must case-insensitively contain any one part</li>
+<li>wildcard: must case-insensitively satisfy wildcard pattern</li>
+<li>plain text: exact case-sensitive match</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.html">UserAgentFilterAttribute</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Action filter that validates the <code>User-Agent</code> request header against a match pattern.<br>
+Always blocks known bots, spiders and crawlers regardless of match pattern.<br>
+Match pattern rules:</p>
+<ul>
+<li><code>null</code> or <code>*</code>: allow all</li>
+<li>regex (contains <code>^$*?[</code>): user agent must satisfy pattern</li>
+<li>pipe-delimited: must case-insensitively contain any one part</li>
+<li>wildcard: must case-insensitively satisfy wildcard pattern</li>
+</ul>
+</dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br><span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br><span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span><br><br>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
+      }
+    </script>
+  </body>
+</html>
