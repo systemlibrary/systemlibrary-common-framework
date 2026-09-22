@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SystemLibrary.Common.Framework.App | System Library Common Framework </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SystemLibrary.Common.Framework.App | System Library Common Framework ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <link rel="stylesheet" href="../public/_extended.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.png" alt=" ">
+             
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="SystemLibrary.Common.Framework.App">
+
+  <h1 id="SystemLibrary_Common_Framework_App" data-uid="SystemLibrary.Common.Framework.App" class="text-break">SystemLibrary.Common.Framework.App</h1>
+
+
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Application.html">Application</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Static class for starting, building and stopping the ASP.NET application host.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.BaseApiController.html">BaseApiController</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers.
+All controllers inheriting BaseApiController are automatically picked up if matching the request path.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Cache.html">Cache</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Static class for sharded in-memory caching with auto-generated cache keys, skip conditions, and optional fallback cache.<br>
+Default duration is 180 seconds.</p>
+<ul>
+<li>Skip options: skipWhenAuthenticated (false), skipWhenAdmin (true), skipWhen (custom condition).</li>
+<li>Pass null as cacheKey to always bypass cache. Pass &quot;&quot; to auto-generate from calling context.</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.html">CalleeCancelledRequestException</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Thrown when the caller cancels an in-flight request via a <code>CancellationToken</code>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.Client.html">Client</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Client is a class for all http(s) requests in your project</p>
+<p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>
+<p>useRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504</p>
+<p>Options:</p>
+<p>useRetryPolicy:</p>
+<p> True: same as 'false', but adds:</p>
+<ul>
+<li>retries one additional time on 502, 504 GET, POST</li>
+</ul>
+<p>- retries up to two times if response is null (timeout/no response)</p>
+<ul>
+<li>retries once on 401 GET, POST</li>
+</ul>
+<p>- retries once on 404 GET</p>
+<ul>
+<li>retries once on 500 GET, POST</li>
+</ul>
+<p>- retries once on 404, 500, 502 504 file request</p>
+<ul>
+<li>retries once on OPTION, PATCH, HEAD, CONNECT, TRACE</li>
+</ul>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.ClientResponse.html">ClientResponse</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Base class for ClientResponse — use as return type when you want a concrete non-generic response type in your methods.
+Always contains a <code>Data</code> property (null if unset) — safe to serialize to JSON without undefined in JS.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.ClientResponse-1.html">ClientResponse&lt;T&gt;</a></dt>
+        <dd class="markdown summary summary-namespace"><p>The response that all Client methods returns</p>
+<p>Note that a response statuscode might be 200 OK, but the IsSuccess might be false in scenarios where no response were returned</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.HtmlHelperFactory.html">HtmlHelperFactory</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Builds <code>IHtmlHelper</code> instances outside of a Razor view context.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.OutputCachePolicy.html">OutputCachePolicy</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Output cache policy names for use with the [OutputCache] attribute.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.ServiceInstance.html">ServiceInstance</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Static accessor for resolving services from the application's service provider.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.IFrameworkHooks.html">IFrameworkHooks</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Hooks into the application startup pipeline. All methods have default empty implementations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.AppHosting.html">AppHosting</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Hosting server type used when starting the application via Application.Start or Application.Build.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.AppType.html">AppType</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Specifies whether the application serves web pages, API endpoints, or runs as a console process.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.CacheDuration.html">CacheDuration</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Cache duration presets in seconds for use with Cache methods.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+        <dt class="summary-namespace-title"><a class="xref" href="SystemLibrary.Common.Framework.App.ContentType.html">ContentType</a></dt>
+        <dd class="markdown summary summary-namespace"><p>Media types for Client request methods, sent as the <code>Accept</code> header.</p>
+<p>Use "None" to omit the header entirely.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br><span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br><span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span><br><br>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
+      }
+    </script>
+  </body>
+</html>
