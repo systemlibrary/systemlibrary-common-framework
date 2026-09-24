@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>ShardedDictionary | System Library Common Framework </title>
+      <title>API Docs | System Library Common Framework </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="ShardedDictionary | System Library Common Framework ">
+      <meta name="title" content="API Docs | System Library Common Framework ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -12,12 +12,12 @@
       <link rel="stylesheet" href="../public/main.css">
       <link rel="stylesheet" href="../public/_extended.css">
       <meta name="docfx:navrel" content="../toc.html">
-      <meta name="docfx:tocrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
       
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/Docs/Documentation/ShardedDictionary.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/docs/apidocs/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,32 +85,9 @@
         </div>
 
         <article data-uid="">
-<h1 id="shardeddictionary">ShardedDictionary</h1>
+<h1 id="api-docs">API Docs</h1>
 
-<h2 id="description">Description</h2>
-<p>A thread-safe generic dictionary that distributes keys across 4 shards to reduce lock contention and improve throughput under concurrent load.</p>
-<h2 id="features">Features</h2>
-<ul>
-<li><strong>Sharded storage</strong>: 4 internal <code>ConcurrentDictionary</code> shards — keys distributed by hash</li>
-<li><strong>Auto-clear</strong>: each shard clears itself when it reaches capacity — no manual management needed</li>
-<li><strong>Cache helper</strong>: <code>Cache(key, getItem)</code> returns existing value or creates and stores a new one</li>
-<li><strong>Standard API</strong>: <code>TryAdd</code>, <code>TryGetValue</code>, <code>TryRemove</code>, <code>ContainsKey</code>, <code>TryUpdate</code>, <code>Clear</code>, <code>Count</code>, <code>Keys</code></li>
-</ul>
-<h2 id="behavior">Behavior</h2>
-<p>Shard is selected by <code>key.GetHashCode() &amp; 3</code> — O(1) shard lookup.</p>
-<p>When a shard exceeds its capacity (<code>maxItemCount / 4</code>), the entire shard is cleared before adding the new item. This is a hard clear — not LRU, not eviction — all items in that shard are lost. Default total capacity is 100,000 items (25,000 per shard).</p>
-<p><code>Cache()</code> is a get-or-create helper — if key exists returns it, otherwise calls <code>getItem()</code>, stores and returns result. Used extensively inside the framework for reflection caching.</p>
-<h2 id="caveats">Caveats</h2>
-<ul>
-<li>Shard clear is <strong>all-or-nothing</strong> — when capacity is hit, entire shard is wiped, not just oldest entries</li>
-<li><code>Count</code> property iterates all 4 shards — slightly expensive, avoid in tight loops</li>
-<li><code>Keys</code> property yields across all shards — not a snapshot, concurrent modifications may affect iteration</li>
-<li><code>ClearLock</code> is a static object — shared across ALL <code>ShardedDictionary</code> instances, potential contention</li>
-</ul>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Use <code>Cache()</code> instead of <code>TryGetValue</code> + <code>TryAdd</code> — it handles the get-or-create pattern atomically per shard.</p>
-</div>
+<p>Welcome to the API documentation with samples for most modules and classes in the framework.</p>
 
 </article>
 

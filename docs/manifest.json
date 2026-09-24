@@ -12,108 +12,108 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.AppHosting.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.AppHosting.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.AppHosting.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.AppHosting.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.AppHosting",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.AppHosting.yml\" sourcestartlinenumber=\"1\">Hosting server type used when starting the application via Application.Start or Application.Build.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.AppHosting.yml\" sourcestartlinenumber=\"1\">Hosting server type used when starting the application via Application.Start or Application.Build.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.AppType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.AppType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.AppType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.AppType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.AppType",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.AppType.yml\" sourcestartlinenumber=\"1\">Specifies whether the application serves web pages, API endpoints, or runs as a console process.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.AppType.yml\" sourcestartlinenumber=\"1\">Specifies whether the application serves web pages, API endpoints, or runs as a console process.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Application.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Application.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Application.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Application.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Application",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Application.yml\" sourcestartlinenumber=\"1\">Static class for starting, building and stopping the ASP.NET application host.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Application.yml\" sourcestartlinenumber=\"1\">Static class for starting, building and stopping the ASP.NET application host.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.yml\" sourcestartlinenumber=\"1\">Base class for custom action filter attributes. Provides header value matching and access denied responses.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.BaseFilterAttribute.yml\" sourcestartlinenumber=\"1\">Base class for custom action filter attributes. Provides header value matching and access denied responses.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates the <code>Origin</code> request header against a match pattern.<br>\nMatch pattern rules:<br></p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"3\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"4\">regex (contains <code>^$*?[</code>): origin must satisfy pattern</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"5\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"6\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"7\">plain text: exact case-sensitive match</li>\n</ul>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates the <code>Origin</code> request header against a match pattern.<br>\nMatch pattern rules:<br></p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"3\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"4\">regex (contains <code>^$*?[</code>): origin must satisfy pattern</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"5\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"6\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.OriginFilterAttribute.yml\" sourcestartlinenumber=\"7\">plain text: exact case-sensitive match</li>\n</ul>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates a request token value against a match pattern.<br>\nThe value is read from the <code>token</code> header or cookie by default.<br>\nMatch pattern rules:<br></p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"4\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"4\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"5\">regex (contains <code>^$*?[</code>): value must satisfy pattern</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"6\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"7\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"8\">plain text: exact case-sensitive match</li>\n</ul>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates a request token value against a match pattern.<br>\nThe value is read from the <code>token</code> header or cookie by default.<br>\nMatch pattern rules:<br></p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"4\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"4\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"5\">regex (contains <code>^$*?[</code>): value must satisfy pattern</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"6\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"7\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.TokenFilterAttribute.yml\" sourcestartlinenumber=\"8\">plain text: exact case-sensitive match</li>\n</ul>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates the <code>User-Agent</code> request header against a match pattern.<br>\nAlways blocks known bots, spiders and crawlers regardless of match pattern.<br>\nMatch pattern rules:</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"4\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"4\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"5\">regex (contains <code>^$*?[</code>): user agent must satisfy pattern</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"6\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"7\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n</ul>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"1\">Action filter that validates the <code>User-Agent</code> request header against a match pattern.<br>\nAlways blocks known bots, spiders and crawlers regardless of match pattern.<br>\nMatch pattern rules:</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"4\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"4\"><code>null</code> or <code>*</code>: allow all</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"5\">regex (contains <code>^$*?[</code>): user agent must satisfy pattern</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"6\">pipe-delimited: must case-insensitively contain any one part</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Attributes.UserAgentFilterAttribute.yml\" sourcestartlinenumber=\"7\">wildcard: must case-insensitively satisfy wildcard pattern</li>\n</ul>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Attributes.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Attributes.html"
         }
       },
       "version": "",
@@ -124,24 +124,24 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.BaseApiController.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.BaseApiController.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.BaseApiController.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.BaseApiController.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.BaseApiController",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.BaseApiController.yml\" sourcestartlinenumber=\"1\">Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers.\nAll controllers inheriting BaseApiController are automatically picked up if matching the request path.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.BaseApiController.yml\" sourcestartlinenumber=\"1\">Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers.\nAll controllers inheriting BaseApiController are automatically picked up if matching the request path.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.BranchType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.BranchType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.BranchType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.BranchType.html"
         }
       },
       "version": "",
@@ -152,150 +152,150 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Cache.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Cache.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Cache.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Cache.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Cache",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"1\">Static class for sharded in-memory caching with auto-generated cache keys, skip conditions, and optional fallback cache.<br>\nDefault duration is 180 seconds.</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"3\">Skip options: skipWhenAuthenticated (false), skipWhenAdmin (true), skipWhen (custom condition).</li>\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"4\">Pass null as cacheKey to always bypass cache. Pass &quot;&quot; to auto-generate from calling context.</li>\n</ul>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"1\">Static class for sharded in-memory caching with auto-generated cache keys, skip conditions, and optional fallback cache.<br>\nDefault duration is 180 seconds.</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"3\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"3\">Skip options: skipWhenAuthenticated (false), skipWhenAdmin (true), skipWhen (custom condition).</li>\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Cache.yml\" sourcestartlinenumber=\"4\">Pass null as cacheKey to always bypass cache. Pass &quot;&quot; to auto-generate from calling context.</li>\n</ul>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.CacheDuration.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.CacheDuration.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.CacheDuration.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.CacheDuration.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.CacheDuration",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.CacheDuration.yml\" sourcestartlinenumber=\"1\">Cache duration presets in seconds for use with Cache methods.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.CacheDuration.yml\" sourcestartlinenumber=\"1\">Cache duration presets in seconds for use with Cache methods.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.CalleeCancelledRequestException",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml\" sourcestartlinenumber=\"1\">Thrown when the caller cancels an in-flight request via a <code>CancellationToken</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.CalleeCancelledRequestException.yml\" sourcestartlinenumber=\"1\">Thrown when the caller cancels an in-flight request via a <code>CancellationToken</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Client.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Client.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Client.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Client.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Client",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"1\">Client is a class for all http(s) requests in your project</p>\n<p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>\n<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"5\">useRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504</p>\n<p>Options:</p>\n<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"9\">useRetryPolicy:</p>\n<p> True: same as 'false', but adds:</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"13\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"13\">retries one additional time on 502, 504 GET, POST</li>\n</ul>\n<p>- retries up to two times if response is null (timeout/no response)</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"17\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"17\">retries once on 401 GET, POST</li>\n</ul>\n<p>- retries once on 404 GET</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"21\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"21\">retries once on 500 GET, POST</li>\n</ul>\n<p>- retries once on 404, 500, 502 504 file request</p>\n<ul sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"25\">\n<li sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"25\">retries once on OPTION, PATCH, HEAD, CONNECT, TRACE</li>\n</ul>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"1\">Client is a class for all http(s) requests in your project</p>\n<p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>\n<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"5\">useRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504</p>\n<p>Options:</p>\n<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"9\">useRetryPolicy:</p>\n<p> True: same as 'false', but adds:</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"13\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"13\">retries one additional time on 502, 504 GET, POST</li>\n</ul>\n<p>- retries up to two times if response is null (timeout/no response)</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"17\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"17\">retries once on 401 GET, POST</li>\n</ul>\n<p>- retries once on 404 GET</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"21\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"21\">retries once on 500 GET, POST</li>\n</ul>\n<p>- retries once on 404, 500, 502 504 file request</p>\n<ul sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"25\">\n<li sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Client.yml\" sourcestartlinenumber=\"25\">retries once on OPTION, PATCH, HEAD, CONNECT, TRACE</li>\n</ul>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.ClientResponse-1.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.ClientResponse-1.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.ClientResponse-1.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.ClientResponse-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.ClientResponse<T>",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.ClientResponse-1.yml\" sourcestartlinenumber=\"1\">The response that all Client methods returns</p>\n<p>Note that a response statuscode might be 200 OK, but the IsSuccess might be false in scenarios where no response were returned</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.ClientResponse-1.yml\" sourcestartlinenumber=\"1\">The response that all Client methods returns</p>\n<p>Note that a response statuscode might be 200 OK, but the IsSuccess might be false in scenarios where no response were returned</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.ClientResponse.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.ClientResponse.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.ClientResponse.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.ClientResponse.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.ClientResponse",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.ClientResponse.yml\" sourcestartlinenumber=\"1\">Base class for ClientResponse — use as return type when you want a concrete non-generic response type in your methods.\nAlways contains a <code>Data</code> property (null if unset) — safe to serialize to JSON without undefined in JS.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.ClientResponse.yml\" sourcestartlinenumber=\"1\">Base class for ClientResponse — use as return type when you want a concrete non-generic response type in your methods.\nAlways contains a <code>Data</code> property (null if unset) — safe to serialize to JSON without undefined in JS.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.ContentType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.ContentType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.ContentType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.ContentType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.ContentType",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.ContentType.yml\" sourcestartlinenumber=\"1\">Media types for Client request methods, sent as the <code>Accept</code> header.</p>\n<p>Use \"None\" to omit the header entirely.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.ContentType.yml\" sourcestartlinenumber=\"1\">Media types for Client request methods, sent as the <code>Accept</code> header.</p>\n<p>Use \"None\" to omit the header entirely.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml\" sourcestartlinenumber=\"1\">HttpRequest extension helpers.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Extensions.HttpRequestExtensions.yml\" sourcestartlinenumber=\"1\">HttpRequest extension helpers.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring the framework middleware pipeline on <code>IApplicationBuilder</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Extensions.IApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring the framework middleware pipeline on <code>IApplicationBuilder</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IServiceCollection.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IServiceCollection.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.html"
         }
       },
       "version": "",
@@ -306,10 +306,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.Extensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.Extensions.html"
         }
       },
       "version": "",
@@ -320,66 +320,66 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.HtmlHelperFactory.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.HtmlHelperFactory.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.HtmlHelperFactory",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml\" sourcestartlinenumber=\"1\">Builds <code>IHtmlHelper</code> instances outside of a Razor view context.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.HtmlHelperFactory.yml\" sourcestartlinenumber=\"1\">Builds <code>IHtmlHelper</code> instances outside of a Razor view context.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.IFrameworkHooks.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.IFrameworkHooks.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.IFrameworkHooks.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.IFrameworkHooks.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.IFrameworkHooks",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.IFrameworkHooks.yml\" sourcestartlinenumber=\"1\">Hooks into the application startup pipeline. All methods have default empty implementations.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.IFrameworkHooks.yml\" sourcestartlinenumber=\"1\">Hooks into the application startup pipeline. All methods have default empty implementations.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.OutputCachePolicy.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.OutputCachePolicy.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.OutputCachePolicy",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml\" sourcestartlinenumber=\"1\">Output cache policy names for use with the [OutputCache] attribute.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.OutputCachePolicy.yml\" sourcestartlinenumber=\"1\">Output cache policy names for use with the [OutputCache] attribute.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.ServiceInstance.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.ServiceInstance.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.ServiceInstance.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.ServiceInstance.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.ServiceInstance",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.App.ServiceInstance.yml\" sourcestartlinenumber=\"1\">Static accessor for resolving services from the application's service provider.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.ServiceInstance.yml\" sourcestartlinenumber=\"1\">Static accessor for resolving services from the application's service provider.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.App.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.App.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.App.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.App.html"
         }
       },
       "version": "",
@@ -390,122 +390,122 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.ApplicationInfo.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.ApplicationInfo.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.ApplicationInfo.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.ApplicationInfo.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.ApplicationInfo",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.ApplicationInfo.yml\" sourcestartlinenumber=\"1\">Exposed environment information</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ApplicationInfo.yml\" sourcestartlinenumber=\"1\">Exposed environment information</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Assemblies.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Assemblies.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Assemblies.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Assemblies.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Assemblies",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Assemblies.yml\" sourcestartlinenumber=\"1\">Static class for scanning types across whitelisted loaded assemblies.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Assemblies.yml\" sourcestartlinenumber=\"1\">Static class for scanning types across whitelisted loaded assemblies.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml\" sourcestartlinenumber=\"1\">Marks a property as the target for a decrypted config value.\nThe named source property is decrypted once at startup and written into the decorated property.\nValues must be encrypted using the parameterless string.Encrypt().</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.ConfigDecryptAttribute.yml\" sourcestartlinenumber=\"1\">Marks a property as the target for a decrypted config value.\nThe named source property is decrypted once at startup and written into the decorated property.\nValues must be encrypted using the parameterless string.Encrypt().</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.EnumTextAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.yml\" sourcestartlinenumber=\"1\">Assigns a display text to an enum field, used in serialization and string conversion.\nFalls back to the enum key name when not applied.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.EnumTextAttribute.yml\" sourcestartlinenumber=\"1\">Assigns a display text to an enum field, used in serialization and string conversion.\nFalls back to the enum key name when not applied.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.EnumValueAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.yml\" sourcestartlinenumber=\"1\">Assigns a custom value to an enum field, used in serialization and string conversion.\nFalls back to the enum key name when not applied.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.EnumValueAttribute.yml\" sourcestartlinenumber=\"1\">Assigns a custom value to an enum field, used in serialization and string conversion.\nFalls back to the enum key name when not applied.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml\" sourcestartlinenumber=\"1\">Compresses and decompresses a property or field on JSON serialization and deserialization.\nUseful for minimizing large string or obfuscate numeric values sent to or received from clients.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.JsonCompressAttribute.yml\" sourcestartlinenumber=\"1\">Compresses and decompresses a property or field on JSON serialization and deserialization.\nUseful for minimizing large string or obfuscate numeric values sent to or received from clients.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml\" sourcestartlinenumber=\"1\">Encrypts and decrypts a property or field on JSON serialization and deserialization using the framework encryption key.\nUseful for hiding sensitive values in API responses — encrypted client-side values are transparently decrypted before reaching your controller.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.JsonEncryptAttribute.yml\" sourcestartlinenumber=\"1\">Encrypts and decrypts a property or field on JSON serialization and deserialization using the framework encryption key.\nUseful for hiding sensitive values in API responses — encrypted client-side values are transparently decrypted before reaching your controller.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml\" sourcestartlinenumber=\"1\">Obfuscates and deobfuscates a property or field on JSON serialization and deserialization.\nHides int IDs and similar values from API responses, preventing enumeration attacks against endpoints accepting integer identifiers.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Attributes.JsonObfuscateAttribute.yml\" sourcestartlinenumber=\"1\">Obfuscates and deobfuscates a property or field on JSON serialization and deserialization.\nHides int IDs and similar values from API responses, preventing enumeration attacks against endpoints accepting integer identifiers.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Attributes.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Attributes.html"
         }
       },
       "version": "",
@@ -516,10 +516,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Config-1.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Config-1.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Config-1.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Config-1.html"
         }
       },
       "version": "",
@@ -530,10 +530,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Core.Events.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Core.Events.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Core.Events.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Core.Events.html"
         }
       },
       "version": "",
@@ -544,10 +544,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Core.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Core.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Core.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Core.html"
         }
       },
       "version": "",
@@ -558,318 +558,318 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.DateJsonConverter.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.DateJsonConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.DateJsonConverter.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.DateJsonConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.DateJsonConverter",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.DateJsonConverter.yml\" sourcestartlinenumber=\"1\">Use to convert a DateTime into a string date 'yyyy-MM-dd', ignoring time</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.DateJsonConverter.yml\" sourcestartlinenumber=\"1\">Use to convert a DateTime into a string date 'yyyy-MM-dd', ignoring time</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.DateTimeJsonConverter.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.DateTimeJsonConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.DateTimeJsonConverter",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml\" sourcestartlinenumber=\"1\">JsonConverter for DateTime with a custom format, for use with <code>Json()</code> extension method options.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.DateTimeJsonConverter.yml\" sourcestartlinenumber=\"1\">JsonConverter for DateTime with a custom format, for use with <code>Json()</code> extension method options.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml\" sourcestartlinenumber=\"1\">JsonConverter for DateTimeOffset with a custom format, for use with <code>Json()</code> extension method options.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.DateTimeOffsetJsonConverter.yml\" sourcestartlinenumber=\"1\">JsonConverter for DateTimeOffset with a custom format, for use with <code>Json()</code> extension method options.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.EncodingType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.EncodingType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.EncodingType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.EncodingType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.EncodingType",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.EncodingType.yml\" sourcestartlinenumber=\"1\">Specifies the text encoding used by <code>JsonEncryptAttribute</code>.\n<code>Auto</code> defaults to UTF8.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.EncodingType.yml\" sourcestartlinenumber=\"1\">Specifies the text encoding used by <code>JsonEncryptAttribute</code>.\n<code>Auto</code> defaults to UTF8.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.EnvironmentInfo.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.EnvironmentInfo.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.EnvironmentInfo.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.EnvironmentInfo.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.EnvironmentInfo",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.EnvironmentInfo.yml\" sourcestartlinenumber=\"1\">Exposed environment information</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.EnvironmentInfo.yml\" sourcestartlinenumber=\"1\">Exposed environment information</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.EnvironmentType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.EnvironmentType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.EnvironmentType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.EnvironmentType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.EnvironmentType",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.EnvironmentType.yml\" sourcestartlinenumber=\"1\">Known environment names used by <code>EnvironmentConfig</code> for <code>IsDevelopment</code>, <code>IsTest</code> and <code>IsProd</code> checks.\nCustom environment names still work for config transformations but won't map to those flags.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.EnvironmentType.yml\" sourcestartlinenumber=\"1\">Known environment names used by <code>EnvironmentConfig</code> for <code>IsDevelopment</code>, <code>IsTest</code> and <code>IsProd</code> checks.\nCustom environment names still work for config transformations but won't map to those flags.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ArrayExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for arrays.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for arrays.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for byte arrays.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for byte arrays.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.CharExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.CharExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.CharExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.CharExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.CharExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.CharExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for characters.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.CharExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for characters.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ConcurrentDictionary.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ConcurrentDictionary.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.DynamicExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml\" sourcestartlinenumber=\"1\">Static methods for dynamic and anonymous objects.\nC# does not support extension methods on <code>dynamic</code> — call these as static methods directly.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml\" sourcestartlinenumber=\"1\">Static methods for dynamic and anonymous objects.\nC# does not support extension methods on <code>dynamic</code> — call these as static methods directly.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions<TEnum>",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml\" sourcestartlinenumber=\"1\">Static methods for enum types — use when extension methods on generic types are needed.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml\" sourcestartlinenumber=\"1\">Static methods for enum types — use when extension methods on generic types are needed.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for enum values.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for enum values.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IEnumerable.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IEnumerableExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IEnumerable.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>IHostBuilder</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>IHostBuilder</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IListStringExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IList of strings.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IList of strings.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for <code>IPrincipal</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IPrincipalExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for <code>IPrincipal</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>IWebHostBuilder</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>IWebHostBuilder</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IntExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IntExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.IntExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.IntExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IntExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.IntExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for integers.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IntExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for integers.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.LongExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.LongExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.LongExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.LongExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.LongExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.LongExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for long integers.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.LongExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for long integers.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for MemoryStream.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.MemoryStreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for MemoryStream.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ObjectExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on object for serialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on object for serialization.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectFormatterFormat.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectFormatterFormat.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectFormatterFormat.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectFormatterFormat.html"
         }
       },
       "version": "",
@@ -880,10 +880,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions.html"
         }
       },
       "version": "",
@@ -894,10 +894,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormat.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormat.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormat.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormat.html"
         }
       },
       "version": "",
@@ -908,10 +908,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormatOptions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormatOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormatOptions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ObjectSanitizedFormatOptions.html"
         }
       },
       "version": "",
@@ -922,94 +922,94 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ReadOnlySpan.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ReadOnlySpan.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.StreamExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.StreamExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on Stream for deserialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on Stream for deserialization.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for StringBuilder.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StringBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for StringBuilder.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.TypeExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for Type.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for Type.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.UriExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.UriExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.UriExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for Uri.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.UriExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for Uri.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>WebApplicationBuilder</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>WebApplicationBuilder</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Extensions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Extensions.html"
         }
       },
       "version": "",
@@ -1020,38 +1020,38 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.FrameworkOptions.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.FrameworkOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.FrameworkOptions.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.FrameworkOptions.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.FrameworkOptions",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.FrameworkOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for framework services and middleware pipeline.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.FrameworkOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for framework services and middleware pipeline.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.HttpContextInstance.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.HttpContextInstance.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.HttpContextInstance.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.HttpContextInstance.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.HttpContextInstance",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.HttpContextInstance.yml\" sourcestartlinenumber=\"1\">Static accessor for the current <code>HttpContext</code>, equivalent to the classic .NET Framework <code>HttpContext.Current</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.HttpContextInstance.yml\" sourcestartlinenumber=\"1\">Static accessor for the current <code>HttpContext</code>, equivalent to the classic .NET Framework <code>HttpContext.Current</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.ILogWriter.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.ILogWriter.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.ILogWriter.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.ILogWriter.html"
         }
       },
       "version": "",
@@ -1062,10 +1062,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.LogLevel.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.LogLevel.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.LogLevel.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.LogLevel.html"
         }
       },
       "version": "",
@@ -1076,10 +1076,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.LogMessage.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.LogMessage.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.LogMessage.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.LogMessage.html"
         }
       },
       "version": "",
@@ -1090,10 +1090,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.MainAssembly.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.MainAssembly.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.MainAssembly.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.MainAssembly.html"
         }
       },
       "version": "",
@@ -1104,52 +1104,52 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.Randomness.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Randomness.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.Randomness.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.Randomness.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Randomness",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.Randomness.yml\" sourcestartlinenumber=\"1\">Static class for generating random values.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Randomness.yml\" sourcestartlinenumber=\"1\">Static class for generating random values.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.ShardedDictionary-2.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.ShardedDictionary-2.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.ShardedDictionary<TKey, TValue>",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.ShardedDictionary-2.yml\" sourcestartlinenumber=\"1\">A thread-safe dictionary sharded across 4 internal concurrent dictionaries to reduce lock contention.\nAutomatically clears a shard when it exceeds its item limit.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.yml\" sourcestartlinenumber=\"1\">A thread-safe dictionary sharded across 4 internal concurrent dictionaries to reduce lock contention.\nAutomatically clears a shard when it exceeds its item limit.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.SystemType.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.SystemType.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.SystemType.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.SystemType.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.SystemType",
-      "Summary": "<p sourcefile=\"docsapi/SystemLibrary.Common.Framework.SystemType.yml\" sourcestartlinenumber=\"1\">Cached <code>Type</code> instances for common system types, avoiding repeated <code>typeof()</code> calls in hot paths.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.SystemType.yml\" sourcestartlinenumber=\"1\">Cached <code>Type</code> instances for common system types, avoiding repeated <code>typeof()</code> calls in hot paths.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "docsapi/SystemLibrary.Common.Framework.yml",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/SystemLibrary.Common.Framework.html"
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.html"
         }
       },
       "version": "",
@@ -1160,350 +1160,310 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "docsapi/toc.yml",
+      "source_relative_path": "apidocs/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "docsapi/toc.html"
+          "relative_path": "apidocs/toc.html"
         },
         ".json": {
-          "relative_path": "docsapi/toc.json"
+          "relative_path": "apidocs/toc.json"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Contact/Index.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/apidocs/index.md",
       "output": {
         ".html": {
-          "relative_path": "Contact/Index.html"
+          "relative_path": "apidocs/index.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Contribute/Index.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/contact/index.md",
       "output": {
         ".html": {
-          "relative_path": "Contribute/Index.html"
+          "relative_path": "contact/index.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/DocsApi/Index.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/contribute/index.md",
       "output": {
         ".html": {
-          "relative_path": "DocsApi/Index.html"
+          "relative_path": "contribute/index.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/ApiFilters.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/apifilters.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/ApiFilters.html"
+          "relative_path": "documentation/apifilters.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/AppSettings.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/application.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/AppSettings.html"
+          "relative_path": "documentation/application.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Application.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/appsettings.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Application.html"
+          "relative_path": "documentation/appsettings.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Assemblies.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/assemblies.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Assemblies.html"
+          "relative_path": "documentation/assemblies.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Cache.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/cache.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Cache.html"
+          "relative_path": "documentation/cache.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Client.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/client.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Client.html"
+          "relative_path": "documentation/client.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Config.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/config.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Config.html"
+          "relative_path": "documentation/config.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Controllers.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/controllers.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Controllers.html"
+          "relative_path": "documentation/controllers.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Dispatch.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/dispatch.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Dispatch.html"
+          "relative_path": "documentation/dispatch.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Encryption.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/encryption.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Encryption.html"
+          "relative_path": "documentation/encryption.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Enum.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/enum.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Enum.html"
+          "relative_path": "documentation/enum.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/EnvironmentConfig.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/environmentconfig.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/EnvironmentConfig.html"
+          "relative_path": "documentation/environmentconfig.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Extensions.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/extensions.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Extensions.html"
+          "relative_path": "documentation/extensions.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/FrameworkOptions.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/frameworkoptions.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/FrameworkOptions.html"
+          "relative_path": "documentation/frameworkoptions.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Hooks.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/hooks.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Hooks.html"
+          "relative_path": "documentation/hooks.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/HttpContextInstance.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/httpcontextinstance.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/HttpContextInstance.html"
+          "relative_path": "documentation/httpcontextinstance.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Index.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/index.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Index.html"
+          "relative_path": "documentation/index.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Json.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/json.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Json.html"
+          "relative_path": "documentation/json.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Log.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/log.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Log.html"
+          "relative_path": "documentation/log.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Metrics.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/metrics.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Metrics.html"
+          "relative_path": "documentation/metrics.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Security.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/security.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Security.html"
+          "relative_path": "documentation/security.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Services.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/services.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Services.html"
+          "relative_path": "documentation/services.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/ShardedDictionary.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/shardeddicstionary.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/ShardedDictionary.html"
+          "relative_path": "documentation/shardeddicstionary.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/StaticFiles.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/staticfiles.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/StaticFiles.html"
+          "relative_path": "documentation/staticfiles.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/SystemType.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/systemtype.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/SystemType.html"
+          "relative_path": "documentation/systemtype.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Documentation/Views.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/views.md",
       "output": {
         ".html": {
-          "relative_path": "Documentation/Views.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Index.md",
-      "output": {
-        ".html": {
-          "relative_path": "Index.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Install/Index.md",
-      "output": {
-        ".html": {
-          "relative_path": "Install/Index.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/License/Index.md",
-      "output": {
-        ".html": {
-          "relative_path": "License/Index.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/Docs/Tutorial/Index.md",
-      "output": {
-        ".html": {
-          "relative_path": "Tutorial/Index.html"
+          "relative_path": "documentation/views.html"
         }
       },
       "version": ""
     },
     {
       "type": "Resource",
-      "source_relative_path": "systemlibrary.common.framework/Docs/favicon.ico",
+      "source_relative_path": "systemlibrary.common.framework/docs/favicon.ico",
       "output": {
         "resource": {
           "relative_path": "favicon.ico"
@@ -1512,8 +1472,38 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/install/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "install/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/license/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "license/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Resource",
-      "source_relative_path": "systemlibrary.common.framework/Docs/logo.png",
+      "source_relative_path": "systemlibrary.common.framework/docs/logo.png",
       "output": {
         "resource": {
           "relative_path": "logo.png"
@@ -1523,13 +1513,23 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "systemlibrary.common.framework/Docs/toc.yml",
+      "source_relative_path": "systemlibrary.common.framework/docs/toc.yml",
       "output": {
         ".html": {
           "relative_path": "toc.html"
         },
         ".json": {
           "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/tutorial/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "tutorial/index.html"
         }
       },
       "version": ""
