@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Cache | System Library Common Framework </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Cache | System Library Common Framework ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <link rel="stylesheet" href="../public/_extended.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/Docs/Documentation/Cache.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.png" alt=" ">
+             
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="">
+<h1 id="cache">Cache</h1>
+
+<h2 id="description">Description</h2>
+<p>Application-level in-memory cache with built-in sharding for thread safety and scalability.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Sharded cache</strong>: 8 cache containers out of the box</li>
+<li><strong>Auto-generated key</strong>: includes namespace, class, method name, <code>IsAuthenticated</code>, user roles, and scoped variables of type <code>string</code>, <code>int</code>, <code>DateTime</code>, <code>bool</code>, or <code>enum</code></li>
+</ul>
+<h2 id="behavior">Behavior</h2>
+<ul>
+<li><strong>Duration</strong>: 3 minutes default</li>
+<li><strong>CacheDuration</strong>: Predefined enum or any integer (seconds)</li>
+<li><strong>Capacity</strong>: 320,000 items across 8 shards (40,000 per shard, configurable)</li>
+<li><strong>Eviction</strong>: When full, 33% of items are removed via IMemoryCache eviction policy</li>
+<li><strong>Fallback [<a href="#">Pro Tier</a>]</strong>: Serves previously cached data when <code>getItem()</code> returns null or throws, for up to 3 minutes after primary expiration</li>
+<li><strong>Skip Options</strong>
+<ul>
+<li><code>skipWhenAuthenticated</code>: Defaults to <code>false</code></li>
+<li><code>skipWhenAdmin</code>: Defaults to <code>true</code>, matches roles: <code>Admin, Admins, Administrator, Administrators, WebAdmins, CmsAdmins</code> (and lowercase variants)</li>
+<li><code>skipWhen</code>: Custom condition, return <code>true</code> to skip</li>
+</ul>
+</li>
+</ul>
+<h4 id="response-cache">Response cache</h4>
+<pre><code class="lang-csharp"></code></pre>
+<h4 id="output-cache">Output cache</h4>
+<p>Cache entire page or controller responses, with skip support for admins and authenticated users:</p>
+<pre><code class="lang-csharp">// On a controller action:
+[OutputCache(Tags = [OutputCacheTag.SkipWhenAdmin])]
+public IActionResult Index() { ... }
+
+// On a razor page:
+@attribute [OutputCache(Tags = [OutputCacheTag.SkipWhenAdmin])]
+</code></pre>
+<p><strong>Available tags:</strong></p>
+<ul>
+<li><code>OutputCacheTag.SkipWhenAdmin</code> — skips cache for admin users</li>
+<li><code>OutputCacheTag.SkipWhenAuthenticated</code> — skips cache for any authenticated user</li>
+</ul>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><code>SkipWhenAuthenticated</code> and <code>SkipWhenAdmin</code> do not work on Razor Pages — controllers only.</p>
+</div>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Auto-generated key is never user-specific — pass your own key containing userId/email to cache per user</li>
+<li><code>null</code> is never cached</li>
+<li><code>Cache.Clear()</code> may return <code>default</code> to concurrent callers during the brief reinitalization window</li>
+<li>Auto-generated key is capped at 2000 characters and 64 scoped variables — exceeding either logs an error</li>
+<li><code>Cache.Lock()</code> is not a true lock — concurrent threads can still slip through</li>
+</ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Pick duration by asking &quot;what is the minimum time this data can be stale?&quot; — always round down to the nearest <code>CacheDuration</code> value.</p>
+</div>
+<h2 id="appsettings">AppSettings</h2>
+<p>View all appsettings <a href="/documentation/AppSettings.html">here</a></p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br><span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br><span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span><br><br>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
+      }
+    </script>
+  </body>
+</html>

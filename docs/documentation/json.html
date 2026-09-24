@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Json | System Library Common Framework </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Json | System Library Common Framework ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <link rel="stylesheet" href="../public/_extended.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/Docs/Documentation/Json.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.png" alt=" ">
+             
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+        </div>
+
+        <article data-uid="">
+<h1 id="json">Json</h1>
+
+<h2 id="description">Description</h2>
+<p>Extension methods for serializing and deserializing JSON on <code>string</code> and <code>object</code>, with built-in custom converters and JSON attribute support.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong><code>object.Json()</code></strong>: serialize to JSON string, optional camelCase</li>
+<li><strong><code>string.Json&lt;T&gt;()</code></strong>: deserialize JSON string to T</li>
+<li><strong><code>string.JsonFind&lt;T&gt;()</code></strong>: extract and deserialize a specific property — supports path notation <code>root/child/leaf</code></li>
+<li><strong><code>JsonEncrypt</code></strong>: transparently encrypts/decrypts a property during serialization</li>
+<li><strong><code>JsonObfuscate</code></strong>: transparently obfuscates/deobfuscates a property during serialization</li>
+<li><strong><code>JsonCompress</code></strong>: transparently compresses/decompresses a property during serialization</li>
+</ul>
+<h2 id="behavior">Behavior</h2>
+<p>Built-in converters handle common edge cases — tolerant parsing of <code>string</code>, <code>int</code>, <code>long</code>, <code>DateTime</code>, <code>DateTimeOffset</code>, <code>Guid</code>, <code>Uri</code> and <code>Enum</code>. Non-serializable types (<code>Exception</code>, <code>Thread</code>, <code>Stream</code> etc) are silently skipped. Circular references are ignored.</p>
+<p><code>JsonFind&lt;T&gt;</code> searches depth-first — for <code>List&lt;T&gt;</code> automatically appends <code>s</code> to the type name when no path is specified.</p>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li><code>JsonFind</code> throws if a node in a specified path is not found</li>
+<li><code>dynamic</code> deserialization bypasses custom converters — dates and enums return as raw strings</li>
+<li><code>JsonSerializerOptions</code> is not a singleton — recreated per call for thread safety</li>
+</ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Use <code>JsonFind&lt;T&gt;</code> when consuming large third-party API responses — extract only what you need without deserializing the entire payload.</p>
+</div>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          
+            <span>Source: <a href='https://github.com/systemlibrary/systemlibrary-common-framework/'>github</a></span><br><span>Package: <a href='https://www.nuget.org/packages/SystemLibrary.Common.Framework/'>nuget</a></span><br><span>Website: <a href='https://www.systemlibrary.com/'>System Library Common Framework</a></span><br><br>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      window.toggleSection = (btn) => {
+        const content = btn.nextElementSibling
+
+        const open = content.style.display !== 'none'
+        content.style.display = open ? 'none' : 'block'
+
+        btn.textContent = (open ? '▼' : '▲') + btn.textContent.slice(1)
+      }
+    </script>
+  </body>
+</html>
