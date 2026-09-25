@@ -557,7 +557,7 @@
   "index.html": {
     "href": "index.html",
     "title": "SystemLibrary Common Framework | System Library Common Framework",
-    "summary": "a SystemLibrary Common Framework Add the NuGet package, wire up one line, focus on controllers and views. Built-in caching, encryption, logging, HTTP client and more. Requires .NET 10 Continue Install · Tutorial"
+    "summary": "SystemLibrary Common Framework Add the NuGet package, wire up one line, focus on controllers and views. Built-in caching, encryption, logging, HTTP client and more. Requires .NET 10 Continue Install · Tutorial"
   },
   "install/index.html": {
     "href": "install/index.html",
