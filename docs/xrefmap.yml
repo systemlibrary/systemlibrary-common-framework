@@ -74,15 +74,15 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Application.Build
   nameWithType: Application.Build
-- uid: SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,SystemLibrary.Common.Framework.FrameworkOptions,System.String[])
-  name: Build<T>(AppType, AppHosting, FrameworkOptions, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Build__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_App_AppHosting_SystemLibrary_Common_Framework_FrameworkOptions_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,SystemLibrary.Common.Framework.FrameworkOptions,System.String[])
-  name.vb: Build(Of T)(AppType, AppHosting, FrameworkOptions, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.Build<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, SystemLibrary.Common.Framework.FrameworkOptions, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.Build(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, SystemLibrary.Common.Framework.FrameworkOptions, String())
-  nameWithType: Application.Build<T>(AppType, AppHosting, FrameworkOptions, string[])
-  nameWithType.vb: Application.Build(Of T)(AppType, AppHosting, FrameworkOptions, String())
+- uid: SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
+  name: Build<T>(AppType, FrameworkOptions, AppHosting, string[])
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Build__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
+  commentId: M:SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
+  name.vb: Build(Of T)(AppType, FrameworkOptions, AppHosting, String())
+  fullName: SystemLibrary.Common.Framework.App.Application.Build<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
+  fullName.vb: SystemLibrary.Common.Framework.App.Application.Build(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
+  nameWithType: Application.Build<T>(AppType, FrameworkOptions, AppHosting, string[])
+  nameWithType.vb: Application.Build(Of T)(AppType, FrameworkOptions, AppHosting, String())
 - uid: SystemLibrary.Common.Framework.App.Application.HostStop
   name: HostStop()
   href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_HostStop
@@ -3122,28 +3122,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(Microsoft.Extensions.Hosting.IHostBuilder)
   nameWithType: IHostBuilderExtensions.ConfigureFrameworkLogging<TLogWriter>(IHostBuilder)
   nameWithType.vb: IHostBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(IHostBuilder)
-- uid: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name: ConfigureFrameworkOptions(IHostBuilder, Action<FrameworkOptions>)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_SystemLibrary_Common_Framework_FrameworkOptions__
-  commentId: M:SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name.vb: ConfigureFrameworkOptions(IHostBuilder, Action(Of FrameworkOptions))
-  fullName: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<SystemLibrary.Common.Framework.FrameworkOptions>)
-  fullName.vb: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of SystemLibrary.Common.Framework.FrameworkOptions))
-  nameWithType: IHostBuilderExtensions.ConfigureFrameworkOptions(IHostBuilder, Action<FrameworkOptions>)
-  nameWithType.vb: IHostBuilderExtensions.ConfigureFrameworkOptions(IHostBuilder, Action(Of FrameworkOptions))
-- uid: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  name: ConfigureFrameworkOptions(IHostBuilder, FrameworkOptions)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_Extensions_Hosting_IHostBuilder_SystemLibrary_Common_Framework_FrameworkOptions_
-  commentId: M:SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  fullName: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder, SystemLibrary.Common.Framework.FrameworkOptions)
-  nameWithType: IHostBuilderExtensions.ConfigureFrameworkOptions(IHostBuilder, FrameworkOptions)
-- uid: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions*
-  name: ConfigureFrameworkOptions
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkOptions_
-  commentId: Overload:SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions
-  nameWithType: IHostBuilderExtensions.ConfigureFrameworkOptions
 - uid: SystemLibrary.Common.Framework.Extensions.IListStringExtensions
   name: IListStringExtensions
   href: apidocs/SystemLibrary.Common.Framework.Extensions.IListStringExtensions.html
@@ -3216,28 +3194,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(Microsoft.AspNetCore.Hosting.IWebHostBuilder)
   nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkLogging<TLogWriter>(IWebHostBuilder)
   nameWithType.vb: IWebHostBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(IWebHostBuilder)
-- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name: ConfigureFrameworkOptions(IWebHostBuilder, Action<FrameworkOptions>)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_Action_SystemLibrary_Common_Framework_FrameworkOptions__
-  commentId: M:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name.vb: ConfigureFrameworkOptions(IWebHostBuilder, Action(Of FrameworkOptions))
-  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder, System.Action<SystemLibrary.Common.Framework.FrameworkOptions>)
-  fullName.vb: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder, System.Action(Of SystemLibrary.Common.Framework.FrameworkOptions))
-  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkOptions(IWebHostBuilder, Action<FrameworkOptions>)
-  nameWithType.vb: IWebHostBuilderExtensions.ConfigureFrameworkOptions(IWebHostBuilder, Action(Of FrameworkOptions))
-- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  name: ConfigureFrameworkOptions(IWebHostBuilder, FrameworkOptions)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_FrameworkOptions_
-  commentId: M:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.FrameworkOptions)
-  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkOptions(IWebHostBuilder, FrameworkOptions)
-- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions*
-  name: ConfigureFrameworkOptions
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkOptions_
-  commentId: Overload:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions
-  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkOptions
 - uid: SystemLibrary.Common.Framework.Extensions.IntExtensions
   name: IntExtensions
   href: apidocs/SystemLibrary.Common.Framework.Extensions.IntExtensions.html
@@ -4146,28 +4102,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(Microsoft.AspNetCore.Builder.WebApplicationBuilder)
   nameWithType: WebApplicationBuilderExtensions.ConfigureFrameworkLogging<TLogWriter>(WebApplicationBuilder)
   nameWithType.vb: WebApplicationBuilderExtensions.ConfigureFrameworkLogging(Of TLogWriter)(WebApplicationBuilder)
-- uid: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name: ConfigureFrameworkOptions(WebApplicationBuilder, Action<FrameworkOptions>)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_WebApplicationBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Builder_WebApplicationBuilder_System_Action_SystemLibrary_Common_Framework_FrameworkOptions__
-  commentId: M:SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})
-  name.vb: ConfigureFrameworkOptions(WebApplicationBuilder, Action(Of FrameworkOptions))
-  fullName: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder, System.Action<SystemLibrary.Common.Framework.FrameworkOptions>)
-  fullName.vb: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder, System.Action(Of SystemLibrary.Common.Framework.FrameworkOptions))
-  nameWithType: WebApplicationBuilderExtensions.ConfigureFrameworkOptions(WebApplicationBuilder, Action<FrameworkOptions>)
-  nameWithType.vb: WebApplicationBuilderExtensions.ConfigureFrameworkOptions(WebApplicationBuilder, Action(Of FrameworkOptions))
-- uid: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  name: ConfigureFrameworkOptions(WebApplicationBuilder, FrameworkOptions)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_WebApplicationBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Builder_WebApplicationBuilder_SystemLibrary_Common_Framework_FrameworkOptions_
-  commentId: M:SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder,SystemLibrary.Common.Framework.FrameworkOptions)
-  fullName: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Builder.WebApplicationBuilder, SystemLibrary.Common.Framework.FrameworkOptions)
-  nameWithType: WebApplicationBuilderExtensions.ConfigureFrameworkOptions(WebApplicationBuilder, FrameworkOptions)
-- uid: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions*
-  name: ConfigureFrameworkOptions
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_WebApplicationBuilderExtensions_ConfigureFrameworkOptions_
-  commentId: Overload:SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.Extensions.WebApplicationBuilderExtensions.ConfigureFrameworkOptions
-  nameWithType: WebApplicationBuilderExtensions.ConfigureFrameworkOptions
 - uid: SystemLibrary.Common.Framework.FrameworkOptions
   name: FrameworkOptions
   href: apidocs/SystemLibrary.Common.Framework.FrameworkOptions.html

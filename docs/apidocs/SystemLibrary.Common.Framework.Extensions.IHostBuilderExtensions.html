@@ -124,18 +124,6 @@ IHostBuilderExtensions  <a class="header-action link-secondary" title="View sour
 
       </div>
 
-      <div class="class-member">
-
-
-
-      </div>
-
-      <div class="class-member">
-
-
-
-      </div>
-
 
       <div class="class-member">
         
@@ -174,69 +162,6 @@ IHostBuilderExtensions  <a class="header-action link-secondary" title="View sour
 
               <span class="member-name">
     ConfigureFrameworkLogging&lt;TLogWriter&gt;(IHostBuilder)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Configures framework options via an action delegate on your own <code>IHostBuilder</code>.<br>
-Use when not calling <code>Application.Start</code> but still need to pass options to the framework.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_SystemLibrary_Common_Framework_FrameworkOptions__" data-uid="SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    IHostBuilder
-              </span>
-
-              <span class="member-name">
-    ConfigureFrameworkOptions(IHostBuilder, Action&lt;FrameworkOptions&gt;)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">Host.CreateDefaultBuilder()
-    .ConfigureFrameworkOptions(options =&gt;
-    {
-        options.SomeOption = true;
-    });</code></pre>
-
-                  </div>
-                </div>
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Passes a pre-built <code>FrameworkOptions</code> instance to the framework.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_Extensions_Hosting_IHostBuilder_SystemLibrary_Common_Framework_FrameworkOptions_" data-uid="SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.Extensions.Hosting.IHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    IHostBuilder
-              </span>
-
-              <span class="member-name">
-    ConfigureFrameworkOptions(IHostBuilder, FrameworkOptions)
               </span>
           </h3>
 

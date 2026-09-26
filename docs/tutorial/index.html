@@ -145,15 +145,16 @@ public class Hooks : IFrameworkHooks
 <h5>Warning</h5>
 <p><code>IFrameworkHooks</code> is not invoked when using the Framework Extension API, as this gives you full control as now you invoke only extension methods.</p>
 </div>
-<pre><code class="lang-csharp">var options = new FrameworkOptions();
+<pre><code class="lang-csharp">
+var options = new FrameworkOptions();
 
 var builder = Host.CreateDefaultBuilder(args);
 
-builder.ConfigureFrameworkOptions(options);
+builder.ConfigureFrameworkLogging();
 
 builder.ConfigureServices((context, services) =&gt;
 {
-    services = services.AddFrameworkServices(AppType.Web);
+    services = services.AddFrameworkServices(AppType.Web, options);
 });
 
 builder = builder.ConfigureWebHostDefaults(webBuilder =&gt;

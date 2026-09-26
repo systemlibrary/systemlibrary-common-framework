@@ -93,7 +93,7 @@
   </div>
 
   <h1 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions" class="text-break">
-IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IWebHostBuilderExtensions/IWebHostBuilderExtensions.cs/#L11"><i class="bi bi-code-slash"></i></a>
+IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IWebHostBuilderExtensions/IWebHostBuilderExtensions.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="markdown summary"><p>Extension methods for configuring framework options on <code>IWebHostBuilder</code>.</p>
@@ -111,18 +111,6 @@ IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View s
 
 
 
-
-      <div class="class-member">
-
-
-
-      </div>
-
-      <div class="class-member">
-
-
-
-      </div>
 
       <div class="class-member">
 
@@ -174,68 +162,6 @@ IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View s
 
               <span class="member-name">
     ConfigureFrameworkLogging&lt;TLogWriter&gt;(IWebHostBuilder)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Configures framework options via an action delegate on your own <code>IWebHostBuilder</code>.<br>
-Use when not calling <code>Application.Start</code> but still need to pass options to the framework.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_Action_SystemLibrary_Common_Framework_FrameworkOptions__" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Action{SystemLibrary.Common.Framework.FrameworkOptions})">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    IWebHostBuilder
-              </span>
-
-              <span class="member-name">
-    ConfigureFrameworkOptions(IWebHostBuilder, Action&lt;FrameworkOptions&gt;)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">webHostBuilder.ConfigureFrameworkOptions(options =&gt;
-{
-    options.SomeOption = true;
-});</code></pre>
-
-                  </div>
-                </div>
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Passes a pre-built <code>FrameworkOptions</code> instance to the framework.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkOptions_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_FrameworkOptions_" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkOptions(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.FrameworkOptions)">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    IWebHostBuilder
-              </span>
-
-              <span class="member-name">
-    ConfigureFrameworkOptions(IWebHostBuilder, FrameworkOptions)
               </span>
           </h3>
 

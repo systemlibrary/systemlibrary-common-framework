@@ -98,18 +98,19 @@
 <h2 id="behavior">Behavior</h2>
 <h3 id="start-api">Start API</h3>
 <p>Simplest approach — framework manages the full host lifecycle:</p>
-<pre><code class="lang-csharp">Application.Start&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel, urls);
+<pre><code class="lang-csharp">var options = new FrameworkOptions();
+Application.Start&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel, urls);
 </code></pre>
 <h3 id="build-api">Build API</h3>
 <p>Returns the host builder for additional configuration before running:</p>
-<pre><code class="lang-csharp">var builder = Application.Build&lt;Hooks&gt;(AppType.Web, AppHosting.Kestrel, options, urls);
+<pre><code class="lang-csharp">var options = new FrameworkOptions();
+var builder = Application.Build&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel,  urls);
 var app = builder.Build();
 app.Run();
 </code></pre>
 <h3 id="extension-api">Extension API</h3>
 <p>Full control via extension methods directly on the host builder. <code>IFrameworkHooks</code> is <strong>not</strong> invoked in this mode:</p>
 <pre><code class="lang-csharp">var builder = Host.CreateDefaultBuilder(args);
-builder.ConfigureFrameworkOptions(options);
 builder.ConfigureServices((context, services) =&gt; {
     services = services.AddFrameworkServices(AppType.Web);
 });

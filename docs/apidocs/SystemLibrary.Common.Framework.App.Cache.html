@@ -422,7 +422,7 @@ Default duration is 180 seconds.</p>
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key is derived from the calling method via stack frame — one lock per call site.<br/>Use <code>lockKey</code> to differentiate multiple Lock calls within the same method.<br/>Not a true lock — concurrent threads can both get true simultaneously.</p>
+    <p>Key is derived from the calling method via stack frame — one lock per call site.<br/>Use <code>lockKey</code> to differentiate multiple Lock calls within the same method.<br/>Not a true lock — concurrent threads can both get true simultaneously so it might run a few times within the duration.</p>
 
                   </div>
                 </div>
