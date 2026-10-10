@@ -390,6 +390,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.AppSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/SystemLibrary.Common.Framework.AppSettings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SystemLibrary.Common.Framework.AppSettings",
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.AppSettings.yml\" sourcestartlinenumber=\"1\">Exposed instance of current appsettings, after all transformations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "apidocs/SystemLibrary.Common.Framework.ApplicationInfo.yml",
       "output": {
         ".html": {

@@ -1655,6 +1655,25 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.App.ServiceInstance.Get(Of T)()
   nameWithType: ServiceInstance.Get<T>()
   nameWithType.vb: ServiceInstance.Get(Of T)()
+- uid: SystemLibrary.Common.Framework.AppSettings
+  name: AppSettings
+  href: apidocs/SystemLibrary.Common.Framework.AppSettings.html
+  commentId: T:SystemLibrary.Common.Framework.AppSettings
+  fullName: SystemLibrary.Common.Framework.AppSettings
+  nameWithType: AppSettings
+- uid: SystemLibrary.Common.Framework.AppSettings.Current
+  name: Current
+  href: apidocs/SystemLibrary.Common.Framework.AppSettings.html#SystemLibrary_Common_Framework_AppSettings_Current
+  commentId: P:SystemLibrary.Common.Framework.AppSettings.Current
+  fullName: SystemLibrary.Common.Framework.AppSettings.Current
+  nameWithType: AppSettings.Current
+- uid: SystemLibrary.Common.Framework.AppSettings.Current*
+  name: Current
+  href: apidocs/SystemLibrary.Common.Framework.AppSettings.html#SystemLibrary_Common_Framework_AppSettings_Current_
+  commentId: Overload:SystemLibrary.Common.Framework.AppSettings.Current
+  isSpec: "True"
+  fullName: SystemLibrary.Common.Framework.AppSettings.Current
+  nameWithType: AppSettings.Current
 - uid: SystemLibrary.Common.Framework.ApplicationInfo
   name: ApplicationInfo
   href: apidocs/SystemLibrary.Common.Framework.ApplicationInfo.html
