@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ObjectFormatterOptions | System Library Common Framework ">
       
-      
+      <meta name="description" content="Options controlling object formatting/serialization used by the framework&#39;s object formatter.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -93,9 +93,11 @@
   </div>
 
   <h1 id="SystemLibrary_Common_Framework_Extensions_ObjectFormatterOptions" data-uid="SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions" class="text-break">
-ObjectFormatterOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/_Internal/ObjectFormatter/ObjectFormatterOptions.cs/#L5"><i class="bi bi-code-slash"></i></a>
+ObjectFormatterOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/_Internal/ObjectFormatter/ObjectFormatterOptions.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h1>
 
+  <div class="markdown summary"><p>Options controlling object formatting/serialization used by the framework's object formatter.</p>
+</div>
 
   <div class="doc-toggles">
 
@@ -112,6 +114,12 @@ ObjectFormatterOptions  <a class="header-action link-secondary" title="View sour
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Exclude members whose value is null from the formatted output.</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class="member-type">
@@ -132,7 +140,7 @@ ObjectFormatterOptions  <a class="header-action link-secondary" title="View sour
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Format of the text</p>
+    <p>Output format (Plain, Json, etc.).</p>
 
                 </div>
               </div>
@@ -156,7 +164,7 @@ ObjectFormatterOptions  <a class="header-action link-secondary" title="View sour
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>CUstom json serializer options, pass null to use Framework Defaults</p>
+    <p>Optional custom JsonSerializerOptions; null uses framework defaults.</p>
 
                 </div>
               </div>
@@ -180,7 +188,7 @@ ObjectFormatterOptions  <a class="header-action link-secondary" title="View sour
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Skipping members further down/deeper than this level (nested members at level 6 is never printed by default)</p>
+    <p>Maximum depth to traverse when formatting nested members.</p>
 
                 </div>
               </div>
@@ -204,7 +212,7 @@ ObjectFormatterOptions  <a class="header-action link-secondary" title="View sour
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Start level, depth, of members of objects</p>
+    <p>Start (root) level of member traversal when formatting.</p>
 
                 </div>
               </div>

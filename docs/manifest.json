@@ -540,7 +540,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Config<T>",
-      "Summary": null
+      "Summary": ""
     },
     {
       "type": "ManagedReference",
@@ -904,7 +904,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions",
-      "Summary": null
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectFormatterOptions.yml\" sourcestartlinenumber=\"1\">Options controlling object formatting/serialization used by the framework's object formatter.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1072,7 +1072,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.ILogWriter",
-      "Summary": null
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ILogWriter.yml\" sourcestartlinenumber=\"1\">Abstraction for writing log messages to a sink (file, console, remote).</p>\n"
     },
     {
       "type": "ManagedReference",

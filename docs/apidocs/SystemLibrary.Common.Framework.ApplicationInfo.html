@@ -114,6 +114,12 @@ ApplicationInfo  <a class="header-action link-secondary" title="View source" hre
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Application name set in appsettings</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -127,6 +133,15 @@ ApplicationInfo  <a class="header-action link-secondary" title="View source" hre
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Fall back to company_unique_appname<br/>Must be set in production environment else it throws</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -153,6 +168,15 @@ ApplicationInfo  <a class="header-action link-secondary" title="View source" hre
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Root for public static files (css, js). Falls back to RootPath if not set by the host.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -180,6 +204,12 @@ ApplicationInfo  <a class="header-action link-secondary" title="View source" hre
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Root folder for cshtml views.</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
