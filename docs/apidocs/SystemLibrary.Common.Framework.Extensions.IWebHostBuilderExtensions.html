@@ -93,7 +93,7 @@
   </div>
 
   <h1 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions" class="text-break">
-IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IWebHostBuilderExtensions/IWebHostBuilderExtensions.cs/#L10"><i class="bi bi-code-slash"></i></a>
+IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IWebHostBuilderExtensions/IWebHostBuilderExtensions.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="markdown summary"><p>Extension methods for configuring framework options on <code>IWebHostBuilder</code>.</p>
@@ -124,8 +124,45 @@ IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View s
 
       </div>
 
+      <div class="class-member">
+
+
+
+      </div>
+
 
       <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Configures Kestrel or IIS with default framework settings</p>
+
+                </div>
+              </div>
+        
+
+          <h3 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_App_AppHosting_System_String___" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,System.String[])">
+              <span class='member-static'>static </span>
+
+              <span class="member-returntype">
+    IWebHostBuilder
+              </span>
+
+              <span class="member-name">
+    ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, string[])
+              </span>
+          </h3>
+
+
+          <div class="doc-toggles">
+          </div>
+      </div>
+      <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Clears all log providers and adds only the standard Console logging for the Microsofts ILogger world</p>
+
+                </div>
+              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkLogging_Microsoft_AspNetCore_Hosting_IWebHostBuilder_" data-uid="SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkLogging(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
@@ -147,7 +184,7 @@ IWebHostBuilderExtensions  <a class="header-action link-secondary" title="View s
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Configures framework logging and adds the standard Console logging for the Microsofts ILogger world</p>
+    <p>Clears log providers and then adds framework logging and the standard Console logging for the Microsofts ILogger world</p>
 
                 </div>
               </div>

@@ -3191,6 +3191,22 @@ references:
   commentId: T:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions
   fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions
   nameWithType: IWebHostBuilderExtensions
+- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
+  name: ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, string[])
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_App_AppHosting_System_String___
+  commentId: M:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
+  name.vb: ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, String())
+  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, string[])
+  fullName.vb: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, String())
+  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, string[])
+  nameWithType.vb: IWebHostBuilderExtensions.ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting*
+  name: ConfigureFrameworkHosting
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_
+  commentId: Overload:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting
+  isSpec: "True"
+  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting
+  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkHosting
 - uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkLogging(Microsoft.AspNetCore.Hosting.IWebHostBuilder)
   name: ConfigureFrameworkLogging(IWebHostBuilder)
   href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkLogging_Microsoft_AspNetCore_Hosting_IWebHostBuilder_
