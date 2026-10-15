@@ -189,16 +189,6 @@
     "title": "Config<T> | System Library Common Framework",
     "summary": "Namespace SystemLibrary.Common.Framework Config<T> class Config<T> { Gets the current loaded configuration instance for type T. Loads the configuration on first access and applies decryption/enum mapping. ??? @%@public static T Current { get; }@%@ @!@isStatic@!@ T Current { get; set; } ??? }"
   },
-  "apidocs/SystemLibrary.Common.Framework.Core.Events.html": {
-    "href": "apidocs/SystemLibrary.Common.Framework.Core.Events.html",
-    "title": "Events | System Library Common Framework",
-    "summary": "Namespace SystemLibrary.Common.Framework.Core Events class Events { ??? @%@public static event Action Shutdown@%@ @!@isStatic@!@ Action Shutdown ??? }"
-  },
-  "apidocs/SystemLibrary.Common.Framework.Core.html": {
-    "href": "apidocs/SystemLibrary.Common.Framework.Core.html",
-    "title": "SystemLibrary.Common.Framework.Core | System Library Common Framework",
-    "summary": "SystemLibrary.Common.Framework.Core"
-  },
   "apidocs/SystemLibrary.Common.Framework.DateJsonConverter.html": {
     "href": "apidocs/SystemLibrary.Common.Framework.DateJsonConverter.html",
     "title": "DateJsonConverter | System Library Common Framework",

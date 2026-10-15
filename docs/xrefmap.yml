@@ -2035,24 +2035,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Config(Of T).Current
   nameWithType: Config<T>.Current
   nameWithType.vb: Config(Of T).Current
-- uid: SystemLibrary.Common.Framework.Core
-  name: SystemLibrary.Common.Framework.Core
-  href: apidocs/SystemLibrary.Common.Framework.Core.html
-  commentId: N:SystemLibrary.Common.Framework.Core
-  fullName: SystemLibrary.Common.Framework.Core
-  nameWithType: SystemLibrary.Common.Framework.Core
-- uid: SystemLibrary.Common.Framework.Core.Events
-  name: Events
-  href: apidocs/SystemLibrary.Common.Framework.Core.Events.html
-  commentId: T:SystemLibrary.Common.Framework.Core.Events
-  fullName: SystemLibrary.Common.Framework.Core.Events
-  nameWithType: Events
-- uid: SystemLibrary.Common.Framework.Core.Events.Shutdown
-  name: Shutdown
-  href: apidocs/SystemLibrary.Common.Framework.Core.Events.html#SystemLibrary_Common_Framework_Core_Events_Shutdown
-  commentId: E:SystemLibrary.Common.Framework.Core.Events.Shutdown
-  fullName: SystemLibrary.Common.Framework.Core.Events.Shutdown
-  nameWithType: Events.Shutdown
 - uid: SystemLibrary.Common.Framework.DateJsonConverter
   name: DateJsonConverter
   href: apidocs/SystemLibrary.Common.Framework.DateJsonConverter.html
@@ -4367,15 +4349,15 @@ references:
   commentId: T:SystemLibrary.Common.Framework.LogMessage
   fullName: SystemLibrary.Common.Framework.LogMessage
   nameWithType: LogMessage
-- uid: SystemLibrary.Common.Framework.LogMessage.#ctor(SystemLibrary.Common.Framework.LogLevel,System.Object[])
-  name: LogMessage(LogLevel, object[])
-  href: apidocs/SystemLibrary.Common.Framework.LogMessage.html#SystemLibrary_Common_Framework_LogMessage__ctor_SystemLibrary_Common_Framework_LogLevel_System_Object___
-  commentId: M:SystemLibrary.Common.Framework.LogMessage.#ctor(SystemLibrary.Common.Framework.LogLevel,System.Object[])
-  name.vb: New(LogLevel, Object())
-  fullName: SystemLibrary.Common.Framework.LogMessage.LogMessage(SystemLibrary.Common.Framework.LogLevel, object[])
-  fullName.vb: SystemLibrary.Common.Framework.LogMessage.New(SystemLibrary.Common.Framework.LogLevel, Object())
-  nameWithType: LogMessage.LogMessage(LogLevel, object[])
-  nameWithType.vb: LogMessage.New(LogLevel, Object())
+- uid: SystemLibrary.Common.Framework.LogMessage.#ctor(SystemLibrary.Common.Framework.LogLevel,System.Object[],System.String)
+  name: LogMessage(LogLevel, object[], string)
+  href: apidocs/SystemLibrary.Common.Framework.LogMessage.html#SystemLibrary_Common_Framework_LogMessage__ctor_SystemLibrary_Common_Framework_LogLevel_System_Object___System_String_
+  commentId: M:SystemLibrary.Common.Framework.LogMessage.#ctor(SystemLibrary.Common.Framework.LogLevel,System.Object[],System.String)
+  name.vb: New(LogLevel, Object(), String)
+  fullName: SystemLibrary.Common.Framework.LogMessage.LogMessage(SystemLibrary.Common.Framework.LogLevel, object[], string)
+  fullName.vb: SystemLibrary.Common.Framework.LogMessage.New(SystemLibrary.Common.Framework.LogLevel, Object(), String)
+  nameWithType: LogMessage.LogMessage(LogLevel, object[], string)
+  nameWithType.vb: LogMessage.New(LogLevel, Object(), String)
 - uid: SystemLibrary.Common.Framework.LogMessage.#ctor*
   name: LogMessage
   href: apidocs/SystemLibrary.Common.Framework.LogMessage.html#SystemLibrary_Common_Framework_LogMessage__ctor_

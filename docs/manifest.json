@@ -544,34 +544,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Core.Events.yml",
-      "output": {
-        ".html": {
-          "relative_path": "apidocs/SystemLibrary.Common.Framework.Core.Events.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "SystemLibrary.Common.Framework.Core.Events",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "apidocs/SystemLibrary.Common.Framework.Core.yml",
-      "output": {
-        ".html": {
-          "relative_path": "apidocs/SystemLibrary.Common.Framework.Core.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "SystemLibrary.Common.Framework.Core",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "apidocs/SystemLibrary.Common.Framework.DateJsonConverter.yml",
       "output": {
         ".html": {
