@@ -93,7 +93,7 @@
   </div>
 
   <h1 id="SystemLibrary_Common_Framework_AppSettings" data-uid="SystemLibrary.Common.Framework.AppSettings" class="text-break">
-AppSettings  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/AppSettingsInstance/ApplicationInfo.cs/#L10"><i class="bi bi-code-slash"></i></a>
+AppSettings  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/AppSettingsInstance/AppSettings.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="markdown summary"><p>Exposed instance of current appsettings, after all transformations</p>
@@ -115,6 +115,12 @@ AppSettings  <a class="header-action link-secondary" title="View source" href="h
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Current instance of IConfiguration</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -130,6 +136,15 @@ AppSettings  <a class="header-action link-secondary" title="View source" href="h
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>This contains the instance of IConfiguration after appsettings.json has been read, transformed, keyvault if configured has been applied and all env-vars too</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>

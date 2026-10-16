@@ -540,7 +540,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Config<T>",
-      "Summary": ""
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Config-1.yml\" sourcestartlinenumber=\"1\">Inherit this class to automatically convert your json files into C# objects</p>\n"
     },
     {
       "type": "ManagedReference",
