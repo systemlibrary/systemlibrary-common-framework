@@ -1169,16 +1169,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/docs/contact/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "contact/index.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "systemlibrary.common.framework/docs/contribute/index.md",
       "output": {
         ".html": {
@@ -1493,6 +1483,16 @@
       "output": {
         "resource": {
           "relative_path": "logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/pro/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "pro/index.html"
         }
       },
       "version": ""
