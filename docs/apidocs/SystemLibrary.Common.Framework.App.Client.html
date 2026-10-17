@@ -92,11 +92,9 @@
     <dl><dt>Namespace</dt><dd><span>SystemLibrary</span>.<span>Common</span>.<a class="xref" href="SystemLibrary.Common.Framework.html">Framework</a>.<a class="xref" href="SystemLibrary.Common.Framework.App.html">App</a></dd></dl>
   </div>
 
-  <h1 id="SystemLibrary_Common_Framework_App_Client" data-uid="SystemLibrary.Common.Framework.App.Client" class="text-break">
-Client  <a class="header-action link-secondary" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.client/Client/_SendAsync.cs/#L9"><i class="bi bi-code-slash"></i></a>
-  </h1>
 
-  <div class="markdown summary"><p>Client is a class for all http(s) requests in your project</p>
+  <div class="markdown summary" style="position:relative;">
+  <p>Client is a class for all http(s) requests in your project</p>
 <p>Uses HttpClient and Polly behind the scenes for features such as reusing tcp connections, retry on 502 and 504 status codes, and optionally a request breaker for 7 seconds, if 25 error codes (404, 429, 500, 502, 503, 504, 505) occurs in a row</p>
 <p>useRetryPolicy: false, will retry once if request is a file request or GET or POST and status code is 502 or 504</p>
 <p>Options:</p>
@@ -117,7 +115,9 @@ Client  <a class="header-action link-secondary" title="View source" href="https:
 <ul>
 <li>retries once on OPTION, PATCH, HEAD, CONNECT, TRACE</li>
 </ul>
-</div>
+
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.client/Client/_SendAsync.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </div>
 
   <div class="doc-toggles">
       <div class="example-wrapper">
@@ -199,8 +199,8 @@ public void Test()
 
 
   <div class="class-content">
-    <h3 class="class-content-title"><span>class </span>Client</h3>
-    <span>{</span>
+    <h1 class="class-content-title"><span>class </span>Client</h1>
+    <span class="curly-bracket">{</span>
     <div class="class-body">
 
 
@@ -697,7 +697,7 @@ var response = new Client().Put&lt;string&gt;("https://www.systemlibrary.com/put
 
 
   </div>
-    <span>}</span>
+    <span class="curly-bracket">}</span>
   </div>
 
 </article>

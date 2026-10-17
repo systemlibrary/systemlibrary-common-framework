@@ -10,18 +10,18 @@ main>div.content {
 }
 
 article h1 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.0rem;
 }
 
 article h2 {
     margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     font-size: 1.625rem;
 }
 
 article h3 {
     margin-top: 2rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.66rem;
     font-size: 1.25rem;
 }
 
@@ -33,6 +33,11 @@ article .class-member h3 {
     text-overflow: ellipsis;
     max-width: 110ch;
 
+}
+
+.member-static {
+    display: none;
+    visibility: hidden;
 }
 
 .member-type,
@@ -72,6 +77,10 @@ article h4 {
 
 article p {
     margin-bottom: 0.5rem;
+}
+
+article .markdown.summary p {
+    margin-bottom: 0;
 }
 
 article ul li {
@@ -114,8 +123,12 @@ footer {
     gap: 0.5rem;
     flex-wrap: wrap;
     position: relative;
+    justify-content: end;
+
     margin: 0;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+    position: relative;
+    top: -4px;
 }
 
 .markdown code.hljs {
@@ -141,7 +154,7 @@ code.hljs {
     top: 100%;
     left: 0;
     width: 100%;
-    background: rgb(246, 248, 246);
+    background: rgb(242, 244, 242);
     border: solid 1px rgb(180, 200, 180);
     color: #376838;
     border-radius: 8px;
@@ -222,7 +235,7 @@ code.hljs {
 .content>article>pre>code.hljs {
     border-radius: 8px;
     margin-top: 0.2em;
-    margin-bottom: 0.2em;
+    margin-bottom: 2px;
     margin-left: 0;
     margin-right: 0;
     padding: 1em;
@@ -261,7 +274,7 @@ code.hljs {
 .markdown.example-content,
 .markdown.summary-content,
 .markdown.remarks-content {
-    background: rgb(246, 248, 246);
+    background: rgb(242, 244, 242);
     border: solid 1px rgb(163, 193, 163);
     color: #3a6b3e;
 }
@@ -271,7 +284,10 @@ code.hljs {
 }
 
 .class-body {
+    margin-top: 1em;
+    margin-bottom: 1em;
     margin-left: 1em;
+    padding-left: 1em;
 
     &>.parameters {
         margin: 0 !important;
@@ -284,14 +300,14 @@ code.hljs {
 }
 
 .class-content-title {
-    font-size: 22px;
-
-    color: var(--bs-body-color);
+    font-size: 28px;
+    color: var(--bs-purple);
 
     margin-bottom: 0;
+    margin-top: 8px;
 
     & span {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 400;
 
         @media screen and (max-width: 768px) {
@@ -302,9 +318,43 @@ code.hljs {
     @media screen and (max-width: 768px) {
         font-size: 18px !important;
     }
+
+    &>span {
+        color: var(--bs-purple);
+        font-size: 24px;
+    }
+}
+
+.facts.text-secondary.breadcrumbs {
+    margin: 0.5rem 0 0.25rem;
+}
+
+.go-to-source-code {
+    transform: translateY(-50%);
+    color: var(--bs-purple);
+    font-weight: bolder !important;
+    font-size: 1.2em !important;
+    position: absolute !important;
+    right: 10px !important;
+}
+
+.curly-bracket {
+    font-size: 20px;
 }
 
 [data-bs-theme=dark] {
+    .go-to-source-code {
+        color: var(--bs-body-color);
+    }
+
+    .class-content-title {
+        color: var(--bs-body-color);
+
+        &>span {
+            color: var(--bs-body-color);
+        }
+    }
+
     .class-enum {
         background: #1e1e1e;
         color: var(--bs-body-color);
@@ -331,5 +381,13 @@ code.hljs {
         background: rgb(73, 77, 71);
         border: solid 1px rgb(123, 137, 141);
         color: var(--bs-body-color);
+    }
+}
+
+/* Mobile fixes */
+body:not([data-search])[data-layout=""]>main>.toc-offcanvas,
+body:not([data-search])[data-layout=conceptual]>main>.toc-offcanvas {
+    @media screen and (max-width: 767px) {
+        max-width: 4px;
     }
 }
