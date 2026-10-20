@@ -96,7 +96,7 @@
   <div class="markdown summary" style="position:relative;">
   <p>Extension methods for byte arrays</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ByteArrayExtensions/Cryptation.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ByteArrayExtensions/Cryptation.cs/#L3"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
@@ -308,7 +308,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Decrypts AES GCM bytes using the provided key.</p>
+    <p>Decrypts AES GCM bytes using the provided key</p>
 
                 </div>
               </div>
@@ -332,7 +332,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes.</p>
+    <p>Key must be 16, 24 or 32 bytes.<br/>Throws if the key is wrong or the data has been tampered with.</p>
 
                   </div>
                 </div>
@@ -342,7 +342,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Decrypts AES GCM bytes using the provided key, or the framework's default key if null.</p>
+    <p>Decrypts AES GCM bytes using the provided key, or the framework's default key if null</p>
 
                 </div>
               </div>
@@ -366,7 +366,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes.</p>
+    <p>The key string is UTF8 encoded and must be 16, 24 or 32 bytes (not characters).<br/>Throws if the key is wrong or the data has been tampered with.</p>
 
                   </div>
                 </div>
@@ -376,7 +376,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Decrypts AES CBC bytes using the provided key.</p>
+    <p>Decrypts AES CBC bytes using the provided key</p>
 
                 </div>
               </div>
@@ -400,7 +400,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes.</p>
+    <p>Key must be 16, 24 or 32 bytes. Throws if the key length is invalid.</p>
 
                   </div>
                 </div>
@@ -410,7 +410,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Decrypts AES CBC bytes using the provided key, or the framework's default key if null.</p>
+    <p>Decrypts AES CBC bytes using the provided key, or the framework's default key if null</p>
 
                 </div>
               </div>
@@ -434,7 +434,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes.</p>
+    <p>The key string is UTF8 encoded and must be 16, 24 or 32 bytes (not characters).</p>
 
                   </div>
                 </div>
@@ -444,7 +444,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Decrypts using RSA with the private key file at the specified path, or the auto-discovered key if null.</p>
+    <p>Decrypts using RSA with the private key file at the specified path, or the auto-discovered key if null</p>
 
                 </div>
               </div>
@@ -469,7 +469,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES GCM with the framework's default key.<br/>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
+    <p>Encrypts using AES GCM with the framework's default key</p>
 
                 </div>
               </div>
@@ -489,12 +489,30 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var cipher = "hello world".GetBytes().Encrypt();
+var plain = cipher.Decrypt();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES GCM with the provided key and optional nonce.</p>
+    <p>Encrypts using AES GCM with the provided key and optional nonce</p>
 
                 </div>
               </div>
@@ -518,7 +536,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes, nonce must be 12 bytes if provided.<br/>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
+    <p>Key must be 16, 24 or 32 bytes. Nonce must be 12 bytes if provided, and should be left unset so a random one is used.<br/>Throws if the key or nonce length is invalid.<br/>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
 
                   </div>
                 </div>
@@ -528,7 +546,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES GCM with the provided key and optional nonce.</p>
+    <p>Encrypts using AES GCM with the provided key and optional nonce</p>
 
                 </div>
               </div>
@@ -552,7 +570,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes, nonce must be 12 bytes if provided.<br/>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
+    <p>The key string is UTF8 encoded and must be 16, 24 or 32 bytes (not characters). Nonce must be 12 bytes if provided.<br/>Leave the nonce unset: reusing a nonce with the same key breaks GCM security.<br/>Returns [12 bytes nonce][ciphertext][16 bytes authentication tag]</p>
 
                   </div>
                 </div>
@@ -562,7 +580,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES CBC with the framework's default key.</p>
+    <p>Encrypts using AES CBC with the framework's default key</p>
 
                 </div>
               </div>
@@ -582,12 +600,30 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var cipher = "hello world".GetBytes().EncryptAesCbc();
+var plain = cipher.DecryptAesCbc();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>CBC does not authenticate the data, so tampering goes undetected. Prefer <code>Encrypt()</code> (AES GCM) unless CBC is required.<br/>Returns [16 bytes IV][ciphertext]</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES CBC with the provided key and optional IV.</p>
+    <p>Encrypts using AES CBC with the provided key and optional IV</p>
 
                 </div>
               </div>
@@ -611,7 +647,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes. IV must be 16 bytes if provided.</p>
+    <p>Key must be 16, 24 or 32 bytes. IV must be 16 bytes if provided.<br/>Returns [16 bytes IV][ciphertext]<br/>Throws if the key or IV length is invalid.</p>
 
                   </div>
                 </div>
@@ -621,7 +657,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using AES CBC with the provided key and optional IV.</p>
+    <p>Encrypts using AES CBC with the provided key and optional IV</p>
 
                 </div>
               </div>
@@ -645,7 +681,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Key must be 16, 24 or 32 bytes. IV must be 16 bytes if provided.</p>
+    <p>The key string is UTF8 encoded and must be 16, 24 or 32 bytes (not characters). IV must be 16 bytes if provided.<br/>Returns [16 bytes IV][ciphertext]</p>
 
                   </div>
                 </div>
@@ -655,7 +691,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Encrypts using RSA with the public key file at the specified path, or the auto-discovered key if null.</p>
+    <p>Encrypts using RSA with the public key file at the specified path, or the auto-discovered key if null</p>
 
                 </div>
               </div>
@@ -675,6 +711,15 @@
 
 
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Only suitable for small payloads, limited by the key size.<br/>Encrypt large data with AES and encrypt the AES key with RSA.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
@@ -872,7 +917,7 @@ var urlSafe = "hello world".GetBytes().ToBase64(urlSafe: true);</code></pre>
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToMD5Hash()</code> for data under ~200 bytes</p>
+    <p>Slower than <code>ToMD5Hash()</code> for data under ~200 bytes. Not suitable for security purposes.</p>
 
                   </div>
                 </div>
