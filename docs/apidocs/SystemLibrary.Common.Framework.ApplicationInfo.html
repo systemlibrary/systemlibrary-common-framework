@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ApplicationInfo | System Library Common Framework ">
       
-      <meta name="description" content="Exposed environment information">
+      <meta name="description" content="Information about the running application: paths, name and view namespaces">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Exposed environment information</p>
+  <p>Information about the running application: paths, name and view namespaces</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/ApplicationInfo/ApplicationInfo.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -116,7 +116,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Application name set in appsettings</p>
+    <p>Application name from appsettings</p>
 
                 </div>
               </div>
@@ -137,7 +137,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Fall back to company_unique_appname<br/>Must be set in production environment else it throws</p>
+    <p>Falls back to <code>company_unique_appname</code>. Must be set in production, otherwise it throws.</p>
 
                   </div>
                 </div>
@@ -151,7 +151,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Full path to the application root folder, never ending with a slash.<br/>Usually the parent of Content Root Path, where appsettings.json lives</p>
+    <p>Full path to the folder used for public static files (css, js)</p>
 
                 </div>
               </div>
@@ -172,7 +172,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Root for public static files (css, js). Falls back to RootPath if not set by the host.</p>
+    <p>Uses the host's content root if set, otherwise <code>wwwroot</code> under <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a> if it exists, otherwise <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a>.</p>
 
                   </div>
                 </div>
@@ -186,7 +186,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>List of all namespaces for View's (cshtml view files)</p>
+    <p>Namespaces of the cshtml views, relative to the root namespace and written as folder paths</p>
 
                 </div>
               </div>
@@ -203,6 +203,14 @@
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <p><code>MyApp.Views.Home</code> becomes <code>/Views/Home</code></p>
+
+                  </div>
+                </div>
         </div>
 
 
@@ -212,7 +220,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Root folder for cshtml views.</p>
+    <p>Full paths to the folders containing cshtml views</p>
 
                 </div>
               </div>
@@ -229,6 +237,15 @@
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Currently only <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a>.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -238,7 +255,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Full path to the application root folder, never ending with a slash.<br/>Traverses up from <code>bin</code> unless the assembly name ends in <code>.Test(s)</code>.</p>
+    <p>Full path to the application root folder</p>
 
                 </div>
               </div>
@@ -255,6 +272,15 @@
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>The folder containing <code>bin</code> when running from a build output, otherwise the application's base directory.<br/>Usually where appsettings.json lives. Uses forward slashes.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 

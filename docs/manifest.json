@@ -414,7 +414,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.ApplicationInfo",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ApplicationInfo.yml\" sourcestartlinenumber=\"1\">Exposed environment information</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ApplicationInfo.yml\" sourcestartlinenumber=\"1\">Information about the running application: paths, name and view namespaces</p>\n"
     },
     {
       "type": "ManagedReference",
