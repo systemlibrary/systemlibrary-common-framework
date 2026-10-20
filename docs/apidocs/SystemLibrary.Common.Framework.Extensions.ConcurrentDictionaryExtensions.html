@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ConcurrentDictionaryExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for ConcurrentDictionary.">
+      <meta name="description" content="Extension methods for ConcurrentDictionary">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for ConcurrentDictionary.</p>
+  <p>Extension methods for ConcurrentDictionary</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ConcurrentDictionaryExtensions/ConcurrentDictionaryExtensions.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -134,7 +134,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a cached value by int key, or invokes <code>getItem</code> and caches the result.<br/>Clears the dictionary and starts over when it exceeds 50,000 entries.</p>
+    <p>Returns the cached value for the int key, or invokes <code>getItem</code> and caches the result</p>
 
                 </div>
               </div>
@@ -163,46 +163,21 @@ var result = cache.Cache(123, () =&gt; "Hello world");</code></pre>
 
                   </div>
                 </div>
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a cached value by Type key using its hash code, or invokes <code>getItem</code> and caches the result.<br/>Clears the dictionary and starts over when it exceeds 50,000 entries.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_ConcurrentDictionaryExtensions_Cache__1_System_Collections_Concurrent_ConcurrentDictionary_System_Int32___0__System_Type_System_Func___0__" data-uid="SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,``0},System.Type,System.Func{``0})">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    T
-              </span>
-
-              <span class="member-name">
-    Cache&lt;T&gt;(ConcurrentDictionary&lt;int, T&gt;, Type, Func&lt;T&gt;)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">ConcurrentDictionary&lt;int, string&gt; cache = new();
-var result = cache.Cache(typeof(Car), () =&gt; "Hello world");</code></pre>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Clears the whole dictionary when it exceeds 50,000 entries.<br/>Returns <code>getItem()</code> uncached if the dictionary is null.<br/><code>getItem</code> may run more than once if called concurrently for the same key.</p>
 
                   </div>
                 </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a cached value by string key, or invokes <code>getItem</code> and caches the result.<br/>Clears the dictionary and starts over when it exceeds 50,000 entries.</p>
+    <p>Returns the cached value for the string key, or invokes <code>getItem</code> and caches the result</p>
 
                 </div>
               </div>
@@ -231,6 +206,58 @@ var result = cache.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Clears the whole dictionary when it exceeds 50,000 entries.<br/>Returns <code>getItem()</code> uncached if the dictionary or key is null.</p>
+
+                  </div>
+                </div>
+
+          </div>
+      </div>
+      <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Returns the cached value for the type, or invokes <code>getItem</code> and caches the result</p>
+
+                </div>
+              </div>
+        
+
+          <h3 id="SystemLibrary_Common_Framework_Extensions_ConcurrentDictionaryExtensions_Cache__1_System_Collections_Concurrent_ConcurrentDictionary_System_Type___0__System_Type_System_Func___0__" data-uid="SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Type,``0},System.Type,System.Func{``0})">
+              <span class='member-static'>static </span>
+
+              <span class="member-returntype">
+    T
+              </span>
+
+              <span class="member-name">
+    Cache&lt;T&gt;(ConcurrentDictionary&lt;Type, T&gt;, Type, Func&lt;T&gt;)
+              </span>
+          </h3>
+
+
+          <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">ConcurrentDictionary&lt;int, string&gt; cache = new();
+var result = cache.Cache(typeof(Car), () =&gt; "Hello world");</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>The key is <code>type.GetHashCode()</code>, so two different types with the same hash code share an entry.<br/>Clears the whole dictionary when it exceeds 50,000 entries.<br/>Returns <code>getItem()</code> uncached if the dictionary is null.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

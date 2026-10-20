@@ -2810,15 +2810,6 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache(Of T)(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, T), Integer, System.Func(Of T))
   nameWithType: ConcurrentDictionaryExtensions.Cache<T>(ConcurrentDictionary<int, T>, int, Func<T>)
   nameWithType.vb: ConcurrentDictionaryExtensions.Cache(Of T)(ConcurrentDictionary(Of Integer, T), Integer, Func(Of T))
-- uid: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,``0},System.Type,System.Func{``0})
-  name: Cache<T>(ConcurrentDictionary<int, T>, Type, Func<T>)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html#SystemLibrary_Common_Framework_Extensions_ConcurrentDictionaryExtensions_Cache__1_System_Collections_Concurrent_ConcurrentDictionary_System_Int32___0__System_Type_System_Func___0__
-  commentId: M:SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Int32,``0},System.Type,System.Func{``0})
-  name.vb: Cache(Of T)(ConcurrentDictionary(Of Integer, T), Type, Func(Of T))
-  fullName: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache<T>(System.Collections.Concurrent.ConcurrentDictionary<int, T>, System.Type, System.Func<T>)
-  fullName.vb: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache(Of T)(System.Collections.Concurrent.ConcurrentDictionary(Of Integer, T), System.Type, System.Func(Of T))
-  nameWithType: ConcurrentDictionaryExtensions.Cache<T>(ConcurrentDictionary<int, T>, Type, Func<T>)
-  nameWithType.vb: ConcurrentDictionaryExtensions.Cache(Of T)(ConcurrentDictionary(Of Integer, T), Type, Func(Of T))
 - uid: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.String,``0},System.String,System.Func{``0})
   name: Cache<T>(ConcurrentDictionary<string, T>, string, Func<T>)
   href: apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html#SystemLibrary_Common_Framework_Extensions_ConcurrentDictionaryExtensions_Cache__1_System_Collections_Concurrent_ConcurrentDictionary_System_String___0__System_String_System_Func___0__
@@ -2828,6 +2819,15 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache(Of T)(System.Collections.Concurrent.ConcurrentDictionary(Of String, T), String, System.Func(Of T))
   nameWithType: ConcurrentDictionaryExtensions.Cache<T>(ConcurrentDictionary<string, T>, string, Func<T>)
   nameWithType.vb: ConcurrentDictionaryExtensions.Cache(Of T)(ConcurrentDictionary(Of String, T), String, Func(Of T))
+- uid: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Type,``0},System.Type,System.Func{``0})
+  name: Cache<T>(ConcurrentDictionary<Type, T>, Type, Func<T>)
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.html#SystemLibrary_Common_Framework_Extensions_ConcurrentDictionaryExtensions_Cache__1_System_Collections_Concurrent_ConcurrentDictionary_System_Type___0__System_Type_System_Func___0__
+  commentId: M:SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache``1(System.Collections.Concurrent.ConcurrentDictionary{System.Type,``0},System.Type,System.Func{``0})
+  name.vb: Cache(Of T)(ConcurrentDictionary(Of Type, T), Type, Func(Of T))
+  fullName: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache<T>(System.Collections.Concurrent.ConcurrentDictionary<System.Type, T>, System.Type, System.Func<T>)
+  fullName.vb: SystemLibrary.Common.Framework.Extensions.ConcurrentDictionaryExtensions.Cache(Of T)(System.Collections.Concurrent.ConcurrentDictionary(Of System.Type, T), System.Type, System.Func(Of T))
+  nameWithType: ConcurrentDictionaryExtensions.Cache<T>(ConcurrentDictionary<Type, T>, Type, Func<T>)
+  nameWithType.vb: ConcurrentDictionaryExtensions.Cache(Of T)(ConcurrentDictionary(Of Type, T), Type, Func(Of T))
 - uid: SystemLibrary.Common.Framework.Extensions.DynamicExtensions
   name: DynamicExtensions
   href: apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.html
