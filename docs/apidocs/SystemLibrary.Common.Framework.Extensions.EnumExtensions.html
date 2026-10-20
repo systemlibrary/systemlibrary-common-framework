@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="EnumExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for enum values.">
+      <meta name="description" content="Extension methods for enum values">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for enum values.</p>
+  <p>Extension methods for enum values</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/EnumExtensions/EnumExtensions.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -152,7 +152,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the <code>EnumText</code> attribute value, or null if not applied.</p>
+    <p>Returns the <code>EnumText</code> attribute value, or null if not applied</p>
 
                 </div>
               </div>
@@ -188,7 +188,7 @@ Color.Pink.GetEnumText();  // null</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the <code>EnumValue</code> attribute value as object, or null if not applied.</p>
+    <p>Returns the <code>EnumValue</code> attribute value as object, or null if not applied</p>
 
                 </div>
               </div>
@@ -225,7 +225,7 @@ Color.Pink.GetEnumValue();  // null</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the enum value matches any of the provided values.</p>
+    <p>Returns true if the enum value equals any of the provided values</p>
 
                 </div>
               </div>
@@ -254,9 +254,24 @@ Color.Red.IsAny(Color.Red, Color.Blue);   // true</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns false if <code>values</code> is null. Values of a different enum type never match.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Converts the enum value to another enum type by matching <code>ToValue()</code> against the target's names, texts or values</p>
+
+                </div>
+              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_EnumExtensions_ToEnum__1_System_Enum_" data-uid="SystemLibrary.Common.Framework.Extensions.EnumExtensions.ToEnum``1(System.Enum)">
@@ -273,12 +288,32 @@ Color.Red.IsAny(Color.Red, Color.Blue);   // true</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">enum A { [EnumValue("x")] One }
+enum B { [EnumText("x")] Uno }
+
+var b = A.One.ToEnum&lt;B&gt;(); // B.Uno</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns <code>default</code> if the value is null or has no match.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the <code>EnumText</code> attribute value, or the enum key name if not applied.</p>
+    <p>Returns the <code>EnumText</code> attribute value, or the enum key name if not applied</p>
 
                 </div>
               </div>
@@ -314,7 +349,7 @@ Color.Pink.ToText();  // "Pink"</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the <code>EnumValue</code> attribute value as string, or the enum key name if not applied.<br/>Enum keys prefixed with <code>_</code> followed by digits have the underscore stripped automatically.</p>
+    <p>Returns the <code>EnumValue</code> attribute value as a string, or the enum key name if not applied</p>
 
                 </div>
               </div>
@@ -346,6 +381,15 @@ Color.Pink.ToValue();  // "Pink"</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>A leading underscore is stripped from keys like <code>_1</code> or <code>_12abc</code>, so enums can have numeric-looking values.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

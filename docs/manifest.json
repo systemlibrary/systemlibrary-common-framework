@@ -694,7 +694,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.DynamicExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml\" sourcestartlinenumber=\"1\">Static methods for dynamic and anonymous objects.\nC# does not support extension methods on <code>dynamic</code> — call these as static methods directly.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.DynamicExtensions.yml\" sourcestartlinenumber=\"1\">Static methods for dynamic and anonymous objects</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -708,7 +708,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions<TEnum>",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml\" sourcestartlinenumber=\"1\">Static methods for enum types — use when extension methods on generic types are needed.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions-1.yml\" sourcestartlinenumber=\"1\">Static methods for enum types - use when extension methods on generic types are needed.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -722,7 +722,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.EnumExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for enum values.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.EnumExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for enum values</p>\n"
     },
     {
       "type": "ManagedReference",

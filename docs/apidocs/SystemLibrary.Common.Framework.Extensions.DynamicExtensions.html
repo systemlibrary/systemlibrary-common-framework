@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="DynamicExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Static methods for dynamic and anonymous objects. C# does not support extension methods on dynamic — call these as static methods directly.">
+      <meta name="description" content="Static methods for dynamic and anonymous objects">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,12 +94,21 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Static methods for dynamic and anonymous objects.<br/>C# does not support extension methods on <code>dynamic</code> — call these as static methods directly.</p>
+  <p>Static methods for dynamic and anonymous objects</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/DynamicExtensions/DynamicExtensions.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/DynamicExtensions/DynamicExtensions.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>C# does not support extension methods on <code>dynamic</code>, so call these as static methods.</p>
+
+        </div>
+      </div>
 
   </div>
 
@@ -122,7 +131,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Merges one or more anonymous or dynamic objects into a new dynamic object.<br/>Later objects overwrite earlier ones on property name collision — property names are case-sensitive.<br/>Result is castable to <code>IDictionary&lt;string, object&gt;</code>.</p>
+    <p>Merges anonymous or dynamic objects into a new dynamic object, later objects overwriting earlier ones</p>
 
                 </div>
               </div>
@@ -164,7 +173,7 @@ var dict = (IDictionary&lt;string, object&gt;)d;
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>If reflection fails on an updating object, cast it to a concrete type before passing it in.</p>
+    <p>Property names are case-sensitive, so <code>age</code> and <code>Age</code> are separate properties.<br/>Only public readable instance properties are copied, fields are ignored.<br/>The result can be cast to <code>IDictionary&lt;string, object&gt;</code>.<br/>If reflection fails on an object, cast it to a concrete type before passing it in.</p>
 
                   </div>
                 </div>
