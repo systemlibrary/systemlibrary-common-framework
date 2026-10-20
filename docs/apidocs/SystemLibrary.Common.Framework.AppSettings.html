@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="AppSettings | System Library Common Framework ">
       
-      <meta name="description" content="Exposed instance of current appsettings, after all transformations">
+      <meta name="description" content="Shortcut to the application&#39;s final configuration">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,12 +94,22 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Exposed instance of current appsettings, after all transformations</p>
+  <p>Shortcut to the application's final configuration</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/AppSettingsInstance/AppSettings.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/AppSettingsInstance/AppSettings.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Sources, where later sources override earlier ones:</p>
+<ol><li>appsettings.json</li><li>Environment transformation, for example appsettings.Development.json</li><li>Environment variables and command line arguments</li><li>Azure Key Vault, only if <code>systemLibraryCommonFramework:config:keyVaultUrl</code> is set</li><li>Environment variables prefixed <code>ASPNETCORE_</code>, <code>DOTNET_</code> and <code>APP_</code>, then command line arguments again, so they win over Key Vault</li></ol>
+
+        </div>
+      </div>
 
   </div>
 
@@ -117,7 +127,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Current instance of IConfiguration</p>
+    <p>The fully built configuration: appsettings.json, environment transformations, Key Vault (if configured), environment variables and command line arguments</p>
 
                 </div>
               </div>
@@ -136,15 +146,6 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
-                <div class="remarks-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
-                  <div class="markdown level0 remarks-content" style="display:none">
-                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>This contains the instance of IConfiguration after appsettings.json has been read, transformed, keyvault if configured has been applied and all env-vars too</p>
-
-                  </div>
-                </div>
-
         </div>
 
       </div>

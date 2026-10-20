@@ -400,7 +400,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.AppSettings",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.AppSettings.yml\" sourcestartlinenumber=\"1\">Exposed instance of current appsettings, after all transformations</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.AppSettings.yml\" sourcestartlinenumber=\"1\">Shortcut to the application's final configuration</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -848,7 +848,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ObjectExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on object for serialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for objects.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -932,7 +932,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.StreamExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on Stream for deserialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for streams.</p>\n"
     },
     {
       "type": "ManagedReference",
