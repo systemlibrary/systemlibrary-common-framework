@@ -106,7 +106,7 @@
         <div class="markdown level0 remarks-content" style="display:none">
           <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
     <p>Sources, where later sources override earlier ones:</p>
-<ol><li>appsettings.json</li><li>Environment transformation, for example appsettings.Development.json</li><li>Environment variables and command line arguments</li><li>Azure Key Vault, only if <code>systemLibraryCommonFramework:config:keyVaultUrl</code> is set</li><li>Environment variables prefixed <code>ASPNETCORE_</code>, <code>DOTNET_</code> and <code>APP_</code>, then command line arguments again, so they win over Key Vault</li></ol>
+<ol><li>appsettings.json</li><li>Environment transformation, for example appsettings.Development.json</li><li>Azure Key Vault, only if <code>systemLibraryCommonFramework:config:keyVaultUrl</code> is set</li><li>Environment variables prefixed <code>ASPNETCORE_</code>, <code>DOTNET_</code> and <code>APP_</code></li><li>Command line arguments</li></ol>
 
         </div>
       </div>
@@ -127,7 +127,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>The fully built configuration: appsettings.json, environment transformations, Key Vault (if configured), environment variables and command line arguments</p>
+    <p>The fully built configuration, after all sources and transformations</p>
 
                 </div>
               </div>
