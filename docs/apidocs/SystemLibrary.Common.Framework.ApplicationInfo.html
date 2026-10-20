@@ -151,7 +151,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Full path to the folder used for public static files (css, js)</p>
+    <p>Full path to the application root folder</p>
 
                 </div>
               </div>
@@ -172,7 +172,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Uses the host's content root if set, otherwise <code>wwwroot</code> under <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a> if it exists, otherwise <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a>.</p>
+    <p>The folder containing <code>bin</code> when running from a build output, otherwise the application's base directory.<br/>Usually where appsettings.json lives. Uses forward slashes.</p>
 
                   </div>
                 </div>
@@ -241,7 +241,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Currently only <a class="xref" href="SystemLibrary.Common.Framework.ApplicationInfo.html#SystemLibrary_Common_Framework_ApplicationInfo_RootPath">RootPath</a>.</p>
+    <p>Currently only <b>RootPath</b>.</p>
 
                   </div>
                 </div>
@@ -255,7 +255,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Full path to the application root folder</p>
+    <p>Full path to the folder used for public static files (css, js)</p>
 
                 </div>
               </div>
@@ -276,7 +276,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>The folder containing <code>bin</code> when running from a build output, otherwise the application's base directory.<br/>Usually where appsettings.json lives. Uses forward slashes.</p>
+    <p><code>wwwroot</code> under the host's content root (or <b>RootPath</b> if the host sets none) if it exists, otherwise that folder itself.</p>
 
                   </div>
                 </div>
