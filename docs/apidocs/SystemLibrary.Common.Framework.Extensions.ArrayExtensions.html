@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ArrayExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for arrays.">
+      <meta name="description" content="Extension methods for arrays">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for arrays.</p>
+  <p>Extension methods for arrays</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ArrayExtensions/ArrayExtensions.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -134,7 +134,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Concatenates one or more arrays into a new array, filtered by a predicate.</p>
+    <p>Returns a new array with the items of the current and additional arrays that match the predicate</p>
 
                 </div>
               </div>
@@ -159,13 +159,28 @@
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
     <pre><code class="lang-csharp">var result = new[] { 3, 4 }.Add(i =&gt; i &gt; 1, new[] { 1, 2, 3 });
-// { 3, 4, 2, 3 } — only values matching predicate are included from all arrays</code></pre>
+// { 3, 4, 2, 3 }</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Null arrays are treated as empty</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Returns a new array with the item appended to the current array</p>
+
+                </div>
+              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_ArrayExtensions_Add__1___0_____0_" data-uid="SystemLibrary.Common.Framework.Extensions.ArrayExtensions.Add``1(``0[],``0)">
@@ -182,12 +197,30 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var result = new[] { 2 }.Add(1);
+// { 2, 1 }</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Null arrays are treated as empty</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Concatenates one or more arrays into a new array.</p>
+    <p>Returns a new array with the items of the current array followed by the items of each additional array</p>
 
                 </div>
               </div>
@@ -216,6 +249,15 @@
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Null arrays are treated as empty</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

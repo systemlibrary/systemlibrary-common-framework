@@ -638,7 +638,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ArrayExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for arrays.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for arrays</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -652,7 +652,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for byte arrays.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for byte arrays</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -848,7 +848,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ObjectExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on object for serialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ObjectExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for objects.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -932,7 +932,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.StreamExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods on Stream for deserialization.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.StreamExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for streams.</p>\n"
     },
     {
       "type": "ManagedReference",

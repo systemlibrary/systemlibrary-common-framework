@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ByteArrayExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for byte arrays.">
+      <meta name="description" content="Extension methods for byte arrays">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for byte arrays.</p>
+  <p>Extension methods for byte arrays</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ByteArrayExtensions/Cryptation.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -242,7 +242,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>GZip compresses the bytes and returns the result as a URL-safe base64 string.</p>
+    <p>GZip compresses the bytes and returns the result as a base64 string</p>
 
                 </div>
               </div>
@@ -275,7 +275,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>GZip decompresses the bytes and returns the result as a string. Defaults to UTF8.</p>
+    <p>GZip decompresses the bytes and returns the result as a string, UTF8 by default</p>
 
                 </div>
               </div>
@@ -678,6 +678,12 @@
           </div>
       </div>
       <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Returns true if both arrays have the same length and content</p>
+
+                </div>
+              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_ByteArrayExtensions_IsEqual_System_Byte___System_Byte___" data-uid="SystemLibrary.Common.Framework.Extensions.ByteArrayExtensions.IsEqual(System.Byte[],System.Byte[])">
@@ -694,12 +700,20 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var same = new byte[] { 1, 2 }.IsEqual(new byte[] { 1, 2 }); // true</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base62 encoded string of the bytes.</p>
+    <p>Returns the bytes as a base62 string</p>
 
                 </div>
               </div>
@@ -727,12 +741,21 @@
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Output is two characters per byte, so it is twice as long as the input</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a URL-safe base64 string — <code>+</code> and <code>/</code> are replaced with <code>-</code> and <code>_</code>, padding stripped.</p>
+    <p>Returns the bytes as a base64 string, optionally URL-safe</p>
 
                 </div>
               </div>
@@ -756,7 +779,8 @@
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">var base64 = "hello world".GetBytes().ToBase64();</code></pre>
+    <pre><code class="lang-csharp">var base64 = "hello world".GetBytes().ToBase64();
+var urlSafe = "hello world".GetBytes().ToBase64(urlSafe: true);</code></pre>
 
                   </div>
                 </div>
@@ -764,7 +788,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Use <code>Obfuscate()</code> instead for data under ~400KB when base64 format is not required — it is faster.</p>
+    <p>URL-safe uses <code>-</code> and <code>_</code> instead of <code>+</code> and <code>/</code>, without padding.<br/>Use <code>Obfuscate()</code> instead for data under ~400KB when base64 format is not required, it is faster.</p>
 
                   </div>
                 </div>
@@ -774,7 +798,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns an MD5 hash string of the bytes.</p>
+    <p>Returns the MD5 hash of the bytes as a string</p>
 
                 </div>
               </div>
@@ -806,7 +830,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Faster than <code>ToSha1Hash()</code> for data under ~200 bytes.</p>
+    <p>Faster than <code>ToSha1Hash()</code> for data under ~200 bytes. Not suitable for security purposes.</p>
 
                   </div>
                 </div>
@@ -816,7 +840,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA1 hash string of the bytes.</p>
+    <p>Returns the SHA1 hash of the bytes as a string</p>
 
                 </div>
               </div>
@@ -848,7 +872,7 @@
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToMD5Hash()</code> for data under ~200 bytes.</p>
+    <p>Slower than <code>ToMD5Hash()</code> for data under ~200 bytes</p>
 
                   </div>
                 </div>
@@ -858,7 +882,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA256 hash string of the bytes.</p>
+    <p>Returns the SHA256 hash of the bytes as a string</p>
 
                 </div>
               </div>
@@ -891,7 +915,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the byte array decoded as a string. Defaults to UTF8.</p>
+    <p>Returns the bytes decoded as a string, UTF8 by default</p>
 
                 </div>
               </div>
