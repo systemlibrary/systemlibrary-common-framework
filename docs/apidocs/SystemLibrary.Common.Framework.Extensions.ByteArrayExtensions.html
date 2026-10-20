@@ -753,6 +753,15 @@ var plain = cipher.DecryptAesCbc();</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Two nulls are equal. A null and an empty array are not.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
@@ -790,7 +799,7 @@ var plain = cipher.DecryptAesCbc();</code></pre>
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Output is two characters per byte, so it is twice as long as the input</p>
+    <p>Output is two characters per byte, so it is twice as long as the input<br/>Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>
