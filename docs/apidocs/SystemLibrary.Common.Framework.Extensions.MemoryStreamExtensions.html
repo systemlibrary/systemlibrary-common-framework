@@ -122,7 +122,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base64 encoded string of the stream contents.</p>
+    <p>Returns the stream contents as a base64 string</p>
 
                 </div>
               </div>
@@ -142,6 +142,24 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var base64 = stream.ToBase64();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Encodes from the start of the stream to its length, regardless of the current position.<br/>Returns null if the stream is null, and an empty string if it is empty.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 
