@@ -918,7 +918,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions",
-      "Summary": null
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for ReadOnlySpan.</p>\n"
     },
     {
       "type": "ManagedReference",
