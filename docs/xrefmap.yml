@@ -3570,6 +3570,15 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.Is(Of T)(System.ReadOnlySpan(Of T))
   nameWithType: ReadOnlySpanExtensions.Is<T>(ReadOnlySpan<T>)
   nameWithType.vb: ReadOnlySpanExtensions.Is(Of T)(ReadOnlySpan(Of T))
+- uid: SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan{System.Byte},System.Boolean)
+  name: ToBase64(ReadOnlySpan<byte>, bool)
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html#SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_ToBase64_System_ReadOnlySpan_System_Byte__System_Boolean_
+  commentId: M:SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan{System.Byte},System.Boolean)
+  name.vb: ToBase64(ReadOnlySpan(Of Byte), Boolean)
+  fullName: SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan<byte>, bool)
+  fullName.vb: SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan(Of Byte), Boolean)
+  nameWithType: ReadOnlySpanExtensions.ToBase64(ReadOnlySpan<byte>, bool)
+  nameWithType.vb: ReadOnlySpanExtensions.ToBase64(ReadOnlySpan(Of Byte), Boolean)
 - uid: SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan{System.Char},System.Text.Encoding,System.Boolean)
   name: ToBase64(ReadOnlySpan<char>, Encoding, bool)
   href: apidocs/SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.html#SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_ToBase64_System_ReadOnlySpan_System_Char__System_Text_Encoding_System_Boolean_

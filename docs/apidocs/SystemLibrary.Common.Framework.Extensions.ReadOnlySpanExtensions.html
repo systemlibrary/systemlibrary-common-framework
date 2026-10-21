@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ReadOnlySpanExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for ReadOnlySpan.">
+      
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -93,12 +93,6 @@
   </div>
 
 
-  <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for ReadOnlySpan.</p>
-
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Extensions/ReadOnlySpanExtensions/ReadOnlySpanExtensions.cs/#L8"><i class="bi bi-code-slash"></i></a>
-  </div>
-
   <div class="doc-toggles">
 
   </div>
@@ -136,11 +130,17 @@
 
       </div>
 
+      <div class="class-member">
+
+
+
+      </div>
+
 
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the span encoded as a byte array. Defaults to UTF8 encoding.</p>
+    <p>Returns the characters encoded as a byte array, UTF8 by default</p>
 
                 </div>
               </div>
@@ -168,15 +168,18 @@
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>An empty span returns an empty array.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the span is null or empty.</p>
-
-                </div>
-              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_IsNot__1_System_ReadOnlySpan___0__" data-uid="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.IsNot``1(System.ReadOnlySpan{``0})">
@@ -193,23 +196,9 @@
 
 
           <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">"Hello World".AsSpan().IsNot(); // false</code></pre>
-
-                  </div>
-                </div>
           </div>
       </div>
       <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the span is non-null and has a length greater than zero.</p>
-
-                </div>
-              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_Is__1_System_ReadOnlySpan___0__" data-uid="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.Is``1(System.ReadOnlySpan{``0})">
@@ -226,23 +215,28 @@
 
 
           <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">"Hello World".AsSpan().Is(); // true</code></pre>
-
-                  </div>
-                </div>
           </div>
       </div>
       <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base64 encoded string of the span. Defaults to UTF8 encoding.</p>
+        
 
-                </div>
-              </div>
+          <h3 id="SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_ToBase64_System_ReadOnlySpan_System_Byte__System_Boolean_" data-uid="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan{System.Byte},System.Boolean)">
+              <span class='member-static'>static </span>
+
+              <span class="member-returntype">
+    string
+              </span>
+
+              <span class="member-name">
+    ToBase64(ReadOnlySpan&lt;byte&gt;, bool)
+              </span>
+          </h3>
+
+
+          <div class="doc-toggles">
+          </div>
+      </div>
+      <div class="class-member">
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_ReadOnlySpanExtensions_ToBase64_System_ReadOnlySpan_System_Char__System_Text_Encoding_System_Boolean_" data-uid="SystemLibrary.Common.Framework.Extensions.ReadOnlySpanExtensions.ToBase64(System.ReadOnlySpan{System.Char},System.Text.Encoding,System.Boolean)">
@@ -259,14 +253,6 @@
 
 
           <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">var base64 = "Hello World".AsSpan().ToBase64();</code></pre>
-
-                  </div>
-                </div>
           </div>
       </div>
 

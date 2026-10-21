@@ -152,7 +152,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Converts an object array of integers or strings to a typed enum array.</p>
+    <p>Converts an object array of integers or strings to a typed enum array</p>
 
                 </div>
               </div>
@@ -176,8 +176,8 @@
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">new object[] { 1, 2, 3 }.AsEnumArray&lt;Colors&gt;();       // by int index
-new object[] { "Red", "Black" }.AsEnumArray&lt;Colors&gt;(); // by key name</code></pre>
+    <pre><code class="lang-csharp">new object[] { 1, 2, 3 }.AsEnumArray&lt;Colors&gt;();       // by underlying value
+new object[] { "Red", "Black" }.AsEnumArray&lt;Colors&gt;(); // by name, text or value</code></pre>
 
                   </div>
                 </div>
@@ -185,7 +185,7 @@ new object[] { "Red", "Black" }.AsEnumArray&lt;Colors&gt;(); // by key name</cod
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Only supports int and string arrays — throws for any other element type.<br/>Assumes all elements in the array are the same type.</p>
+    <p>Integers match the enum's underlying value, strings match by name, <code>EnumText</code> or <code>EnumValue</code>.<br/>The type is read from the first element only, so all elements must be the same type.<br/>Returns null if the array is null or empty. Throws for any other element type.<br/>Strings that match no enum member become <code>default</code> and are logged as a warning.</p>
 
                   </div>
                 </div>
@@ -315,7 +315,7 @@ var json = user.Json(translateUnicodeCodepoints: true);</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a sanitized text representation of the object's public properties in the specified format.</p>
+    <p>Returns a sanitized text representation of the object's public properties in the given format</p>
 
                 </div>
               </div>
@@ -335,11 +335,19 @@ var json = user.Json(translateUnicodeCodepoints: true);</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var text = new { Name = "John", Age = 42 }.ToSanitizedObjectText();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Only supports class types — throws <code>NotSupportedException</code> for value types.</p>
+    <p>Only class types are supported, structs throw <code>NotSupportedException</code>.<br/>Returns null if the object is null. A string is returned as is.</p>
 
                   </div>
                 </div>
