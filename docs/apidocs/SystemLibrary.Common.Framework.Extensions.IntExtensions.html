@@ -134,7 +134,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the value clamped between <code>min</code> and <code>max</code>. Defaults to 0–9999.</p>
+    <p>Returns the value limited to the range <code>min</code> to <code>max</code>, defaulting to 0 to 9999</p>
 
                 </div>
               </div>
@@ -169,7 +169,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base62 encoded string of the integer.</p>
+    <p>Returns the integer as a base62 string of 1 to 6 characters</p>
 
                 </div>
               </div>
@@ -189,11 +189,20 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var a = 123456.ToBase62();
+var b = (-1).ToBase62(); // same as uint.MaxValue.ToBase62()</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not compatible with other base62 implementations.</p>
+    <p>Negative numbers are encoded by their unsigned bit pattern, so <code>-1</code> gives the same string as <code>uint.MaxValue</code>.<br/>Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>
@@ -203,7 +212,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base62 encoded string of the integer.</p>
+    <p>Returns the unsigned integer as a base62 string of up to 6 characters</p>
 
                 </div>
               </div>
@@ -223,11 +232,19 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var base62 = 123456u.ToBase62();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not compatible with other base62 implementations.</p>
+    <p>Returns an empty string for 0.<br/>Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>

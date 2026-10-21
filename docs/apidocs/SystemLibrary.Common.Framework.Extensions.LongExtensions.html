@@ -140,7 +140,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base62 encoded string of the value.</p>
+    <p>Returns the long as a base62 string of 1 to 11 characters</p>
 
                 </div>
               </div>
@@ -160,11 +160,20 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var a = 123456789L.ToBase62();
+var b = (-1L).ToBase62(); // same as ulong.MaxValue.ToBase62()</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not compatible with other base62 implementations.</p>
+    <p>Negative numbers are encoded by their unsigned bit pattern, so <code>-1</code> gives the same string as <code>ulong.MaxValue</code>.<br/>Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>
@@ -174,7 +183,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a base62 encoded string of the value.</p>
+    <p>Returns the unsigned long as a base62 string of 1 to 11 characters</p>
 
                 </div>
               </div>
@@ -194,6 +203,14 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var a = 123456789UL.ToBase62();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
@@ -208,7 +225,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the base62 encoded value as a char array with the encoded length via <code>out len</code>.</p>
+    <p>Returns the base62 string as a char array, with its length in <code>len</code></p>
 
                 </div>
               </div>
@@ -228,11 +245,19 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var chars = 123456789UL.ToBase62(out var len);</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not compatible with other base62 implementations.</p>
+    <p>Same digits as the string overload. Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>
@@ -242,7 +267,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Writes the base62 encoded value into a span buffer starting at <code>position</code>, returns the new position.</p>
+    <p>Writes the base62 digits into <code>buffer</code> from <code>position</code>, least significant digit first, and returns the new position</p>
 
                 </div>
               </div>
@@ -262,11 +287,21 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">Span&lt;char&gt; buffer = stackalloc char[11];
+var end = 123456789UL.ToBase62(buffer, 0);
+var digits = buffer[..end]; // reversed</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not compatible with other base62 implementations.</p>
+    <p>The digits are in reverse order compared to the string overloads, and nothing is written for 0.<br/>The buffer needs room for up to 11 chars.<br/>Not compatible with other base62 implementations.</p>
 
                   </div>
                 </div>
