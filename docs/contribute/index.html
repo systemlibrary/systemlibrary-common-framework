@@ -88,11 +88,23 @@
 <h1 id="contribute">Contribute</h1>
 
 <h3 id="email">Email</h3>
-<p>Email: support@systemlibrary.com
-for access to the private repository — no questions asked.
-Clone, fork, and submit PRs freely.</p>
+<p>Email <a href="mailto:support@systemlibrary.com">support@systemlibrary.com</a> for access to the private repository — no questions asked. Clone, fork, and submit PRs freely.</p>
 <h3 id="slack">Slack</h3>
 <p>Join the community on <a href="https://join.slack.com/t/systemlibrary/shared_invite/zt-41jb3i5ci-j8vlc5tzRafcaw90%7E8lecg">Slack</a>.</p>
+<h3 id="coding-standards">Coding Standards</h3>
+<p>Prioritize performance, minimal code, reusability, thread safety, and consistency.</p>
+<ul>
+<li><strong>Performance first.</strong> Minimize CPU cycles, allocations, boxing, unnecessary LINQ, and avoidable work. Cache hot-path lookups where appropriate.</li>
+<li><strong>Keep code minimal.</strong> Every line should provide value. Avoid boilerplate, redundant checks, unnecessary abstractions, and excessive indirection.</li>
+<li><strong>Use concise names.</strong> Names must never be unnecessarily verbose.</li>
+<li><strong>Preserve variable names.</strong></li>
+<li><strong>Keep classes and methods reusable.</strong></li>
+<li><strong>Thread safety matters.</strong> Shared state must be safe for concurrent access. Avoid unnecessary locks and contention.</li>
+<li><strong>Avoid unnecessary allocations.</strong> Reuse objects and buffers where appropriate. Consider memory pressure as well as execution speed.</li>
+<li><strong>Banned C# keywords:</strong> <code>record</code>, <code>sealed</code>, <code>init</code>, <code>tuple</code>, <code>private</code>, <code>readonly</code>.</li>
+<li><strong>Respect the architecture.</strong> New code must fit the framework's established architecture.</li>
+</ul>
+<p>Good luck :)</p>
 
 </article>
 

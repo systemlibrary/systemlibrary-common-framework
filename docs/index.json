@@ -412,7 +412,7 @@
   "contribute/index.html": {
     "href": "contribute/index.html",
     "title": "Contribute | System Library Common Framework",
-    "summary": "Contribute Email Email: support@systemlibrary.com for access to the private repository — no questions asked. Clone, fork, and submit PRs freely. Slack Join the community on Slack."
+    "summary": "Contribute Email Email support@systemlibrary.com for access to the private repository — no questions asked. Clone, fork, and submit PRs freely. Slack Join the community on Slack. Coding Standards Prioritize performance, minimal code, reusability, thread safety, and consistency. Performance first. Minimize CPU cycles, allocations, boxing, unnecessary LINQ, and avoidable work. Cache hot-path lookups where appropriate. Keep code minimal. Every line should provide value. Avoid boilerplate, redundant checks, unnecessary abstractions, and excessive indirection. Use concise names. Names must never be unnecessarily verbose. Preserve variable names. Keep classes and methods reusable. Thread safety matters. Shared state must be safe for concurrent access. Avoid unnecessary locks and contention. Avoid unnecessary allocations. Reuse objects and buffers where appropriate. Consider memory pressure as well as execution speed. Banned C# keywords: record, sealed, init, tuple, private, readonly. Respect the architecture. New code must fit the framework's established architecture. Good luck :)"
   },
   "documentation/apifilters.html": {
     "href": "documentation/apifilters.html",
