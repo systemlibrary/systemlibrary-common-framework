@@ -188,7 +188,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the StringBuilder begins with the specified string.</p>
+    <p>Returns true if the StringBuilder begins with the given string</p>
 
                 </div>
               </div>
@@ -208,12 +208,32 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var sb = new StringBuilder("Hello World");
+sb.BeginsWith("Hello");        // true
+sb.BeginsWith("hello");        // false
+sb.BeginsWith("hello", true);  // true</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns false if the StringBuilder is null or empty, or if <code>start</code> is null or empty.<br/>Case-insensitive comparison uses invariant culture.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the StringBuilder ends with the specified string.</p>
+    <p>Returns true if the StringBuilder ends with the given string</p>
 
                 </div>
               </div>
@@ -233,12 +253,32 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var sb = new StringBuilder("Hello World");
+sb.EndsWith("World");        // true
+sb.EndsWith("world");        // false
+sb.EndsWith("world", true);  // true</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns false if the StringBuilder or <code>ending</code> is null.<br/>An empty <code>ending</code> returns true only if the StringBuilder is also empty.<br/>Case-insensitive comparison uses invariant culture.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a 64-bit fingerprint hash of the StringBuilder contents. Returns 0 for null or empty input.</p>
+    <p>Returns a 64-bit fingerprint of the StringBuilder contents, or 0 if it is null or empty</p>
 
                 </div>
               </div>
@@ -258,11 +298,21 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var a = new StringBuilder("Hello World").GetFingerprint();
+var b = new StringBuilder("Hello World").GetFingerprint();
+// a == b</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Skips characters on inputs exceeding 256 chars for performance — increases collision probability on large inputs.</p>
+    <p>Not a cryptographic hash, and not suitable for security purposes.<br/>Inputs over 512 length are sampled, so two inputs of the same length that differ in skipped positions get the same fingerprint.<br/>The length and the first, middle and last characters are always included.</p>
 
                   </div>
                 </div>
@@ -363,7 +413,7 @@ Inputs over 256 chars trade collision resistance for performance — the fingerp
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the index of the first occurrence of <code>text</code>, or -1 if not found.</p>
+    <p>Returns the index of the first occurrence of <code>text</code>, or -1 if not found</p>
 
                 </div>
               </div>
@@ -383,6 +433,27 @@ Inputs over 256 chars trade collision resistance for performance — the fingerp
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var sb = new StringBuilder("Hello World");
+sb.IndexOf("World");           // 6
+sb.IndexOf("world");           // -1
+sb.IndexOf("world", true);     // 6
+sb.IndexOf("o", false, 5);     // 7</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Returns -1 if the StringBuilder or <code>text</code> is null.<br/>An empty <code>text</code> returns 0 only if the StringBuilder is also empty, otherwise -1.<br/>A negative <code>start</code> is treated as 0.<br/>Case-insensitive comparison uses invariant culture.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
@@ -472,7 +543,7 @@ sb.MaxLength(1).ToString(); // "h"</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Removes the first matching value from the end. Defaults to trimming space and newlines if no values specified.<br/>Returns true if anything was removed.</p>
+    <p>Removes the first matching value from the end of the StringBuilder, returns true if anything was removed</p>
 
                 </div>
               </div>
@@ -492,12 +563,31 @@ sb.MaxLength(1).ToString(); // "h"</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var sb = new StringBuilder("Hello  ");
+sb.TrimEnd();          // true, sb is "Hello "
+sb.TrimEnd("llo");     // false, sb ends with a space</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Removes one match only, not repeated matches. Defaults to space, <code>\r\n</code>, <code>\n</code> and <code>\t</code> if no values are given.<br/>Values are checked in order, and the case-sensitive match is used. Null and empty values are ignored.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Removes the first matching value from the start. Defaults to trimming space and newlines if no values specified.<br/>Returns true if anything was removed.</p>
+    <p>Removes the first matching value from the start of the StringBuilder, returns true if anything was removed</p>
 
                 </div>
               </div>
@@ -517,6 +607,25 @@ sb.MaxLength(1).ToString(); // "h"</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var sb = new StringBuilder("  Hello");
+sb.TrimStart();        // true, sb is " Hello"
+sb.TrimStart("Hel");   // false, sb starts with a space</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Removes one match only, not repeated matches. Defaults to space, <code>\r\n</code>, <code>\n</code> and <code>\t</code> if no values are given.<br/>Values are checked in order, and the case-sensitive match is used. Null and empty values are ignored.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

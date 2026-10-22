@@ -192,7 +192,7 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns an MD5 hash of the stream contents asynchronously, or null if unreadable.</p>
+    <p>Returns the MD5 hash of the stream contents as an uppercase hex string, or null if the stream is null or unreadable</p>
 
                 </div>
               </div>
@@ -212,11 +212,20 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = stream.ToMD5Hash();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToSha1HashAsync()</code> for data over ~200 bytes.</p>
+    <p>Not suitable for security purposes.<br/>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
 
                   </div>
                 </div>
@@ -226,7 +235,7 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns an MD5 hash of the stream contents, or null if unreadable.</p>
+    <p>Returns the MD5 hash of the stream contents as an uppercase hex string asynchronously, or null if the stream is unreadable</p>
 
                 </div>
               </div>
@@ -246,11 +255,20 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = await stream.ToMD5HashAsync();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToSha1Hash()</code> for data over ~200 bytes.</p>
+    <p>Not suitable for security purposes.<br/>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
 
                   </div>
                 </div>
@@ -260,7 +278,7 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA1 hash of the stream contents, or null if unreadable.</p>
+    <p>Returns the SHA1 hash of the stream contents as an uppercase hex string, or null if the stream is unreadable</p>
 
                 </div>
               </div>
@@ -280,11 +298,20 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = stream.ToSha1Hash();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToMD5Hash()</code> for data under ~200 bytes.</p>
+    <p>Not suitable for security purposes.<br/>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
 
                   </div>
                 </div>
@@ -294,7 +321,7 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA1 hash of the stream contents asynchronously, or null if unreadable.</p>
+    <p>Returns the SHA1 hash of the stream contents as an uppercase hex string asynchronously, or null if the stream is unreadable</p>
 
                 </div>
               </div>
@@ -314,11 +341,20 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = await stream.ToSha1HashAsync();</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Slower than <code>ToMD5HashAsync()</code> for data under ~200 bytes.</p>
+    <p>Not suitable for security purposes.<br/>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
 
                   </div>
                 </div>
@@ -328,7 +364,7 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA256 hash of the stream contents, or null if unreadable.</p>
+    <p>Returns the SHA256 hash of the stream contents as an uppercase hex string, or null if the stream is unreadable</p>
 
                 </div>
               </div>
@@ -348,12 +384,30 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = stream.ToSha256Hash();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a SHA256 hash of the stream contents asynchronously, or null if unreadable.</p>
+    <p>Returns the SHA256 hash of the stream contents as an uppercase hex string asynchronously, or null if the stream is unreadable</p>
 
                 </div>
               </div>
@@ -373,6 +427,24 @@ var result = await stream.JsonAsync&lt;T&gt;();</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">using var stream = new MemoryStream("hello world".GetBytes());
+var hash = await stream.ToSha256HashAsync();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Hashes from the stream's current position to the end, and leaves it at the end.<br/>Does not dispose the stream.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 
