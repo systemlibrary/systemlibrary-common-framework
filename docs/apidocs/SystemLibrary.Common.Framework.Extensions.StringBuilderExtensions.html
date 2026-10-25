@@ -312,7 +312,7 @@ var b = new StringBuilder("Hello World").GetFingerprint();
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not a cryptographic hash, and not suitable for security purposes.<br/>Inputs over 512 length are sampled, so two inputs of the same length that differ in skipped positions get the same fingerprint.<br/>The length and the first, middle and last characters are always included.<br/>Does not support big-endian, uses always little-endian byte order</p>
+    <p>Not a cryptographic hash, and not suitable for security purposes.<br/>Inputs over 512 length are sampled, so two inputs of the same length that differ in skipped positions get the same fingerprint.<br/>The length and the first, middle and last characters are always included.<br/>The value depends on the machine's byte order, so don't compare stored fingerprints between little-endian and big-endian machines.</p>
 
                   </div>
                 </div>
