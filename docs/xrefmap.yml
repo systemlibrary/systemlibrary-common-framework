@@ -3903,6 +3903,19 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.Default
   nameWithType: TypeExtensions.Default
+- uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName(System.Type)
+  name: GetFriendlyName(Type)
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetFriendlyName_System_Type_
+  commentId: M:SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName(System.Type)
+  fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName(System.Type)
+  nameWithType: TypeExtensions.GetFriendlyName(Type)
+- uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName*
+  name: GetFriendlyName
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetFriendlyName_
+  commentId: Overload:SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName
+  isSpec: "True"
+  fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName
+  nameWithType: TypeExtensions.GetFriendlyName
 - uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeArgument(System.Type,System.Int32)
   name: GetTypeArgument(Type, int)
   href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetTypeArgument_System_Type_System_Int32_
@@ -3932,19 +3945,6 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeArguments
   nameWithType: TypeExtensions.GetTypeArguments
-- uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName(System.Type)
-  name: GetTypeName(Type)
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetTypeName_System_Type_
-  commentId: M:SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName(System.Type)
-  fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName(System.Type)
-  nameWithType: TypeExtensions.GetTypeName(Type)
-- uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName*
-  name: GetTypeName
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetTypeName_
-  commentId: Overload:SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName
-  nameWithType: TypeExtensions.GetTypeName
 - uid: SystemLibrary.Common.Framework.Extensions.TypeExtensions.Inherits(System.Type,System.Type)
   name: Inherits(Type, Type)
   href: apidocs/SystemLibrary.Common.Framework.Extensions.TypeExtensions.html#SystemLibrary_Common_Framework_Extensions_TypeExtensions_Inherits_System_Type_System_Type_

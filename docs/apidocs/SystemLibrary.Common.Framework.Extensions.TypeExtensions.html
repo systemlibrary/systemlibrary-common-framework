@@ -200,7 +200,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a default instance for value types, or null for reference types and interfaces.</p>
+    <p>Returns the default value of the type: a new instance for value types, otherwise null</p>
 
                 </div>
               </div>
@@ -220,12 +220,75 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(int).Default();    // 0
+typeof(int?).Default();   // null
+typeof(string).Default(); // null</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Nullable value types, reference types and interfaces return null. Enums return the integer 0, not an enum value.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the generic type argument at the specified index, or null if not found.<br/>Searches interfaces if no direct generic arguments exist.</p>
+    <p>Returns the most meaningful name of the type: the first type argument for generics and collections, otherwise the type name</p>
+
+                </div>
+              </div>
+        
+
+          <h3 id="SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetFriendlyName_System_Type_" data-uid="SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetFriendlyName(System.Type)">
+              <span class='member-static'>static </span>
+
+              <span class="member-returntype">
+    string
+              </span>
+
+              <span class="member-name">
+    GetFriendlyName(Type)
+              </span>
+          </h3>
+
+
+          <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(Car).GetTypeName();                              // "Car"
+typeof(List&lt;Car&gt;).GetTypeName();                  // "Car"
+typeof(Dictionary&lt;string, Car&gt;).GetTypeName();    // "String, Car"</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>A dictionary returns <code>&quot;Key, Value&quot;</code> with both type names.</p>
+
+                  </div>
+                </div>
+
+          </div>
+      </div>
+      <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Returns the generic type argument at <code>index</code>, or null if there is none</p>
 
                 </div>
               </div>
@@ -249,16 +312,26 @@
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">typeof(List&lt;Car&gt;).GetTypeArgument(); // typeof(Car)</code></pre>
+    <pre><code class="lang-csharp">typeof(List&lt;Car&gt;).GetTypeArgument();  // typeof(Car)
+typeof(Car[]).GetTypeArgument();            // typeof(Car)</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>If the type has no generic arguments itself, the collection interfaces it implements are searched, so arrays work too.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns all generic type arguments, or null if none found.<br/>Searches interfaces if no direct generic arguments exist.</p>
+    <p>Returns all generic type arguments of the type, or null if there are none</p>
 
                 </div>
               </div>
@@ -282,51 +355,25 @@
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">typeof(List&lt;Car&gt;).GetTypeArguments(); // [ typeof(Car) ]</code></pre>
+    <pre><code class="lang-csharp">typeof(Dictionary&lt;string, Car&gt;).GetTypeArguments(); // [ typeof(string), typeof(Car) ]</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>If the type has no generic arguments itself, the collection interfaces it implements are searched.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the most meaningful type name — for generics and collections returns the first type argument name.</p>
-
-                </div>
-              </div>
-        
-
-          <h3 id="SystemLibrary_Common_Framework_Extensions_TypeExtensions_GetTypeName_System_Type_" data-uid="SystemLibrary.Common.Framework.Extensions.TypeExtensions.GetTypeName(System.Type)">
-              <span class='member-static'>static </span>
-
-              <span class="member-returntype">
-    string
-              </span>
-
-              <span class="member-name">
-    GetTypeName(Type)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
-                <div class="example-wrapper">
-                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
-                  <div class="markdown level0 example-content" style="display:none">
-                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">typeof(Car).GetTypeName();           // "Car"
-typeof(List&lt;Car&gt;).GetTypeName(); // "Car"
-typeof(Car[]).GetTypeName();          // "Car"</code></pre>
-
-                  </div>
-                </div>
-          </div>
-      </div>
-      <div class="class-member">
-              <div class="summary-wrapper">
-                <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if <code>thisType</code> inherits or implements <code>type</code>. Returns false if both types are the same.</p>
+    <p>Returns true if the type inherits from or implements <code>type</code>, and false if they are the same type</p>
 
                 </div>
               </div>
@@ -351,7 +398,7 @@ typeof(Car[]).GetTypeName();          // "Car"</code></pre>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
     <pre><code class="lang-csharp">typeof(Car).Inherits(typeof(IVehicle)); // true
-typeof(Car).Inherits(typeof(Car));       // false</code></pre>
+typeof(Car).Inherits(typeof(Car));      // false</code></pre>
 
                   </div>
                 </div>
@@ -360,7 +407,7 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a compiler-generated anonymous type.</p>
+    <p>Returns true if the type is a compiler-generated anonymous type</p>
 
                 </div>
               </div>
@@ -380,12 +427,21 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var item = new { Name = "John" };
+item.GetType().IsAnonymousType(); // true</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a concrete, instantiable class — not abstract, interface, enum, array, native, dictionary or delegate.</p>
+    <p>Returns true if the type is a concrete class that can be instantiated</p>
 
                 </div>
               </div>
@@ -405,12 +461,31 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(Car).IsClassType();    // true
+typeof(string).IsClassType(); // false
+typeof(ICar).IsClassType();   // false</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Abstract classes, interfaces, enums, arrays, dictionaries, tuples, delegates, string and StringBuilder return false.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a <code>Dictionary</code> or <code>IDictionary</code>.</p>
+    <p>Returns true if the type is a <code>Dictionary&lt;,&gt;</code>, <code>IDictionary&lt;,&gt;</code>, <code>IDictionary</code> or a generic type implementing <code>IDictionary</code></p>
 
                 </div>
               </div>
@@ -430,12 +505,30 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(Dictionary&lt;string, Car&gt;).IsDictionary(); // true
+typeof(List&lt;Car&gt;).IsDictionary();               // false</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>A non-generic class that implements <code>IDictionary</code>, such as <code>Hashtable</code>, returns false.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is internal and non-nested.</p>
+    <p>Returns true if the type is internal and not nested</p>
 
                 </div>
               </div>
@@ -455,12 +548,20 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(InternalHelper).IsInternal(); // true when declared as: internal class InternalHelper</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a <code>KeyValuePair&lt;,&gt;</code>.</p>
+    <p>Returns true if the type is a <code>KeyValuePair&lt;,&gt;</code></p>
 
                 </div>
               </div>
@@ -480,12 +581,20 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(KeyValuePair&lt;string, Car&gt;).IsKeyValuePair(); // true</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a <code>List&lt;T&gt;</code> or array. Does not check <code>IList</code> or <code>Dictionary</code>.</p>
+    <p>Returns true if the type is an array or a <code>List&lt;T&gt;</code></p>
 
                 </div>
               </div>
@@ -505,12 +614,31 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(List&lt;Car&gt;).IsListOrArray(); // true
+typeof(Car[]).IsListOrArray();          // true
+typeof(Car).IsListOrArray();            // false</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Other collections such as <code>IList&lt;T&gt;</code>, <code>HashSet&lt;T&gt;</code> and dictionaries return false.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is nullable.</p>
+    <p>Returns true if the type is <code>Nullable&lt;T&gt;</code></p>
 
                 </div>
               </div>
@@ -530,12 +658,21 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(int?).IsNullableType(); // true
+typeof(int).IsNullableType();  // false</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if type is a numeric type — int, uint, long, ulong, short, float, double, decimal, byte, ushort or sbyte.</p>
+    <p>Returns true if the type is one of the built-in numeric types</p>
 
                 </div>
               </div>
@@ -555,12 +692,30 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(int).IsNumberType();  // true
+typeof(int?).IsNumberType(); // false</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>int, uint, long, ulong, short, ushort, byte, sbyte, float, double and decimal. Nullable versions return false.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Sets a static property or field by name, including private and internal members. Throws if member not found.</p>
+    <p>Sets a static property or field by name, including non-public members</p>
 
                 </div>
               </div>
@@ -578,6 +733,23 @@ typeof(Car).Inherits(typeof(Car));       // false</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">typeof(Settings).SetStaticMember("Counter", 5);</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Properties are checked before fields, non-public before public. Only members declared on the type itself are found, not inherited ones.<br/>Does nothing if the type is null, and throws if no member with that name exists.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 
