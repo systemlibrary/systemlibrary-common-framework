@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="LogLevel | System Library Common Framework ">
       
-      
+      <meta name="description" content="Severity of a log message, also used as the minimum level setting in appsettings">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,22 @@
   </div>
 
 
+  <div class="markdown summary" style="position:relative;">
+  <p>Severity of a log message, also used as the minimum level setting in appsettings</p>
+
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/Log/LogLevel.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  </div>
+
   <div class="doc-toggles">
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Each level has a numeric value, and messages below the configured minimum level are ignored.<br/><b>None</b> ignores everything, and <b>Dump</b> bypasses all thresholds.</p>
+
+        </div>
+      </div>
 
   </div>
 
@@ -105,7 +120,7 @@
       <dl class="parameters">
         <div class="class-enum-key-summary">
           <dd>
-          <p>A 'placeholder' to ease and be deliberate in the appsettings that all log invocations are written</p>
+          <p>Placeholder for appsettings, to state explicitly that all messages are written</p>
 
           
           </dd>
@@ -113,7 +128,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_All">&nbsp;&nbsp;All = -1</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>System failures</p>
+          <p>System failures where the application cannot continue</p>
 
           
           </dd>
@@ -121,7 +136,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Critical">&nbsp;&nbsp;Critical = 9</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Developer targeted probes 'why is this not behaving properly' messages</p>
+          <p>Developer diagnostics for finding out why something does not behave as expected</p>
 
           
           </dd>
@@ -129,7 +144,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Debug">&nbsp;&nbsp;Debug = 4</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Ignored all thresholds and always sends the message to the ILogWriter</p>
+          <p>Ignores all thresholds and always sends the message to the ILogWriter</p>
 
           
           </dd>
@@ -137,7 +152,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Dump">&nbsp;&nbsp;Dump = 99999</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Exceptions that has to stop execution of code</p>
+          <p>Failures that stop the current operation</p>
 
           
           </dd>
@@ -145,7 +160,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Error">&nbsp;&nbsp;Error = 5</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Lifecycle and state changes as messages</p>
+          <p>Lifecycle and state changes</p>
 
           
           </dd>
@@ -153,7 +168,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Information">&nbsp;&nbsp;Information = 2</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Ignored log level messages</p>
+          <p>Disables logging, no message is written</p>
 
           
           </dd>
@@ -161,7 +176,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_None">&nbsp;&nbsp;None = 9999</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Raw internals - every micro event meant for inspection only</p>
+          <p>Very detailed internal events, meant for inspection only</p>
 
           
           </dd>
@@ -169,7 +184,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Trace">&nbsp;&nbsp;Trace = 1</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Default, sets the min log level to be the 'logging' in appsettings</p>
+          <p>Default, uses the minimum level configured as 'logging' in appsettings</p>
 
           
           </dd>
@@ -177,7 +192,7 @@
         <dt id="SystemLibrary_Common_Framework_LogLevel_Unset">&nbsp;&nbsp;Unset = 0</dt>
         <div class="class-enum-key-summary">
           <dd>
-          <p>Soft issues which are recoverable, but somewhat unexpected</p>
+          <p>Unexpected but recoverable issues</p>
 
           
           </dd>

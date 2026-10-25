@@ -122,7 +122,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the primary domain of the URI, stripping subdomains. Returns blank, never null.</p>
+    <p>Returns the primary domain of the URI with subdomains removed, or an empty string if the URI is null or empty</p>
 
                 </div>
               </div>
@@ -146,11 +146,21 @@
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">new Uri("https://www.sub.systemlibrary.com").GetPrimaryDomain(); // "systemlibrary.com"
-new Uri("https://systemlibrary.github.io/path").GetPrimaryDomain(); // "github.io"</code></pre>
+    <pre><code class="lang-csharp">new Uri("https://www.sub.systemlibrary.com").GetPrimaryDomain();      // "systemlibrary.com"
+new Uri("https://systemlibrary.github.io/path").GetPrimaryDomain();   // "github.io"
+new Uri("http://localhost:5010").GetPrimaryDomain();                  // "localhost"</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>A simple heuristic, not a public suffix list lookup: it assumes the top-level domain is at most 4 characters, so the result is the last two parts of the host.<br/>A longer last part is treated as a name and <code>topLevelDomain</code> is appended, so <code>example.museum</code> gives <code>museum.com</code>.<br/>A host with no dot gets <code>topLevelDomain</code> appended, except <code>localhost</code>.<br/>Multi-part suffixes are not recognized, so <code>www.example.co.uk</code> gives <code>co.uk</code>.<br/>A relative URI is treated as a host string.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

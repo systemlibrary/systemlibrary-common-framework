@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="MainAssembly | System Library Common Framework ">
       
-      
+      <meta name="description" content="Information about the application&#39;s main assembly, the one that started the application">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -93,7 +93,22 @@
   </div>
 
 
+  <div class="markdown summary" style="position:relative;">
+  <p>Information about the application's main assembly, the one that started the application</p>
+
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/MainAssembly/MainAssembly.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </div>
+
   <div class="doc-toggles">
+      <div class="example-wrapper">
+        <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+        <div class="markdown level0 example-content" style="display:none">
+          <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var name = MainAssembly.Name;
+var types = MainAssembly.Types;</code></pre>
+
+        </div>
+      </div>
 
   </div>
 
@@ -109,6 +124,12 @@
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The main assembly</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -124,6 +145,14 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var assembly = MainAssembly.Current;</code></pre>
+
+                  </div>
+                </div>
         </div>
 
       </div>
@@ -131,6 +160,12 @@
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Full name of the main assembly, including version, culture and public key token</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -146,6 +181,14 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var fullName = MainAssembly.FullName; // "MyApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"</code></pre>
+
+                  </div>
+                </div>
         </div>
 
       </div>
@@ -153,6 +196,12 @@
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Simple name of the main assembly, without version or extension</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -168,6 +217,14 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var name = MainAssembly.Name; // "MyApp"</code></pre>
+
+                  </div>
+                </div>
         </div>
 
       </div>
@@ -175,6 +232,12 @@
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The root namespace of the main assembly</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -190,6 +253,23 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var ns = MainAssembly.RootNamespace; // "MyApp"</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Used to turn view namespaces into folder paths, see <b>ApplicationInfo.ViewNamespaces</b>.</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>
@@ -197,6 +277,12 @@
       <div class="class-member">
 
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>All types declared in the main assembly</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -212,6 +298,23 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var controllers = MainAssembly.Types.Where(t =&gt; t.Name.EndsWith("Controller"));</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Loaded once at startup, so the array does not change while the application runs.</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>

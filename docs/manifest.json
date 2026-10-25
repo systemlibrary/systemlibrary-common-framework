@@ -1058,7 +1058,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.LogLevel",
-      "Summary": null
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.LogLevel.yml\" sourcestartlinenumber=\"1\">Severity of a log message, also used as the minimum level setting in appsettings</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1086,7 +1086,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.MainAssembly",
-      "Summary": null
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.MainAssembly.yml\" sourcestartlinenumber=\"1\">Information about the application's main assembly, the one that started the application</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1100,7 +1100,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Randomness",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Randomness.yml\" sourcestartlinenumber=\"1\">Static class for generating random values.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Randomness.yml\" sourcestartlinenumber=\"1\">Static class for generating random values</p>\n"
     },
     {
       "type": "ManagedReference",
