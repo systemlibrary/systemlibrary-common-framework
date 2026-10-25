@@ -65,7 +65,7 @@ article .class-member {
     }
 
     & .doc-toggles {
-        margin-top: 4px;
+        margin-top: 2px;
     }
 }
 
@@ -287,7 +287,7 @@ code.hljs {
     margin-top: 1em;
     margin-bottom: 1em;
     margin-left: 1em;
-    padding-left: 1em;
+    padding-left: 1.5em;
 
     &>.parameters {
         margin: 0 !important;
@@ -299,12 +299,17 @@ code.hljs {
     }
 }
 
+.class-content {
+    line-height: 1.25;
+}
+
 .class-content-title {
     font-size: 28px;
     color: var(--bs-purple);
 
     margin-bottom: 0;
     margin-top: 8px;
+    line-height: 1.25;
 
     & span {
         font-size: 20px;
