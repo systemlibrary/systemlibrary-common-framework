@@ -278,7 +278,7 @@ sb.EndsWith("world", true);  // true</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a 64-bit fingerprint of the StringBuilder contents, or 0 if it is null or empty</p>
+    <p>Returns a fast 64-bit fingerprint of the string, or 0 if it is null or empty</p>
 
                 </div>
               </div>
@@ -312,7 +312,7 @@ var b = new StringBuilder("Hello World").GetFingerprint();
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Not a cryptographic hash, and not suitable for security purposes.<br/>Inputs over 512 length are sampled, so two inputs of the same length that differ in skipped positions get the same fingerprint.<br/>The length and the first, middle and last characters are always included.<br/>The value depends on the machine's byte order, so don't compare stored fingerprints between little-endian and big-endian machines.</p>
+    <p>Texts over 1023 chars are sampled, so a small edit in large texts may give the same fingerpint.<br/>Not a cryptographic hash, and not suitable for security purposes.<br/>The value depends on the machine's byte order, so don't compare stored fingerprints between little-endian and big-endian machines.</p>
 
                   </div>
                 </div>
@@ -360,7 +360,7 @@ var b = new StringBuilder("Hello World").GetFingerprint();
 <li>Input ≤ 32 chars: returns up to 13 chars</li>
 <li>Input ≤ 64 chars: returns up to 15 chars</li>
 <li>Input &gt; 64 chars: returns up to 21 chars
-Texts over 1024 chars are sampled, so a small edit in a skipped position may give the same key.</li>
+Texts over 1023 chars are sampled, so a small edit in large texts may give the same key.</li>
 </ul>
 
                   </div>
