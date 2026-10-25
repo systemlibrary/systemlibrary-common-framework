@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="ShardedDictionary&lt;TKey, TValue&gt; | System Library Common Framework ">
       
-      <meta name="description" content="A thread-safe dictionary sharded across 4 internal concurrent dictionaries to reduce lock contention. Automatically clears a shard when it exceeds its item limit.">
+      <meta name="description" content="A thread-safe dictionary split into 4 internal concurrent dictionaries (shards) to reduce contention">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,12 +94,31 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>A thread-safe dictionary sharded across 4 internal concurrent dictionaries to reduce lock contention.<br/>Automatically clears a shard when it exceeds its item limit.</p>
+  <p>A thread-safe dictionary split into 4 internal concurrent dictionaries (shards) to reduce contention</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/ShardedDictionary/ShardedDictionary.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/ShardedDictionary/ShardedDictionary.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
+      <div class="example-wrapper">
+        <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+        <div class="markdown level0 example-content" style="display:none">
+          <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var dict = new ShardedDictionary&lt;string, int&gt;(10000);
+dict.Add("a", 1);
+var value = dict["a"]; // 1</code></pre>
+
+        </div>
+      </div>
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Meant as a size-capped cache. When a shard exceeds its share of <code>maxItemCount</code>, the whole shard is cleared, so up to a quarter of the cached items disappear at once.<br/>The shard is picked from the low 2 bits of the key's hash code.<br/>Only <b>Cache</b> accepts a null key. The other methods throw <code>ArgumentNullException</code> for null.</p>
+
+        </div>
+      </div>
 
   </div>
 
@@ -118,7 +137,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the total item count across all shards.</p>
+    <p>The total number of items across all shards</p>
 
                 </div>
               </div>
@@ -135,6 +154,23 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var count = dict.Count;</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Not an atomic snapshot, since shards are counted one after another.</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>
@@ -144,7 +180,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Gets or sets the value for the key.</p>
+    <p>Gets the value for the key, or <code>default</code> if not found, and sets or overwrites the value</p>
 
                 </div>
               </div>
@@ -161,6 +197,24 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">dict["a"] = 1;
+var value = dict["a"]; // 1</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>The setter does not check the item limit, so only <b>Add</b>, <b>TryAdd</b> and <b>Cache</b> keep the dictionary within its size.</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>
@@ -170,7 +224,7 @@
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Enumerates all keys across all shards.</p>
+    <p>All keys across all shards</p>
 
                 </div>
               </div>
@@ -187,6 +241,23 @@
                 <span class="member-prop">{ get; set; }</span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">foreach (var key in dict.Keys) { }</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Safe to enumerate while other threads change the dictionary, but the result is not a snapshot and may miss or include concurrent changes.</p>
+
+                  </div>
+                </div>
+
         </div>
 
       </div>
@@ -267,7 +338,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Adds the key/value pair. Silently discards if key already exists.</p>
+    <p>Adds the key and value, and silently ignores it if the key already exists</p>
 
                 </div>
               </div>
@@ -284,12 +355,20 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">dict.Add("a", 1);</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the cached value for the key, or invokes <code>getItem</code>, stores and returns the result.<br/>Clears the shard if it has reached its item limit before storing.</p>
+    <p>Returns the cached value for the key, or invokes <code>getItem</code>, stores the result and returns it</p>
 
                 </div>
               </div>
@@ -316,12 +395,21 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Clears the key's shard first if it has exceeded its limit.<br/><code>getItem</code> may run more than once if called concurrently for the same key, and the last result wins.<br/>A null key skips the cache and returns <code>getItem()</code>.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Clears all shards.</p>
+    <p>Removes all items from all shards</p>
 
                 </div>
               </div>
@@ -338,12 +426,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">dict.Clear();</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the key exists.</p>
+    <p>Returns true if the key exists</p>
 
                 </div>
               </div>
@@ -361,12 +457,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var exists = dict.ContainsKey("a");</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns the value for the key, or default if not found.</p>
+    <p>Returns the value for the key, or <code>default</code> if it is not found</p>
 
                 </div>
               </div>
@@ -384,12 +488,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var value = dict.GetValue("a");</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Removes the key and returns its value, or default if not found.</p>
+    <p>Removes the key and returns its value, or <code>default</code> if it was not found</p>
 
                 </div>
               </div>
@@ -407,12 +519,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var value = dict.Remove("a");</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Attempts to add the key/value pair. Clears the shard first if it has reached its item limit.</p>
+    <p>Adds the key and value if the key does not exist, and returns true if it was added</p>
 
                 </div>
               </div>
@@ -430,12 +550,30 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var added = dict.TryAdd("a", 1); // true
+var again = dict.TryAdd("a", 2); // false</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Clears the key's shard first if it has exceeded its limit.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the key was found, setting <code>value</code>. Returns false if not found.</p>
+    <p>Returns true and sets <code>value</code> if the key is found, otherwise false</p>
 
                 </div>
               </div>
@@ -453,12 +591,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">if (dict.TryGetValue("a", out var value)) { }</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if key was found and removed, else false</p>
+    <p>Removes the key and returns true if it was found</p>
 
                 </div>
               </div>
@@ -476,12 +622,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var removed = dict.TryRemove("a");</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns true if the key was found and removed.</p>
+    <p>Removes the key and returns true if it was found, with the removed value in <code>value</code></p>
 
                 </div>
               </div>
@@ -499,12 +653,20 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var removed = dict.TryRemove("a", out var value);</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Updates the value for <code>key</code> only if the current value equals <code>comparisonValue</code>.</p>
+    <p>Replaces the value for the key with <code>newValue</code> only if the current value equals <code>comparisonValue</code>, and returns true if it did</p>
 
                 </div>
               </div>
@@ -522,6 +684,15 @@ var result = dict.Cache("myKey", () =&gt; "Hello world");</code></pre>
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">dict.Add("a", 1);
+var updated = dict.TryUpdate("a", 2, 1); // true</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
 

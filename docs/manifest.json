@@ -1114,7 +1114,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.ShardedDictionary<TKey, TValue>",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.yml\" sourcestartlinenumber=\"1\">A thread-safe dictionary sharded across 4 internal concurrent dictionaries to reduce lock contention.\nAutomatically clears a shard when it exceeds its item limit.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.yml\" sourcestartlinenumber=\"1\">A thread-safe dictionary split into 4 internal concurrent dictionaries (shards) to reduce contention</p>\n"
     },
     {
       "type": "ManagedReference",
