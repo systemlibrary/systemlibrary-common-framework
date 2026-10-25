@@ -322,7 +322,7 @@ var b = new StringBuilder("Hello World").GetFingerprint();
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a short sampled key of the input.</p>
+    <p>Returns a short key for the text, with a prefix if given, or just the prefix if the text is null or empty</p>
 
                 </div>
               </div>
@@ -342,17 +342,25 @@ var b = new StringBuilder("Hello World").GetFingerprint();
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">var key = new StringBuilder("Hello World").GetSampledKey("cmp-");</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Output length varies by input size.</p>
+    <p>The same text always gives the same key, so it can be used for cache keys and rendering id's, etc.<br/>Not a cryptographic hash, and not suitable for security purposes.<br/>Output length varies by input size.</p>
 <ul>
-<li>Input ≤ 11 chars: returns up to 11 chars, lossless base62</li>
+<li>Input ≤ 11 chars: returns up to 11 chars</li>
 <li>Input ≤ 32 chars: returns up to 13 chars</li>
 <li>Input ≤ 64 chars: returns up to 15 chars</li>
-<li>Input &gt; 64 chars: returns up to 22 chars
-Inputs over 256 chars trade collision resistance for performance — the fingerprint starts skipping characters.</li>
+<li>Input &gt; 64 chars: returns up to 21 chars
+Texts over 1024 chars are sampled, so a small edit in a skipped position may give the same key.</li>
 </ul>
 
                   </div>
