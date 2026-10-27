@@ -1148,11 +1148,11 @@
       "type": "Toc",
       "source_relative_path": "apidocs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "apidocs/toc.html"
-        },
         ".json": {
           "relative_path": "apidocs/toc.json"
+        },
+        ".html": {
+          "relative_path": "apidocs/toc.html"
         }
       },
       "version": ""
@@ -1501,11 +1501,11 @@
       "type": "Toc",
       "source_relative_path": "systemlibrary.common.framework/docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""
