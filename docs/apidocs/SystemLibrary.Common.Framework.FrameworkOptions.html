@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="FrameworkOptions | System Library Common Framework ">
       
-      <meta name="description" content="Configuration options for framework services and middleware pipeline.">
+      <meta name="description" content="Configuration options for the framework&#39;s services and middleware pipeline">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Configuration options for framework services and middleware pipeline.</p>
+  <p>Configuration options for the framework's services and middleware pipeline</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/FrameworkOptionsServices.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -115,6 +115,15 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
         </div>
       </div>
 
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Every option has a default, so only set the ones you want to change.</p>
+
+        </div>
+      </div>
+
   </div>
 
 
@@ -130,7 +139,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Additional assemblies registered as application parts — controllers within them are mapped to requests.</p>
+    <p>Additional assemblies whose controllers and views are registered with the application, default null</p>
 
                 </div>
               </div>
@@ -145,6 +154,23 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.ApplicationParts = new[] { typeof(AdminController).Assembly };</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>The main assembly is always included. Use this for controllers in other projects or class libraries.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -154,7 +180,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Cache-Control max-age in seconds for static file responses. Default: 604800 (7 days).</p>
+    <p>Cache-Control max-age in seconds for static file responses, default 604800 (7 days)</p>
 
                 </div>
               </div>
@@ -169,11 +195,19 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.StaticFilesClientCacheSeconds = 3600; // 1 hour</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Requires <code>UseStaticFilePolicy</code> to be true. Has no effect if <code>max-age</code> is already set in the response.</p>
+    <p>Requires <b>UseStaticFilePolicy</b> to be true. Has no effect if <code>max-age</code> is already set in the response.</p>
 
                   </div>
                 </div>
@@ -187,7 +221,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Relative paths from which static content is served — e.g. <code>new[] { &quot;/static&quot;, &quot;/public&quot; }</code>.</p>
+    <p>Relative request paths from which static content is served, default null</p>
 
                 </div>
               </div>
@@ -206,7 +240,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <p>StaticRequestPaths = new string[] { &quot;/static&quot;, &quot;/public&quot; }</p>
+    <pre><code class="lang-csharp">options.StaticRequestPaths = new[] { "/static", "/public" };</code></pre>
 
                   </div>
                 </div>
@@ -214,7 +248,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Requires <code>UseStaticFilePolicy</code> to be true.</p>
+    <p>Requires <b>UseStaticFilePolicy</b> to be true.</p>
 
                   </div>
                 </div>
@@ -252,7 +286,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers authorization services and middleware. Default: true.</p>
+    <p>Registers authorization services and middleware, default true</p>
 
                 </div>
               </div>
@@ -276,7 +310,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers Brotli response compression services and middleware. Default: false.</p>
+    <p>Registers Brotli response compression services and middleware, default false</p>
 
                 </div>
               </div>
@@ -291,6 +325,15 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>If both Brotli and Gzip are enabled, the response uses whichever the client accepts, and the framework's provider order decides when both are accepted.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -300,7 +343,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Generates a single Data Protection key file in the parent of <code>RootPath</code>, valid for 100 years.<br/>Required for <code>EncryptUsingKeyRing</code> and <code>DecryptUsingKeyRing</code> and cookie encryption across instances. Default: false.</p>
+    <p>Creates a Data Protection key file valid for 100 years, so encrypted values and cookies can be read by every instance, default false</p>
 
                 </div>
               </div>
@@ -315,11 +358,19 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.UseDataProtectionPolicy = true;</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>All app instances must share the same key file. Store it outside source control and distribute via pipeline.</p>
+    <p>Required for <code>EncryptUsingKeyRing</code>, <code>DecryptUsingKeyRing</code> and cookie encryption across instances.<br/>The file is created in the parent folder of <b>ApplicationInfo.RootPath</b>.<br/>All instances must use the same key file, so store it outside source control and deploy it with your pipeline.</p>
 
                   </div>
                 </div>
@@ -333,7 +384,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers the developer exception page middleware — shows detailed error information. Default: true.</p>
+    <p>Registers the developer exception page middleware, which shows detailed error information, default true</p>
 
                 </div>
               </div>
@@ -348,6 +399,23 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.UseDeveloperPage = false;</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Detailed errors can expose source code and internals, so set it to false for production unless the page is restricted elsewhere.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -405,7 +473,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers HSTS middleware — adds <code>Strict-Transport-Security</code> header for client-side redirection. Default: false.</p>
+    <p>Registers HSTS middleware, which adds the <code>Strict-Transport-Security</code> header so browsers use HTTPS on later visits, default false</p>
 
                 </div>
               </div>
@@ -420,6 +488,15 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Browsers ignore the header over plain HTTP, and ASP.NET Core skips it for localhost by default.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -453,7 +530,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers output cache services and middleware. Default: true.</p>
+    <p>Registers output cache services and middleware, default true</p>
 
                 </div>
               </div>
@@ -501,11 +578,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Adds security middleware.</p>
-<p>Prod-only: Adds 'nosniff' for .js and .mjs in the static branch.</p>
-<p>Prod-only: Adds Referrer-Policy 'strict-origin-when-cross-origin' on non-static and non-API requests.</p>
-<p>Prod-only: Adds Content-Security-Policy allowing all, but only allowing iframing for primary domain + subdomains on non-static and non-API requests.</p>
-<p>Non-prod environments do not add security headers, allowing all content and resources to load freely.</p>
+    <p>Adds security middleware, default true</p>
 
                 </div>
               </div>
@@ -520,6 +593,25 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.UseSecurityPolicy = false;</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>In production only:</p>
+<ul><li>Adds <code>nosniff</code> for .js and .mjs files in the static branch</li><li>Adds <code>Referrer-Policy: strict-origin-when-cross-origin</code> on non-static and non-API requests</li><li>Adds a <code>Content-Security-Policy</code> that allows all content, but allows iframing only for the primary domain and its subdomains, on non-static and non-API requests</li></ul>
+<p>Other environments add no security headers, so all content and resources load freely.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -529,7 +621,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers static file middleware serving from <code>wwwroot</code> and auto-discovered folders: <code>public</code>, <code>static</code>, <code>dist</code>, <code>frontend</code>, <code>assets</code>, <code>files</code>.<br/>Only GET and HEAD requests are served. Default: true.</p>
+    <p>Registers static file middleware serving from <code>wwwroot</code> and the auto-discovered folders <code>public</code>, <code>static</code>, <code>dist</code>, <code>frontend</code>, <code>assets</code> and <code>files</code>, default true</p>
 
                 </div>
               </div>
@@ -544,11 +636,19 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.UseStaticFilePolicy = true;</code></pre>
+
+                  </div>
+                </div>
                 <div class="remarks-wrapper">
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Serves unknown file types, enables HTTPS compression and appends <code>Cache-Control</code> if not already set.</p>
+    <p>Only GET and HEAD requests are served.<br/>Serves unknown file types, enables HTTPS compression and appends <code>Cache-Control</code> if not already set.</p>
 
                   </div>
                 </div>
@@ -562,7 +662,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers middleware that logs status code, path and HTTP method for all responses with status &gt;= 300. Default: true.</p>
+    <p>Registers middleware that logs the status code, path and HTTP method of every response with a status of 300 or higher, default true</p>
 
                 </div>
               </div>
@@ -577,6 +677,14 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.UseStatusCodeLogger = false;</code></pre>
+
+                  </div>
+                </div>
         </div>
 
 
@@ -586,7 +694,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Custom view location expander for advanced Razor view resolution.<br/>Use <code>ViewLocations</code> instead for simple path additions.</p>
+    <p>Custom view location expander for advanced Razor view resolution, default null</p>
 
                 </div>
               </div>
@@ -601,6 +709,23 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
               </span>
           </span>
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">options.ViewLocationExpander = new MyViewLocationExpander();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Use <b>ViewLocations</b> for simple path additions.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 
@@ -610,7 +735,7 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Custom Razor view location formats appended to the default search paths.</p>
+    <p>Custom Razor view location formats, added to the default search paths, default null</p>
 
                 </div>
               </div>
@@ -633,6 +758,15 @@ services.AddFrameworkServices(AppType.Web);</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p><code>{0}</code> is the view name, <code>{1}</code> the controller name and <code>{2}</code> the area name.</p>
+
+                  </div>
+                </div>
+
         </div>
 
 

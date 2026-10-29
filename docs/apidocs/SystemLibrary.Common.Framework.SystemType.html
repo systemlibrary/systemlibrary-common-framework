@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="SystemType | System Library Common Framework ">
       
-      <meta name="description" content="Cached Type instances for common system types, avoiding repeated typeof() calls in hot paths.">
+      <meta name="description" content="Cached Type instances for common system types">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,12 +94,29 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Cached <code>Type</code> instances for common system types, avoiding repeated <code>typeof()</code> calls in hot paths.</p>
+  <p>Cached <code>Type</code> instances for common system types</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/SystemType/SystemType.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/SystemType/SystemType.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
+      <div class="example-wrapper">
+        <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+        <div class="markdown level0 example-content" style="display:none">
+          <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">if (type == SystemType.StringType) { }</code></pre>
+
+        </div>
+      </div>
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Instances are created once, so comparisons and dictionary lookups can use a shared reference.</p>
+
+        </div>
+      </div>
 
   </div>
 
@@ -114,6 +131,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>BigInteger</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -134,6 +157,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>bool</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -154,6 +183,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>bool?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -174,6 +209,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>byte[]</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -194,6 +235,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>byte</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -214,6 +261,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>char</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -234,6 +287,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>CompilerGeneratedAttribute</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -254,6 +313,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>DateTimeOffset</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -274,6 +339,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>DateTimeOffset?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -294,6 +365,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>DateTime</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -314,6 +391,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>DateTime?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -334,6 +417,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>decimal</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -354,6 +443,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>Delegate</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -374,6 +469,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>Dictionary&lt;,&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -394,6 +495,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>double</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -414,6 +521,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>double?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -434,6 +547,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>EnumTextAttribute</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -454,6 +573,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>EnumValueAttribute</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -474,6 +599,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>Exception</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -494,6 +625,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>ExpandoObject</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -514,6 +651,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>float</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -534,6 +677,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>Guid</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -554,6 +703,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>Half</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -574,6 +729,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>ICollection&lt;&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -594,6 +755,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of the non-generic <code>ICollection</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -614,6 +781,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>IDictionary&lt;,&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -634,6 +807,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of the non-generic <code>IDictionary</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -654,6 +833,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>IList&lt;&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -674,6 +859,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of the non-generic <code>IList</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -694,6 +885,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>short</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -714,6 +911,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>short?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -734,6 +937,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>long</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -754,6 +963,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>long?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -774,6 +989,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>int[]</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -794,6 +1015,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>int</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -814,6 +1041,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>int?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -834,6 +1067,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>KeyValuePair&lt;,&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -854,6 +1093,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>List&lt;&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -874,6 +1119,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The open generic type <code>Nullable&lt;&gt;</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -894,6 +1145,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>object</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -914,6 +1171,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>StringBuilder</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -934,6 +1197,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>string</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -954,6 +1223,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>TimeSpan</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -974,6 +1249,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>TimeSpan?</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -994,6 +1275,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The static class <code>Tuple</code>, not the generic tuple types</p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -1014,6 +1301,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>ushort</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -1034,6 +1327,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>ulong</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -1054,6 +1353,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>uint</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>
@@ -1074,6 +1379,12 @@
 
       <div class="class-member">
 
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>The type of <code>Uri</code></p>
+
+                </div>
+              </div>
 
           <span class="member-line">
             <span class='member-static'>static </span>

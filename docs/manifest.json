@@ -1016,7 +1016,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.FrameworkOptions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.FrameworkOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for framework services and middleware pipeline.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.FrameworkOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for the framework's services and middleware pipeline</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1128,7 +1128,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.SystemType",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.SystemType.yml\" sourcestartlinenumber=\"1\">Cached <code>Type</code> instances for common system types, avoiding repeated <code>typeof()</code> calls in hot paths.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.SystemType.yml\" sourcestartlinenumber=\"1\">Cached <code>Type</code> instances for common system types</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1148,11 +1148,11 @@
       "type": "Toc",
       "source_relative_path": "apidocs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "apidocs/toc.html"
-        },
         ".json": {
           "relative_path": "apidocs/toc.json"
+        },
+        ".html": {
+          "relative_path": "apidocs/toc.html"
         }
       },
       "version": ""
@@ -1501,11 +1501,11 @@
       "type": "Toc",
       "source_relative_path": "systemlibrary.common.framework/docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""
