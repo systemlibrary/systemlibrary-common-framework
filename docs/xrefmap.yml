@@ -4609,15 +4609,15 @@ references:
   fullName.vb: SystemLibrary.Common.Framework.ShardedDictionary(Of TKey, TValue)
   nameWithType: ShardedDictionary<TKey, TValue>
   nameWithType.vb: ShardedDictionary(Of TKey, TValue)
-- uid: SystemLibrary.Common.Framework.ShardedDictionary`2.#ctor(System.Int32)
-  name: ShardedDictionary(int)
-  href: apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.html#SystemLibrary_Common_Framework_ShardedDictionary_2__ctor_System_Int32_
-  commentId: M:SystemLibrary.Common.Framework.ShardedDictionary`2.#ctor(System.Int32)
-  name.vb: New(Integer)
-  fullName: SystemLibrary.Common.Framework.ShardedDictionary<TKey, TValue>.ShardedDictionary(int)
-  fullName.vb: SystemLibrary.Common.Framework.ShardedDictionary(Of TKey, TValue).New(Integer)
-  nameWithType: ShardedDictionary<TKey, TValue>.ShardedDictionary(int)
-  nameWithType.vb: ShardedDictionary(Of TKey, TValue).New(Integer)
+- uid: SystemLibrary.Common.Framework.ShardedDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})
+  name: ShardedDictionary(int, IEqualityComparer<TKey>)
+  href: apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.html#SystemLibrary_Common_Framework_ShardedDictionary_2__ctor_System_Int32_System_Collections_Generic_IEqualityComparer__0__
+  commentId: M:SystemLibrary.Common.Framework.ShardedDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})
+  name.vb: New(Integer, IEqualityComparer(Of TKey))
+  fullName: SystemLibrary.Common.Framework.ShardedDictionary<TKey, TValue>.ShardedDictionary(int, System.Collections.Generic.IEqualityComparer<TKey>)
+  fullName.vb: SystemLibrary.Common.Framework.ShardedDictionary(Of TKey, TValue).New(Integer, System.Collections.Generic.IEqualityComparer(Of TKey))
+  nameWithType: ShardedDictionary<TKey, TValue>.ShardedDictionary(int, IEqualityComparer<TKey>)
+  nameWithType.vb: ShardedDictionary(Of TKey, TValue).New(Integer, IEqualityComparer(Of TKey))
 - uid: SystemLibrary.Common.Framework.ShardedDictionary`2.#ctor*
   name: ShardedDictionary
   href: apidocs/SystemLibrary.Common.Framework.ShardedDictionary-2.html#SystemLibrary_Common_Framework_ShardedDictionary_2__ctor_

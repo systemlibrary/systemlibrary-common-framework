@@ -96,7 +96,7 @@
   <div class="markdown summary" style="position:relative;">
   <p>A thread-safe dictionary split into 4 internal concurrent dictionaries (shards) to reduce contention</p>
 
-  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/ShardedDictionary/ShardedDictionary.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.net/ShardedDictionary/ShardedDictionary.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
@@ -115,7 +115,7 @@ var value = dict["a"]; // 1</code></pre>
         <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
         <div class="markdown level0 remarks-content" style="display:none">
           <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Meant as a size-capped cache. When a shard exceeds its share of <code>maxItemCount</code>, the whole shard is cleared, so up to a quarter of the cached items disappear at once.<br/>The shard is picked from the low 2 bits of the key's hash code.<br/>Only <b>Cache</b> accepts a null key. The other methods throw <code>ArgumentNullException</code> for null.</p>
+    <p>Meant as a size-capped cache. When a shard exceeds its share of <code>maxItemCount</code>, the whole shard is cleared, so up to a quarter of the cached items disappear at once.<br/>The shard is picked from the low 2 bits of the key's hash code.<br/>A null key is never stored: lookups return false or <code>default</code>, adds and removes do nothing, and <b>Cache</b> returns <code>getItem()</code>.</p>
 
         </div>
       </div>
