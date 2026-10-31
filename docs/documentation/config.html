@@ -87,43 +87,66 @@
         <article data-uid="">
 <h1 id="config">Config</h1>
 
-<h2 id="description">Description</h2>
-<p>Abstract base class for loading typed configuration from JSON, XML or .config files. Singleton per type — loaded once at first access, thread-safe.</p>
+<p><code>Config&lt;T&gt;</code> is the framework’s typed configuration abstraction for JSON, XML, and .config-style settings. It loads configuration into strongly typed C# objects from files, <code>appsettings.json</code>, or Azure Key Vault.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Auto-discovery</strong>: files are located by class name, searched in <code>~/</code>, <code>~/Configs/</code> and <code>~/Configurations/</code> — file and class names are matched case-insensitively</li>
-<li><strong>Transformations</strong>: environment-specific overrides via <code>ClassName.Environment.json</code> using <code>ASPNETCORE_ENVIRONMENT</code></li>
-<li><strong>Auto-decryption</strong>: encrypted properties are decrypted at startup via naming convention or attribute</li>
-<li><strong>Enum support</strong>: public enum fields are automatically mapped from configuration values</li>
-<li><strong>appSettings support</strong>: config can also live as a named section inside <code>appsettings.json</code></li>
-<li><strong>User secrets support</strong>: set <code>userSecretsId</code> in appsettings to enable <code>dotnet user-secrets</code> for local development</li>
-<li></li>
+<li><strong>Auto-discovery</strong>: locates files by class name in <code>~/</code>, <code>~/Configs/</code>, and <code>~/Configurations/</code>.</li>
+<li><strong>Environment transforms</strong>: supports <code>ClassName.Environment.json</code> overrides.</li>
+<li><strong>Decryption</strong>: decrypts encrypted properties using <code>ConfigDecryptAttribute</code>.</li>
+<li><strong>AppSettings support</strong>: loads configuration from named sections in <code>appsettings.json</code>.</li>
+<li><strong>Environment variables</strong>: supports environment-specific overrides.</li>
+<li><strong>Key Vault support</strong>: loads configuration and environment transforms from Azure Key Vault.</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p>Config is loaded once on first access of <code>Current</code> and cached for the application lifetime. Transformations are applied on top of the base file — only properties defined in the transformation file are overridden.</p>
-<p><strong>Decryption</strong> happens automatically at startup for properties matching either convention:</p>
+<p>Configuration is loaded lazily on first access to <code>T.Current</code> and cached for the lifetime of the application.</p>
+<p>Files are discovered by class name using case-insensitive matching. Environment-specific transforms are applied on top of the base configuration when available.</p>
+<p>When Key Vault is configured through <code>systemLibraryCommonFramework:config:keyVaultUrl</code>, the framework can load:</p>
 <ul>
-<li>Naming convention: <code>TokenDecrypt</code> decrypts the value of <code>Token</code></li>
-<li>Attribute convention: <code>[ConfigDecrypt(&quot;Token&quot;)]</code> on any property name decrypts <code>Token</code> into it</li>
+<li><code>{groupName}.json</code></li>
+<li><code>{groupName}.{Environment}.json</code></li>
 </ul>
-<p>Values must be encrypted using <code>string.Encrypt()</code> — the parameterless version — so the same default key is used for both encryption and decryption.</p>
+<p>These are applied as configuration values and environment transforms. Dots in secret names are replaced with hyphens to comply with Key Vault naming restrictions.</p>
+<p>Environment-variable overrides use the following prefixes:</p>
+<ul>
+<li><code>APP_</code> for configuration files outside <code>appsettings.json</code>.</li>
+<li><code>APP_</code>, <code>ASPNETCORE_</code>, and <code>DOTNET_</code> for <code>appsettings.json</code>.</li>
+</ul>
+<h2 id="decryption">Decryption</h2>
+<p>Properties decorated with <code>ConfigDecryptAttribute</code> are decrypted during configuration loading.</p>
+<pre><code class="lang-csharp">public class PokemonConfig : Config&lt;PokemonConfig&gt;
+{
+    public string Token { get; set; }
+
+    [ConfigDecrypt(&quot;Token&quot;)]
+    public string TokenDecrypted { get; set; }
+}
+</code></pre>
+<p>Values must be encrypted using the framework's <code>string.Encrypt()</code> method so the same default key is used during decryption.</p>
+<h2 id="example">Example</h2>
+<pre><code class="lang-csharp">public class PokemonConfig : Config&lt;PokemonConfig&gt;
+{
+    public string Url { get; set; }
+    public int CacheDuration { get; set; }
+}
+
+var url = PokemonConfig.Current.Url;
+</code></pre>
+<p>Example configuration files:</p>
+<ul>
+<li><code>PokemonConfig.json</code></li>
+<li><code>PokemonConfig.Production.json</code></li>
+<li><code>PokemonConfig.Development.json</code></li>
+</ul>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li><p><code>T</code> cannot be a nested class</p>
-</li>
-<li><p>Config file must exist and cannot be empty</p>
-</li>
-<li><p>Decryption failures are logged as warnings and app continues</p>
-</li>
-<li><p>Custom config files (non-appsettings) only support <code>APP_</code> prefixed environment variables
-for overriding values — e.g. <code>APP_PokemonConfig__Url=https://prod.api.com</code></p>
-</li>
-<li><p><code>appsettings.json</code> additionally supports <code>ASPNETCORE_</code> and <code>DOTNET_</code> prefixed variables</p>
-</li>
+<li><code>T</code> cannot be a nested type.</li>
+<li>The configuration file must exist and cannot be empty.</li>
+<li>Decryption failures throw exceptions.</li>
+<li>Key Vault retrieval failures are logged as warnings, and startup continues without the unavailable values.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Store encrypted values safely in git — they are encrypted with a key only your application knows. See <a href="/documentation/encryption.html">Encryption</a> for details.</p>
+<p>Encrypted values can be stored alongside source code, as long as the encryption key is kept separate.</p>
 </div>
 
 </article>

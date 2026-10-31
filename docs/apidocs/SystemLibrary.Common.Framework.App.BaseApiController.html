@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="BaseApiController | System Library Common Framework ">
       
-      <meta name="description" content="Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers. All controllers inheriting BaseApiController are automatically picked up if matching the request path.">
+      <meta name="description" content="Base class for API controllers, with automatic endpoint documentation and JSON and XML response helpers">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,12 +94,33 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers.<br/>All controllers inheriting BaseApiController are automatically picked up if matching the request path.</p>
+  <p>Base class for API controllers, with automatic endpoint documentation and JSON and XML response helpers</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Api/BaseApiController/_Docs.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </div>
 
   <div class="doc-toggles">
+      <div class="example-wrapper">
+        <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+        <div class="markdown level0 example-content" style="display:none">
+          <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">public class PokemonController : BaseApiController
+{
+    [HttpGet]
+    public ActionResult Get(string name) =&gt; Json(new { name });
+}</code></pre>
+
+        </div>
+      </div>
+
+      <div class="remarks-wrapper">
+        <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+        <div class="markdown level0 remarks-content" style="display:none">
+          <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Controllers inheriting this class are picked up automatically when they match the request path.<br/>Every inheriting controller gets a <code>/docs</code> endpoint, see <b>Docs</b>.</p>
+
+        </div>
+      </div>
 
   </div>
 
@@ -134,7 +155,7 @@
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns a JSON overview of all public endpoints declared on the inheriting controller.</p>
+    <p>Returns a JSON overview of the public endpoints declared directly on the inheriting controller</p>
 
                 </div>
               </div>
@@ -157,7 +178,9 @@
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
     <pre><code class="lang-csharp">// GET /api/pokemon/docs
-public class PokemonController : BaseApiController { ... }</code></pre>
+// {
+//   "[GET] /api/pokemon/search?name&amp;limit=10": "string, int → pokemon[]"
+// }</code></pre>
 
                   </div>
                 </div>
@@ -165,7 +188,7 @@ public class PokemonController : BaseApiController { ... }</code></pre>
                   <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
                   <div class="markdown level0 remarks-content" style="display:none">
                     <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
-    <p>Only methods declared directly on the controller are included — inherited members are excluded.</p>
+    <p>Request the controller's path followed by <code>/docs</code>.<br/>Each entry has the HTTP method, path and parameters as the key, and the parameter types and response type as the value.<br/>Inherited methods are not included. Entries are sorted by HTTP method, then by path.<br/>The overview is available in every environment, so protect or disable it if the endpoint list should not be public.</p>
 
                   </div>
                 </div>
@@ -175,7 +198,7 @@ public class PokemonController : BaseApiController { ... }</code></pre>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns an HTTP 200 JSON response. Properties are camelCased by default.</p>
+    <p>Returns an HTTP 200 response with the data as JSON</p>
 
                 </div>
               </div>
@@ -202,12 +225,21 @@ return Json(user, camelCase: false);</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>Property names are camelCased unless <code>camelCase</code> is false.<br/>The status code is always 200, so use <code>StatusCode</code> or the standard helpers for errors.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Returns an HTTP 200 XML response.</p>
+    <p>Returns an HTTP 200 response with the data as XML</p>
 
                 </div>
               </div>
@@ -233,6 +265,15 @@ return Json(user, camelCase: false);</code></pre>
 
                   </div>
                 </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>The status code is always 200, so use <code>StatusCode</code> or the standard helpers for errors.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

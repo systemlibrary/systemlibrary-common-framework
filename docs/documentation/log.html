@@ -87,37 +87,29 @@
         <article data-uid="">
 <h1 id="log">Log</h1>
 
-<h2 id="description">Description</h2>
-<p>Global static logging available anywhere without injection. Messages are queued and written on a background thread — main thread is never blocked. Supports file, stdout/stderr and custom writers.</p>
+<p>The framework exposes a global <code>Log</code> type for application logging without dependency injection.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Global access</strong>: <code>Log.Error()</code>, <code>Log.Warning()</code>, <code>Log.Information()</code>, <code>Log.Debug()</code>, <code>Log.Trace()</code>, <code>Log.Critical()</code>, <code>Log.Dump()</code> — no injection needed</li>
-<li><strong>Auto-enrichment</strong>: optionally appends URL, query string, browser name, correlation ID and authenticated state to each message</li>
-<li><strong>Multiple formats</strong>: Text, JSON or HTML output</li>
-<li><strong>Log forwarding</strong>: forward framework logs to stdout/stderr, or forward stdout/stderr into your <code>ILogWriter</code></li>
-<li><strong>File writer</strong>: built-in fallback file writer with file size limit</li>
-<li><strong>Flush on shutdown</strong>: queue is drained before app exits</li>
+<li><strong>Global access</strong>: <code>Log.Error()</code>, <code>Log.Warning()</code>, <code>Log.Information()</code>, <code>Log.Debug()</code>, <code>Log.Trace()</code>, and <code>Log.Dump()</code></li>
+<li><strong>Background queueing</strong>: messages are queued and flushed on a background thread instead of blocking the calling thread</li>
+<li><strong>Custom output</strong>: supports file output, stdout/stderr, and custom <code>ILogWriter</code> implementations</li>
+<li><strong>Enrichment</strong>: can attach request and user context when available</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p><code>Log.Dump()</code> bypasses the queue and rate limiter — written immediately and directly. Use for debugging only.</p>
-<p><code>Log.Debug()</code> and <code>Log.Dump()</code> skip URL, browser and stack trace enrichment for performance.</p>
-<p><strong>Log forwarding modes:</strong></p>
-<ul>
-<li><code>Default</code> → your <code>ILogWriter</code> receives all log calls, stdout/stderr untouched</li>
-<li><code>LogToStd</code> → all log calls go to stdout/stderr with ANSI color support</li>
-<li><code>StdToLog</code> → stdout/stderr is forwarded into your <code>ILogWriter</code></li>
-</ul>
-<p>If no <code>ILogWriter</code> is registered, falls back to file writer at <code>%HomeDrive%/Logs/Dump.log</code>.</p>
-<p>Correlation ID is auto-generated per request if not already present in <code>HttpContext.Items</code>.</p>
+<p><code>Log</code> writes are checked against the configured minimum log level before being queued. <code>Log.Dump()</code> is the direct-write debug helper for cases where immediate output is more useful than queueing.</p>
+<pre><code class="lang-csharp">Log.Warning(&quot;Retrying request&quot;);
+Log.Dump(&quot;diagnostic payload&quot;);
+</code></pre>
+<p>The framework can also forward logs to stdout/stderr or consume stdout/stderr with an <code>ILogWriter</code> implementation when configured through the framework logging pipeline.</p>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li><code>Log.Dump()</code> should not be used in production — no rate limiting, no queuing, direct write</li>
-<li>File writer has no log rotation</li>
-<li>Rate limited: max 400 messages per 4ms interval, discards silently and logs one warning per overflow</li>
+<li><code>Log.Dump()</code> bypasses some of the normal queue and filter behavior and is meant for diagnostics, not production logging.</li>
+<li>File logging is a fallback behavior; custom sinks are preferred in production systems.</li>
+<li>Logging is not a substitute for structured observability systems such as Application Insights, Datadog, or OpenTelemetry.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Implement <code>ILogWriter</code> and register it as a singleton to send logs to Datadog, Application Insights or any other sink — the framework handles all enrichment and formatting before calling <code>Write()</code>.</p>
+<p>Implement <code>ILogWriter</code> and register it as a singleton to route messages to your preferred sink while keeping the framework’s formatting and enrichment behavior consistent.</p>
 </div>
 <h2 id="appsettings">AppSettings</h2>
 <p>View all appsettings <a href="/documentation/AppSettings.html">here</a></p>

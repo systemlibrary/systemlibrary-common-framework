@@ -87,29 +87,30 @@
         <article data-uid="">
 <h1 id="controllers">Controllers</h1>
 
-<h2 id="description">Description</h2>
-<p>The framework extends ASP.NET MVC with routing conventions, smart action selection, and a base API controller with built-in documentation endpoint.</p>
+<p>The framework adds routing conventions and helper behavior on top of ASP.NET MVC.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Auto-routing</strong>: controllers are routed automatically based on class name and namespace — no <code>[Route]</code> attributes needed</li>
-<li><strong>BaseApiController</strong>: base class for all API controllers, adds <code>/docs</code> endpoint listing all actions and their parameters</li>
-<li><strong>Short route</strong>: controllers suffixed with <code>Api</code> get both a full and short route — <code>PokemonApiController</code> resolves as both <code>/api/pokemonapi/</code> and <code>/api/pokemon/</code></li>
-<li><strong>Smart action selection</strong>: when multiple actions match a request, the one whose parameters best match the query string wins</li>
+<li><strong>Auto-routing</strong>: controllers are routed automatically based on class name and namespace</li>
+<li><strong>BaseApiController</strong>: adds JSON and XML response helpers for API actions</li>
+<li><strong>Action matching</strong>: overload resolution prefers the action whose parameters best match the request values</li>
+<li><strong>Short route aliases</strong>: names such as <code>PokemonApiController</code> resolve to both long and short route variants</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p>Routing conventions are applied automatically at startup — controllers inheriting <code>Controller</code> or <code>BaseApiController</code> get routes registered without any attributes.</p>
-<p><strong>API routes</strong> are prefixed with <code>/api/</code> and follow <code>[controller]/[action]</code> pattern. Namespace segments beyond the root are included in the path:</p>
-<pre><code>MyApp.Api.Admin.UserApiController  →  /api/admin/userapi/  and  /api/admin/user/
+<p>Controllers inheriting from <code>Controller</code> or <code>BaseApiController</code> are discovered automatically by the framework. The routing conventions apply without requiring <code>[Route]</code> attributes on every controller.</p>
+<p>API endpoints are built under <code>/api/</code> and follow the controller/action pattern. Namespace segments beyond the root are included in the route path when present.</p>
+<pre><code class="lang-text">MyApp.Api.Admin.UserApiController -&gt; /api/admin/userapi/ and /api/admin/user/
 </code></pre>
-<p><strong>Action selection</strong> resolves ambiguity when multiple overloads exist — if query string parameters match an action's parameter names, that action wins. If no query string exists, the parameterless action wins.</p>
+<p>The auto-routing logic prefers the action whose parameter names best match the incoming query string values when multiple actions could match the same request.</p>
+<p>BaseApiController exposes convenience response helpers such as <code>Json(object data, bool camelCase = true)</code> and <code>Xml(object data)</code>.</p>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li>Controllers with an explicit <code>[Route]</code> attribute are excluded from auto-routing conventions</li>
-<li>Controllers with <code>[ApiController]</code> attribute are excluded from auto-routing conventions</li>
+<li>Controllers with explicit <code>[Route]</code> attributes are excluded from the framework’s automatic convention behavior.</li>
+<li>Controllers marked with <code>[ApiController]</code> are also excluded from the auto-routing pattern.</li>
+<li>The framework does not replace the ASP.NET routing system; it adds a convention layer and friendly action selection behavior.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Inherit <code>BaseApiController</code> for all your APIs to get the free <code>/docs</code> endpoint.</p>
+<p>Inherit <code>BaseApiController</code> for API endpoints when you want the framework to handle response shaping and route conventions for you.</p>
 </div>
 
 </article>

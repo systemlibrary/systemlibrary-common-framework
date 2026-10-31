@@ -87,18 +87,17 @@
         <article data-uid="">
 <h1 id="client">Client</h1>
 
-<h2 id="description">Description</h2>
-<p>Class for making HTTP requests with built-in resilience, connection reuse and automatic retries. Uses <code>HttpClient</code> and Polly under the hood.</p>
+<p>The framework <code>Client</code> wraps outbound HTTP requests and is designed for reuse, resilience, and simplified integration code.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>All HTTP methods</strong>: GET, POST, PUT, DELETE, HEAD, OPTIONS — sync and async variants</li>
-<li><strong>Connection reuse</strong>: underlying <code>HttpClient</code> cached per host, port, timeout, scheme, SSL and decompression settings — eliminates socket exhaustion</li>
-<li><strong>Retry policy</strong>: configurable, see Behavior</li>
-<li><strong>Circuit breaker [<a href="#">Pro Tier</a>]</strong>: stops requests for 7 seconds after 25 consecutive errors on the same host + path</li>
-<li><strong>Fluent API</strong>: call directly on any string URL via extension methods</li>
+<li><strong>HTTP verbs</strong>: GET, POST, PUT, DELETE, HEAD, OPTIONS, and related requests</li>
+<li><strong>Connection reuse</strong>: underlying <code>HttpClient</code> instances are reused based on host and connection configuration</li>
+<li><strong>Retry behavior</strong>: retries are applied according to the request type and configured policy</li>
+<li><strong>Fluent usage</strong>: call directly from a string URL or a typed client instance</li>
+<li><strong>Resilience</strong>: supports the framework’s default timeout and error-handling behavior</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p>Defaults are read from appsettings and can be overridden per instance in the constructor. A new <code>Client</code> instance does not necessarily create a new underlying <code>HttpClient</code> — it reuses one from cache if scheme, host, port, timeout, SSL and decompression settings match.</p>
+<p>The framework caches <code>HttpClient</code> instances per host, port, timeout, scheme, SSL, and decompression configuration so requests can reuse a healthy connection instead of creating a new client every time.</p>
 <p><strong>Retry policy disabled</strong> (default):</p>
 <ul>
 <li>Always retries once on 502, 504 for GET, POST and file requests</li>
@@ -133,16 +132,22 @@
 </ul>
 </li>
 </ul>
+<pre><code class="lang-csharp">var client = new Client();
+var response = client.Get&lt;string&gt;(&quot;https://api.example.com/data&quot;);
+</code></pre>
+<p>The same pattern also works via URL-based extensions:</p>
+<pre><code class="lang-csharp">var response = &quot;https://api.example.com/data&quot;.GetRequest&lt;string&gt;();
+</code></pre>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li><code>DELETE</code> and <code>PUT</code> are never retried</li>
-<li>502 and 504 on GET, POST or file requests always retry at least once — set <code>retryTimeout: 0</code> in appsettings to disable</li>
-<li><code>throwOnUnsuccessful</code> defaults to <code>false</code> — errors are logged as warnings, not thrown</li>
-<li><code>ClientCertificate</code> must include a private key or an exception is thrown</li>
+<li><code>DELETE</code> and <code>PUT</code> requests are not retried.</li>
+<li><code>throwOnUnsuccessful</code> defaults to <code>false</code>, so some failures are logged rather than thrown.</li>
+<li><code>ClientCertificate</code> must include a private key or an exception is raised when used.</li>
+<li>Retry behavior is intentionally conservative and depends on the framework’s configuration.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Inherit <code>Client</code> to build typed integration clients — share base URL, headers, and auth logic across all methods in one place.</p>
+<p>Inherit from <code>Client</code> to build typed integration clients that share a base URL, headers, and authentication logic across your application.</p>
 </div>
 <h2 id="appsettings">AppSettings</h2>
 <p>View all appsettings <a href="/documentation/AppSettings.html">here</a></p>

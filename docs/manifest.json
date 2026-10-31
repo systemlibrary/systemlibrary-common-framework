@@ -134,7 +134,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.BaseApiController",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.BaseApiController.yml\" sourcestartlinenumber=\"1\">Abstract base class for API controllers with automatic endpoint documentation and built-in response helpers.\nAll controllers inheriting BaseApiController are automatically picked up if matching the request path.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.BaseApiController.yml\" sourcestartlinenumber=\"1\">Base class for API controllers, with automatic endpoint documentation and JSON and XML response helpers</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -288,7 +288,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IServiceCollection.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for IServiceCollection</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -750,7 +750,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions",
-      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring framework options on <code>IHostBuilder</code>.</p>\n"
+      "Summary": "<p sourcefile=\"apidocs/SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Extension methods for configuring the framework on <code>IHostBuilder</code></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1219,6 +1219,36 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/basetest.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/basetest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/basetestkestrel.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/basetestkestrel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/basetestserver.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/basetestserver.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "systemlibrary.common.framework/docs/documentation/cache.md",
       "output": {
         ".html": {
@@ -1289,10 +1319,10 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "systemlibrary.common.framework/docs/documentation/environmentconfig.md",
+      "source_relative_path": "systemlibrary.common.framework/docs/documentation/environmentinfo.md",
       "output": {
         ".html": {
-          "relative_path": "documentation/environmentconfig.html"
+          "relative_path": "documentation/environmentinfo.html"
         }
       },
       "version": ""

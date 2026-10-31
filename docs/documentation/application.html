@@ -87,44 +87,63 @@
         <article data-uid="">
 <h1 id="application">Application</h1>
 
-<h2 id="description">Description</h2>
-<p>Entry point for starting and stopping the host. Wraps ASP.NET host setup into three startup approaches depending on how much control you need.</p>
+<p>Entry point for starting and stopping the framework host. The class wraps ASP.NET host creation and exposes several startup patterns depending on how much control you need.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Three startup APIs</strong>: Start, Build, and Extension — from zero-config to full control</li>
-<li><strong>Hook support</strong>: <code>IFrameworkHooks</code> callbacks throughout the host lifecycle</li>
-<li><strong>Async support</strong>: All startup methods have async variants</li>
+<li><strong>Startup helpers</strong>: <code>Start</code>, <code>StartAsync</code>, <code>Build</code>, and host shutdown helpers</li>
+<li><strong>Hook lifecycle</strong>: <code>IFrameworkHooks</code> callbacks during host construction and startup</li>
+<li><strong>Async support</strong>: sync and async startup/shutdown variants</li>
+<li><strong>Flexible startup</strong>: either framework-managed startup or direct host-builder configuration</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
 <h3 id="start-api">Start API</h3>
-<p>Simplest approach — framework manages the full host lifecycle:</p>
+<p>The simplest pattern is to let the framework create and run the host for you:</p>
 <pre><code class="lang-csharp">var options = new FrameworkOptions();
-Application.Start&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel, urls);
+Application.Start&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel);
+
+public class Hooks : IFrameworkHooks
+{
+    public void OnConfigureServices(IServiceCollection services, EnvironmentType env)
+    {
+    }
+}
 </code></pre>
+<p>This registers the framework services and middleware, builds the host, and blocks until shutdown.</p>
 <h3 id="build-api">Build API</h3>
-<p>Returns the host builder for additional configuration before running:</p>
+<p>Use the build helper when you want to configure the host builder before running it:</p>
 <pre><code class="lang-csharp">var options = new FrameworkOptions();
-var builder = Application.Build&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel,  urls);
+var urls = new[] { &quot;http://localhost:5010&quot; };
+
+var builder = Application.Build&lt;Hooks&gt;(AppType.Web, options, AppHosting.Kestrel, urls);
 var app = builder.Build();
 app.Run();
 </code></pre>
 <h3 id="extension-api">Extension API</h3>
-<p>Full control via extension methods directly on the host builder. <code>IFrameworkHooks</code> is <strong>not</strong> invoked in this mode:</p>
+<p>Full control via extension methods directly on the host builder. <code>IFrameworkHooks</code> is not invoked in this mode. This is the pattern the repo uses in its current demo application:</p>
 <pre><code class="lang-csharp">var builder = Host.CreateDefaultBuilder(args);
-builder.ConfigureServices((context, services) =&gt; {
-    services = services.AddFrameworkServices(AppType.Web);
+
+builder.ConfigureFrameworkLogging();
+
+builder.ConfigureServices((context, services) =&gt;
+{
+    services = services.AddFrameworkServices(AppType.Web, options);
 });
-builder = builder.ConfigureWebHostDefaults(webBuilder =&gt; {
-    webBuilder.UseKestrel();
-    webBuilder.Configure(app =&gt; {
+
+builder = builder.ConfigureWebHostDefaults(webBuilder =&gt;
+{
+    webBuilder.ConfigureFrameworkHosting();
+
+    webBuilder.Configure(app =&gt;
+    {
         app.UseFrameworkBeginMiddlewares(AppType.Web);
-        // ...
         app.UseFrameworkEndMiddlewares(AppType.Web);
     });
 });
+
 var app = builder.Build();
 app.Run();
 </code></pre>
+<p>This approach gives the application full control over the host and pipeline while still using the framework's service registrations and middleware extensions.</p>
 <h3 id="stopping-the-host">Stopping the host</h3>
 <pre><code class="lang-csharp">Application.HostStop();
 // or
@@ -132,18 +151,14 @@ await Application.HostStopAsync();
 </code></pre>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li>Calling <code>Start</code> or <code>StartAsync</code> twice throws <code>InvalidOperationException</code> — only one host instance is allowed</li>
-<li><code>IFrameworkHooks</code> is not invoked when using the Framework Extension API</li>
+<li>Calling <code>Start</code> or <code>StartAsync</code> twice throws <code>InvalidOperationException</code> because only one host instance is allowed at a time.</li>
+<li>The <code>IFrameworkHooks</code> lifecycle is skipped when the extension API is used directly.</li>
+<li>For most applications, the HostBuilder + <code>AddFrameworkServices</code> pattern is the clearest and most explicit option.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<ul>
-<li>Use <code>Application.Start</code> for most applications. Use <code>Application.Build</code> if you need to configure the host after building. Use the Extension API if you're integrating into an existing host setup or you need full control.</li>
-<li>Modules work without registering middleware: <code>Log</code>, <code>Cache</code>, <code>Client</code>, <code>Encryption</code>, <code>Json</code> and <code>Config</code></li>
-</ul>
+<p>Use <code>Application.Start</code> when you want the framework to manage the host lifecycle. Use <code>Application.Build</code> when you need to configure the host before <code>Run()</code>. Use the extension API when you already have an ASP.NET host setup and want direct control over the pipeline.</p>
 </div>
-<h2 id="appsettings">AppSettings</h2>
-<p>View all appsettings <a href="/documentation/AppSettings.html">here</a></p>
 
 </article>
 

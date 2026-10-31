@@ -87,20 +87,20 @@
         <article data-uid="">
 <h1 id="enum">Enum</h1>
 
-<h2 id="description">Description</h2>
 <p>Extensions and attributes for enriching enums with metadata, enabling conversion between enum keys, custom text and custom values — with full support in JSON serialization.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>EnumText attribute</strong>: attach a custom text to any enum key</li>
-<li><strong>EnumValue attribute</strong>: attach a custom value (any type) to any enum key</li>
-<li><strong>ToText()</strong>: returns <code>EnumText</code> value or falls back to key name as string</li>
-<li><strong>ToValue()</strong>: returns <code>EnumValue</code> value or falls back to key name as string</li>
-<li><strong>GetEnumText()</strong>: returns <code>EnumText</code> value or null if attribute not present</li>
-<li><strong>GetEnumValue()</strong>: returns <code>EnumValue</code> value or null if attribute not present</li>
-<li><strong>ToEnum()</strong>: converts string to enum key — matches key name, <code>EnumValue</code> or <code>EnumText</code> (case insensitive)</li>
-<li><strong>IsAny()</strong>: checks if enum matches any in a list</li>
-<li><strong>EnumExtensions&lt;T&gt;</strong>: static helpers to get all keys, enums or values from an enum type</li>
-<li><strong>Model binding</strong>: <code>ToEnum()</code> is registered globally via <code>TypeDescriptor</code> — ASP.NET model binding automatically uses <code>EnumValue</code> and <code>EnumText</code> matching for query strings, form posts and route values</li>
+<li><code>EnumTextAttribute</code> for display-friendly enum names</li>
+<li><code>EnumValueAttribute</code> for machine-readable values</li>
+<li><code>ToText()</code> to convert enum to text</li>
+<li><code>ToValue()</code> to convert enum to custom value</li>
+<li><code>GetEnumText()</code> to retrieve the attribute value without fallback</li>
+<li><code>GetEnumValue()</code> to retrieve the attribute value without fallback</li>
+<li><code>ToEnum()</code> to convert strings back to enum values</li>
+<li><code>IsAny()</code> to check whether an enum value matches any value in a set</li>
+<li><code>EnumExtensions&lt;TEnum&gt;</code> for generic enum helpers</li>
+<li>ASP.NET model binding support</li>
+<li>JSON serialization/deserialization support</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
 <p><code>ToEnum()</code> matching priority:</p>
@@ -124,6 +124,55 @@ strings, form posts and route values.</p>
 <h5>Tip</h5>
 <p>Use <code>EnumValue</code> for machine-readable identifiers (IDs, codes, symbols) and <code>EnumText</code> for human-readable display strings — they serve different purposes and can both be applied to the same key.</p>
 </div>
+<h2 id="examples">Examples</h2>
+<pre><code class="lang-csharp">public enum Status
+{
+    [EnumText(&quot;Open&quot;)]
+    Open,
+
+    [EnumValue(&quot;in_progress&quot;)]
+    InProgress,
+
+    [EnumText(&quot;Closed&quot;)]
+    [EnumValue(&quot;closed&quot;)]
+    Closed
+}
+
+Status.Open.ToText();             // &quot;Open&quot;
+Status.InProgress.ToValue();      // &quot;in_progress&quot;
+Status.InProgress.GetEnumValue(); // &quot;in_progress&quot;
+Status.Closed.GetEnumText();      // &quot;Closed&quot;
+</code></pre>
+<h3 id="aspnet-model-binding">ASP.NET model binding</h3>
+<pre><code class="lang-csharp">public IActionResult Get([FromQuery] Status status)
+{
+    return Ok(status);
+}
+</code></pre>
+<h4 id="requests-with-query-params-such-as-these-bind-correctly">Requests with query params such as these bind correctly:</h4>
+<pre><code class="lang-text">?status=Open
+?status=in_progress
+?status=Closed
+</code></pre>
+<h3 id="json-serialization">JSON serialization</h3>
+<pre><code class="lang-csharp">var json = new { status = Status.InProgress }.Json();
+</code></pre>
+<p>This serializes using the configured enum value instead of the raw numeric underlying enum value.</p>
+<h3 id="example-with-numeric-like-enum-names">Example with numeric-like enum names</h3>
+<pre><code class="lang-csharp">public enum Codes
+{
+    _0,
+    _1,
+    _2A
+}
+</code></pre>
+<pre><code class="lang-csharp">Codes._1.ToValue(); // &quot;1&quot;
+</code></pre>
+<h3 id="generic-enum-helpers">Generic enum helpers</h3>
+<pre><code class="lang-csharp">var keys = EnumExtensions&lt;Color&gt;.GetKeys();
+var values = EnumExtensions&lt;Color&gt;.GetValues();
+var enums = EnumExtensions&lt;Color&gt;.GetEnums();
+</code></pre>
 
 </article>
 

@@ -87,35 +87,33 @@
         <article data-uid="">
 <h1 id="views">Views</h1>
 
-<h2 id="description">Description</h2>
-<p>The framework extends ASP.NET view discovery to support feature-folder structure — controllers and their views can live in the same folder anywhere in the project.</p>
+<p>The framework extends ASP.NET view discovery so controllers and their views can live together in feature-style folders.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Feature folder support</strong>: views are discovered next to their controllers</li>
-<li><strong>Auto namespace discovery</strong>: controller namespaces are automatically registered as view search paths at startup</li>
-<li><strong>Custom view locations</strong>: add extra view paths via <code>FrameworkOptions.ViewLocations</code></li>
-<li><strong>Custom expander</strong>: pass your own <code>IViewLocationExpander</code> via <code>FrameworkOptions.ViewLocationExpander</code></li>
+<li><strong>Feature-folder support</strong>: views are discovered beside their controllers</li>
+<li><strong>Namespace discovery</strong>: controller namespaces are added as view search roots</li>
+<li><strong>Custom locations</strong>: additional view paths can be supplied through <code>FrameworkOptions.ViewLocations</code></li>
+<li><strong>Custom expander support</strong>: a custom <code>IViewLocationExpander</code> can be added alongside the built-in behavior</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p>The framework registers these view search paths automatically:</p>
-<pre><code>/{controller}/{view}.cshtml
+<p>The framework registers several built-in view search paths automatically:</p>
+<pre><code class="lang-text">/{controller}/{view}.cshtml
 /{namespaceSegment}/{controller}/{view}.cshtml
 /{namespaceSegment}/{controller}/{controller}.cshtml
 /{namespaceSegment}/{controller}/Views/{view}.cshtml
 /{namespaceSegment}/Views/Shared/{controller}/{view}.cshtml
 </code></pre>
-<p>Namespace segments of discovered controllers are also added as view search paths — so a controller in <code>MyApp.Content.Home</code> namespace automatically registers <code>Content/Home</code> as a valid view root.</p>
-<p>Custom locations from <code>FrameworkOptions</code> are appended after the built-in paths — built-in paths always take priority.</p>
+<p>When the framework discovers a controller namespace, it also registers that namespace segment as a valid view root. This makes folder-based features easy to structure without manually wiring view locations.</p>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li>Built-in view paths take priority</li>
-<li>View namespace discovery runs once on first request — not at startup</li>
-<li><code>ApplicationParts</code> must be set in <code>FrameworkOptions</code> if controllers live in external assemblies</li>
-<li>Custom <code>ViewLocationExpander</code> runs alongside the built-in expander — both are active simultaneously</li>
+<li>Built-in view paths take priority over custom view paths.</li>
+<li>View namespace discovery happens as controller metadata is discovered, not during a global startup pass.</li>
+<li>If controllers live in external assemblies, <code>ApplicationParts</code> configuration may still be needed.</li>
+<li>The custom <code>ViewLocationExpander</code> runs alongside the built-in expander; both are active.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Organise your project as feature folders — keep <code>HomeController.cs</code> and <code>Index.cshtml</code> in the same <code>~/Content/Home/</code> folder. No configuration needed, the framework discovers them automatically.</p>
+<p>Keep a controller and its matching view in the same feature folder to align with the framework’s default conventions and avoid extra configuration.</p>
 </div>
 
 </article>

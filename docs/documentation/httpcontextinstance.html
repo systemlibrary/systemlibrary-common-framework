@@ -87,25 +87,26 @@
         <article data-uid="">
 <h1 id="httpcontextinstance">HttpContextInstance</h1>
 
-<h2 id="description">Description</h2>
-<p>Global thread-safe access to the current <code>HttpContext</code> — the .NET Framework <code>HttpContext.Current</code> pattern brought back for ASP.NET Core.</p>
+<p>Global access to the current <code>HttpContext</code> without having to inject it through a dependency chain.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong><code>HttpContextInstance.Current</code></strong>: returns the current <code>HttpContext</code> from anywhere without injection</li>
+<li><strong>Current context accessor</strong>: <code>HttpContextInstance.Current</code> returns the active request context from anywhere in the app</li>
+<li><strong>Static helper support</strong>: useful in extension methods and framework-level utilities that do not accept a <code>HttpContext</code> parameter</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
 <pre><code class="lang-csharp">var context = HttpContextInstance.Current;
 var path = context.Request?.Path;
 </code></pre>
+<p>When no HTTP request is active, the framework returns a default empty context instead of <code>null</code>, which makes static helpers safe to call during background work, testing, or console execution.</p>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li>If no active HTTP context exists, returns a default <code>HttpContext</code> with an empty <code>ClaimsPrincipal</code> and the framework service provider — never returns <code>null</code>.</li>
-<li>Returns a <strong>default empty context</strong> (not null) outside of HTTP requests — console apps, background jobs, unit tests</li>
-<li>Requires <code>AddFrameworkServices()</code> to be called at startup — registered automatically by the framework</li>
+<li>If no HTTP request is active, the returned object is a default empty <code>HttpContext</code> with an empty <code>ClaimsPrincipal</code>.</li>
+<li>This is intended for code paths that need a safe default, not for forcing a real request context.</li>
+<li><code>AddFrameworkServices()</code> should be called during startup so that the singleton access pattern is registered correctly.</li>
 </ul>
 <div class="TIP">
 <h5>Tip</h5>
-<p>Use <code>HttpContextInstance.Current</code> in static helpers and extension methods where injection is not available.</p>
+<p>Use <code>HttpContextInstance.Current</code> in static helpers where you need request data but do not want to pass <code>HttpContext</code> through every method call.</p>
 </div>
 
 </article>

@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>EnvironmentConfig | System Library Common Framework </title>
+      <title>BaseTestServer | System Library Common Framework </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="EnvironmentConfig | System Library Common Framework ">
+      <meta name="title" content="BaseTestServer | System Library Common Framework ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -17,7 +17,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/docs/documentation/environmentconfig.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework/docs/documentation/basetestserver.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,43 +85,40 @@
         </div>
 
         <article data-uid="">
-<h1 id="environmentconfig">EnvironmentConfig</h1>
+<h1 id="basetestserver">BaseTestServer</h1>
 
-<h2 id="description">Description</h2>
-<p>Provides environment detection and configuration based on <code>ASPNETCORE_ENVIRONMENT</code>. Inherits from <code>Config&lt;T&gt;</code> — supports the same file discovery, transformations and decryption.</p>
+<p><code>BaseTestServer</code> provides an in-memory ASP.NET Core test host using Microsoft's <code>TestServer</code>. It allows integration testing of controllers and framework middleware without opening a network port.</p>
 <h2 id="features">Features</h2>
 <ul>
-<li><strong>Environment detection</strong>: <code>IsDevelopment</code>, <code>IsTest</code>, <code>IsProd</code> static flags available anywhere</li>
-<li><strong>Environment name</strong>: reads from <code>ASPNETCORE_ENVIRONMENT</code> across all hosting models — IIS, IISExpress, Kestrel, Test Explorer, CLI</li>
-<li><strong>Typed environment enum</strong>: inherit <code>EnvironmentConfig&lt;T, TEnum&gt;</code> to map environment name to your own enum</li>
-<li><strong>ContentRootPath</strong>: static path to the application root folder</li>
+<li><strong>In-memory hosting</strong>: Runs the ASP.NET application using <code>TestServer</code>.</li>
+<li><strong>Framework middleware</strong>: Initializes the framework services and middleware pipeline.</li>
+<li><strong>Custom configuration</strong>: Supports callbacks for services, application configuration, and logging.</li>
+<li><strong>HTTP helpers</strong>: Sends GET requests and returns either the response body or the complete response message.</li>
+<li><strong>Rebuild</strong>: Recreates the test host when services or middleware need to be reconfigured.</li>
 </ul>
 <h2 id="behavior">Behavior</h2>
-<p><code>IsDevelopment</code> is true when neither <code>IsProd</code> nor <code>IsTest</code> is true — it's the fallback, not an explicit check.</p>
-<p><code>IsTest</code> covers a broad range of non-production, non-development environments:</p>
-<pre><code>AT, Integration, PreProd, PreProduction, QA, 
-Sandbox, Stage, Staging, Test, UAT, UnitTest, 
-CI, ContinuousIntegration, Build
+<p>The host and <code>HttpClient</code> are initialized lazily on first access to <code>Client</code>.</p>
+<p><code>GetResponseText()</code> returns the response body. Unsuccessful responses are logged but do not throw automatically.</p>
+<p><code>GetResponseMessage()</code> returns the complete <code>HttpResponseMessage</code>, allowing tests to inspect the status code, headers, and content.</p>
+<p><code>RebuildClient()</code> disposes the current <code>TestServer</code>. The next request initializes a new host and client.</p>
+<h2 id="example">Example</h2>
+<pre><code class="lang-csharp">public class UserTests : BaseTestServer
+{
+    [TestMethod]
+    public void GetUser()
+    {
+        var response = GetResponseMessage(&quot;/api/users?id=1&quot;);
+
+        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+    }
+}
 </code></pre>
-<p><code>IsProd</code> matches only <code>Prod</code> and <code>Production</code>.</p>
-<p>Environment name resolution priority varies by hosting model but generally follows:</p>
-<ol>
-<li><code>environmentConfig.json</code> transformation file for current environment</li>
-<li><code>environmentConfig.json</code> <code>name</code> property</li>
-<li><code>ASPNETCORE_ENVIRONMENT</code> from <code>mstest.runsettings</code>, <code>web.config</code>, <code>launchSettings.json</code> or Windows environment variables</li>
-<li>Falls back to <code>&quot;&quot;</code> — never null</li>
-</ol>
 <h2 id="caveats">Caveats</h2>
 <ul>
-<li><code>IsDevelopment</code> returns <code>true</code> if environment is unset or unrecognized — safe default but worth being aware of</li>
-<li>Inherit <code>EnvironmentConfig&lt;YourClass, YourEnum&gt;</code> if you need additional properties beyond <code>Name</code> and <code>EnvironmentType</code></li>
-<li><code>ContentRootPath</code> strips <code>/bin/</code> and <code>/lib/</code> path segments automatically —
-returns the project root, not the build output folder</li>
+<li>Requests are sent through the in-memory test host; no real network port is opened.</li>
+<li>The supplied request helpers use GET.</li>
+<li>Non-success responses returned by GetResponseText() are logged but do not automatically fail the test.</li>
 </ul>
-<div class="TIP">
-<h5>Tip</h5>
-<p>Use <code>EnvironmentConfig.IsProd</code> instead of <code>string.Equals(env, &quot;Production&quot;)</code> — it handles both <code>Prod</code> and <code>Production</code> and is available globally without injection.</p>
-</div>
 
 </article>
 

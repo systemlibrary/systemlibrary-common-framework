@@ -1360,19 +1360,6 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.AddFrameworkServices
   nameWithType: IServiceCollectionExtensions.AddFrameworkServices
-- uid: SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection,SystemLibrary.Common.Framework.FrameworkOptions)
-  name: UseDataProtectionPolicy(IServiceCollection, FrameworkOptions)
-  href: apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.html#SystemLibrary_Common_Framework_App_Extensions_IServiceCollectionExtensions_UseDataProtectionPolicy_Microsoft_Extensions_DependencyInjection_IServiceCollection_SystemLibrary_Common_Framework_FrameworkOptions_
-  commentId: M:SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection,SystemLibrary.Common.Framework.FrameworkOptions)
-  fullName: SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection, SystemLibrary.Common.Framework.FrameworkOptions)
-  nameWithType: IServiceCollectionExtensions.UseDataProtectionPolicy(IServiceCollection, FrameworkOptions)
-- uid: SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy*
-  name: UseDataProtectionPolicy
-  href: apidocs/SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.html#SystemLibrary_Common_Framework_App_Extensions_IServiceCollectionExtensions_UseDataProtectionPolicy_
-  commentId: Overload:SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy
-  isSpec: "True"
-  fullName: SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy
-  nameWithType: IServiceCollectionExtensions.UseDataProtectionPolicy
 - uid: SystemLibrary.Common.Framework.App.Extensions.StringExtensions
   name: StringExtensions
   href: apidocs/SystemLibrary.Common.Framework.App.Extensions.StringExtensions.html
@@ -4200,12 +4187,12 @@ references:
   commentId: F:SystemLibrary.Common.Framework.FrameworkOptions.UseHsts
   fullName: SystemLibrary.Common.Framework.FrameworkOptions.UseHsts
   nameWithType: FrameworkOptions.UseHsts
-- uid: SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirection
-  name: UseHttpsRedirection
-  href: apidocs/SystemLibrary.Common.Framework.FrameworkOptions.html#SystemLibrary_Common_Framework_FrameworkOptions_UseHttpsRedirection
-  commentId: F:SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirection
-  fullName: SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirection
-  nameWithType: FrameworkOptions.UseHttpsRedirection
+- uid: SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirectionPort
+  name: UseHttpsRedirectionPort
+  href: apidocs/SystemLibrary.Common.Framework.FrameworkOptions.html#SystemLibrary_Common_Framework_FrameworkOptions_UseHttpsRedirectionPort
+  commentId: F:SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirectionPort
+  fullName: SystemLibrary.Common.Framework.FrameworkOptions.UseHttpsRedirectionPort
+  nameWithType: FrameworkOptions.UseHttpsRedirectionPort
 - uid: SystemLibrary.Common.Framework.FrameworkOptions.UseOutputCache
   name: UseOutputCache
   href: apidocs/SystemLibrary.Common.Framework.FrameworkOptions.html#SystemLibrary_Common_Framework_FrameworkOptions_UseOutputCache

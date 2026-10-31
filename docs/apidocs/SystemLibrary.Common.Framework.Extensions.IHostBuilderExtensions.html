@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="IHostBuilderExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for configuring framework options on IHostBuilder.">
+      <meta name="description" content="Extension methods for configuring the framework on IHostBuilder">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for configuring framework options on <code>IHostBuilder</code>.</p>
+  <p>Extension methods for configuring the framework on <code>IHostBuilder</code></p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IHostBuilderExtensions/IHostBuilderExtensions.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -126,6 +126,12 @@
 
 
       <div class="class-member">
+              <div class="summary-wrapper">
+                <div class="markdown level0 summary-content summary-show-inline">
+    <p>Adds the framework's default logging to the host, including the standard console logger of Microsoft's <code>ILogger</code></p>
+
+                </div>
+              </div>
         
 
           <h3 id="SystemLibrary_Common_Framework_Extensions_IHostBuilderExtensions_ConfigureFrameworkLogging_Microsoft_Extensions_Hosting_IHostBuilder_" data-uid="SystemLibrary.Common.Framework.Extensions.IHostBuilderExtensions.ConfigureFrameworkLogging(Microsoft.Extensions.Hosting.IHostBuilder)">
@@ -142,12 +148,21 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">Host.CreateDefaultBuilder(args)
+    .ConfigureFrameworkLogging();</code></pre>
+
+                  </div>
+                </div>
           </div>
       </div>
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Configures framework logging and adds the standard Console logging for the Microsofts ILogger world</p>
+    <p>Registers <code>TLogWriter</code> as the framework's log writer, and adds the framework's default logging to the host</p>
 
                 </div>
               </div>
@@ -167,6 +182,24 @@
 
 
           <div class="doc-toggles">
+                <div class="example-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
+                  <div class="markdown level0 example-content" style="display:none">
+                    <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
+    <pre><code class="lang-csharp">Host.CreateDefaultBuilder(args)
+    .ConfigureFrameworkLogging&lt;MyLogWriter&gt;();</code></pre>
+
+                  </div>
+                </div>
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p><code>TLogWriter</code> is created once with its parameterless constructor, so it needs one.<br/>Registering the writer here means it is in place before the services are built, which is earlier than registering it from <b>UseFrameworkBeginMiddlewares</b>.</p>
+
+                  </div>
+                </div>
+
           </div>
       </div>
 

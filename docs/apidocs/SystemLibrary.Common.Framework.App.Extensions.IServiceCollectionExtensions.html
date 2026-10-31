@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="IServiceCollectionExtensions | System Library Common Framework ">
       
-      <meta name="description" content="Extension methods for IServiceCollection.">
+      <meta name="description" content="Extension methods for IServiceCollection">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -94,7 +94,7 @@
 
 
   <div class="markdown summary" style="position:relative;">
-  <p>Extension methods for IServiceCollection.</p>
+  <p>Extension methods for IServiceCollection</p>
 
   <a class="header-action link-secondary go-to-source-code" title="View source" href="https://github.com/systemlibrary/systemlibrary-common-framework-private/blob/main/source/systemlibrary.common.framework.app/Extensions/IServiceCollectionExtensions/_UseViews.cs/#L12"><i class="bi bi-code-slash"></i></a>
   </div>
@@ -118,19 +118,11 @@
 
       </div>
 
-      <div class="class-member">
-
-
-
-      </div>
-
 
       <div class="class-member">
               <div class="summary-wrapper">
                 <div class="markdown level0 summary-content summary-show-inline">
-    <p>Registers all framework services required for the configured <code>AppType</code>.<br>
-Console apps register a minimal set — memory cache and logging only.<br>
-Web and Api additionally register MVC, routing, compression, auth, output cache, forwarded headers and views.</p>
+    <p>Registers the framework's services for the given <code>AppType</code></p>
 
                 </div>
               </div>
@@ -154,29 +146,23 @@ Web and Api additionally register MVC, routing, compression, auth, output cache,
                   <button class="btn btn-sm btn-outline-secondary example-toggle" onclick="toggleSection(this)">▼ Example</button>
                   <div class="markdown level0 example-content" style="display:none">
                     <span class="example-close" onclick="toggleSection(this.closest('.example-wrapper').querySelector('.example-toggle'))">✕</span>
-    <pre><code class="lang-csharp">services.AddFrameworkServices(AppType.Web);</code></pre>
+    <pre><code class="lang-csharp">services.AddFrameworkServices(AppType.Web);
+
+services.AddFrameworkServices(AppType.Api, new FrameworkOptions { UseBrotliResponseCompression = true });</code></pre>
 
                   </div>
                 </div>
-          </div>
-      </div>
-      <div class="class-member">
-        
+                <div class="remarks-wrapper">
+                  <button class="btn btn-sm btn-outline-secondary remarks-toggle" onclick="toggleSection(this)">▼ Remarks</button>
+                  <div class="markdown level0 remarks-content" style="display:none">
+                    <span class="remarks-close" onclick="toggleSection(this.closest('.remarks-wrapper').querySelector('.remarks-toggle'))">✕</span>
+    <p>All app types get logging, common services, data protection (if enabled in <b>FrameworkOptions</b>) and a memory cache.<br/><code>Web</code> and <code>Api</code> additionally get:</p>
+<ul><li>Forwarded headers, HTTPS redirection, Gzip and Brotli compression, output cache and response caching, each if enabled in <b>FrameworkOptions</b></li><li>Cookie policy, authentication, authorization (if enabled), routing and session</li><li>MVC with controllers, views, default JSON converters and the application parts from <b>FrameworkOptions</b></li><li>CORS with a default policy that allows any origin, method and header</li></ul>
+<p>Synchronous IO is allowed on both Kestrel and IIS.<br/>The <code>options</code> instance is registered as a singleton, so the services are configured from its values at the time of this call.<br/>Call this once per service collection. Run-time Razor compilation is not included, and consumers register it themselves if they want it.<br/>Session uses a 10 second IO timeout, a 10 minute idle timeout and an essential, HttpOnly cookie.<br/>The framework does not call <code>UseSession()</code>, so add it to the pipeline where you need it.</p>
 
-          <h3 id="SystemLibrary_Common_Framework_App_Extensions_IServiceCollectionExtensions_UseDataProtectionPolicy_Microsoft_Extensions_DependencyInjection_IServiceCollection_SystemLibrary_Common_Framework_FrameworkOptions_" data-uid="SystemLibrary.Common.Framework.App.Extensions.IServiceCollectionExtensions.UseDataProtectionPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection,SystemLibrary.Common.Framework.FrameworkOptions)">
-              <span class='member-static'>static </span>
+                  </div>
+                </div>
 
-              <span class="member-returntype">
-    IServiceCollection
-              </span>
-
-              <span class="member-name">
-    UseDataProtectionPolicy(IServiceCollection, FrameworkOptions)
-              </span>
-          </h3>
-
-
-          <div class="doc-toggles">
           </div>
       </div>
 
