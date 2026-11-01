@@ -95,7 +95,9 @@
       &quot;debug&quot;: false,
       &quot;diagnostics&quot;: false,
       &quot;license&quot;: &quot;&quot;,    // contact support@systemlibrary.com
-      &quot;forwardedNetworks&quot;: &quot;&quot;   // Ex: &quot;*&quot;
+    },
+    &quot;network&quot;: {
+        &quot;forwardedIPNetworks&quot;: &quot;&quot; // Ex: &quot;*&quot;
     },
     &quot;cache&quot;: {
       &quot;duration&quot;: 180,  // &gt; 0
@@ -117,7 +119,7 @@
         &quot;userSecretsId&quot;: &quot;&quot;
     },
     &quot;cryptography&quot;: {
-      &quot;encryptionKeyDirectory&quot;: &quot;&quot; // Ex C:/temp/
+      &quot;keyDirectory&quot;: &quot;&quot; // Ex C:/temp/
     },
     &quot;json&quot;: {
         &quot;allowTrailingCommas&quot;: true,
@@ -127,22 +129,19 @@
         &quot;WriteIndented&quot;: false,
         &quot;ignoreReadOnlyFields&quot;: true,
         &quot;includeFields&quot;: true,
-        &quot;jsonSecureAttributesEnabled&quot;: true
+        &quot;enableProtectionAttributes&quot;: true
     },
     &quot;log&quot;: {
       &quot;level&quot;: &quot;Warning&quot;, // Trace, Information, Warning, Debug, Error, Critical
       &quot;format&quot;: &quot;Text&quot;, // Text, Json, Html
-      &quot;fullFilePath&quot;: &quot;%HomeDrive%/Logs/Dump.log&quot;,
-      &quot;addStacktrace&quot;: false,
-      &quot;addTimestamp&quot;: true,
-      &quot;addAuthenticatedState&quot;: true,
-      &quot;addUrl&quot;: true,
-      &quot;addCorrelationId&quot;: true,
-      &quot;addBrowserName&quot;: false
+      &quot;filePath&quot;: &quot;%HomeDrive%/Logs/Dump.log&quot;,
+      &quot;type&quot;: &quot;Std&quot;, // Std, File
+      &quot;loggerOutput&quot;: &quot;&quot; // unset, clear, log
     },
     &quot;metrics&quot;: {
         &quot;enable&quot;: true, // [Pro Tier]
-        &quot;metricUIToken&quot;: &quot;Demo&quot;
+        &quot;url&quot;: &quot;/slcf/metrics&quot;, 
+        &quot;secretKeyForUI&quot;: &quot;Demo&quot;
     }
   }
 }
