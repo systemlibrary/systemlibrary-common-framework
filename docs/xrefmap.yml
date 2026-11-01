@@ -74,15 +74,15 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Application.Build
   nameWithType: Application.Build
-- uid: SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: Build<T>(AppType, FrameworkOptions, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Build__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: Build(Of T)(AppType, FrameworkOptions, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.Build<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.Build(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: Application.Build<T>(AppType, FrameworkOptions, AppHosting, string[])
-  nameWithType.vb: Application.Build(Of T)(AppType, FrameworkOptions, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name: Build<T>(AppType, FrameworkOptions, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Build__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.App.Application.Build``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name.vb: Build(Of T)(AppType, FrameworkOptions, AppHosting)
+  fullName: SystemLibrary.Common.Framework.App.Application.Build<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  fullName.vb: SystemLibrary.Common.Framework.App.Application.Build(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: Application.Build<T>(AppType, FrameworkOptions, AppHosting)
+  nameWithType.vb: Application.Build(Of T)(AppType, FrameworkOptions, AppHosting)
 - uid: SystemLibrary.Common.Framework.App.Application.HostStop
   name: HostStop()
   href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_HostStop
@@ -109,15 +109,12 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Application.HostStopAsync
   nameWithType: Application.HostStopAsync
-- uid: SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: Start(AppType, FrameworkOptions, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Start_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: Start(AppType, FrameworkOptions, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: Application.Start(AppType, FrameworkOptions, AppHosting, string[])
-  nameWithType.vb: Application.Start(AppType, FrameworkOptions, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name: Start(AppType, FrameworkOptions, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Start_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  fullName: SystemLibrary.Common.Framework.App.Application.Start(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: Application.Start(AppType, FrameworkOptions, AppHosting)
 - uid: SystemLibrary.Common.Framework.App.Application.Start*
   name: Start
   href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Start_
@@ -125,15 +122,12 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Application.Start
   nameWithType: Application.Start
-- uid: SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: StartAsync(AppType, FrameworkOptions, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_StartAsync_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: StartAsync(AppType, FrameworkOptions, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: Application.StartAsync(AppType, FrameworkOptions, AppHosting, string[])
-  nameWithType.vb: Application.StartAsync(AppType, FrameworkOptions, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name: StartAsync(AppType, FrameworkOptions, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_StartAsync_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  fullName: SystemLibrary.Common.Framework.App.Application.StartAsync(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: Application.StartAsync(AppType, FrameworkOptions, AppHosting)
 - uid: SystemLibrary.Common.Framework.App.Application.StartAsync*
   name: StartAsync
   href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_StartAsync_
@@ -141,24 +135,24 @@ references:
   isSpec: "True"
   fullName: SystemLibrary.Common.Framework.App.Application.StartAsync
   nameWithType: Application.StartAsync
-- uid: SystemLibrary.Common.Framework.App.Application.StartAsync``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: StartAsync<T>(AppType, FrameworkOptions, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_StartAsync__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.StartAsync``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: StartAsync(Of T)(AppType, FrameworkOptions, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.StartAsync<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.StartAsync(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: Application.StartAsync<T>(AppType, FrameworkOptions, AppHosting, string[])
-  nameWithType.vb: Application.StartAsync(Of T)(AppType, FrameworkOptions, AppHosting, String())
-- uid: SystemLibrary.Common.Framework.App.Application.Start``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: Start<T>(AppType, FrameworkOptions, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Start__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.App.Application.Start``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: Start(Of T)(AppType, FrameworkOptions, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.App.Application.Start<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.App.Application.Start(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: Application.Start<T>(AppType, FrameworkOptions, AppHosting, string[])
-  nameWithType.vb: Application.Start(Of T)(AppType, FrameworkOptions, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.App.Application.StartAsync``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name: StartAsync<T>(AppType, FrameworkOptions, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_StartAsync__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.App.Application.StartAsync``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name.vb: StartAsync(Of T)(AppType, FrameworkOptions, AppHosting)
+  fullName: SystemLibrary.Common.Framework.App.Application.StartAsync<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  fullName.vb: SystemLibrary.Common.Framework.App.Application.StartAsync(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: Application.StartAsync<T>(AppType, FrameworkOptions, AppHosting)
+  nameWithType.vb: Application.StartAsync(Of T)(AppType, FrameworkOptions, AppHosting)
+- uid: SystemLibrary.Common.Framework.App.Application.Start``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name: Start<T>(AppType, FrameworkOptions, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.App.Application.html#SystemLibrary_Common_Framework_App_Application_Start__1_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_FrameworkOptions_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.App.Application.Start``1(SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.FrameworkOptions,SystemLibrary.Common.Framework.App.AppHosting)
+  name.vb: Start(Of T)(AppType, FrameworkOptions, AppHosting)
+  fullName: SystemLibrary.Common.Framework.App.Application.Start<T>(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  fullName.vb: SystemLibrary.Common.Framework.App.Application.Start(Of T)(SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.FrameworkOptions, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: Application.Start<T>(AppType, FrameworkOptions, AppHosting)
+  nameWithType.vb: Application.Start(Of T)(AppType, FrameworkOptions, AppHosting)
 - uid: SystemLibrary.Common.Framework.App.Attributes
   name: SystemLibrary.Common.Framework.App.Attributes
   href: apidocs/SystemLibrary.Common.Framework.App.Attributes.html
@@ -3160,15 +3154,12 @@ references:
   commentId: T:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions
   fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions
   nameWithType: IWebHostBuilderExtensions
-- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name: ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, string[])
-  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_App_AppType_SystemLibrary_Common_Framework_App_AppHosting_System_String___
-  commentId: M:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppType,SystemLibrary.Common.Framework.App.AppHosting,System.String[])
-  name.vb: ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, String())
-  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, string[])
-  fullName.vb: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.App.AppType, SystemLibrary.Common.Framework.App.AppHosting, String())
-  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, string[])
-  nameWithType.vb: IWebHostBuilderExtensions.ConfigureFrameworkHosting(IWebHostBuilder, AppType, AppHosting, String())
+- uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppHosting)
+  name: ConfigureFrameworkHosting(IWebHostBuilder, AppHosting)
+  href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_Microsoft_AspNetCore_Hosting_IWebHostBuilder_SystemLibrary_Common_Framework_App_AppHosting_
+  commentId: M:SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder,SystemLibrary.Common.Framework.App.AppHosting)
+  fullName: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting(Microsoft.AspNetCore.Hosting.IWebHostBuilder, SystemLibrary.Common.Framework.App.AppHosting)
+  nameWithType: IWebHostBuilderExtensions.ConfigureFrameworkHosting(IWebHostBuilder, AppHosting)
 - uid: SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.ConfigureFrameworkHosting*
   name: ConfigureFrameworkHosting
   href: apidocs/SystemLibrary.Common.Framework.Extensions.IWebHostBuilderExtensions.html#SystemLibrary_Common_Framework_Extensions_IWebHostBuilderExtensions_ConfigureFrameworkHosting_
