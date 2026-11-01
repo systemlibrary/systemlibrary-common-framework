@@ -106,6 +106,7 @@
 <h2 id="chapter-1-startup">Chapter 1: Startup</h2>
 <p>The framework supports several startup approaches. The most flexible pattern is the direct host-builder extension API.</p>
 <h3 id="extension-api">Extension API</h3>
+<p>Program.cs - fill in code:</p>
 <pre><code class="lang-csharp">using SystemLibrary.Common.Framework;
 using SystemLibrary.Common.Framework.App;
 using SystemLibrary.Common.Framework.App.Extensions;
@@ -140,7 +141,7 @@ app.Run();
 <hr>
 <h2 id="chapter-2-configuration">Chapter 2: Configuration</h2>
 <p>The framework provides typed configuration through <code>Config&lt;T&gt;</code>. The config is loaded from files that match the type name and is cached after the first access.</p>
-<h3 id="example">Example</h3>
+<h3 id="create-configurations">Create configurations</h3>
 <p><code>~/Configs/PokemonConfig.json</code></p>
 <pre><code class="lang-json">{
   &quot;url&quot;: &quot;https://localhost:5010/api&quot;,
@@ -160,21 +161,10 @@ app.Run();
     public int CacheDuration { get; set; }
 }
 </code></pre>
-<p>Usage:</p>
-<pre><code class="lang-csharp">var apiUrl = PokemonConfig.Current.Url;
-var cacheSeconds = PokemonConfig.Current.CacheDuration;
-</code></pre>
 <hr>
-<h2 id="chapter-3-logging">Chapter 3: Logging</h2>
-<p>The framework exposes a global <code>Log</code> type.</p>
-<pre><code class="lang-csharp">Log.Information(&quot;App started&quot;);
-Log.Warning(&quot;Retrying request&quot;);
-Log.Error(&quot;Request failed&quot;, ex);
-</code></pre>
-<p>The logger supports queueing, background flushing, stdout/stderr forwarding, and custom <code>ILogWriter</code> implementations.</p>
-<hr>
-<h2 id="chapter-4-controllers-and-views">Chapter 4: Controllers and views</h2>
+<h2 id="chapter-3-controllers-and-views">Chapter 3: Controllers and views</h2>
 <p>Controllers can live alongside their views in feature folders and the framework will discover those paths automatically.</p>
+<p>Create:</p>
 <p><code>~/Content/Home/HomeController.cs</code></p>
 <pre><code class="lang-csharp">public class HomeController : Controller
 {
@@ -197,7 +187,7 @@ Log.Error(&quot;Request failed&quot;, ex);
 </ul>
 <p>The Home controller is registered as the default homepage, so an empty Path routes to its Index action.</p>
 <hr>
-<h2 id="chapter-5-static-files">Chapter 5: Static files</h2>
+<h2 id="chapter-4-static-files">Chapter 4: Static files</h2>
 <p>Asset folders such as <code>wwwroot</code>, <code>public</code>, <code>static</code>, <code>dist</code>, <code>frontend</code>, <code>assets</code>, and <code>files</code> are served automatically.</p>
 <p>Example, create an <code>asset folder</code> and place an image:</p>
 <pre><code class="lang-text">~/wwwroot/image.png
@@ -206,7 +196,7 @@ Log.Error(&quot;Request failed&quot;, ex);
 <pre><code class="lang-text">http://localhost:5010/image.png
 </code></pre>
 <hr>
-<h2 id="chapter-6-api-controllers">Chapter 6: API controllers</h2>
+<h2 id="chapter-5-api-controllers">Chapter 5: API controllers</h2>
 <p>API controllers inherit from <code>BaseApiController</code>, which adds JSON/XML response helpers.</p>
 <pre><code class="lang-csharp">public class PokemonApiController : BaseApiController
 {
@@ -218,13 +208,13 @@ Log.Error(&quot;Request failed&quot;, ex);
 </code></pre>
 <p>The framework adds route conventions and action matching based on controller names and namespaces.</p>
 <hr>
-<h2 id="chapter-7-the-client">Chapter 7: The client</h2>
+<h2 id="chapter-6-the-client">Chapter 6: The client</h2>
 <p>Use the framework <code>Client</code> to execute outbound HTTP calls while reusing connection state and applying the framework’s retry behavior.</p>
 <pre><code class="lang-csharp">var client = new Client();
 var response = client.Get&lt;dynamic&gt;(PokemonConfig.Current.Url + &quot;/pokemon/pikachu&quot;);
 </code></pre>
 <hr>
-<h2 id="chapter-8-cache">Chapter 8: Cache</h2>
+<h2 id="chapter-7-cache">Chapter 7: Cache</h2>
 <p>The framework cache is sharded and supports auto-generated keys, auth/admin skip rules, and conditional cache entries.</p>
 <pre><code class="lang-csharp">var name = Cache.Get(&quot;pokemon-pikachu&quot;, () =&gt;
 {
@@ -235,7 +225,7 @@ var response = client.Get&lt;dynamic&gt;(PokemonConfig.Current.Url + &quot;/poke
 </code></pre>
 <p>The generated key includes the calling context and user state when no explicit key is passed.</p>
 <hr>
-<h2 id="chapter-9-more-modules">Chapter 9: More modules</h2>
+<h2 id="chapter-8-more-modules">Chapter 8: More modules</h2>
 <p>The framework includes additional modules for encryption, JSON, metrics, assemblies, and method helpers. See the documentation section for each module for deeper details.</p>
 <ul>
 <li><a href="../documentation/">Documentation</a></li>
